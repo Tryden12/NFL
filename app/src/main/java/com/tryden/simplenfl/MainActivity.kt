@@ -1,12 +1,15 @@
 package com.tryden.simplenfl
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.constants.Constants.BASE_URL_NFL
 import com.tryden.simplenfl.teams.models.team.TeamObject
 import retrofit2.*
@@ -22,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.textView)
+        val teamNameTextView = findViewById<TextView>(R.id.teamNameTextView)
+        val recordTextView = findViewById<TextView>(R.id.recordTextView)
+        val logoImageView = findViewById<ImageView>(R.id.logoImageView)
 
         val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
 
@@ -33,7 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         val nflService: NFLService = retrofit.create(NFLService::class.java)
 
-        nflService.getTeamById(4).enqueue(object : Callback<TeamObject> {
+        nflService.getTeamById(10).enqueue(object : Callback<TeamObject> {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<TeamObject>, response: Response<TeamObject>) {
                 Log.e(TAG, response.toString() )
                 if (!response.isSuccessful) {
@@ -46,9 +52,13 @@ class MainActivity : AppCompatActivity() {
                 val body = response.body()!!
                 val team = body.team
                 val teamName = body.team.displayName
-                val city = body.team.franchise.venue.address.city
+                val record = team.record.items[0].summary
+                val logo = team.logos[1].href
 
-                textView.text = teamName
+                teamNameTextView.text = teamName
+                recordTextView.text = "(${record})"
+
+                Picasso.get().load(logo).into(logoImageView)
             }
 
             override fun onFailure(call: Call<TeamObject>, t: Throwable) {
