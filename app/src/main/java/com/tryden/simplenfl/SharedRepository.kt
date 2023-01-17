@@ -1,10 +1,10 @@
 package com.tryden.simplenfl
 
-import com.tryden.simplenfl.teams.models.team.TeamObject
+import com.tryden.simplenfl.network.NetworkLayer
 
 class SharedRepository {
 
-    suspend fun getTeamById(teamId: Int): TeamObject? {
+    suspend fun getTeamById(teamId: Int): com.tryden.simplenfl.network.response.teams.models.team.TeamObject? {
         val request = NetworkLayer.apiClient.getTeamById(teamId)
 
         // If the api call fails, network fails, or user loses internet

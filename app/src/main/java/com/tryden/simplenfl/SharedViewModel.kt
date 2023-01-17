@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.teams.models.team.TeamObject
+import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
 import kotlinx.coroutines.launch
 
 class SharedViewModel: ViewModel() {
 
    private val repository = SharedRepository()
 
-    private val _teamByIdLiveData = MutableLiveData<TeamObject?>()
-    val teamByIdLiveData: LiveData<TeamObject?> = _teamByIdLiveData
+    private val _teamByIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.teams.models.team.TeamObject?>()
+    val teamByIdLiveData: LiveData<com.tryden.simplenfl.network.response.teams.models.team.TeamObject?> = _teamByIdLiveData
 
     fun refreshTeam(teamId: Int) {
         viewModelScope.launch {
