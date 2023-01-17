@@ -1,6 +1,8 @@
 package com.tryden.simplenfl
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val view = teamNameTextView.rootView
 
 
-        viewModel.refreshTeam(10)
+        viewModel.refreshTeam(2)
         viewModel.teamByIdLiveData.observe(this) { response ->
             if (response == null) {
                 Toast.makeText(
@@ -43,16 +45,27 @@ class MainActivity : AppCompatActivity() {
             val teamName = team.displayName
             val record = team.record.items[0].summary
             val logo = team.logos[1].href
-            val bgColor = "#${team.color}"
+            val teamColor = "#${team.color}"
+            val alternateColor = "#${team.alternateColor}"
 
             teamNameTextView.text = teamName
             recordTextView.text = "(${record})"
 
             Picasso.get().load(logo).into(logoImageView)
-            view.setBackgroundColor(Color.parseColor(bgColor));
 
+            val gradientDrawable = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(
+                    Color.parseColor(teamColor),
+                    getColor(R.color.black))
+                );
+            gradientDrawable.cornerRadius = 0f;
 
+            //Set Gradient
+            view.background = gradientDrawable;
+            supportActionBar?.title = ""
         }
 
     }
+
 }
