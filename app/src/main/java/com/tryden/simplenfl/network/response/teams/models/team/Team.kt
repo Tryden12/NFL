@@ -13,7 +13,7 @@ data class Team(
     val name: String = "",
     val nextEvent: List<com.tryden.simplenfl.network.response.teams.models.team.NextEvent> = listOf(),
     val nickname: String = "",
-    val record: com.tryden.simplenfl.network.response.teams.models.team.Record = com.tryden.simplenfl.network.response.teams.models.team.Record(),
+    val record: com.tryden.simplenfl.network.response.teams.models.team.RecordTeam = com.tryden.simplenfl.network.response.teams.models.team.RecordTeam(),
     val shortDisplayName: String = "",
     val slug: String = "",
     val standingSummary: String = "",
