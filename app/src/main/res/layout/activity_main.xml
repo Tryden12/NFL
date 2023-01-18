@@ -9,61 +9,160 @@
     tools:background="@color/black"
     tools:context=".MainActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintHeader"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/logoImageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic[5]" />
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/teamNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="0dp"
-        android:fontFamily="@font/opensans_bold"
-        android:lineHeight="28dp"
-        android:maxLines="2"
-        android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/recordTextView"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic[5]" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/teamNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/opensans_bold"
+            android:lineHeight="28dp"
+            android:maxLines="2"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/recordTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@id/cardView"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Washington Commanders" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/recordTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:layout_marginTop="0dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/teamNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/teamNameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/cardView"
+            tools:text="(12-4)" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="@id/cardView"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Washington Commanders" />
+        app:layout_constraintTop_toBottomOf="@id/constraintHeader"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dateGameItemTextview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Saturday, Jan 21"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewAwayLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateGameItemTextview" >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/awayLogoImageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/teamNameAwayGameItemTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewAwayLogo"
+            app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
+            tools:text="Away Team"/>
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/recordTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:fontFamily="@font/opensans_regular"
-        android:textColor="@color/white"
-        android:maxLines="1"
-        android:layout_marginTop="0dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/teamNameTextView"
-        app:layout_constraintTop_toBottomOf="@id/teamNameTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/cardView"
-        tools:text="(12-4)"
-        />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewHomeLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/teamNameAwayGameItemTextview" >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/homeLogoImageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/teamNameHomeGameItemTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+            app:layout_constraintTop_toTopOf="@id/cardViewHomeLogo"
+            tools:text="Home Team"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

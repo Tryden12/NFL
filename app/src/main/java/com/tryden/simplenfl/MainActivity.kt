@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -28,9 +29,40 @@ class MainActivity : AppCompatActivity() {
         val teamNameTextView = findViewById<TextView>(R.id.teamNameTextView)
         val recordTextView = findViewById<TextView>(R.id.recordTextView)
         val logoImageView = findViewById<ImageView>(R.id.logoImageView)
+
+        val homeTeamNameTextView = findViewById<TextView>(R.id.teamNameHomeGameItemTextview)
+        val awayTeamNameTextView = findViewById<TextView>(R.id.teamNameAwayGameItemTextview)
+        val homeTeamLogoImageView = findViewById<ImageView>(R.id.homeLogoImageView)
+        val awayTeamLogoImageView = findViewById<ImageView>(R.id.awayLogoImageView)
+
         val view = teamNameTextView.rootView
 
 
+        viewModel.refreshScoreboard()
+        viewModel.scoreboardByRangeLiveData.observe(this) { response ->
+            if (response == null) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Unsuccessful network call!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@observe
+            }
+
+            val scores = response.events
+            val homeTeamName = scores[0].competitions[0].competitors[0].team.name
+            val awayTeamName = scores[0].competitions[0].competitors[1].team.name
+
+            val homeTeamLogo = scores[0].competitions[0].competitors[0].team.logo
+            val awayTeamLogo = scores[0].competitions[0].competitors[1].team.logo
+
+            homeTeamNameTextView.text = homeTeamName
+            awayTeamNameTextView.text = awayTeamName
+            Picasso.get().load(homeTeamLogo).into(homeTeamLogoImageView)
+            Picasso.get().load(awayTeamLogo).into(awayTeamLogoImageView)
+
+
+        }
         viewModel.refreshTeam(2)
         viewModel.teamByIdLiveData.observe(this) { response ->
             if (response == null) {
