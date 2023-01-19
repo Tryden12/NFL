@@ -161,6 +161,58 @@
             app:layout_constraintTop_toTopOf="@id/cardViewHomeLogo"
             tools:text="Home Team"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/testAllTeamsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+            app:layout_constraintTop_toBottomOf="@id/cardViewHomeLogo"
+            tools:text="NFL"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/testRosterByTeamIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+            app:layout_constraintTop_toBottomOf="@id/testAllTeamsTextView"
+            tools:text="Fullname from roster"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/testBreakingNewsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+            app:layout_constraintTop_toBottomOf="@id/testRosterByTeamIdTextView"
+            tools:text="First breaking news headline"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/testArticleByIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+            app:layout_constraintTop_toBottomOf="@id/testBreakingNewsTextView"
+            tools:text="Article by id"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

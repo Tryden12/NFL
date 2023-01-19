@@ -1,23 +1,41 @@
 package com.tryden.simplenfl.network
 
+import com.tryden.simplenfl.network.response.teams.models.article.Article
+import com.tryden.simplenfl.network.response.teams.models.news.News
+import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
-import retrofit2.Call
+import com.tryden.simplenfl.network.response.teams.models.teams.Sports
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface NFLService {
+
+    @GET("teams")
+    suspend fun getAllTeams(): Response<Sports>
 
     @GET("teams/{team-id}")
     suspend fun getTeamById(
         @Path("team-id") teamId: Int
     ): Response<TeamObject>
 
+    @GET("teams/{team-id}/roster")
+    suspend fun getRosterByTeamId(
+        @Path("team-id") teamId: Int
+    ): Response<Roster>
+
     //scoreboard?limit=1000&dates=20220908-20230108
     @GET("scoreboard")
     suspend fun getScoreboardRange(
 //        @Query("dates") range: String
-    ) : Response<Scoreboard>
+    ): Response<Scoreboard>
+
+    @GET("news")
+    suspend fun getBreakingNews() : Response<News>
+
+    @GET("news/{article-id}")
+    suspend fun getArticleById(
+        @Path("article-id") articleId: String
+    ): Response<Article>
 }
