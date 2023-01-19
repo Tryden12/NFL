@@ -10,7 +10,8 @@ import retrofit2.Response
 import java.lang.Exception
 
 class ApiClient(
-    private val nflService: NFLService
+    private val nflService: NFLService,
+    private val articleByIDService: ArticleByIDService
 ) {
 
     suspend fun getAllTeams() : SimpleResponse<Sports> {
@@ -34,7 +35,7 @@ class ApiClient(
     }
 
     suspend fun getArticleById(articleId: String) : SimpleResponse<Article> {
-        return safeApiCall { nflService.getArticleById(articleId) }
+        return safeApiCall { articleByIDService.getArticleById(articleId) }
     }
 
 

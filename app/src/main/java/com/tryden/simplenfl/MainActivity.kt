@@ -158,7 +158,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         // refresh article by id
-        // TODO: fix
         viewModel.refreshArticle("35475085")
         viewModel.articleById.observe(this) { response ->
             if (response == null) {

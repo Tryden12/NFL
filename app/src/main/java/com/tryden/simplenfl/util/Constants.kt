@@ -9,4 +9,6 @@ object Constants {
     // Example /scoreboard?limit=1000&dates=20220908-20230108
     const val SCOREBOARD_URL =
         "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
+
+    const val ARTICLE_BY_ID = "http://now.core.api.espn.com/v1/sports/news/"
 }
