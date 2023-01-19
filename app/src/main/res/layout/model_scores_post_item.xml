@@ -74,10 +74,6 @@
         tools:text="Home Team"/>
 
 
-
-
-    <!--     For games status: over    -->
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/statusGameItemTextview"
         android:layout_width="wrap_content"
@@ -90,7 +86,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:text="Final"/>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -104,51 +100,9 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/statusGameItemTextview"
         app:layout_constraintTop_toBottomOf="@id/statusGameItemTextview"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:text="Sun, 9/11"/>
 
-
-
-    <!--     For games status: Pre    -->
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/datePreGameItemTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_semi_bold"
-        android:maxLines="1"
-        android:textColor="@color/grey"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/datePostGameItemTextview"
-        app:layout_constraintTop_toTopOf="@id/pointsAwayItemTextview"
-        android:visibility="visible"
-        tools:text="Sat, 1/21"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/timePreGameItemTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_semi_bold"
-        android:maxLines="1"
-        android:textColor="@color/grey"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/datePostGameItemTextview"
-        app:layout_constraintTop_toBottomOf="@id/datePreGameItemTextview"
-        android:visibility="visible"
-        tools:text="4:30 PM"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/broadcastPreGameItemTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_semi_bold"
-        android:maxLines="1"
-        android:textColor="@color/grey"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/datePostGameItemTextview"
-        app:layout_constraintTop_toBottomOf="@id/timePreGameItemTextview"
-        android:visibility="visible"
-        tools:text="CBS"/>
 
     <View
         android:id="@+id/dividerVerticalScoresView"
@@ -194,7 +148,7 @@
         app:layout_constraintEnd_toStartOf="@id/winnerArrowAwayImageView"
         app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
         app:layout_constraintBottom_toBottomOf="@id/teamNameAwayTextview"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:text="21"/>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -203,44 +157,16 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_extra_bold"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
         android:maxLines="1"
         android:textColor="@color/grey"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/winnerArrowHomeImageView"
         app:layout_constraintTop_toTopOf="@id/teamNameHomeTextview"
         app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:text="18"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/recordAwayItemTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_regular"
-        android:layout_marginStart="8dp"
-        android:maxLines="1"
-        android:layout_marginBottom="-2dp"
-        android:textColor="@color/grey"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@id/winnerArrowAwayImageView"
-        app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
-        app:layout_constraintBottom_toBottomOf="@id/teamNameAwayTextview"
-        tools:text="9-7-1"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/recordHomeItemTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_regular"
-        android:layout_marginStart="8dp"
-        android:maxLines="1"
-        android:layout_marginTop="-2dp"
-        android:textColor="@color/grey"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@id/winnerArrowHomeImageView"
-        app:layout_constraintTop_toTopOf="@id/teamNameHomeTextview"
-        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
-        tools:text="14-3"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/descriptionGameBottomItemTextview"
