@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@color/dark_grey">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewAwayLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/awayLogoImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/teamNameAwayGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/cardViewAwayLogo"
+        app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
+        tools:text="Away Team"/>
+
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewHomeLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/teamNameAwayGameItemTextview" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/homeLogoImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/teamNameHomeGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:maxLines="1"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+        app:layout_constraintTop_toTopOf="@id/cardViewHomeLogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Home Team"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/statusGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="16dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Final"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dateGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:layout_marginEnd="70dp"
+        android:maxLines="1"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/statusGameItemTextview"
+        app:layout_constraintTop_toBottomOf="@id/statusGameItemTextview"
+        tools:text="Sun, 9/11"/>
+
+    <View
+        android:id="@+id/dividerVerticalScoresView"
+        android:layout_width="1dp"
+        android:layout_height="42dp"
+        android:background="@color/white"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@id/statusGameItemTextview"
+        app:layout_constraintTop_toTopOf="@id/teamNameAwayGameItemTextview"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeGameItemTextview"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/winnerArrowTopImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
+        app:layout_constraintTop_toTopOf="@id/dividerVerticalScoresView"
+        tools:src="@drawable/ic_arrow_left_scores_50"
+        android:visibility="visible"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/winnerArrowBottomImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
+        app:layout_constraintBottom_toBottomOf="@id/dividerVerticalScoresView"
+        tools:src="@drawable/ic_arrow_left_scores_50"
+        android:visibility="invisible"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pointsAwayItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_extra_bold"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/winnerArrowTopImageView"
+        app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
+        tools:text="21"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pointsHomeItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_extra_bold"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/winnerArrowBottomImageView"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeGameItemTextview"
+        tools:text="18"/>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
