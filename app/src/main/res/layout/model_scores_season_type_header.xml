@@ -7,7 +7,7 @@
     android:background="@color/dark_grey">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/dateGameItemTextview"
+        android:id="@+id/seasonTypeTextview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_extra_bold"

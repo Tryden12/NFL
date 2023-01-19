@@ -26,7 +26,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/teamNameAwayGameItemTextview"
+        android:id="@+id/teamNameAwayTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_bold"
@@ -49,7 +49,7 @@
         android:layout_marginStart="16dp"
         app:cardCornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/teamNameAwayGameItemTextview" >
+        app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview" >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/homeLogoImageView"
@@ -61,7 +61,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/teamNameHomeGameItemTextview"
+        android:id="@+id/teamNameHomeTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_bold"
@@ -109,23 +109,22 @@
         android:background="@color/white"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toStartOf="@id/statusGameItemTextview"
-        app:layout_constraintTop_toTopOf="@id/teamNameAwayGameItemTextview"
-        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeGameItemTextview"
+        app:layout_constraintTop_toTopOf="@id/teamNameAwayTextview"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/winnerArrowTopImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/winnerArrowAwayImageView"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:scaleType="centerCrop"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
         app:layout_constraintTop_toTopOf="@id/dividerVerticalScoresView"
-        tools:src="@drawable/ic_arrow_left_scores_50"
-        android:visibility="visible"
-        />
+        tools:src="@drawable/ic_arrow_left_scores_50" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/winnerArrowBottomImageView"
+        android:id="@+id/winnerArrowHomeImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
@@ -144,7 +143,7 @@
         android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/winnerArrowTopImageView"
+        app:layout_constraintEnd_toStartOf="@id/winnerArrowAwayImageView"
         app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
         tools:text="21"/>
 
@@ -157,8 +156,8 @@
         android:maxLines="1"
         android:textColor="@color/grey"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/winnerArrowBottomImageView"
-        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeGameItemTextview"
+        app:layout_constraintEnd_toStartOf="@id/winnerArrowHomeImageView"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
         tools:text="18"/>
 
 

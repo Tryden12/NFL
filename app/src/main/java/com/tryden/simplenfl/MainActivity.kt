@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         val recordTextView = findViewById<TextView>(R.id.recordTextView)
         val logoImageView = findViewById<ImageView>(R.id.logoImageView)
 
-        val homeTeamNameTextView = findViewById<TextView>(R.id.teamNameHomeGameItemTextview)
-        val awayTeamNameTextView = findViewById<TextView>(R.id.teamNameAwayGameItemTextview)
+        val homeTeamNameTextView = findViewById<TextView>(R.id.teamNameHomeTextview)
+        val awayTeamNameTextView = findViewById<TextView>(R.id.teamNameAwayTextview)
         val homeTeamLogoImageView = findViewById<ImageView>(R.id.homeLogoImageView)
         val awayTeamLogoImageView = findViewById<ImageView>(R.id.awayLogoImageView)
 

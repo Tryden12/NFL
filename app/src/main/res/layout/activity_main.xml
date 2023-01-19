@@ -116,7 +116,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/teamNameAwayGameItemTextview"
+            android:id="@+id/teamNameAwayTextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensans_bold"
@@ -138,7 +138,7 @@
             android:layout_marginStart="16dp"
             app:cardCornerRadius="50dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teamNameAwayGameItemTextview" >
+            app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview" >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/homeLogoImageView"
@@ -150,7 +150,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/teamNameHomeGameItemTextview"
+            android:id="@+id/teamNameHomeTextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensans_bold"
