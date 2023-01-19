@@ -2,16 +2,21 @@ package com.tryden.simplenfl.network
 
 import com.tryden.simplenfl.network.response.teams.models.article.Article
 import com.tryden.simplenfl.network.response.teams.models.news.News
+import com.tryden.simplenfl.network.response.teams.models.player.Player
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
 import com.tryden.simplenfl.network.response.teams.models.teams.Sports
+import com.tryden.simplenfl.network.service.ArticleByIDService
+import com.tryden.simplenfl.network.service.NFLService
+import com.tryden.simplenfl.network.service.PlayerByIdService
 import retrofit2.Response
 import java.lang.Exception
 
 class ApiClient(
     private val nflService: NFLService,
-    private val articleByIDService: ArticleByIDService
+    private val articleByIDService: ArticleByIDService,
+    private val playerByIdService: PlayerByIdService
 ) {
 
     suspend fun getAllTeams() : SimpleResponse<Sports> {
@@ -36,6 +41,10 @@ class ApiClient(
 
     suspend fun getArticleById(articleId: String) : SimpleResponse<Article> {
         return safeApiCall { articleByIDService.getArticleById(articleId) }
+    }
+
+    suspend fun getPlayerById(playerId: String): SimpleResponse<Player> {
+        return safeApiCall { playerByIdService.getPlayerById(playerId) }
     }
 
 

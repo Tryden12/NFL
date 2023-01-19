@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.network
+package com.tryden.simplenfl.network.service
 
 import com.tryden.simplenfl.network.response.teams.models.article.Article
 import com.tryden.simplenfl.network.response.teams.models.news.News
@@ -34,8 +34,4 @@ interface NFLService {
     @GET("news")
     suspend fun getBreakingNews() : Response<News>
 
-    @GET("news/{article-id}")
-    suspend fun getArticleById(
-        @Path("article-id") articleId: String
-    ): Response<Article>
 }

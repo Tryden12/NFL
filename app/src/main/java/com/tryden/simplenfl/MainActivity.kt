@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val testRosterByTeamIdTextView = findViewById<TextView>(R.id.testRosterByTeamIdTextView)
         val testBreakingNewsTextView = findViewById<TextView>(R.id.testBreakingNewsTextView)
         val testArticleByIdTextView = findViewById<TextView>(R.id.testArticleByIdTextView)
+        val testPlayerByIdTextView = findViewById<TextView>(R.id.testPlayerByIdTextView)
 
         val view = teamNameTextView.rootView
 
@@ -174,6 +175,22 @@ class MainActivity : AppCompatActivity() {
 
             testArticleByIdTextView.text = articleByIdHeadline
 
+        }
+
+        // refresh player by id
+        viewModel.refreshPlayer("14876")
+        viewModel.playerByIdLiveData.observe(this) { response ->
+            if (response == null) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Unsuccessful network call for refreshArticle!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@observe
+            }
+
+            val playerByIdName = response.displayName
+            testPlayerByIdTextView.text = playerByIdName
         }
 
 

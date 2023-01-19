@@ -172,7 +172,7 @@
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
             app:layout_constraintTop_toBottomOf="@id/cardViewHomeLogo"
-            tools:text="NFL"/>
+            tools:text="List of all teams"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/testRosterByTeamIdTextView"
@@ -212,6 +212,19 @@
             app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
             app:layout_constraintTop_toBottomOf="@id/testBreakingNewsTextView"
             tools:text="Article by id"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/testPlayerByIdTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
+            app:layout_constraintTop_toBottomOf="@id/testArticleByIdTextView"
+            tools:text="Player by id"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

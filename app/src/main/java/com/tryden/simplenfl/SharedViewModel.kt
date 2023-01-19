@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.network.response.teams.models.article.Article
 import com.tryden.simplenfl.network.response.teams.models.news.News
+import com.tryden.simplenfl.network.response.teams.models.player.Player
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
@@ -33,6 +34,9 @@ class SharedViewModel: ViewModel() {
 
     private val _articleByIdLiveData = MutableLiveData<Article?>()
     val articleById: LiveData<Article?> = _articleByIdLiveData
+
+    private val _playerByIdLiveData = MutableLiveData<Player?>()
+    val playerByIdLiveData: LiveData<Player?> = _playerByIdLiveData
 
     fun refreshTeam(teamId: Int) {
         viewModelScope.launch {
@@ -79,6 +83,14 @@ class SharedViewModel: ViewModel() {
             val response = repository.getArticleById(articleId)
 
             _articleByIdLiveData.postValue(response)
+        }
+    }
+
+    fun refreshPlayer(playerId: String) {
+        viewModelScope.launch {
+            val response = repository.getPlayerById(playerId)
+
+            _playerByIdLiveData.postValue(response)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.network
+package com.tryden.simplenfl.network.service
 
 import com.tryden.simplenfl.network.response.teams.models.article.Article
 import retrofit2.Response

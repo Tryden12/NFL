@@ -3,6 +3,7 @@ package com.tryden.simplenfl
 import com.tryden.simplenfl.network.NetworkLayer
 import com.tryden.simplenfl.network.response.teams.models.article.Article
 import com.tryden.simplenfl.network.response.teams.models.news.News
+import com.tryden.simplenfl.network.response.teams.models.player.Player
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
@@ -76,6 +77,17 @@ class SharedRepository {
     // Get article by id
     suspend fun getArticleById(articleId: String): Article? {
         val request = NetworkLayer.apiClient.getArticleById(articleId)
+
+        if (request.failed || !request.isSuccessful) {
+            return null
+        }
+
+        return request.body
+    }
+
+    // Get player by id
+    suspend fun getPlayerById(playerId: String): Player? {
+        val request = NetworkLayer.apiClient.getPlayerById(playerId)
 
         if (request.failed || !request.isSuccessful) {
             return null

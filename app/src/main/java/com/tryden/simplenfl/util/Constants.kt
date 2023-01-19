@@ -2,7 +2,7 @@ package com.tryden.simplenfl.util
 
 object Constants {
 
-    // NFL Base URL
+    // NFL base URL
     const val BASE_URL_NFL = "http://site.api.espn.com/apis/site/v2/sports/football/nfl/"
 
     // NFL scoreboard by dates
@@ -10,5 +10,11 @@ object Constants {
     const val SCOREBOARD_URL =
         "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
 
-    const val ARTICLE_BY_ID = "http://now.core.api.espn.com/v1/sports/news/"
+    // Article by id base URL
+    const val ARTICLE_BY_ID_URL = "http://now.core.api.espn.com/v1/sports/news/"
+
+    // Player by id base URL
+    const val PLAYER_BY_ID_URL = "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
+
+
 }
