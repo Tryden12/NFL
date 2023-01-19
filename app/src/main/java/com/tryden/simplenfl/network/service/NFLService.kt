@@ -9,6 +9,7 @@ import com.tryden.simplenfl.network.response.teams.models.teams.Sports
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NFLService {
 
@@ -28,7 +29,8 @@ interface NFLService {
     //scoreboard?limit=1000&dates=20220908-20230108
     @GET("scoreboard")
     suspend fun getScoreboardRange(
-//        @Query("dates") range: String
+        @Query("dates") dates: String,
+        @Query("limit") limit: String
     ): Response<Scoreboard>
 
     @GET("news")
