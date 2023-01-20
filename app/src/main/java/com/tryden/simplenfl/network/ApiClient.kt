@@ -4,9 +4,9 @@ import com.tryden.simplenfl.network.response.teams.models.article.Article
 import com.tryden.simplenfl.network.response.teams.models.news.News
 import com.tryden.simplenfl.network.response.teams.models.player.Player
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
-import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
 import com.tryden.simplenfl.network.response.teams.models.teams.Sports
+import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 import com.tryden.simplenfl.network.service.ArticleByIDService
 import com.tryden.simplenfl.network.service.NFLService
 import com.tryden.simplenfl.network.service.PlayerByIdService

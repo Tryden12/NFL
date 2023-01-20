@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.refreshTeam(2)
-        viewModel.refreshScoreboard("20220908-20230108","1000")
+        viewModel.refreshScoreboard("20220914-20230212","1000")
 
         epoxyTeamRecyclerView.setControllerAndBuildModels(epoxyControllerTeam)
         epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)

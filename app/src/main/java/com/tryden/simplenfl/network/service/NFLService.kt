@@ -1,11 +1,10 @@
 package com.tryden.simplenfl.network.service
 
-import com.tryden.simplenfl.network.response.teams.models.article.Article
 import com.tryden.simplenfl.network.response.teams.models.news.News
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
-import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
 import com.tryden.simplenfl.network.response.teams.models.teams.Sports
+import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

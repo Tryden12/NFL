@@ -1,7 +1,6 @@
 package com.tryden.simplenfl.team.scores
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyController
@@ -12,7 +11,7 @@ import com.tryden.simplenfl.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresPostItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresPreItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
-import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
+import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -47,29 +46,29 @@ class TeamScoresEpoxyController: EpoxyController() {
             return
         }
 
-//        SeasonTypeHeader(seasonType = "Post Season")
-//            .id("post-season").addTo(this)
-//
-//        for (i in scoresResponse!!.events.size-1 downTo 0) {
-//            if (scoresResponse!!.events[i].competitions[0].status.type.state == "pre") {
-//
-//                for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
-//                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
-//                        ScoresPreItemEpoxyModel(
-//                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo,
-//                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
-//                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
-//                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
-//                            recordAway = scoresResponse!!.events[i].competitions[0].competitors[0].records[0].summary,
-//                            recordHome = scoresResponse!!.events[i].competitions[0].competitors[1].records[0].summary,
-//                            dateScheduled = scoresResponse!!.events[i].date,
-//                            broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
-//                            headline = ""
-//                        ).id(scoresResponse!!.events[i].id).addTo(this)
-//                    }
-//                }
-//            }
-//        }
+        SeasonTypeHeader(seasonType = "Post Season")
+            .id("post-season").addTo(this)
+
+        for (i in scoresResponse!!.events.size-1 downTo 0) {
+            if (scoresResponse!!.events[i].competitions[0].status.type.state == "pre") {
+
+                for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
+                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
+                        ScoresPreItemEpoxyModel(
+                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                            recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(1)?.summary.toString(),
+                            recordHome = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(0)?.summary.toString(),
+                            dateScheduled = scoresResponse!!.events[i].date,
+                            broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
+                            headline = scoresResponse!!.events[i].competitions[0].notes[0].headline
+                        ).id(scoresResponse!!.events[i].id).addTo(this)
+                    }
+                }
+            }
+        }
 
 
 
@@ -84,10 +83,10 @@ class TeamScoresEpoxyController: EpoxyController() {
                 for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
                     if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
                         ScoresPostItemEpoxyModel(
-                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo,
-                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
-                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
-                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
+                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
                             pointsAway = scoresResponse!!.events[i].competitions[0].competitors[0].score,
                             pointsHome = scoresResponse!!.events[i].competitions[0].competitors[1].score,
                             datePlayed = scoresResponse!!.events[i].date,
@@ -136,15 +135,20 @@ class TeamScoresEpoxyController: EpoxyController() {
                 descriptionGameBottomItemTextview.text = headline
             }
 
-            // Parse ISO format to "E, M/d"
-//            val actual = OffsetDateTime.parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
-//            val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
-//            val gameTime = actual.format(formatter)
+            // Parse ISO format to "Sun, 10/18"
+            val responseDate = OffsetDateTime.parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+            val formatter = DateTimeFormatter.ofPattern("E',' M/d")
+            val formatDate = responseDate.format(formatter)
+
+            // Parse ISO format to "4:30 PM"
+            val actual = OffsetDateTime.parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+            val formatter2 = DateTimeFormatter.ofPattern("h:mm a")
+            val gameTime = actual.format(formatter2)
 
             recordAwayItemTextview.text = recordAway
             recordHomeItemTextview.text = recordHome
-            datePreGameItemTextview.text = dateScheduled
-            timePreGameItemTextview.text = "4:30 PM"
+            datePreGameItemTextview.text = formatDate
+            timePreGameItemTextview.text = gameTime
             broadcastPreGameItemTextview.text = broadcast
 
 
@@ -213,7 +217,7 @@ class TeamScoresEpoxyController: EpoxyController() {
 
                 datePostGameItemTextview.text = formatDateTime.toString()
 
-            } else { // cancelled or post-poned
+            } else { // cancelled or postponed
                 winnerArrowAwayImageView.visibility = View.INVISIBLE
                 winnerArrowHomeImageView.visibility = View.INVISIBLE
 
