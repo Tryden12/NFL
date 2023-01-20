@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="25dp"
         app:cardCornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="25dp"
         app:cardCornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview" >
@@ -107,9 +107,9 @@
 
     <View
         android:id="@+id/dividerVerticalScoresView"
-        android:layout_width="1dp"
-        android:layout_height="42dp"
-        android:background="@color/white"
+        android:layout_width="2px"
+        android:layout_height="40dp"
+        android:background="@color/light_grey"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toStartOf="@id/statusGameItemTextview"
         app:layout_constraintTop_toTopOf="@id/teamNameAwayTextview"
@@ -118,22 +118,23 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/winnerArrowAwayImageView"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:scaleType="centerCrop"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
         app:layout_constraintTop_toTopOf="@id/dividerVerticalScoresView"
-        tools:src="@drawable/ic_arrow_left_scores_50" />
+        android:src="@drawable/ic_arrow_left_scores_50"
+        />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/winnerArrowHomeImageView"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
         app:layout_constraintBottom_toBottomOf="@id/dividerVerticalScoresView"
-        tools:src="@drawable/ic_arrow_left_scores_50"
+        android:src="@drawable/ic_arrow_left_scores_50"
         android:visibility="invisible"
         />
 

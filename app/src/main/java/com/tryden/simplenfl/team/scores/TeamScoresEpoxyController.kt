@@ -1,14 +1,22 @@
 package com.tryden.simplenfl.team.scores
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
+import com.tryden.simplenfl.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresPostItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresPreItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
 import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
+import java.time.LocalDate
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class TeamScoresEpoxyController: EpoxyController() {
 
@@ -43,21 +51,27 @@ class TeamScoresEpoxyController: EpoxyController() {
         SeasonTypeHeader(seasonType = "Regular Season")
             .id("regular-season").addTo(this)
 
-        ScoresPostItemEpoxyModel(
-            logoAway = scoresResponse!!.events[0].competitions[0].competitors[0].team.logo,
-            logoHome = scoresResponse!!.events[0].competitions[0].competitors[1].team.logo,
-            teamNameAway = scoresResponse!!.events[0].competitions[0].competitors[0].team.name,
-            teamNameHome = scoresResponse!!.events[0].competitions[0].competitors[1].team.name,
-            pointsAway = scoresResponse!!.events[0].competitions[0].competitors[1].score,
-            pointsHome = scoresResponse!!.events[0].competitions[0].competitors[0].score,
-            datePlayed = "Sun, 9/09",
-            statusDesc = scoresResponse!!.events[0].competitions[0].status.type.description
-        ).id(scoresResponse!!.events[0].id).addTo(this)
+
+
+        for (i in scoresResponse!!.events.indices) {
+            if (scoresResponse!!.events[i].competitions[0].status.type.state == "post") {
+                ScoresPostItemEpoxyModel(
+                    logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo,
+                    logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
+                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
+                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
+                    pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
+                    pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
+                    datePlayed = scoresResponse!!.events[i].date,
+                    statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description
+                ).id(scoresResponse!!.events[i].id).addTo(this)
+            }
+        }
     }
 
     // Add season type header
     data class SeasonTypeHeader(
-        val seasonType: String
+        val seasonType: String,
     ): ViewBindingKotlinModel<ModelScoresSeasonTypeHeaderBinding>(R.layout.model_scores_season_type_header) {
 
         override fun ModelScoresSeasonTypeHeaderBinding.bind() {
@@ -114,6 +128,7 @@ class TeamScoresEpoxyController: EpoxyController() {
         val headline: String = "",
     ): ViewBindingKotlinModel<ModelScoresPostItemBinding>(R.layout.model_scores_post_item) {
 
+        @SuppressLint("SimpleDateFormat")
         override fun ModelScoresPostItemBinding.bind() {
             Picasso.get().load(logoAway).into(awayLogoImageView)
             Picasso.get().load(logoHome).into(homeLogoImageView)
@@ -131,18 +146,35 @@ class TeamScoresEpoxyController: EpoxyController() {
             pointsAwayItemTextview.text = pointsAway
             pointsHomeItemTextview.text = pointsHome
 
-            if (pointsAway > pointsHome) {
+            if (pointsAway.toInt() > pointsHome.toInt()) {
                 winnerArrowAwayImageView.visibility = View.VISIBLE
                 winnerArrowHomeImageView.visibility = View.INVISIBLE
+
+                pointsAwayItemTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
+                pointsHomeItemTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
+
+                teamNameAwayTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
+                teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
+
             } else {
                 winnerArrowAwayImageView.visibility = View.INVISIBLE
                 winnerArrowHomeImageView.visibility = View.VISIBLE
+
+                pointsAwayItemTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
+                pointsHomeItemTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
+
+                teamNameAwayTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
+                teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
+
             }
 
             statusGameItemTextview.text = statusDesc
 
-            // convert date format TODO
-            datePostGameItemTextview.text = datePlayed
+            // Parse ISO format to "E, M/d"
+            val actual = OffsetDateTime.parse(datePlayed, DateTimeFormatter.ISO_DATE_TIME)
+            val formatter = DateTimeFormatter.ofPattern("E',' M/d")
+            val formatDateTime = actual.format(formatter)
+            datePostGameItemTextview.text = formatDateTime.toString()
 
         }
     }
