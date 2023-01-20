@@ -52,19 +52,24 @@ class TeamScoresEpoxyController: EpoxyController() {
             .id("regular-season").addTo(this)
 
 
-
-        for (i in scoresResponse!!.events.indices) {
+        for (i in scoresResponse!!.events.size-1 downTo 0) {
+//        for (i in scoresResponse!!.events.indices) {
             if (scoresResponse!!.events[i].competitions[0].status.type.state == "post") {
-                ScoresPostItemEpoxyModel(
-                    logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo,
-                    logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
-                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
-                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
-                    pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
-                    pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
-                    datePlayed = scoresResponse!!.events[i].date,
-                    statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description
-                ).id(scoresResponse!!.events[i].id).addTo(this)
+
+                for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
+                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
+                        ScoresPostItemEpoxyModel(
+                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo,
+                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
+                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
+                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
+                            pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
+                            pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
+                            datePlayed = scoresResponse!!.events[i].date,
+                            statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description
+                        ).id(scoresResponse!!.events[i].id).addTo(this)
+                    }
+                }
             }
         }
     }

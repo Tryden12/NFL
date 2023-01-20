@@ -33,6 +33,7 @@
         android:fontFamily="@font/opensans_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="25"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/cardViewAwayLogo"
@@ -68,6 +69,7 @@
         android:fontFamily="@font/opensans_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="25"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
@@ -80,12 +82,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_semi_bold"
-        android:layout_marginEnd="70dp"
         android:layout_marginTop="16dp"
         android:maxLines="1"
+        android:maxLength="12"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="visible"
         tools:text="Final"/>
@@ -97,6 +99,7 @@
         android:fontFamily="@font/opensans_semi_bold"
         android:layout_marginEnd="70dp"
         android:maxLines="1"
+        android:maxLength="12"
         android:textColor="@color/grey"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/statusGameItemTextview"
@@ -111,7 +114,7 @@
         android:layout_height="40dp"
         android:background="@color/light_grey"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@id/statusGameItemTextview"
+        app:layout_constraintEnd_toStartOf="@id/rightSideMarginEndView"
         app:layout_constraintTop_toTopOf="@id/teamNameAwayTextview"
         app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
         />
@@ -132,11 +135,10 @@
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
-        app:layout_constraintBottom_toBottomOf="@id/dividerVerticalScoresView"
         android:src="@drawable/ic_arrow_left_scores_50"
         android:visibility="invisible"
-        />
+        app:layout_constraintBottom_toBottomOf="@id/dividerVerticalScoresView"
+        app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/pointsAwayItemTextview"
@@ -145,6 +147,7 @@
         android:fontFamily="@font/opensans_extra_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="4"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/winnerArrowAwayImageView"
@@ -161,6 +164,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
         android:maxLines="1"
+        android:maxLength="4"
         android:textColor="@color/grey"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/winnerArrowHomeImageView"
@@ -198,6 +202,22 @@
         app:layout_constraintStart_toStartOf="@id/cardViewHomeLogo"
         app:layout_constraintTop_toBottomOf="@id/cardViewHomeLogo"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        />
+
+    <!--
+           View below acts as margin-end for right side of scoreboard
+   -->
+
+    <View
+        android:id="@+id/rightSideMarginEndView"
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="100dp"
+        android:background="?attr/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:visibility="invisible"
         />
 
