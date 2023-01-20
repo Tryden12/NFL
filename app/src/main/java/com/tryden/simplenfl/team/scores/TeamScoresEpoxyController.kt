@@ -13,7 +13,6 @@ import com.tryden.simplenfl.databinding.ModelScoresPostItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresPreItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
 import com.tryden.simplenfl.network.response.teams.models.scoreboard.Scoreboard
-import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -48,6 +47,32 @@ class TeamScoresEpoxyController: EpoxyController() {
             return
         }
 
+//        SeasonTypeHeader(seasonType = "Post Season")
+//            .id("post-season").addTo(this)
+//
+//        for (i in scoresResponse!!.events.size-1 downTo 0) {
+//            if (scoresResponse!!.events[i].competitions[0].status.type.state == "pre") {
+//
+//                for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
+//                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
+//                        ScoresPreItemEpoxyModel(
+//                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo,
+//                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
+//                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
+//                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
+//                            recordAway = scoresResponse!!.events[i].competitions[0].competitors[0].records[0].summary,
+//                            recordHome = scoresResponse!!.events[i].competitions[0].competitors[1].records[0].summary,
+//                            dateScheduled = scoresResponse!!.events[i].date,
+//                            broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
+//                            headline = ""
+//                        ).id(scoresResponse!!.events[i].id).addTo(this)
+//                    }
+//                }
+//            }
+//        }
+
+
+
         SeasonTypeHeader(seasonType = "Regular Season")
             .id("regular-season").addTo(this)
 
@@ -63,8 +88,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo,
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name,
                             teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name,
-                            pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
-                            pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
+                            pointsAway = scoresResponse!!.events[i].competitions[0].competitors[0].score,
+                            pointsHome = scoresResponse!!.events[i].competitions[0].competitors[1].score,
                             datePlayed = scoresResponse!!.events[i].date,
                             statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description
                         ).id(scoresResponse!!.events[i].id).addTo(this)
@@ -93,7 +118,6 @@ class TeamScoresEpoxyController: EpoxyController() {
         val recordAway: String,
         val recordHome: String,
         val dateScheduled: String,
-        val gameTime: String,
         val broadcast: String,
         val headline: String,
     ): ViewBindingKotlinModel<ModelScoresPreItemBinding>(R.layout.model_scores_pre_item) {
@@ -112,11 +136,19 @@ class TeamScoresEpoxyController: EpoxyController() {
                 descriptionGameBottomItemTextview.text = headline
             }
 
+            // Parse ISO format to "E, M/d"
+//            val actual = OffsetDateTime.parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+//            val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+//            val gameTime = actual.format(formatter)
+
             recordAwayItemTextview.text = recordAway
             recordHomeItemTextview.text = recordHome
             datePreGameItemTextview.text = dateScheduled
-            timePreGameItemTextview.text = gameTime
+            timePreGameItemTextview.text = "4:30 PM"
             broadcastPreGameItemTextview.text = broadcast
+
+
+
         }
     }
 
@@ -151,6 +183,11 @@ class TeamScoresEpoxyController: EpoxyController() {
             pointsAwayItemTextview.text = pointsAway
             pointsHomeItemTextview.text = pointsHome
 
+            // Parse ISO format to "E, M/d"
+            val actual = OffsetDateTime.parse(datePlayed, DateTimeFormatter.ISO_DATE_TIME)
+            val formatter = DateTimeFormatter.ofPattern("E',' M/d")
+            val formatDateTime = actual.format(formatter)
+
             if (pointsAway.toInt() > pointsHome.toInt()) {
                 winnerArrowAwayImageView.visibility = View.VISIBLE
                 winnerArrowHomeImageView.visibility = View.INVISIBLE
@@ -161,7 +198,10 @@ class TeamScoresEpoxyController: EpoxyController() {
                 teamNameAwayTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
                 teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
 
-            } else {
+                datePostGameItemTextview.text = formatDateTime.toString()
+
+
+            } else if (pointsAway.toInt() < pointsHome.toInt()) {
                 winnerArrowAwayImageView.visibility = View.INVISIBLE
                 winnerArrowHomeImageView.visibility = View.VISIBLE
 
@@ -171,119 +211,23 @@ class TeamScoresEpoxyController: EpoxyController() {
                 teamNameAwayTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
                 teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
 
+                datePostGameItemTextview.text = formatDateTime.toString()
+
+            } else { // cancelled or post-poned
+                winnerArrowAwayImageView.visibility = View.INVISIBLE
+                winnerArrowHomeImageView.visibility = View.INVISIBLE
+
+                pointsAwayItemTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
+                pointsHomeItemTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.grey))
+
+                teamNameAwayTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
+                teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,R.color.white))
+
+                datePostGameItemTextview.visibility = View.INVISIBLE
             }
 
+            // Status TextView
             statusGameItemTextview.text = statusDesc
-
-            // Parse ISO format to "E, M/d"
-            val actual = OffsetDateTime.parse(datePlayed, DateTimeFormatter.ISO_DATE_TIME)
-            val formatter = DateTimeFormatter.ofPattern("E',' M/d")
-            val formatDateTime = actual.format(formatter)
-            datePostGameItemTextview.text = formatDateTime.toString()
-
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    //        // Add scores item
-//        data class ScoresItemEpoxyModel(
-//            val logoAway: String,
-//            val logoHome: String,
-//            val teamNameAway: String,
-//            val teamNameHome: String,
-//            val pointsAway: String,
-//            val pointsHome: String,
-//            val recordAway: String,
-//            val recordHome: String,
-//            val dateScheduled: String,
-//            val gameTime: String,
-//            val broadcast: String,
-//            val datePlayed: String,
-//            val headline: String,
-//            val status: String,
-//        ): ViewBindingKotlinModel<ModelScoresItemBinding>(R.layout.model_scores_item) {
-//
-//            override fun ModelScoresItemBinding.bind() {
-//
-//                Picasso.get().load(logoAway).into(awayLogoImageView)
-//                Picasso.get().load(logoHome).into(homeLogoImageView)
-//
-//                teamNameAwayTextview.text = teamNameAway
-//                teamNameHomeTextview.text = teamNameHome
-//
-//                if (headline.isEmpty()) {
-//                    descriptionGameBottomItemTextview.visibility = View.GONE
-//                } else {
-//                    descriptionGameBottomItemTextview.visibility = View.VISIBLE
-//                    descriptionGameBottomItemTextview.text = headline
-//                }
-//
-//
-//                when (status) {
-//                    "pre" -> {
-//                        // Visible TextViews
-//                        recordAwayItemTextview.visibility = View.VISIBLE
-//                        recordHomeItemTextview.visibility = View.VISIBLE
-//                        datePreGameItemTextview.visibility = View.VISIBLE
-//                        timePreGameItemTextview.visibility = View.VISIBLE
-//                        broadcastPreGameItemTextview.visibility = View.VISIBLE
-//                        // Invisible TextViews
-//                        statusGameItemTextview.visibility = View.INVISIBLE
-//                        datePostGameItemTextview.visibility = View.INVISIBLE
-//                        pointsAwayItemTextview.visibility = View.INVISIBLE
-//                        pointsHomeItemTextview.visibility = View.INVISIBLE
-//                        winnerArrowAwayImageView.visibility = View.INVISIBLE
-//                        winnerArrowHomeImageView.visibility = View.INVISIBLE
-//
-//                        recordAwayItemTextview.text = recordAway
-//                        recordHomeItemTextview.text = recordHome
-//                        datePreGameItemTextview.text = dateScheduled
-//                        timePreGameItemTextview.text = gameTime
-//                        broadcastPreGameItemTextview.text = broadcast
-//                    }
-//                    "post" -> {
-//                        // Visible TextViews
-//                        statusGameItemTextview.visibility = View.VISIBLE
-//                        datePostGameItemTextview.visibility = View.VISIBLE
-//                        pointsAwayItemTextview.visibility = View.VISIBLE
-//                        pointsHomeItemTextview.visibility = View.VISIBLE
-//                        winnerArrowAwayImageView.visibility = View.VISIBLE
-//                        winnerArrowHomeImageView.visibility = View.VISIBLE
-//
-//                        // Invisible TextViews
-//                        recordAwayItemTextview.visibility = View.INVISIBLE
-//                        recordHomeItemTextview.visibility = View.INVISIBLE
-//                        datePreGameItemTextview.visibility = View.INVISIBLE
-//                        timePreGameItemTextview.visibility = View.INVISIBLE
-//                        broadcastPreGameItemTextview.visibility = View.INVISIBLE
-//
-//
-//                        pointsAwayItemTextview.text = pointsAway
-//                        pointsHomeItemTextview.text = pointsHome
-//
-//                        if (pointsAway > pointsHome) {
-//                            winnerArrowAwayImageView.visibility = View.VISIBLE
-//                            winnerArrowHomeImageView.visibility = View.INVISIBLE
-//                        } else {
-//                            winnerArrowAwayImageView.visibility = View.INVISIBLE
-//                            winnerArrowHomeImageView.visibility = View.VISIBLE
-//                        }
-//
-//                        // convert date format TODO
-//                        datePostGameItemTextview.text = ""
-//                    }
-//                }
-//
-//            }
-//        }
 }
