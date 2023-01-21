@@ -15,7 +15,7 @@ import com.tryden.simplenfl.team.roster.TeamRosterEpoxyController
 import com.tryden.simplenfl.team.scores.TeamScoresEpoxyController
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivityPlayer : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityPlayer,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityPlayer,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityPlayer,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityPlayer,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()

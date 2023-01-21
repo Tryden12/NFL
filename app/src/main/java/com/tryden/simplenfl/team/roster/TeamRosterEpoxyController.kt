@@ -77,7 +77,7 @@ class TeamRosterEpoxyController: EpoxyController() {
         }
     }
 
-    // Add roster type header
+    // Roster type header
     data class RosterTypeHeaderEpoxyHeader(
         val rosterType: String
     ): ViewBindingKotlinModel<ModelRosterHeaderBinding>(R.layout.model_roster_header) {
@@ -87,6 +87,7 @@ class TeamRosterEpoxyController: EpoxyController() {
         }
     }
 
+    // Player item model
     data class RosterPlayerItemEpoxyModel(
         val imageUrl: String,
         val name: String,
@@ -101,7 +102,7 @@ class TeamRosterEpoxyController: EpoxyController() {
 
             parentConstraintLayout.setBackgroundColor(Color.parseColor(backgroundColor))
 
-            Picasso.get().load(imageUrl).into(playerImageView)
+            Picasso.get().load(imageUrl).into(playerImageImageView)
             nameTextView.text = name
             numberTextView.text = number
             positionTextView.text = position
