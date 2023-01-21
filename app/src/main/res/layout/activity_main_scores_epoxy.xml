@@ -21,7 +21,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/epoxy_roster_RecyclerView"
+        android:id="@+id/epoxy_scores_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"

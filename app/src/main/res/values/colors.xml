@@ -13,12 +13,12 @@
     <!-- Greys-->
     <color name="accent">#6C6C6C</color>
     <color name="dark_grey">#2B2B2B</color>
-    <color name="darkish_grey">#3C3C3C</color>
+    <color name="darkish_grey">#323232</color>
 
     <color name="grey">#808080</color>
     <color name="light_grey">#B3B3B3</color>
 
     <!-- Blues-->
-    <color name="blue_link">#055C9D</color>
+    <color name="blue_link">#0E86D4</color>
 
 </resources>

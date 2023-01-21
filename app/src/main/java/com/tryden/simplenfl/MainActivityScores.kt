@@ -10,11 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.team.header.TeamPageHeaderEpoxyController
-import com.tryden.simplenfl.team.roster.TeamRosterEpoxyController
 import com.tryden.simplenfl.team.scores.TeamScoresEpoxyController
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivityScores : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
@@ -26,15 +25,14 @@ class MainActivity : AppCompatActivity() {
 
     private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
     private val epoxyControllerScores = TeamScoresEpoxyController()
-    private val epoxyControllerRoster = TeamRosterEpoxyController()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_scores_epoxy)
 
         val epoxyTeamRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
-        val epoxyRosterRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_roster_RecyclerView)
+        val epoxyScoresRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_RecyclerView)
 
         val view = epoxyTeamRecyclerView.rootView
 
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityScores,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -84,19 +82,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
-                    "Unsuccessful network call!",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@observe
-            }
-        }
-        viewModel.rosterByTeamId.observe(this) { response ->
-            epoxyControllerRoster.rosterResponse = response
-
-            if (response == null) {
-                Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityScores,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -105,10 +91,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.refreshTeam(2)
-        viewModel.refreshRoster(2)
+        viewModel.refreshScoreboard("20220914-20230212","1000")
 
         epoxyTeamRecyclerView.setControllerAndBuildModels(epoxyControllerTeam)
-        epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)
+        epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
 
     }
 
