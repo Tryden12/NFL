@@ -32,7 +32,7 @@
         android:fontFamily="@font/opensans_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
-        android:maxLength="25"
+        android:maxLength="22"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/cardViewAwayLogo"
@@ -68,7 +68,7 @@
         android:fontFamily="@font/opensans_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
-        android:maxLength="25"
+        android:maxLength="22"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
@@ -83,13 +83,13 @@
         android:fontFamily="@font/opensans_semi_bold"
         android:layout_marginTop="16dp"
         android:maxLines="1"
-        android:maxLength="12"
+        android:maxLength="10"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="visible"
-        tools:text="Final"/>
+        tools:text="Canceled"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/datePostGameItemTextview"
@@ -98,7 +98,7 @@
         android:fontFamily="@font/opensans_semi_bold"
         android:layout_marginEnd="70dp"
         android:maxLines="1"
-        android:maxLength="12"
+        android:maxLength="13"
         android:textColor="@color/grey"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/statusGameItemTextview"

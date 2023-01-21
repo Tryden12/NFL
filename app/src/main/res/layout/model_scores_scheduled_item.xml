@@ -32,6 +32,7 @@
         android:fontFamily="@font/opensans_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="20"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/cardViewAwayLogo"
@@ -67,11 +68,12 @@
         android:fontFamily="@font/opensans_bold"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="20"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
         app:layout_constraintTop_toTopOf="@id/cardViewHomeLogo"
-        tools:text="Home Team"/>
+        tools:text="Home Team Team Team Team Team Team"/>
 
     <!--     For games status: Pre    -->
 
@@ -81,12 +83,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_semi_bold"
         android:maxLines="1"
+        android:maxLength="13"
         android:textColor="@color/grey"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
         app:layout_constraintTop_toTopOf="@id/teamNameAwayTextview"
         android:visibility="visible"
-        tools:text="Sat, 1/21"/>
+        tools:text="Sat, 10/21"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/timePreGameItemTextview"
@@ -94,6 +97,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_semi_bold"
         android:maxLines="1"
+        android:maxLength="10"
         android:textColor="@color/grey"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
@@ -107,6 +111,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/opensans_semi_bold"
         android:maxLines="1"
+        android:maxLength="10"
         android:textColor="@color/grey"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
@@ -134,6 +139,7 @@
         android:fontFamily="@font/opensans_regular"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="7"
         android:layout_marginBottom="-2dp"
         android:layout_marginEnd="10dp"
         android:textColor="@color/grey"
@@ -150,6 +156,7 @@
         android:fontFamily="@font/opensans_regular"
         android:layout_marginStart="8dp"
         android:maxLines="1"
+        android:maxLength="7"
         android:layout_marginTop="-2dp"
         android:layout_marginEnd="10dp"
         android:textColor="@color/grey"
