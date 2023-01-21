@@ -6,7 +6,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.team.header.TeamPageHeaderEpoxyController
@@ -29,7 +28,7 @@ class MainActivityScores : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_scores_epoxy)
+        setContentView(R.layout.activity_main_scores)
 
         val epoxyTeamRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
         val epoxyScoresRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_RecyclerView)

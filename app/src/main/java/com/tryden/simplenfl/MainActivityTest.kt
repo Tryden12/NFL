@@ -6,7 +6,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.team.header.TeamPageHeaderEpoxyController
@@ -15,7 +14,7 @@ import com.tryden.simplenfl.team.roster.TeamRosterEpoxyController
 import com.tryden.simplenfl.team.scores.TeamScoresEpoxyController
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivityTest : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_test)
 
         val epoxyTeamRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
         val epoxyPlayerRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_player_RecyclerView)
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityTest,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityTest,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -98,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityTest,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -110,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivity,
+                    this@MainActivityTest,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()

@@ -15,6 +15,8 @@ object Constants {
 
     // Player by id base URL
     const val PLAYER_BY_ID_URL = "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
+    // Player by id base URL
+    const val PLAYER_BY_ID_URL_NEW = "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/14876"
 
 
 }
