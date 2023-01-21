@@ -8,9 +8,11 @@ import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SimpleNFLApplication
-import com.tryden.simplenfl.databinding.ModelScoresPostItemBinding
-import com.tryden.simplenfl.databinding.ModelScoresPreItemBinding
+import com.tryden.simplenfl.databinding.ModelScoresFinalItemBinding
+import com.tryden.simplenfl.databinding.ModelScoresScheduledItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
+import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBottomBinding
+import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -37,7 +39,7 @@ class TeamScoresEpoxyController: EpoxyController() {
 
     override fun buildModels() {
         if (isLoading) {
-            // Loading model if you so choose
+            LoadingEpoxyModel().id("loading").addTo(this)
             return
         }
 
@@ -46,15 +48,24 @@ class TeamScoresEpoxyController: EpoxyController() {
             return
         }
 
-        SeasonTypeHeader(seasonType = "Post Season")
-            .id("post-season").addTo(this)
+        var postHeaderFilled = false
+        var regularHeaderFilled = false
+
+//        SeasonTypeHeader(seasonType = "Post Season")
+//            .id("post-season").addTo(this)
 
         for (i in scoresResponse!!.events.size-1 downTo 0) {
             if (scoresResponse!!.events[i].competitions[0].status.type.state == "pre") {
 
                 for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
                     if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
-                        ScoresPreItemEpoxyModel(
+
+                        if (!postHeaderFilled) {
+                            SeasonTypeHeader(seasonType = "Post Season")
+                                .id("post-season").addTo(this)
+                            postHeaderFilled = true
+                        }
+                        ScoresScheduledItemEpoxyModel(
                             logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
@@ -69,12 +80,15 @@ class TeamScoresEpoxyController: EpoxyController() {
                 }
             }
         }
+        if (postHeaderFilled) {
+            SeasonTypeHeaderBottom(filler = "").id("1").addTo(this)
+        }
 
 
 
-        SeasonTypeHeader(seasonType = "Regular Season")
-            .id("regular-season").addTo(this)
-
+//        SeasonTypeHeader(seasonType = "Regular Season")
+//            .id("regular-season").addTo(this)
+//
 
         for (i in scoresResponse!!.events.size-1 downTo 0) {
 //        for (i in scoresResponse!!.events.indices) {
@@ -82,7 +96,13 @@ class TeamScoresEpoxyController: EpoxyController() {
 
                 for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
                     if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
-                        ScoresPostItemEpoxyModel(
+
+                        if (!regularHeaderFilled) {
+                            SeasonTypeHeader(seasonType = "Regular Season")
+                                .id("regular-season").addTo(this)
+                            regularHeaderFilled = true
+                        }
+                        ScoresFinalItemEpoxyModel(
                             logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
@@ -96,6 +116,9 @@ class TeamScoresEpoxyController: EpoxyController() {
                 }
             }
         }
+        if (regularHeaderFilled) {
+            SeasonTypeHeaderBottom(filler = "").id("2").addTo(this)
+        }
     }
 
     // Add season type header
@@ -108,8 +131,17 @@ class TeamScoresEpoxyController: EpoxyController() {
         }
     }
 
+    data class SeasonTypeHeaderBottom(
+        val filler: String
+    ): ViewBindingKotlinModel<ModelScoresSeasonTypeHeaderBottomBinding>(R.layout.model_scores_season_type_header_bottom) {
+
+        override fun ModelScoresSeasonTypeHeaderBottomBinding.bind() {
+           // nothing to do
+        }
+    }
+
     // Add scores item
-    data class ScoresPreItemEpoxyModel(
+    data class ScoresScheduledItemEpoxyModel(
         val logoAway: String,
         val logoHome: String,
         val teamNameAway: String,
@@ -119,9 +151,9 @@ class TeamScoresEpoxyController: EpoxyController() {
         val dateScheduled: String,
         val broadcast: String,
         val headline: String,
-    ): ViewBindingKotlinModel<ModelScoresPreItemBinding>(R.layout.model_scores_pre_item) {
+    ): ViewBindingKotlinModel<ModelScoresScheduledItemBinding>(R.layout.model_scores_scheduled_item) {
 
-        override fun ModelScoresPreItemBinding.bind() {
+        override fun ModelScoresScheduledItemBinding.bind() {
             Picasso.get().load(logoAway).into(awayLogoImageView)
             Picasso.get().load(logoHome).into(homeLogoImageView)
 
@@ -157,7 +189,7 @@ class TeamScoresEpoxyController: EpoxyController() {
     }
 
     // Add scores item
-    data class ScoresPostItemEpoxyModel(
+    data class ScoresFinalItemEpoxyModel(
         val logoAway: String,
         val logoHome: String,
         val teamNameAway: String,
@@ -167,10 +199,10 @@ class TeamScoresEpoxyController: EpoxyController() {
         val datePlayed: String,
         val statusDesc: String,
         val headline: String = "",
-    ): ViewBindingKotlinModel<ModelScoresPostItemBinding>(R.layout.model_scores_post_item) {
+    ): ViewBindingKotlinModel<ModelScoresFinalItemBinding>(R.layout.model_scores_final_item) {
 
         @SuppressLint("SimpleDateFormat")
-        override fun ModelScoresPostItemBinding.bind() {
+        override fun ModelScoresFinalItemBinding.bind() {
             Picasso.get().load(logoAway).into(awayLogoImageView)
             Picasso.get().load(logoHome).into(homeLogoImageView)
 

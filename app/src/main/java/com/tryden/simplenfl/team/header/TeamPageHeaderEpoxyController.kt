@@ -5,8 +5,6 @@ import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.databinding.ModelScoresPostItemBinding
-import com.tryden.simplenfl.databinding.ModelScoresPreItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamPageHeaderBinding
@@ -34,7 +32,7 @@ class TeamPageHeaderEpoxyController: EpoxyController() {
     override fun buildModels() {
 
         if (isLoading) {
-            LoadingEpoxyModel().id("loading").addTo(this)
+//            LoadingEpoxyModel().id("loading").addTo(this)
             return
         }
 
