@@ -1,15 +1,17 @@
 package com.tryden.simplenfl
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
-import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.team.header.TeamPageHeaderEpoxyController
 import com.tryden.simplenfl.team.scores.TeamScoresEpoxyController
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportActionBar?.title = ""
         val epoxyTeamRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
         val epoxyScoresRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_RecyclerView)
 
@@ -61,7 +62,16 @@ class MainActivity : AppCompatActivity() {
             gradientDrawable.cornerRadius = 0f;
 
             //Set Gradient
-            view.background = gradientDrawable;
+//            view.background = gradientDrawable;
+            epoxyTeamRecyclerView.background = gradientDrawable
+            supportActionBar?.apply {
+                supportActionBar?.title = ""
+                setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
+                elevation = 0f
+            }
+//            window.statusBarColor = response.team.color.toInt()
+//            window.statusBarColor = ContextCompat.getColor(this, response.team.color.toInt())
+            window.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
 
         }
 
