@@ -67,7 +67,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/labelPositionTextView"
+            android:id="@+id/positionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -83,7 +83,7 @@
             tools:text="QB" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/labelAgeTextView"
+            android:id="@+id/ageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -99,7 +99,7 @@
             tools:text="25" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/labelHeightTextView"
+            android:id="@+id/heightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="105dp"
