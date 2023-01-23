@@ -65,7 +65,16 @@ class PlayerEpoxyController: EpoxyController() {
 
         override fun ModelPlayerHeaderBinding.bind() {
 
-            Picasso.get().load(playerImageUrl).into(playerImageImageView)
+            if (playerImageUrl.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_headshot)
+                    .placeholder(R.drawable.placeholder_headshot)
+                    .error(R.drawable.placeholder_headshot)
+                    .into(playerImageImageView)
+            } else {
+                Picasso.get().load(playerImageUrl).into(playerImageImageView)
+            }
+
             firstNameTextView.text = firstName
             lastNameTextView.text = lastName
             numberTextView.text = "#$number"

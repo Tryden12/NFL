@@ -60,7 +60,15 @@ class TeamPageHeaderEpoxyController: EpoxyController() {
             teamNameTextView.text = teamName
             recordTextView.text = "($record)"
 
-            Picasso.get().load(logoUrl).into(logoImageView)
+            if (logoUrl.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(logoImageView)
+            } else {
+                Picasso.get().load(logoUrl).into(logoImageView)
+            }
         }
     }
 

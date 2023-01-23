@@ -154,8 +154,26 @@ class TeamScoresEpoxyController: EpoxyController() {
     ): ViewBindingKotlinModel<ModelScoresScheduledItemBinding>(R.layout.model_scores_scheduled_item) {
 
         override fun ModelScoresScheduledItemBinding.bind() {
-            Picasso.get().load(logoAway).into(awayLogoImageView)
-            Picasso.get().load(logoHome).into(homeLogoImageView)
+
+            if (logoAway.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(awayLogoImageView)
+            } else {
+                Picasso.get().load(logoAway).into(awayLogoImageView)
+            }
+
+            if (logoHome.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(homeLogoImageView)
+            } else {
+                Picasso.get().load(logoHome).into(homeLogoImageView)
+            }
 
             teamNameAwayTextview.text = teamNameAway
             teamNameHomeTextview.text = teamNameHome

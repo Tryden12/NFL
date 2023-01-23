@@ -82,7 +82,16 @@ class TeamListHomeEpoxyController(
         (R.layout.model_teams_list_vertical_item) {
 
         override fun ModelTeamsListVerticalItemBinding.bind() {
-            Picasso.get().load(logoUrl).into(logoImageView)
+
+            if (logoUrl.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(logoImageView)
+            } else {
+                Picasso.get().load(logoUrl).into(logoImageView)
+            }
             teamNameTextView.text = teamName
 
 

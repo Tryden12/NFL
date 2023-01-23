@@ -1,7 +1,5 @@
 package com.tryden.simplenfl.team.roster
 
-import android.graphics.Color
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
@@ -103,7 +101,21 @@ class TeamRosterEpoxyController: EpoxyController() {
 
             parentConstraintLayout.setBackgroundColor(backgroundColor)
 
-            Picasso.get().load(imageUrl).into(playerImageImageView)
+            if (imageUrl.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_headshot)
+                    .placeholder(R.drawable.placeholder_headshot)
+                    .error(R.drawable.placeholder_headshot)
+                    .into(playerImageImageView)
+            } else {
+                Picasso.get()
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder_headshot)
+                    .error(R.drawable.placeholder_headshot)
+                    .into(playerImageImageView)
+            }
+
+
             nameTextView.text = name
             numberTextView.text = number
             positionTextView.text = position
