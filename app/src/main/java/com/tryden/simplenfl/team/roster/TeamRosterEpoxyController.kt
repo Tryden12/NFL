@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.team.roster
 
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
@@ -50,27 +51,27 @@ class TeamRosterEpoxyController: EpoxyController() {
                 .id(rosterType[i].position).addTo(this)
 
             // Add all players listed in the roster type
-            for (j in rosterType[i].items.indices)
-                if (j == 0 || j % 2 == 0) {
+            for (j in rosterResponse!!.athletes[i].items.indices)
+                if (j % 2 == 0) {
                     RosterPlayerItemEpoxyModel(
-                        imageUrl = rosterResponse!!.athletes[0].items[j].headshot.href,
-                        name = rosterResponse!!.athletes[0].items[j].displayName,
-                        number = rosterResponse!!.athletes[0].items[j].jersey,
-                        position = rosterResponse!!.athletes[0].items[j].position.abbreviation,
-                        age = rosterResponse!!.athletes[0].items[j].age.toString(),
-                        height = rosterResponse!!.athletes[0].items[j].displayHeight,
+                        imageUrl = rosterResponse!!.athletes[i].items[j].headshot.href,
+                        name = rosterResponse!!.athletes[i].items[j].displayName,
+                        number = rosterResponse!!.athletes[i].items[j].jersey,
+                        position = rosterResponse!!.athletes[i].items[j].position.abbreviation,
+                        age = rosterResponse!!.athletes[i].items[j].age.toString(),
+                        height = rosterResponse!!.athletes[i].items[j].displayHeight,
                         backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.dark_grey) // dark background
-                    ).id(rosterResponse!!.athletes[0].items[j].id).addTo(this)
+                    ).id(rosterResponse!!.athletes[i].items[j].id).addTo(this)
                 } else {
                     RosterPlayerItemEpoxyModel(
-                        imageUrl = rosterResponse!!.athletes[0].items[j].headshot.href,
-                        name = rosterResponse!!.athletes[0].items[j].displayName,
-                        number = rosterResponse!!.athletes[0].items[j].jersey,
-                        position = rosterResponse!!.athletes[0].items[j].position.abbreviation,
-                        age = rosterResponse!!.athletes[0].items[j].age.toString(),
-                        height = rosterResponse!!.athletes[0].items[j].displayHeight,
+                        imageUrl = rosterResponse!!.athletes[i].items[j].headshot.href,
+                        name = rosterResponse!!.athletes[i].items[j].displayName,
+                        number = rosterResponse!!.athletes[i].items[j].jersey,
+                        position = rosterResponse!!.athletes[i].items[j].position.abbreviation,
+                        age = rosterResponse!!.athletes[i].items[j].age.toString(),
+                        height = rosterResponse!!.athletes[i].items[j].displayHeight,
                         backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.darkish_grey) // lighter background
-                    ).id(rosterResponse!!.athletes[0].items[j].id).addTo(this)
+                    ).id(rosterResponse!!.athletes[i].items[j].id).addTo(this)
                 }
 
         }
