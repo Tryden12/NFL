@@ -140,7 +140,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
             }
 
             val body = response.sports
-            testAllTeamsTextView.text = body[0].leagues[0].name
+            testAllTeamsTextView.text = body[0].leagues[0].teams[0].team.shortDisplayName
         }
 
         // refresh breaking news

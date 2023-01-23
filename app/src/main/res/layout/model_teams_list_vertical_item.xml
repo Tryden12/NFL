@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/dark_grey">
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTeamsLogoCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/teamNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/light_grey"
+        android:textSize="8sp"
+        android:textAllCaps="true"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/cardTeamsLogoCardView"
+        app:layout_constraintStart_toStartOf="@id/cardTeamsLogoCardView"
+        app:layout_constraintEnd_toEndOf="@id/cardTeamsLogoCardView"
+        tools:text="Commanders"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

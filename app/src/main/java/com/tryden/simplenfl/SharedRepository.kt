@@ -6,7 +6,7 @@ import com.tryden.simplenfl.network.response.teams.models.news.News
 import com.tryden.simplenfl.network.response.teams.models.player.Player
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
-import com.tryden.simplenfl.network.response.teams.models.teams.Sports
+import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
 import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 
 class SharedRepository {
@@ -31,7 +31,7 @@ class SharedRepository {
     }
 
     // Get all teams
-    suspend fun getAllTeams(): Sports? {
+    suspend fun getAllTeams(): AllTeams? {
         val request = NetworkLayer.apiClient.getAllTeams()
 
         if (request.failed || !request.isSuccessful) {

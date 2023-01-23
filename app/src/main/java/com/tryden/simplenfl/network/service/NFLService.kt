@@ -3,7 +3,7 @@ package com.tryden.simplenfl.network.service
 import com.tryden.simplenfl.network.response.teams.models.news.News
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
-import com.tryden.simplenfl.network.response.teams.models.teams.Sports
+import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
 import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface NFLService {
 
     @GET("teams")
-    suspend fun getAllTeams(): Response<Sports>
+    suspend fun getAllTeams(): Response<AllTeams>
 
     @GET("teams/{team-id}")
     suspend fun getTeamById(

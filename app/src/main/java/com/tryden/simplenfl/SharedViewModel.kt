@@ -9,7 +9,7 @@ import com.tryden.simplenfl.network.response.teams.models.news.News
 import com.tryden.simplenfl.network.response.teams.models.player.Player
 import com.tryden.simplenfl.network.response.teams.models.roster.Roster
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
-import com.tryden.simplenfl.network.response.teams.models.teams.Sports
+import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
 import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
 import kotlinx.coroutines.launch
 
@@ -20,8 +20,8 @@ class SharedViewModel: ViewModel() {
     private val _teamByIdLiveData = MutableLiveData<TeamObject?>()
     val teamByIdLiveData: LiveData<TeamObject?> = _teamByIdLiveData
 
-    private val _allTeamsListLiveData = MutableLiveData<Sports?>()
-    val allTeamsListLiveData: LiveData<Sports?> = _allTeamsListLiveData
+    private val _allTeamsListLiveData = MutableLiveData<AllTeams?>()
+    val allTeamsListLiveData: LiveData<AllTeams?> = _allTeamsListLiveData
 
     private val _rosterByTeamIdLiveData = MutableLiveData<Roster?>()
     val rosterByTeamId: LiveData<Roster?> = _rosterByTeamIdLiveData
