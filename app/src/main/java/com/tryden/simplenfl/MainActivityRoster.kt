@@ -103,8 +103,13 @@ class MainActivityRoster : AppCompatActivity() {
             }
         }
 
-        viewModel.refreshTeam(2)
-        viewModel.refreshRoster(2)
+        val teamId = intent.getIntExtra("test", 2)
+        if (teamId != null) {
+            viewModel.refreshTeam(teamId = teamId)
+        }
+        if (teamId != null) {
+            viewModel.refreshRoster(teamId = teamId)
+        }
 
         epoxyTeamRecyclerView.setControllerAndBuildModels(epoxyControllerTeam)
         epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)

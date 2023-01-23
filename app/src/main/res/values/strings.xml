@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SimpleNFL</string>
+
+
+    <!-- Team -->
+    <string name="team_id_key">team_id_key</string>
 </resources>

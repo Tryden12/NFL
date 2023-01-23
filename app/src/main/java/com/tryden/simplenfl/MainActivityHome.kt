@@ -1,7 +1,9 @@
 package com.tryden.simplenfl
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +21,7 @@ class MainActivityHome : AppCompatActivity() {
         ViewModelProvider(this)[SharedViewModel::class.java]
     }
 
-    private val epoxyControllerTeamList = TeamListHomeEpoxyController()
+    private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected) // function pointer
 
 
 
@@ -47,6 +49,13 @@ class MainActivityHome : AppCompatActivity() {
 
         epoxyTeamListRecyclerView.setControllerAndBuildModels(epoxyControllerTeamList)
 
+    }
+
+    private fun onTeamSelected(teamId: Int) {
+        Log.e(TAG, "onTeamSelected: $teamId")
+        val intent = Intent(this, MainActivityRoster::class.java)
+        intent.putExtra("test", teamId)
+        startActivity(intent)
     }
 
 

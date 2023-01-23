@@ -7,6 +7,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
+import com.tryden.simplenfl.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelRosterHeaderBinding
 import com.tryden.simplenfl.databinding.ModelRosterPlayerItemBinding
 import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
@@ -45,7 +46,7 @@ class TeamRosterEpoxyController: EpoxyController() {
         val rosterType = rosterResponse!!.athletes
         var headshot = rosterResponse!!.athletes[0].items[0].fullName
 
-        for (i in rosterType.indices) {
+        for (i in rosterResponse!!.athletes.indices) {
             // Add the roster header by roster type (Offense, Defense, Special Teams
             RosterTypeHeaderEpoxyHeader(rosterType = rosterType[i].position)
                 .id(rosterType[i].position).addTo(this)
@@ -60,7 +61,7 @@ class TeamRosterEpoxyController: EpoxyController() {
                         position = rosterResponse!!.athletes[0].items[j].position.abbreviation,
                         age = rosterResponse!!.athletes[0].items[j].age.toString(),
                         height = rosterResponse!!.athletes[0].items[j].displayHeight,
-                        backgroundColor = "#2B2B2B" // dark background
+                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.dark_grey) // dark background
                     ).id(rosterResponse!!.athletes[0].items[j].id).addTo(this)
                 } else {
                     RosterPlayerItemEpoxyModel(
@@ -70,7 +71,7 @@ class TeamRosterEpoxyController: EpoxyController() {
                         position = rosterResponse!!.athletes[0].items[j].position.abbreviation,
                         age = rosterResponse!!.athletes[0].items[j].age.toString(),
                         height = rosterResponse!!.athletes[0].items[j].displayHeight,
-                        backgroundColor = "#323232" // lighter background
+                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.darkish_grey) // lighter background
                     ).id(rosterResponse!!.athletes[0].items[j].id).addTo(this)
                 }
 
@@ -95,12 +96,12 @@ class TeamRosterEpoxyController: EpoxyController() {
         val position: String,
         val age: String,
         val height: String,
-        val backgroundColor: String
+        val backgroundColor: Int
     ): ViewBindingKotlinModel<ModelRosterPlayerItemBinding>(R.layout.model_roster_player_item) {
 
         override fun ModelRosterPlayerItemBinding.bind() {
 
-            parentConstraintLayout.setBackgroundColor(Color.parseColor(backgroundColor))
+            parentConstraintLayout.setBackgroundColor(backgroundColor)
 
             Picasso.get().load(imageUrl).into(playerImageImageView)
             nameTextView.text = name

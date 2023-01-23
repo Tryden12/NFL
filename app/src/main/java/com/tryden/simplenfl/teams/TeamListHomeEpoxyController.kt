@@ -10,7 +10,9 @@ import com.tryden.simplenfl.databinding.ModelTeamsListVerticalItemBinding
 import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
 
-class TeamListHomeEpoxyController: EpoxyController() {
+class TeamListHomeEpoxyController(
+    private val onTeamSelected: (Int) -> Unit
+): EpoxyController() {
 
 
     var isLoading: Boolean = true
@@ -50,8 +52,10 @@ class TeamListHomeEpoxyController: EpoxyController() {
         for (i in teamsListResponse!!.sports[0].leagues[0].teams.indices) {
 
             TeamVerticalListEpoxyModel(
+                teamId = teamsListResponse!!.sports[0].leagues[0].teams[i].team.id.toInt(),
                 logoUrl = teamsListResponse!!.sports[0].leagues[0].teams[i].team.logos[0].href,
-                teamName = teamsListResponse!!.sports[0].leagues[0].teams[i].team.shortDisplayName
+                teamName = teamsListResponse!!.sports[0].leagues[0].teams[i].team.shortDisplayName,
+                onTeamSelected = onTeamSelected
             ).id(teamsListResponse!!.sports[0].leagues[0].teams[i].team.id).addTo(this)
 
         }
@@ -70,14 +74,23 @@ class TeamListHomeEpoxyController: EpoxyController() {
 
     // Add teams
     data class TeamVerticalListEpoxyModel(
+        val teamId: Int,
         val logoUrl: String,
-        val teamName: String
+        val teamName: String,
+        val onTeamSelected: (Int) -> Unit
     ): ViewBindingKotlinModel<ModelTeamsListVerticalItemBinding>
         (R.layout.model_teams_list_vertical_item) {
 
         override fun ModelTeamsListVerticalItemBinding.bind() {
             Picasso.get().load(logoUrl).into(logoImageView)
             teamNameTextView.text = teamName
+
+
+
+            // Click listener for teams pages
+            root.setOnClickListener {
+                onTeamSelected(teamId)
+            }
         }
     }
 }
