@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tryden.simplenfl.news.headlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.scores.HomeScoresEpoxyController
 
@@ -26,12 +27,14 @@ class MainActivityHome : AppCompatActivity() {
     private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
     private val epoxyControllerScores = HomeScoresEpoxyController()
 
+    private lateinit var bottomNavigationView: BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_home)
         supportActionBar?.hide()
+        setupBottomNav()
 
         val epoxyHomeTopHeadlinesRecyclerView= findViewById<EpoxyRecyclerView>(R.id.epoxy_home_top_headlines_RecyclerView)
         val epoxyHomeScoresRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_home_scores_RecyclerView)
@@ -94,6 +97,27 @@ class MainActivityHome : AppCompatActivity() {
 //        intent.putExtra("test", teamId)
 //        startActivity(intent)
 //    }
+
+    private fun setupBottomNav() {
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homePage -> {
+                    true
+                }
+                R.id.teamsListPage -> {
+                    true
+                }
+                R.id.scoresPage -> {
+                    true
+                }
+                R.id.newsPage -> {
+                    true
+                }
+                else -> false
+            }
+        }
+    }
 
 
 }
