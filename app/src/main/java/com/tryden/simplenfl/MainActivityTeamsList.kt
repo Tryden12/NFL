@@ -11,7 +11,7 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.teams.TeamListHomeEpoxyController
 
 
-class MainActivityHome : AppCompatActivity() {
+class MainActivityTeamsList : AppCompatActivity() {
 
     companion object {
         val TAG = "MainActivity"
@@ -37,7 +37,7 @@ class MainActivityHome : AppCompatActivity() {
             epoxyControllerTeamList.teamsListResponse = response
             if (response == null) {
                 Toast.makeText(
-                    this@MainActivityHome,
+                    this@MainActivityTeamsList,
                     "Unsuccessful network call!",
                     Toast.LENGTH_SHORT
                 ).show()

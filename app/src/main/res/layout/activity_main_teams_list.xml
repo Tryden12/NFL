@@ -11,20 +11,20 @@ tools:context=".MainActivityTest">
 
 
     <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/epoxy_home_scores_RecyclerView"
+        android:id="@+id/epoxy_team_list_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        app:itemSpacing="0dp"
+        app:itemSpacing="8dp"
         android:orientation="vertical"
-        app:spanCount="1"
+        app:spanCount="4"
         android:background="@drawable/bg_rounded_corners"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:itemCount="12"
-        tools:listitem="@layout/model_scores_final_item"/>
+        tools:listitem="@layout/model_teams_list_vertical_item"/>
 
 
 
