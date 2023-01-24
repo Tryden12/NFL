@@ -145,7 +145,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
 
         // refresh breaking news
         viewModel.refreshBreakingNews()
-        viewModel.newsBreaking.observe(this) { response ->
+        viewModel.newsBreakingLiveData.observe(this) { response ->
             if (response == null) {
                 Toast.makeText(
                     this@MainActivityBackupForTesting,

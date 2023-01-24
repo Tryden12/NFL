@@ -30,7 +30,7 @@ class SharedViewModel: ViewModel() {
     val scoreboardByRangeLiveData: LiveData<ScoreboardResponse?> = _scoreboardByRangeLiveData
 
     private val _newsBreakingLiveData = MutableLiveData<NewsResponse?>()
-    val newsBreaking: LiveData<NewsResponse?> = _newsBreakingLiveData
+    val newsBreakingLiveData: LiveData<NewsResponse?> = _newsBreakingLiveData
 
     private val _articleByIdLiveData = MutableLiveData<ArticleResponse?>()
     val articleById: LiveData<ArticleResponse?> = _articleByIdLiveData

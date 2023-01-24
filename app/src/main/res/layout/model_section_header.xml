@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="8dp"
     tools:background="@color/dark_grey">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -17,7 +15,9 @@
         android:lineHeight="28dp"
         android:maxLines="1"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:letterSpacing=".07"
+        android:textAllCaps="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
