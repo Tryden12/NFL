@@ -4,6 +4,6 @@ data class Competitor(
     val homeAway: String = "",
     val id: String = "",
     val order: Int = 0,
-    val team: com.tryden.simplenfl.network.response.teams.models.team.Team = com.tryden.simplenfl.network.response.teams.models.team.Team(),
+    val team: Team = Team(),
     val type: String = ""
 )

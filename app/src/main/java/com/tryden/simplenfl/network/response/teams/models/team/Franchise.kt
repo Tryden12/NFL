@@ -12,5 +12,5 @@ data class Franchise(
     val shortDisplayName: String = "",
     val slug: String = "",
     val uid: String = "",
-    val venue: com.tryden.simplenfl.network.response.teams.models.team.Venue = com.tryden.simplenfl.network.response.teams.models.team.Venue()
+    val venue: Venue = Venue()
 )
