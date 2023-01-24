@@ -70,7 +70,7 @@ class TeamScoresEpoxyController: EpoxyController() {
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
                             teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                            recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(1)?.summary.toString(),
+                            recordAway = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(0)?.summary.toString(),
                             recordHome = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(0)?.summary.toString(),
                             dateScheduled = scoresResponse!!.events[i].date,
                             broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
@@ -221,8 +221,26 @@ class TeamScoresEpoxyController: EpoxyController() {
 
         @SuppressLint("SimpleDateFormat")
         override fun ModelScoresFinalItemBinding.bind() {
-            Picasso.get().load(logoAway).into(awayLogoImageView)
-            Picasso.get().load(logoHome).into(homeLogoImageView)
+
+            if (logoAway.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(awayLogoImageView)
+            } else {
+                Picasso.get().load(logoAway).into(awayLogoImageView)
+            }
+
+            if (logoHome.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(homeLogoImageView)
+            } else {
+                Picasso.get().load(logoHome).into(homeLogoImageView)
+            }
 
             teamNameAwayTextview.text = teamNameAway
             teamNameHomeTextview.text = teamNameHome
