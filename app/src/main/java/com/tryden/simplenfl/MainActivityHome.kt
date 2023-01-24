@@ -34,6 +34,7 @@ class MainActivityHome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_home)
+        supportActionBar?.hide()
 
         val epoxyHomeTopHeadlinesRecyclerView= findViewById<EpoxyRecyclerView>(R.id.epoxy_home_top_headlines_RecyclerView)
         val epoxyHomeScoresRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxy_home_scores_RecyclerView)
