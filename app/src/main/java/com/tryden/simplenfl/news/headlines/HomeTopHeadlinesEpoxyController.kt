@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.news.headlines
 
+import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
@@ -39,25 +40,32 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
         }
 
         SectionHeaderHeadlinesEpoxyModel(
-            title = "Top Headlines"
+            title = "Top Headlines",
+            logoVisible = true
         ).id("top_headlines").addTo(this)
 
-
-        BreakingNewsHeadlineItemEpoxyModel(
-            headlineTitle = newsResponse!!.articles[0].headline
-        ).id("1").addTo(this)
-
-
+        for (i in newsResponse!!.articles.indices) {
+            BreakingNewsHeadlineItemEpoxyModel(
+                headlineTitle = newsResponse!!.articles[i].headline
+            ).id(newsResponse!!.articles[i].categories[0].id).addTo(this)
+        }
     }
 
     // Section header for headlines
     data class SectionHeaderHeadlinesEpoxyModel(
-        val title: String
+        val title: String,
+        val logoVisible: Boolean,
     ): ViewBindingKotlinModel<ModelSectionHeaderBinding>
         (R.layout.model_section_header) {
 
         override fun ModelSectionHeaderBinding.bind() {
             titleSectionTextView.text = title
+
+            // If logo present
+            if (logoVisible)
+                logoSectionImageView.visibility = View.VISIBLE
+            else
+                logoSectionImageView.visibility = View.GONE
         }
     }
 
