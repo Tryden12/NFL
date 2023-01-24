@@ -1,18 +1,18 @@
 package com.tryden.simplenfl
 
 import com.tryden.simplenfl.network.NetworkLayer
-import com.tryden.simplenfl.network.response.teams.models.article.Article
-import com.tryden.simplenfl.network.response.teams.models.news.News
-import com.tryden.simplenfl.network.response.teams.models.player.Player
-import com.tryden.simplenfl.network.response.teams.models.roster.Roster
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
-import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
+import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
+import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
+import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
+import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
+import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
+import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
+import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 
 class SharedRepository {
 
     // Team by Id
-    suspend fun getTeamById(teamId: Int): TeamObject? {
+    suspend fun getTeamById(teamId: Int): TeamObjectResponse? {
         val request = NetworkLayer.apiClient.getTeamById(teamId)
 
         // If the api call fails, network fails, or user loses internet
@@ -31,7 +31,7 @@ class SharedRepository {
     }
 
     // Get all teams
-    suspend fun getAllTeams(): AllTeams? {
+    suspend fun getAllTeams(): AllTeamsResponse? {
         val request = NetworkLayer.apiClient.getAllTeams()
 
         if (request.failed || !request.isSuccessful) {
@@ -42,7 +42,7 @@ class SharedRepository {
     }
 
     // Get roster by team id
-    suspend fun getRosterByTeamId(teamId: Int): Roster? {
+    suspend fun getRosterByTeamId(teamId: Int): RosterResponse? {
         val request = NetworkLayer.apiClient.getRosterByTeamId(teamId)
 
         if (request.failed || !request.isSuccessful) {
@@ -53,7 +53,7 @@ class SharedRepository {
     }
 
     // Get scoreboard by date range
-    suspend fun getScoreboardRange(dates: String, limit: String): Scoreboard? {
+    suspend fun getScoreboardRange(dates: String, limit: String): ScoreboardResponse? {
         val request = NetworkLayer.apiClient.getScoreboardRange(dates, limit)
 
         if (request.failed || !request.isSuccessful) {
@@ -64,7 +64,7 @@ class SharedRepository {
     }
 
     // Get breaking news
-    suspend fun getBreakingNews(): News? {
+    suspend fun getBreakingNews(): NewsResponse? {
         val request = NetworkLayer.apiClient.getBreakingNews()
 
         if (request.failed || !request.isSuccessful) {
@@ -75,7 +75,7 @@ class SharedRepository {
     }
 
     // Get article by id
-    suspend fun getArticleById(articleId: String): Article? {
+    suspend fun getArticleById(articleId: String): ArticleResponse? {
         val request = NetworkLayer.apiClient.getArticleById(articleId)
 
         if (request.failed || !request.isSuccessful) {
@@ -86,7 +86,7 @@ class SharedRepository {
     }
 
     // Get player by id
-    suspend fun getPlayerById(playerId: String): Player? {
+    suspend fun getPlayerById(playerId: String): PlayerResponse? {
         val request = NetworkLayer.apiClient.getPlayerById(playerId)
 
         if (request.failed || !request.isSuccessful) {

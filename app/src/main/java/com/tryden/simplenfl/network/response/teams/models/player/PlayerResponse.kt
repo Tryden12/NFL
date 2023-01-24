@@ -1,6 +1,6 @@
 package com.tryden.simplenfl.network.response.teams.models.player
 
-data class Player(
+data class PlayerResponse(
     val `$ref`: String = "",
     val active: Boolean = false,
     val age: Int = 0,

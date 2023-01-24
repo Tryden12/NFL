@@ -4,39 +4,39 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.network.response.teams.models.article.Article
-import com.tryden.simplenfl.network.response.teams.models.news.News
-import com.tryden.simplenfl.network.response.teams.models.player.Player
-import com.tryden.simplenfl.network.response.teams.models.roster.Roster
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
-import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
+import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
+import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
+import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
+import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
+import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
+import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
+import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import kotlinx.coroutines.launch
 
 class SharedViewModel: ViewModel() {
 
    private val repository = SharedRepository()
 
-    private val _teamByIdLiveData = MutableLiveData<TeamObject?>()
-    val teamByIdLiveData: LiveData<TeamObject?> = _teamByIdLiveData
+    private val _teamByIdLiveData = MutableLiveData<TeamObjectResponse?>()
+    val teamByIdLiveData: LiveData<TeamObjectResponse?> = _teamByIdLiveData
 
-    private val _allTeamsListLiveData = MutableLiveData<AllTeams?>()
-    val allTeamsListLiveData: LiveData<AllTeams?> = _allTeamsListLiveData
+    private val _allTeamsListLiveData = MutableLiveData<AllTeamsResponse?>()
+    val allTeamsListLiveData: LiveData<AllTeamsResponse?> = _allTeamsListLiveData
 
-    private val _rosterByTeamIdLiveData = MutableLiveData<Roster?>()
-    val rosterByTeamId: LiveData<Roster?> = _rosterByTeamIdLiveData
+    private val _rosterByTeamIdLiveData = MutableLiveData<RosterResponse?>()
+    val rosterByTeamId: LiveData<RosterResponse?> = _rosterByTeamIdLiveData
 
-    private val _scoreboardByRangeLiveData = MutableLiveData<Scoreboard?>()
-    val scoreboardByRangeLiveData: LiveData<Scoreboard?> = _scoreboardByRangeLiveData
+    private val _scoreboardByRangeLiveData = MutableLiveData<ScoreboardResponse?>()
+    val scoreboardByRangeLiveData: LiveData<ScoreboardResponse?> = _scoreboardByRangeLiveData
 
-    private val _newsBreakingLiveData = MutableLiveData<News?>()
-    val newsBreaking: LiveData<News?> = _newsBreakingLiveData
+    private val _newsBreakingLiveData = MutableLiveData<NewsResponse?>()
+    val newsBreaking: LiveData<NewsResponse?> = _newsBreakingLiveData
 
-    private val _articleByIdLiveData = MutableLiveData<Article?>()
-    val articleById: LiveData<Article?> = _articleByIdLiveData
+    private val _articleByIdLiveData = MutableLiveData<ArticleResponse?>()
+    val articleById: LiveData<ArticleResponse?> = _articleByIdLiveData
 
-    private val _playerByIdLiveData = MutableLiveData<Player?>()
-    val playerByIdLiveData: LiveData<Player?> = _playerByIdLiveData
+    private val _playerByIdLiveData = MutableLiveData<PlayerResponse?>()
+    val playerByIdLiveData: LiveData<PlayerResponse?> = _playerByIdLiveData
 
     fun refreshTeam(teamId: Int) {
         viewModelScope.launch {

@@ -1,6 +1,5 @@
 package com.tryden.simplenfl.team.roster
 
-import android.util.Log
 import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
@@ -10,7 +9,7 @@ import com.tryden.simplenfl.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelRosterHeaderBinding
 import com.tryden.simplenfl.databinding.ModelRosterPlayerItemBinding
 import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.roster.Roster
+import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
 
 class TeamRosterEpoxyController: EpoxyController() {
 
@@ -21,7 +20,7 @@ class TeamRosterEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var rosterResponse: Roster? = null
+    var rosterResponse: RosterResponse? = null
         set(value) {
             field = value
             if (value != null) {

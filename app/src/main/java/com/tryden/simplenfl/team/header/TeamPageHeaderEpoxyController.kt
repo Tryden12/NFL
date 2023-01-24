@@ -1,6 +1,5 @@
 package com.tryden.simplenfl.team.header
 
-import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
@@ -8,8 +7,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamPageHeaderBinding
-import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObject
+import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
 
 class TeamPageHeaderEpoxyController: EpoxyController() {
 
@@ -20,7 +18,7 @@ class TeamPageHeaderEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var teamResponse: TeamObject? = null
+    var teamResponse: TeamObjectResponse? = null
         set(value) {
             field = value
             if (field != null) {

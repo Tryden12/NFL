@@ -5,9 +5,8 @@ import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelPlayerHeaderBinding
-import com.tryden.simplenfl.databinding.ModelRosterPlayerItemBinding
 import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.player.Player
+import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
 
 class PlayerEpoxyController: EpoxyController() {
 
@@ -18,7 +17,7 @@ class PlayerEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var playerResponse: Player? = null
+    var playerResponse: PlayerResponse? = null
         set(value) {
             field = value
             if (value != null) {

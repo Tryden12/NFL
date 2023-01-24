@@ -13,7 +13,7 @@ import com.tryden.simplenfl.databinding.ModelScoresScheduledItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBottomBinding
 import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.scores.Scoreboard
+import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -27,7 +27,7 @@ class TeamScoresEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var scoresResponse: Scoreboard? = null
+    var scoresResponse: ScoreboardResponse? = null
         set(value) {
             field = value
             if (value != null) {

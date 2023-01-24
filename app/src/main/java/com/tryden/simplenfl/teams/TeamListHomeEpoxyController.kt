@@ -1,14 +1,12 @@
 package com.tryden.simplenfl.teams
 
-import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamsListVerticalItemBinding
-import com.tryden.simplenfl.epoxy.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeams
+import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
 
 class TeamListHomeEpoxyController(
     private val onTeamSelected: (Int) -> Unit
@@ -22,7 +20,7 @@ class TeamListHomeEpoxyController(
                 requestModelBuild()
             }
         }
-    var teamsListResponse: AllTeams? = null
+    var teamsListResponse: AllTeamsResponse? = null
         set(value) {
             field = value
             if (value != null) {

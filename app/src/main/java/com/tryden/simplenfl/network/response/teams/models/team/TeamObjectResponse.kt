@@ -1,5 +1,5 @@
 package com.tryden.simplenfl.network.response.teams.models.team
 
-data class TeamObject(
+data class TeamObjectResponse(
     val team: Team = Team()
 )
