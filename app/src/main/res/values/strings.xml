@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">SimpleNFL</string>
 
+    <!-- Bottom Menu Navigation -->
+    <string name="home">Home</string>
+    <string name="scores">Scores</string>
+    <string name="news">News</string>
+    <string name="teams">Teams</string>
 
     <!-- Team -->
     <string name="team_id_key">team_id_key</string>

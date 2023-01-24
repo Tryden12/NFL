@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homePage"
+        android:enabled="true"
+        android:icon="@drawable/icon_selection"
+        android:title="@string/home">
+
+    </item>
+
+    <item android:id="@+id/scoresPage"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_menu_item_scores_24"
+        android:title="@string/scores">
+
+    </item>
+
+    <item android:id="@+id/teamsListPage"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_menu_item_team_24"
+        android:title="@string/teams">
+
+    </item>
+
+    <item android:id="@+id/newsPage"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_menu_item_news_24"
+        android:title="@string/news">
+
+    </item>
+
+</menu>

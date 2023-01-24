@@ -1,8 +1,6 @@
 package com.tryden.simplenfl
 
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.news.headlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.scores.HomeScoresEpoxyController
-import com.tryden.simplenfl.teams.TeamListHomeEpoxyController
 
 
 class MainActivityHome : AppCompatActivity() {
