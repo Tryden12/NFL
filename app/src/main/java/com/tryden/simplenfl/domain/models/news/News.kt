@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.domain.models.news
 
+import com.tryden.simplenfl.domain.models.article.ArticleById
 
 
 data class News(
@@ -111,8 +112,11 @@ data class News(
         val athletes: Athletes = Athletes()
     )
 
+//    data class NewsX(
+//        val href: String = ""
+//    )
     data class NewsX(
-        val href: String = ""
+        val href: ArticleById = ArticleById()
     )
 
     data class Self(

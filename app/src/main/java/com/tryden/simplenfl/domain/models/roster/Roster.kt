@@ -5,9 +5,7 @@ data class Roster(
     val athletes: List<Athlete> = listOf(),
     val coach: List<Coach> = listOf(),
     val season: Season = Season(),
-    val status: String = "",
     val team: Team = Team(),
-    val timestamp: String = ""
 ) {
 
     data class AlternateIds(

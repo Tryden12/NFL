@@ -1,7 +1,7 @@
 package com.tryden.simplenfl.domain.models.article
 
 
-data class Article(
+data class ArticleById(
     val headlines: List<Headline> = listOf(),
     val resultsCount: Int = 0,
     val resultsLimit: Int = 0,
