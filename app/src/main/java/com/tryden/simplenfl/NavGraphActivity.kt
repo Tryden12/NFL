@@ -38,7 +38,8 @@ class NavGraphActivity: AppCompatActivity() {
                     navHostFragment.navController.navigate(R.id.action_homeFragment_to_scoresFragment)
                     true
                 }
-                R.id.newsPage -> {
+                R.id.newsFragment -> {
+                    navHostFragment.navController.navigate(R.id.action_homeFragment_to_newsFragment)
                     true
                 }
                 else -> false

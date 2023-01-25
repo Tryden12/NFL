@@ -26,7 +26,7 @@
     </item>
 
     <item
-        android:id="@+id/newsPage"
+        android:id="@+id/newsFragment"
         android:icon="@drawable/ic_bottom_menu_item_news_24"
         android:checked="false"
         android:title="@string/news">

@@ -106,7 +106,7 @@ class MainActivityHome : AppCompatActivity() {
                 R.id.scoresFragment -> {
                     true
                 }
-                R.id.newsPage -> {
+                R.id.newsFragment -> {
                     true
                 }
                 else -> false
