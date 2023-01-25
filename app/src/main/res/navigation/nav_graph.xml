@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_teamsListFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_teamsListFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
@@ -66,5 +69,14 @@
         <action
             android:id="@+id/action_newsFragment_to_scoresFragment"
             app:destination="@id/scoresFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.tryden.simplenfl.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team" >
+        <action
+            android:id="@+id/action_teamFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
     </fragment>
 </navigation>

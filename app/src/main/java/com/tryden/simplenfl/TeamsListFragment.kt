@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.teams.TeamListHomeEpoxyController
 
@@ -50,7 +51,7 @@ class TeamsListFragment : Fragment() {
 //        intent.putExtra("test", teamId)
 //        startActivity(intent)
 
-        // todo findNavController().navigate(R.id.action)
+        findNavController().navigate(R.id.action_teamsListFragment_to_teamFragment)
     }
 
 }
