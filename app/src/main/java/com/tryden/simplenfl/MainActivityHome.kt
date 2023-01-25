@@ -2,7 +2,6 @@ package com.tryden.simplenfl
 
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -98,10 +97,10 @@ class MainActivityHome : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.homePage -> {
+                R.id.homeFragment -> {
                     true
                 }
-                R.id.teamsListPage -> {
+                R.id.teamsListFragment -> {
                     true
                 }
                 R.id.scoresPage -> {

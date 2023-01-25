@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/homePage"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_bottom_menu_item_home_24"
         android:checked="true"
         android:title="@string/home">
@@ -18,7 +18,7 @@
     </item>
 
     <item
-        android:id="@+id/teamsListPage"
+        android:id="@+id/teamsListFragment"
         android:icon="@drawable/ic_bottom_menu_item_team_24"
         android:checked="false"
         android:title="@string/teams">
