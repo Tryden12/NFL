@@ -26,6 +26,15 @@
         android:label="fragment_teams_list"
         tools:layout="@layout/fragment_teams_list" >
 
+        <action
+            android:id="@+id/action_teamsListFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_teamsListFragment_to_scoresFragment"
+            app:destination="@id/scoresFragment" />
+        <action
+            android:id="@+id/action_teamsListFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
@@ -33,10 +42,29 @@
         android:label="fragment_scores"
         tools:layout="@layout/fragment_scores" >
 
+        <action
+            android:id="@+id/action_scoresFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_scoresFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
+        <action
+            android:id="@+id/action_scoresFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.tryden.simplenfl.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_teamsListFragment"
+            app:destination="@id/teamsListFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_scoresFragment"
+            app:destination="@id/scoresFragment" />
+    </fragment>
 </navigation>
