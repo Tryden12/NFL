@@ -10,7 +10,7 @@
     </item>
 
     <item
-        android:id="@+id/scoresPage"
+        android:id="@+id/scoresFragment"
         android:icon="@drawable/ic_bottom_menu_item_scores_24"
         android:checked="false"
         android:title="@string/scores">

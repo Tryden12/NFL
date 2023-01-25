@@ -103,7 +103,7 @@ class MainActivityHome : AppCompatActivity() {
                 R.id.teamsListFragment -> {
                     true
                 }
-                R.id.scoresPage -> {
+                R.id.scoresFragment -> {
                     true
                 }
                 R.id.newsPage -> {

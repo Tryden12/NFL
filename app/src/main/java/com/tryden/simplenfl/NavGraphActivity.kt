@@ -21,15 +21,21 @@ class NavGraphActivity: AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
+
+                // Todo: add when() checking which fragment is active
+                // to check which action to take
+                // right now, this only supports going to each fragment, not back and forth
+
                 R.id.homeFragment -> {
-                    navHostFragment.navController.navigate(R.id.action_teamsListFragment_to_homeFragment)
+//                    navHostFragment.navController.navigate(R.id.action_teamsListFragment_to_homeFragment)
                     true
                 }
                 R.id.teamsListFragment -> {
                     navHostFragment.navController.navigate(R.id.action_homeFragment_to_teamsListFragment)
                     true
                 }
-                R.id.scoresPage -> {
+                R.id.scoresFragment -> {
+                    navHostFragment.navController.navigate(R.id.action_homeFragment_to_scoresFragment)
                     true
                 }
                 R.id.newsPage -> {
