@@ -54,7 +54,6 @@ class MainActivityHome : AppCompatActivity() {
 //        }
 
         viewModel.newsBreakingLiveData.observe(this) { response ->
-
             epoxyControllerTopHeadlines.newsResponse = response
             if (response == null) {
                 Toast.makeText(
@@ -64,11 +63,8 @@ class MainActivityHome : AppCompatActivity() {
                 ).show()
                 return@observe
             }
-
-            Log.e(TAG, "onCreate: ${response!!.articles[0].headline}" )
         }
         viewModel.scoreboardByRangeLiveData.observe(this) { response ->
-
             epoxyControllerScores.scoresHomeResponse = response
             if (response == null) {
                 Toast.makeText(
