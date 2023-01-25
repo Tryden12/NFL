@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.tryden.simplenfl.HomeFragment"
+        android:name="com.tryden.simplenfl.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/teamsListFragment"
-        android:name="com.tryden.simplenfl.TeamsListFragment"
+        android:name="com.tryden.simplenfl.fragments.TeamsListFragment"
         android:label="fragment_teams_list"
         tools:layout="@layout/fragment_teams_list" >
 
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
-        android:name="com.tryden.simplenfl.ScoresFragment"
+        android:name="com.tryden.simplenfl.fragments.ScoresFragment"
         android:label="fragment_scores"
         tools:layout="@layout/fragment_scores" >
 
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.tryden.simplenfl.NewsFragment"
+        android:name="com.tryden.simplenfl.fragments.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
         <action
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/teamFragment"
-        android:name="com.tryden.simplenfl.TeamFragment"
+        android:name="com.tryden.simplenfl.fragments.TeamFragment"
         android:label="fragment_team"
         tools:layout="@layout/fragment_team" >
         <action

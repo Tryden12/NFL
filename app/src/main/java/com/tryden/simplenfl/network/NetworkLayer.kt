@@ -4,7 +4,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.tryden.simplenfl.SimpleNFLApplication
+import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.network.service.ArticleByIDService
 import com.tryden.simplenfl.network.service.NFLService
 import com.tryden.simplenfl.network.service.PlayerByIdService
