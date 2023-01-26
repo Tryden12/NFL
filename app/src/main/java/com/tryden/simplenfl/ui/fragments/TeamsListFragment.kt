@@ -2,16 +2,17 @@ package com.tryden.simplenfl.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.activitiesbackup.MainActivityTeamsList
+import com.tryden.simplenfl.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.teams.TeamListHomeEpoxyController
 
 
@@ -22,6 +23,7 @@ class TeamsListFragment : Fragment() {
     }
 
     private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected) // function pointer
+    private val epoxyControllerScores = TeamScoresEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +50,13 @@ class TeamsListFragment : Fragment() {
 
     private fun onTeamSelected(teamId: Int) {
         Log.e(MainActivityTeamsList.TAG, "onTeamSelected: $teamId")
-//        val intent = Intent(this, MainActivityRoster::class.java)
-//        intent.putExtra("test", teamId)
-//        startActivity(intent)
 
-        findNavController().navigate(R.id.action_teamsListFragment_to_teamFragment)
+
+        val teamFragmentDirections = TeamsListFragmentDirections.actionTeamsListFragmentToTeamFragment(teamId = teamId)
+        findNavController().navigate(directions = teamFragmentDirections)
+
+        // todo: try bundling for viewpager fragments
+
     }
 
 }

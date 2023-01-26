@@ -6,16 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.epoxy.EpoxyRecyclerView
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.team.scores.TeamScoresEpoxyController
-import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
 class TeamScoresFragment : Fragment() {
 

@@ -1,19 +1,17 @@
 package com.tryden.simplenfl.ui.fragments.team
 
-import android.app.ActionBar.LayoutParams
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.google.android.material.tabs.TabLayout
@@ -36,6 +34,8 @@ class TeamFragment : Fragment() {
 
     private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
 
+    private val safeArgs: TeamFragmentArgs by navArgs()
+
     private lateinit var teamAdapter: TeamViewPagerAdapter
     private lateinit var teamViewPager: ViewPager2
     private lateinit var teamTabLayout: TabLayout
@@ -53,8 +53,6 @@ class TeamFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupComponents()
-
-
     }
 
     private fun setupComponents() {
@@ -71,18 +69,18 @@ class TeamFragment : Fragment() {
 
             // Set header colors
             teamColor = "#${response!!.team.color}"
+            // status bar
             requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
 //            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 //            activity?.window?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
             // header
-//            epoxyTeamRecyclerView?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
             epoxyTeamRecyclerView?.background = getTeamColorGradient(teamColor)
             // Setup tab layout
             setupTabLayoutAndViewPager(teamColor)
 
         }
-        viewModel.refreshTeam(2)
+        viewModel.refreshTeam(safeArgs.teamId)
         epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
     }
 
