@@ -20,7 +20,7 @@
         <activity android:name=".activitiesbackup.MainActivityHome"/>
         <activity android:name=".activitiesbackup.MainActivityRoster"/>
 
-        <activity android:name=".activity.NavGraphActivity"
+        <activity android:name=".ui.activity.NavGraphActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

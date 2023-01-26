@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.activity
+package com.tryden.simplenfl.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tryden.simplenfl.R
+import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
 class NavGraphActivity: AppCompatActivity() {
 

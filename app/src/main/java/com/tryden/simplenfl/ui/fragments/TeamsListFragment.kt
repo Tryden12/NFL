@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.fragments
+package com.tryden.simplenfl.ui.fragments
 
 import android.os.Bundle
 import android.util.Log

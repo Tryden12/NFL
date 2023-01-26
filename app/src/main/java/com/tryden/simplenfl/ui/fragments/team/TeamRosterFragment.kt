@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.fragments
+package com.tryden.simplenfl.ui.fragments.team
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,36 +9,38 @@ import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.news.headlines.HomeTopHeadlinesEpoxyController
+import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyController
 
-class NewsFragment : Fragment() {
+class TeamRosterFragment : Fragment() {
+
 
     val viewModel: SharedViewModel by lazy {
         ViewModelProvider(this)[SharedViewModel::class.java]
     }
 
-    private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
-
+    private val epoxyControllerRoster = TeamRosterEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        return inflater.inflate(R.layout.fragment_team_roster, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyNewsTopHeadlinesRecyclerView= view.findViewById<EpoxyRecyclerView>(R.id.epoxy_news_top_headlines_RecyclerView)
+        val epoxyRosterRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_roster_RecyclerView)
 
-        viewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerTopHeadlines.newsResponse = response
+        viewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
+            epoxyControllerRoster.rosterResponse = response
         }
-        viewModel.refreshBreakingNews()
 
-        epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
+        viewModel.refreshRoster(2)
+
+        epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)
 
     }
+
 }
