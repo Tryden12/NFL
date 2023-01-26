@@ -9,8 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.team.scores.TeamScoresEpoxyController
+import com.tryden.simplenfl.epoxy.controllers.scores.HomeScoresEpoxyController
 
 
 class ScoresFragment : Fragment() {
@@ -19,8 +18,7 @@ class ScoresFragment : Fragment() {
         ViewModelProvider(this)[SharedViewModel::class.java]
     }
 
-    private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
-    private val epoxyControllerScores = TeamScoresEpoxyController()
+    private val epoxyControllerScores = HomeScoresEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,21 +31,15 @@ class ScoresFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyTeamRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
         val epoxyScoresRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_RecyclerView)
-        viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerTeam.teamResponse = response
-        }
 
         // refresh scoreboard
         viewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerScores.scoresResponse = response
+            epoxyControllerScores.scoresHomeResponse = response
         }
 
-        viewModel.refreshTeam(2)
         viewModel.refreshScoreboard("20220914-20230212","1000")
 
-        epoxyTeamRecyclerView.setControllerAndBuildModels(epoxyControllerTeam)
         epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
 
     }
