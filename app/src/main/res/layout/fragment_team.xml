@@ -24,7 +24,10 @@
         android:id="@+id/teamsTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey"/>
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
+        app:tabRippleColor="@null"
+        tools:background="@color/grey"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/teamViewPager"

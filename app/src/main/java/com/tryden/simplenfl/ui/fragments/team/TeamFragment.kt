@@ -1,10 +1,16 @@
 package com.tryden.simplenfl.ui.fragments.team
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.epoxy.EpoxyRecyclerView
@@ -12,6 +18,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
+import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.team.scores.TeamScoresEpoxyController
@@ -27,6 +34,10 @@ class TeamFragment : Fragment() {
 
     private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
 
+    private lateinit var teamAdapter: TeamViewPagerAdapter
+    private lateinit var teamViewPager: ViewPager2
+    private lateinit var teamTabLayout: TabLayout
+    private var teamColor: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +50,44 @@ class TeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupTabLayoutAndViewPager()
-        refreshTeamHeader()
+        setupComponents()
+
 
     }
 
-    private fun setupTabLayoutAndViewPager() {
-        val teamAdapter = TeamViewPagerAdapter(parentFragmentManager, lifecycle)
-        val teamViewPager = view?.findViewById<ViewPager2>(R.id.teamViewPager)
-        val teamTabLayout = view?.findViewById<TabLayout>(R.id.teamsTabLayout)
+    private fun setupComponents() {
+        val epoxyTeamRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
+        viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
+            epoxyControllerTeam.teamResponse = response
+            if (response == null) {
+                Toast.makeText(
+                    activity,
+                    "Team response unsuccessful",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            // Set header colors
+            teamColor = "#${response!!.team.color}"
+            activity?.window?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
+            epoxyTeamRecyclerView?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
+
+            // Setup tab layout
+            setupTabLayoutAndViewPager(teamColor)
+
+        }
+        viewModel.refreshTeam(2)
+        epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
+    }
+
+    private fun setupTabLayoutAndViewPager(teamColor: String) {
+        teamAdapter = TeamViewPagerAdapter(parentFragmentManager, lifecycle)
+        teamViewPager = view?.findViewById(R.id.teamViewPager)!!
+        teamTabLayout = view?.findViewById(R.id.teamsTabLayout)!!
         teamViewPager?.adapter = teamAdapter
 
         if (teamTabLayout != null) {
+            teamTabLayout.setBackgroundColor(Color.parseColor(teamColor))
             if (teamViewPager != null) {
                 TabLayoutMediator(teamTabLayout, teamViewPager) { tab, position ->
                     tab.text = tabTitles[position]
@@ -59,12 +96,15 @@ class TeamFragment : Fragment() {
         }
     }
 
-    private fun refreshTeamHeader() {
-        val epoxyTeamRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
-        viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerTeam.teamResponse = response
-        }
-        viewModel.refreshTeam(2)
-        epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
+    private fun getTeamColorGradient(teamColor: String) : GradientDrawable{
+        val gradientDrawable = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(
+                Color.parseColor(teamColor),
+                getColor(SimpleNFLApplication.context, R.color.black))
+        );
+        gradientDrawable.cornerRadius = 0f;
+        return gradientDrawable
     }
+
 }
