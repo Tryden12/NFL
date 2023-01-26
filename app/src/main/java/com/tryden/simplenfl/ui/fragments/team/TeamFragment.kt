@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.ui.fragments.team
 
+import android.app.ActionBar.LayoutParams
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
@@ -69,9 +71,13 @@ class TeamFragment : Fragment() {
 
             // Set header colors
             teamColor = "#${response!!.team.color}"
-            activity?.window?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
-            epoxyTeamRecyclerView?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
-
+            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
+//            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//            activity?.window?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
+            // header
+//            epoxyTeamRecyclerView?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
+            epoxyTeamRecyclerView?.background = getTeamColorGradient(teamColor)
             // Setup tab layout
             setupTabLayoutAndViewPager(teamColor)
 
@@ -98,7 +104,7 @@ class TeamFragment : Fragment() {
 
     private fun getTeamColorGradient(teamColor: String) : GradientDrawable{
         val gradientDrawable = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM,
+            GradientDrawable.Orientation.BOTTOM_TOP,
             intArrayOf(
                 Color.parseColor(teamColor),
                 getColor(SimpleNFLApplication.context, R.color.black))

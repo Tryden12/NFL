@@ -1,12 +1,14 @@
 package com.tryden.simplenfl.ui.activity
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
+import com.tryden.simplenfl.application.SimpleNFLApplication
 
 class NavGraphActivity: AppCompatActivity() {
 
@@ -19,6 +21,7 @@ class NavGraphActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nav_graph)
         supportActionBar?.hide()
+        window.statusBarColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.black)
 
         setupNavHost()
         bottomNavActions()
