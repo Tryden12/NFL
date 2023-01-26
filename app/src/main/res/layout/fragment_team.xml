@@ -27,7 +27,7 @@
         app:tabTextColor="@color/white"
         app:tabIndicatorColor="@color/white"
         app:tabRippleColor="@null"
-        tools:background="@color/grey"/>
+        android:background="@color/black"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/teamViewPager"

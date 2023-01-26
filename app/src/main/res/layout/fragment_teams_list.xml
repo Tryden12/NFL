@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:itemCount="12"
+        tools:itemCount="32"
         tools:listitem="@layout/model_teams_list_vertical_item"/>
 
 

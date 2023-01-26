@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.epoxy.controllers.teams
 
+import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
@@ -42,6 +43,7 @@ class TeamListHomeEpoxyController(
         }
 
         TitleTeamsListEpoxyModel(
+            useLogo = false,
             title = "Select Team"
 //        ).id("title-teams").addTo(this)
         ).id("title-teams").spanSizeOverride { _, _, _ -> 4 }.addTo(this)
@@ -61,11 +63,15 @@ class TeamListHomeEpoxyController(
 
     // Add list header
     data class TitleTeamsListEpoxyModel(
+        val useLogo: Boolean,
         val title: String
     ): ViewBindingKotlinModel<ModelSectionHeaderBinding>
         (R.layout.model_section_header) {
 
         override fun ModelSectionHeaderBinding.bind() {
+            if (!useLogo) {
+                logoSectionImageView.visibility = View.GONE
+            }
             titleSectionTextView.text = title
         }
     }
