@@ -35,7 +35,7 @@ class NewsFragment : Fragment() {
 
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
-            epoxyControllerTopHeadlines.maxHeadlines = 10
+            epoxyControllerTopHeadlines.maxHeadlines = 8
         }
         sharedViewModel.refreshBreakingNews("","100")
 

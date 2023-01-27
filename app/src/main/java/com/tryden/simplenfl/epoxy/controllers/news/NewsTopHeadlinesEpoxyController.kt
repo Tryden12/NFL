@@ -30,7 +30,7 @@ class NewsTopHeadlinesEpoxyController: EpoxyController() {
         }
 
     // default to 5 headlines
-    var maxHeadlines: Int = 8
+    var maxHeadlines: Int = 5
         set(value) {
             field = value
         }
@@ -55,7 +55,7 @@ class NewsTopHeadlinesEpoxyController: EpoxyController() {
         var storyCount = 1
         for (i in newsResponse!!.articles.indices) {
             // article type must NOT be media
-            if (!newsResponse!!.articles[i].type.equals("Media", ignoreCase = true)
+            if (newsResponse!!.articles[i].type.equals("HeadlineNews", ignoreCase = true)
                 && storyCount <= maxHeadlines
             ) {
                 NewsHeadlineItemEpoxyModel(

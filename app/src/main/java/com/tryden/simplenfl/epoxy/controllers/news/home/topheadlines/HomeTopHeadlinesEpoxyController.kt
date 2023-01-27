@@ -53,7 +53,7 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
         var storyCount = 1
         for (i in newsResponse!!.articles.indices) {
             // article type must NOT be media
-            if (!newsResponse!!.articles[i].type.equals("Media", ignoreCase = true)
+            if (newsResponse!!.articles[i].type.equals("HeadlineNews", ignoreCase = true)
                 && storyCount <= maxHeadlines
             ) {
                 HomeNewsHeadlineItemEpoxyModel(
