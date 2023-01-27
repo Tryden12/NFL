@@ -1,6 +1,9 @@
 package com.tryden.simplenfl.ui.fragments.article
 
+import kotlin.text.StringBuilder
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,7 +32,18 @@ class ArticleFragment : Fragment() {
 
         val textView = view.findViewById<TextView>(R.id.articleTextView)
         sharedViewModel.articleByIdLiveDataResponse.observe(viewLifecycleOwner) { response ->
-            textView.text = response!!.headlines[0].title
+            var html = response!!.headlines[0].story
+            Log.e("ArticleFragment", "storyBefore: $html" )
+
+            var htmlWithAddedBrTags = addBrTags(html = html)
+            Log.e("ArticleFragment", "storyAfter: $htmlWithAddedBrTags" )
+
+            textView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(htmlWithAddedBrTags.toString(), Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                Html.fromHtml(htmlWithAddedBrTags.toString())
+            }
+
         }
         sharedViewModel.onArticleSelectedLiveData.observe(viewLifecycleOwner) { articleId ->
             Log.e("ArticleFragment", "onArticleSelected: $articleId" )
@@ -37,6 +51,17 @@ class ArticleFragment : Fragment() {
             sharedViewModel.refreshArticle(articleId)
         }
 
+    }
+
+    private fun addBrTags(html: String) : StringBuilder {
+        var builder = StringBuilder()
+        builder.append(html)
+        for (i in builder.indices) {
+            if(builder[i] == 'p' && builder[i-1] == '/') {
+                builder.insert(i+2, "<br>")
+            }
+        }
+        return builder
     }
 
 }
