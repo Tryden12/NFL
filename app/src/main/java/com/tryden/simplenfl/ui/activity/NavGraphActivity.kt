@@ -51,7 +51,7 @@ class NavGraphActivity: AppCompatActivity() {
                         R.id.newsFragment -> navHostFragment.navController.navigate(R.id.action_newsFragment_to_homeFragment)
                         R.id.teamFragment -> navHostFragment.navController.navigate(R.id.action_teamFragment_to_homeFragment)
                         R.id.playerFragment -> navHostFragment.navController.navigate(R.id.action_playerFragment_to_homeFragment)
-
+                        R.id.articleFragment -> navHostFragment.navController.navigate(R.id.action_articleFragment_to_homeFragment)
                     }
                     true
                 }
@@ -63,7 +63,7 @@ class NavGraphActivity: AppCompatActivity() {
                         R.id.newsFragment -> navHostFragment.navController.navigate(R.id.action_newsFragment_to_scoresFragment)
                         R.id.teamFragment -> navHostFragment.navController.navigate(R.id.action_teamFragment_to_scoresFragment)
                         R.id.playerFragment -> navHostFragment.navController.navigate(R.id.action_playerFragment_to_scoresFragment)
-
+                        R.id.articleFragment -> navHostFragment.navController.navigate(R.id.action_articleFragment_to_scoresFragment)
                     }
                     true
                 }
@@ -75,7 +75,7 @@ class NavGraphActivity: AppCompatActivity() {
                         R.id.newsFragment -> navHostFragment.navController.navigate(R.id.action_newsFragment_to_teamsListFragment)
                         R.id.teamFragment -> navHostFragment.navController.navigate(R.id.action_teamFragment_to_teamsListFragment)
                         R.id.playerFragment -> navHostFragment.navController.navigate(R.id.action_playerFragment_to_teamsListFragment)
-
+                        R.id.articleFragment -> navHostFragment.navController.navigate(R.id.action_articleFragment_to_teamsListFragment)
                     }
                     true
                 }
@@ -87,7 +87,7 @@ class NavGraphActivity: AppCompatActivity() {
                         R.id.teamsListFragment -> navHostFragment.navController.navigate(R.id.action_teamsListFragment_to_newsFragment)
                         R.id.teamFragment -> navHostFragment.navController.navigate(R.id.action_teamFragment_to_newsFragment)
                         R.id.playerFragment -> navHostFragment.navController.navigate(R.id.action_playerFragment_to_newsFragment)
-
+                        R.id.articleFragment -> navHostFragment.navController.navigate(R.id.action_articleFragment_to_newsFragment)
                     }
                     true
                 }
