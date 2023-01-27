@@ -22,18 +22,11 @@ class TeamsListFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected) // function pointer
-    private val epoxyControllerScores = TeamScoresEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            Log.e("TeamsListFragment", "initial teamId: $teamId ")
-        }
-
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_teams_list, container, false)
     }
@@ -41,15 +34,12 @@ class TeamsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val epoxyTeamListRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_list_RecyclerView)
-
-
         sharedViewModel.allTeamsListLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTeamList.teamsListResponse = response
         }
-
         sharedViewModel.refreshTeamsList()
-
         epoxyTeamListRecyclerView.setControllerAndBuildModels(epoxyControllerTeamList)
     }
 
@@ -57,11 +47,7 @@ class TeamsListFragment : Fragment() {
         Log.e("TeamsListFragment", "onTeamSelected: $teamId")
 
         sharedViewModel.saveCurrentTeamId(teamId = teamId.toString())
-        val teamFragmentDirections = TeamsListFragmentDirections.actionTeamsListFragmentToTeamFragment(teamId = teamId)
-        findNavController().navigate(directions = teamFragmentDirections)
-
-        // todo: try bundling for viewpager fragments
-
+        findNavController().navigate(R.id.action_teamsListFragment_to_teamFragment)
     }
 
 }

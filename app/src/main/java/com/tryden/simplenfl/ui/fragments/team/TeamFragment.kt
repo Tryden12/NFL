@@ -34,8 +34,6 @@ class TeamFragment : Fragment() {
 
     private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
 
-    private val safeArgs: TeamFragmentArgs by navArgs()
-
     private lateinit var teamAdapter: TeamViewPagerAdapter
     private lateinit var teamViewPager: ViewPager2
     private lateinit var teamTabLayout: TabLayout
@@ -80,7 +78,9 @@ class TeamFragment : Fragment() {
             setupTabLayoutAndViewPager(teamColor)
 
         }
-        sharedViewModel.refreshTeam(safeArgs.teamId)
+        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
+            sharedViewModel.refreshTeam(teamId = teamId.toInt())
+        }
         epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
     }
 
