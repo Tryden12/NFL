@@ -36,13 +36,15 @@ class HomeFragment : Fragment() {
 
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
+            // change the amount of headlines to display
+            epoxyControllerTopHeadlines.maxHeadlines = 6
 
         }
         sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerScores.scoresHomeResponse = response
 
         }
-        sharedViewModel.refreshBreakingNews("media", "1")
+        sharedViewModel.refreshBreakingNews("", "50")
         sharedViewModel.refreshScoreboard("20230114-20230212", "")
 
         epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)

@@ -28,6 +28,12 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
             }
         }
 
+    // default to 5 headlines
+    var maxHeadlines: Int = 5
+        set(value) {
+            field = value
+        }
+
     override fun buildModels() {
         if (isLoading) {
             LoadingEpoxyModel().id("loading").addTo(this)
@@ -44,10 +50,17 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
             logoVisible = true
         ).id("home_top_headlines").addTo(this)
 
+        var storyCount = 1
         for (i in newsResponse!!.articles.indices) {
-            HomeNewsHeadlineItemEpoxyModel(
-                headlineTitle = newsResponse!!.articles[i].headline
-            ).id("news-$i").addTo(this)
+            // article type must NOT be media
+            if (!newsResponse!!.articles[i].type.equals("Media", ignoreCase = true)
+                && storyCount <= maxHeadlines
+            ) {
+                HomeNewsHeadlineItemEpoxyModel(
+                    headlineTitle = newsResponse!!.articles[i].headline
+                ).id("news-$storyCount").addTo(this)
+                storyCount++
+            }
         }
     }
 
