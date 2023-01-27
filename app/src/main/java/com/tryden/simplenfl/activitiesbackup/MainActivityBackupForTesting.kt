@@ -165,7 +165,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
 
         // refresh article by id
         viewModel.refreshArticle("35475085")
-        viewModel.articleById.observe(this) { response ->
+        viewModel.articleByIdLiveDataResponse.observe(this) { response ->
             if (response == null) {
                 Toast.makeText(
                     this@MainActivityBackupForTesting,
