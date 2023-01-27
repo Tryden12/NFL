@@ -6,24 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/dark_grey">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewAwayLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/awayLogoImageView"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
             android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic[7]" />
-
-    </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/teamNameAwayTextview"
@@ -35,31 +27,20 @@
         android:maxLength="20"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/cardViewAwayLogo"
-        app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
+        app:layout_constraintStart_toEndOf="@id/awayLogoImageView"
+        app:layout_constraintTop_toTopOf="@id/awayLogoImageView"
         tools:text="Away Team"/>
-
-
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewHomeLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview" >
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/homeLogoImageView"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
             android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview"
             tools:src="@tools:sample/backgrounds/scenic[7]" />
-
-    </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/teamNameHomeTextview"
@@ -71,11 +52,9 @@
         android:maxLength="20"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/cardViewHomeLogo"
-        app:layout_constraintTop_toTopOf="@id/cardViewHomeLogo"
+        app:layout_constraintStart_toEndOf="@id/homeLogoImageView"
+        app:layout_constraintTop_toTopOf="@id/homeLogoImageView"
         tools:text="Home Team Team Team Team Team Team"/>
-
-    <!--     For games status: Pre    -->
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/datePreGameItemTextview"
@@ -145,7 +124,7 @@
         android:textColor="@color/grey"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
-        app:layout_constraintTop_toTopOf="@id/cardViewAwayLogo"
+        app:layout_constraintTop_toTopOf="@id/awayLogoImageView"
         app:layout_constraintBottom_toBottomOf="@id/teamNameAwayTextview"
         tools:text="9-7-1"/>
 
@@ -176,8 +155,8 @@
         android:maxLines="1"
         android:textColor="@color/grey"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/cardViewHomeLogo"
-        app:layout_constraintTop_toBottomOf="@id/cardViewHomeLogo"
+        app:layout_constraintStart_toStartOf="@id/homeLogoImageView"
+        app:layout_constraintTop_toBottomOf="@id/homeLogoImageView"
         app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone"
         tools:text="AFC Wild Card Playoffs"/>
@@ -191,8 +170,8 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toStartOf="@id/cardViewHomeLogo"
-        app:layout_constraintTop_toBottomOf="@id/cardViewHomeLogo"
+        app:layout_constraintStart_toStartOf="@id/homeLogoImageView"
+        app:layout_constraintTop_toBottomOf="@id/homeLogoImageView"
         app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="invisible"
         />
