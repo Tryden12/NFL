@@ -7,6 +7,8 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamPageHeaderBinding
+import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.LoadingNoCircleEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
 
 class TeamPageHeaderEpoxyController: EpoxyController() {
@@ -30,7 +32,7 @@ class TeamPageHeaderEpoxyController: EpoxyController() {
     override fun buildModels() {
 
         if (isLoading) {
-//            LoadingEpoxyModel().id("loading").addTo(this)
+            LoadingNoCircleEpoxyModel().id("loading").addTo(this)
             return
         }
 
