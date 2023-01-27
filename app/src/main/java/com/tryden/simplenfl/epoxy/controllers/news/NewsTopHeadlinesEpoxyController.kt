@@ -7,6 +7,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 
 class NewsTopHeadlinesEpoxyController: EpoxyController() {
@@ -28,6 +29,12 @@ class NewsTopHeadlinesEpoxyController: EpoxyController() {
             }
         }
 
+    // default to 5 headlines
+    var maxHeadlines: Int = 8
+        set(value) {
+            field = value
+        }
+
     override fun buildModels() {
         if (isLoading) {
             LoadingEpoxyModel().id("loading").addTo(this)
@@ -44,10 +51,18 @@ class NewsTopHeadlinesEpoxyController: EpoxyController() {
             logoVisible = true
         ).id("news_top_headlines").addTo(this)
 
+
+        var storyCount = 1
         for (i in newsResponse!!.articles.indices) {
-            NewsHeadlineItemEpoxyModel(
-                headlineTitle = newsResponse!!.articles[i].headline
-            ).id("news-$i").addTo(this)
+            // article type must NOT be media
+            if (!newsResponse!!.articles[i].type.equals("Media", ignoreCase = true)
+                && storyCount <= maxHeadlines
+            ) {
+                NewsHeadlineItemEpoxyModel(
+                    headlineTitle = newsResponse!!.articles[i].headline
+                ).id("news-$storyCount").addTo(this)
+                storyCount++
+            }
         }
     }
 

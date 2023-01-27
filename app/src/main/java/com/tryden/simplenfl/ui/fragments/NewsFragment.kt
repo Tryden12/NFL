@@ -35,8 +35,9 @@ class NewsFragment : Fragment() {
 
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
+            epoxyControllerTopHeadlines.maxHeadlines = 10
         }
-        sharedViewModel.refreshBreakingNews("","10")
+        sharedViewModel.refreshBreakingNews("","100")
 
         epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
 
