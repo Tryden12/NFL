@@ -9,7 +9,7 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.news.headlines.HomeTopHeadlinesEpoxyController
+import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.scores.HomeScoresEpoxyController
 
 
@@ -77,7 +77,7 @@ class MainActivityHome : AppCompatActivity() {
             }
         }
 
-        viewModel.refreshBreakingNews()
+        viewModel.refreshBreakingNews("","")
         viewModel.refreshScoreboard("20230114-20230212", "")
 //        viewModel.refreshTeamsList()
 

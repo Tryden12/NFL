@@ -6,18 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.news.headlines.HomeTopHeadlinesEpoxyController
+import com.tryden.simplenfl.epoxy.controllers.news.NewsTopHeadlinesEpoxyController
+import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 
 class NewsFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
 
-    private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
+    private val epoxyControllerTopHeadlines = NewsTopHeadlinesEpoxyController()
 
 
     override fun onCreateView(
@@ -36,7 +36,7 @@ class NewsFragment : Fragment() {
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
         }
-        sharedViewModel.refreshBreakingNews()
+        sharedViewModel.refreshBreakingNews("","10")
 
         epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
 

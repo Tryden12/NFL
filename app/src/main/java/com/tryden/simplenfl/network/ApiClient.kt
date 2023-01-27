@@ -35,8 +35,8 @@ class ApiClient(
         return safeApiCall { nflService.getScoreboardRange(dates, limit) }
     }
 
-    suspend fun getBreakingNews(): SimpleResponse<NewsResponse> {
-        return safeApiCall { nflService.getBreakingNews() }
+    suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<NewsResponse> {
+        return safeApiCall { nflService.getBreakingNews(type, limit) }
     }
 
     suspend fun getArticleById(articleId: String) : SimpleResponse<ArticleResponse> {

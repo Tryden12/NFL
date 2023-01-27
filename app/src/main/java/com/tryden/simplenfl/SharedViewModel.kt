@@ -78,9 +78,9 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    fun refreshBreakingNews() {
+    fun refreshBreakingNews(type: String, limit: String) {
         viewModelScope.launch {
-            val response = repository.getBreakingNews()
+            val response = repository.getBreakingNews(type, limit)
 
             _newsBreakingLiveData.postValue(response)
         }

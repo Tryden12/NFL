@@ -64,8 +64,8 @@ class SharedRepository {
     }
 
     // Get breaking news
-    suspend fun getBreakingNews(): NewsResponse? {
-        val request = NetworkLayer.apiClient.getBreakingNews()
+    suspend fun getBreakingNews(type: String, limit: String): NewsResponse? {
+        val request = NetworkLayer.apiClient.getBreakingNews(type, limit)
 
         if (request.failed || !request.isSuccessful) {
             return null

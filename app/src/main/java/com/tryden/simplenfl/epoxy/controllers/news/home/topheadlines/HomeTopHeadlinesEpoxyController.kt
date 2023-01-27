@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.epoxy.controllers.news.headlines
+package com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyController
@@ -42,12 +42,12 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
         SectionHeaderHeadlinesEpoxyModel(
             title = "Top Headlines",
             logoVisible = true
-        ).id("top_headlines").addTo(this)
+        ).id("home_top_headlines").addTo(this)
 
         for (i in newsResponse!!.articles.indices) {
-            BreakingNewsHeadlineItemEpoxyModel(
+            HomeNewsHeadlineItemEpoxyModel(
                 headlineTitle = newsResponse!!.articles[i].headline
-            ).id(newsResponse!!.articles[i].categories[0].id).addTo(this)
+            ).id("news-$i").addTo(this)
         }
     }
 
@@ -70,7 +70,7 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
     }
 
     // Headline items
-    data class BreakingNewsHeadlineItemEpoxyModel(
+    data class HomeNewsHeadlineItemEpoxyModel(
         val headlineTitle: String
     ): ViewBindingKotlinModel<ModelNewsBreakingHeadlineItemBinding>
         (R.layout.model_news_breaking_headline_item) {

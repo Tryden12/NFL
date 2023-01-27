@@ -33,6 +33,9 @@ interface NFLService {
     ): Response<ScoreboardResponse>
 
     @GET("news")
-    suspend fun getBreakingNews() : Response<NewsResponse>
+    suspend fun getBreakingNews(
+        @Query("type") type: String,
+        @Query("limit") limit: String
+    ) : Response<NewsResponse>
 
 }
