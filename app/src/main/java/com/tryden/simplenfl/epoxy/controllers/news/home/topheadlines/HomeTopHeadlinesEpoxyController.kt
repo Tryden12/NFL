@@ -9,7 +9,9 @@ import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 
-class HomeTopHeadlinesEpoxyController: EpoxyController() {
+class HomeTopHeadlinesEpoxyController(
+    private val onArticleSelected: (String) -> Unit
+): EpoxyController() {
 
     var isLoading: Boolean = true
         set(value) {
@@ -56,12 +58,29 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
             if (newsResponse!!.articles[i].type.equals("HeadlineNews", ignoreCase = true)
                 && storyCount <= maxHeadlines
             ) {
-                HomeNewsHeadlineItemEpoxyModel(
-                    headlineTitle = newsResponse!!.articles[i].headline
-                ).id("news-$storyCount").addTo(this)
+                getArticleIdFromUrl(newsResponse!!.articles[i].links.api.news.href)?.let { articleId ->
+                    HomeNewsHeadlineItemEpoxyModel(
+                        headlineTitle = newsResponse!!.articles[i].headline,
+                        articleId = articleId,
+                        onArticleSelected = onArticleSelected
+                    ).id("news-$storyCount").addTo(this)
+                }
                 storyCount++
             }
         }
+    }
+
+    /**
+     * To navigate on click from headline to view the article,
+     * we must grab the article id in the given url.
+     *
+     * This article id is then passed in through this data flow:
+     * EpoxyModel -> private fun in Fragment -> SharedViewModel
+     *
+     * Then the ArticleFragment grabs the article id from SharedViewModel
+     */
+    private fun getArticleIdFromUrl(url: String?): String? {
+        return url?.split("sports/news/")?.get(1)
     }
 
     // Section header for headlines
@@ -84,12 +103,18 @@ class HomeTopHeadlinesEpoxyController: EpoxyController() {
 
     // Headline items
     data class HomeNewsHeadlineItemEpoxyModel(
-        val headlineTitle: String
+        val headlineTitle: String,
+        val articleId: String,
+        val onArticleSelected: (String) -> Unit
     ): ViewBindingKotlinModel<ModelNewsBreakingHeadlineItemBinding>
         (R.layout.model_news_breaking_headline_item) {
 
         override fun ModelNewsBreakingHeadlineItemBinding.bind() {
             newsHomeHeadlineShortTitleTextView.text = headlineTitle
+
+            root.setOnClickListener {
+                onArticleSelected(articleId)
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.tryden.simplenfl.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ class NewsFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
 
-    private val epoxyControllerTopHeadlines = NewsTopHeadlinesEpoxyController()
+    private val epoxyControllerTopHeadlines = NewsTopHeadlinesEpoxyController(::onArticleSelected)
 
 
     override fun onCreateView(
@@ -41,5 +42,10 @@ class NewsFragment : Fragment() {
 
         epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
 
+    }
+
+    private fun onArticleSelected(articleId: String) {
+        Log.e("NewsFragment", "onArticleSelected: $articleId" )
+        true
     }
 }

@@ -25,7 +25,7 @@ class MainActivityHome : AppCompatActivity() {
 
 //    private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected) // function pointer
 
-    private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
+//    private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
     private val epoxyControllerScores = HomeScoresEpoxyController()
 
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -53,18 +53,18 @@ class MainActivityHome : AppCompatActivity() {
 //                return@observe
 //            }
 //        }
-
-        viewModel.newsBreakingLiveData.observe(this) { response ->
-            epoxyControllerTopHeadlines.newsResponse = response
-            if (response == null) {
-                Toast.makeText(
-                    this@MainActivityHome,
-                    "Unsuccessful network call!",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@observe
-            }
-        }
+//
+//        viewModel.newsBreakingLiveData.observe(this) { response ->
+//            epoxyControllerTopHeadlines.newsResponse = response
+//            if (response == null) {
+//                Toast.makeText(
+//                    this@MainActivityHome,
+//                    "Unsuccessful network call!",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                return@observe
+//            }
+//        }
         viewModel.scoreboardByRangeLiveData.observe(this) { response ->
             epoxyControllerScores.scoresHomeResponse = response
             if (response == null) {
@@ -81,7 +81,7 @@ class MainActivityHome : AppCompatActivity() {
         viewModel.refreshScoreboard("20230114-20230212", "")
 //        viewModel.refreshTeamsList()
 
-        epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
+//        epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
         epoxyHomeScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
     //        epoxyTeamListRecyclerView.setControllerAndBuildModels(epoxyControllerTeamList)
 
