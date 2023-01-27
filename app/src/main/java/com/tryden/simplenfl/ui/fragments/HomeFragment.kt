@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
@@ -54,7 +55,9 @@ class HomeFragment : Fragment() {
 
     private fun onArticleSelected(articleId: String) {
         Log.e("HomeFragment", "onArticleSelected: $articleId" )
-        true
+
+        sharedViewModel.saveCurrentArticleId(articleId = articleId)
+        findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
     }
 
 

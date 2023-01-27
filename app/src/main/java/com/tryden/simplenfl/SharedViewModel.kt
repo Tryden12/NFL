@@ -32,18 +32,27 @@ class SharedViewModel: ViewModel() {
     private val _newsBreakingLiveData = MutableLiveData<NewsResponse?>()
     val newsBreakingLiveData: LiveData<NewsResponse?> = _newsBreakingLiveData
 
-    private val _articleByIdLiveData = MutableLiveData<ArticleResponse?>()
-    val articleById: LiveData<ArticleResponse?> = _articleByIdLiveData
+    private val _articleByIdLiveDataResponse = MutableLiveData<ArticleResponse?>()
+    val articleByIdLiveDataResponse: LiveData<ArticleResponse?> = _articleByIdLiveDataResponse
 
     private val _playerByIdLiveData = MutableLiveData<PlayerResponse?>()
     val playerByIdLiveData: LiveData<PlayerResponse?> = _playerByIdLiveData
 
-    private val _onTeamSelectedLiveData = MutableLiveData("-1")
+    private val _onTeamSelectedLiveData = MutableLiveData("1")
     val onTeamSelectedLiveData: LiveData<String> = _onTeamSelectedLiveData
+
+    private val _onArticleSelectedLiveData = MutableLiveData<String>()
+    val onArticleSelectedLiveData: LiveData<String> = _onArticleSelectedLiveData
 
     fun saveCurrentTeamId(teamId: String) {
         _onTeamSelectedLiveData.value = teamId
     }
+
+    fun saveCurrentArticleId(articleId: String) {
+        _onArticleSelectedLiveData.value = articleId
+    }
+
+
 
 
     fun refreshTeam(teamId: Int) {
@@ -90,7 +99,7 @@ class SharedViewModel: ViewModel() {
         viewModelScope.launch {
             val response = repository.getArticleById(articleId)
 
-            _articleByIdLiveData.postValue(response)
+            _articleByIdLiveDataResponse.postValue(response)
         }
     }
 
