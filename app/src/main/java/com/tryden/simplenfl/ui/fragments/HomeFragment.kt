@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
@@ -14,9 +15,8 @@ import com.tryden.simplenfl.epoxy.controllers.scores.HomeScoresEpoxyController
 
 class HomeFragment : Fragment() {
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
     private val epoxyControllerScores = HomeScoresEpoxyController()
@@ -35,16 +35,16 @@ class HomeFragment : Fragment() {
         val epoxyHomeTopHeadlinesRecyclerView= view.findViewById<EpoxyRecyclerView>(R.id.epoxy_home_top_headlines_RecyclerView)
         val epoxyHomeScoresRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_home_scores_RecyclerView)
 
-        viewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
 
         }
-        viewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerScores.scoresHomeResponse = response
 
         }
-        viewModel.refreshBreakingNews()
-        viewModel.refreshScoreboard("20230114-20230212", "")
+        sharedViewModel.refreshBreakingNews()
+        sharedViewModel.refreshScoreboard("20230114-20230212", "")
 
         epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
         epoxyHomeScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)

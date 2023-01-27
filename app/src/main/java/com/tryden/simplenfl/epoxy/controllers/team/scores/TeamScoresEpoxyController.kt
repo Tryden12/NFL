@@ -1,6 +1,7 @@
 package com.tryden.simplenfl.epoxy.controllers.team.scores
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyController
@@ -36,6 +37,13 @@ class TeamScoresEpoxyController: EpoxyController() {
             }
         }
 
+    // changed via saving to a view model using activity lifecycle
+    var onTeamSelected: String? = ""
+        set(value) {
+            field = value
+        }
+
+
 
     override fun buildModels() {
         if (isLoading) {
@@ -51,14 +59,14 @@ class TeamScoresEpoxyController: EpoxyController() {
         var postHeaderFilled = false
         var regularHeaderFilled = false
 
-//        SeasonTypeHeader(seasonType = "Post Season")
-//            .id("post-season").addTo(this)
+
+        Log.e("TeamScoresEpoxyController", "onTeamSelected: $onTeamSelected" )
 
         for (i in scoresResponse!!.events.size-1 downTo 0) {
             if (scoresResponse!!.events[i].competitions[0].status.type.state == "pre") {
 
                 for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
-                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
+                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == onTeamSelected) {
 
                         if (!postHeaderFilled) {
                             SeasonTypeHeader(seasonType = "Post Season")
@@ -95,7 +103,7 @@ class TeamScoresEpoxyController: EpoxyController() {
             if (scoresResponse!!.events[i].competitions[0].status.type.state == "post") {
 
                 for (j in scoresResponse!!.events[i].competitions[0].competitors.indices) {
-                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == "2") {
+                    if (scoresResponse!!.events[i].competitions[0].competitors[j].team.id == onTeamSelected) {
 
                         if (!regularHeaderFilled) {
                             SeasonTypeHeader(seasonType = "Regular Season")

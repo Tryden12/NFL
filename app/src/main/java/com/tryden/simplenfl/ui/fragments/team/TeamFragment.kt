@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -28,9 +29,8 @@ class TeamFragment : Fragment() {
 
     private var tabTitles = arrayOf("Scores","Roster", "News")
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
 
@@ -57,7 +57,7 @@ class TeamFragment : Fragment() {
 
     private fun setupComponents() {
         val epoxyTeamRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
-        viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTeam.teamResponse = response
             if (response == null) {
                 Toast.makeText(
@@ -80,7 +80,7 @@ class TeamFragment : Fragment() {
             setupTabLayoutAndViewPager(teamColor)
 
         }
-        viewModel.refreshTeam(safeArgs.teamId)
+        sharedViewModel.refreshTeam(safeArgs.teamId)
         epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
     }
 

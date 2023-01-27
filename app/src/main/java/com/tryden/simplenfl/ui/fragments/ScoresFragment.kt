@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
@@ -14,9 +15,8 @@ import com.tryden.simplenfl.epoxy.controllers.scores.HomeScoresEpoxyController
 
 class ScoresFragment : Fragment() {
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     private val epoxyControllerScores = HomeScoresEpoxyController()
 
@@ -34,11 +34,11 @@ class ScoresFragment : Fragment() {
         val epoxyScoresRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_RecyclerView)
 
         // refresh scoreboard
-        viewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerScores.scoresHomeResponse = response
         }
 
-        viewModel.refreshScoreboard("20220914-20230212","1000")
+        sharedViewModel.refreshScoreboard("20220914-20230212","1000")
 
         epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
 

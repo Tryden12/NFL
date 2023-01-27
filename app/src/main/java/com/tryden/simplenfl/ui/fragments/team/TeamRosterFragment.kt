@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
@@ -14,9 +15,8 @@ import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyControl
 class TeamRosterFragment : Fragment() {
 
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     private val epoxyControllerRoster = TeamRosterEpoxyController()
 
@@ -33,11 +33,14 @@ class TeamRosterFragment : Fragment() {
 
         val epoxyRosterRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_roster_RecyclerView)
 
-        viewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
             epoxyControllerRoster.rosterResponse = response
         }
 
-        viewModel.refreshRoster(2)
+        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
+            sharedViewModel.refreshRoster(teamId = teamId.toInt())
+        }
+
 
         epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)
 

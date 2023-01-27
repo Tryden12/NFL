@@ -38,6 +38,14 @@ class SharedViewModel: ViewModel() {
     private val _playerByIdLiveData = MutableLiveData<PlayerResponse?>()
     val playerByIdLiveData: LiveData<PlayerResponse?> = _playerByIdLiveData
 
+    private val _onTeamSelectedLiveData = MutableLiveData("-1")
+    val onTeamSelectedLiveData: LiveData<String> = _onTeamSelectedLiveData
+
+    fun saveCurrentTeamId(teamId: String) {
+        _onTeamSelectedLiveData.value = teamId
+    }
+
+
     fun refreshTeam(teamId: Int) {
         viewModelScope.launch {
             val response = repository.getTeamById(teamId)

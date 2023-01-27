@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
@@ -18,9 +19,7 @@ import com.tryden.simplenfl.epoxy.controllers.teams.TeamListHomeEpoxyController
 
 class TeamsListFragment : Fragment() {
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected) // function pointer
     private val epoxyControllerScores = TeamScoresEpoxyController()
@@ -29,6 +28,12 @@ class TeamsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
+            Log.e("TeamsListFragment", "initial teamId: $teamId ")
+        }
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_teams_list, container, false)
     }
@@ -39,19 +44,19 @@ class TeamsListFragment : Fragment() {
         val epoxyTeamListRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_list_RecyclerView)
 
 
-        viewModel.allTeamsListLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.allTeamsListLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTeamList.teamsListResponse = response
         }
 
-        viewModel.refreshTeamsList()
+        sharedViewModel.refreshTeamsList()
 
         epoxyTeamListRecyclerView.setControllerAndBuildModels(epoxyControllerTeamList)
     }
 
     private fun onTeamSelected(teamId: Int) {
-        Log.e(MainActivityTeamsList.TAG, "onTeamSelected: $teamId")
+        Log.e("TeamsListFragment", "onTeamSelected: $teamId")
 
-
+        sharedViewModel.saveCurrentTeamId(teamId = teamId.toString())
         val teamFragmentDirections = TeamsListFragmentDirections.actionTeamsListFragmentToTeamFragment(teamId = teamId)
         findNavController().navigate(directions = teamFragmentDirections)
 

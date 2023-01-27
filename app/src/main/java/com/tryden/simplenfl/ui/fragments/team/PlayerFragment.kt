@@ -1,20 +1,20 @@
-package com.tryden.simplenfl
+package com.tryden.simplenfl.ui.fragments.team
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.airbnb.epoxy.EpoxyRecyclerView
+import com.tryden.simplenfl.R
+import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.epoxy.controllers.team.player.PlayerEpoxyController
 
 class PlayerFragment : Fragment() {
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     private val epoxyControllerPlayer = PlayerEpoxyController()
 
@@ -32,11 +32,11 @@ class PlayerFragment : Fragment() {
 
         val epoxyPlayerRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_player_RecyclerView)
 
-        viewModel.playerByIdLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.playerByIdLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerPlayer.playerResponse = response
         }
 
-        viewModel.refreshPlayer("14876")
+        sharedViewModel.refreshPlayer("14876")
         epoxyPlayerRecyclerView.setControllerAndBuildModels(epoxyControllerPlayer)
 
     }

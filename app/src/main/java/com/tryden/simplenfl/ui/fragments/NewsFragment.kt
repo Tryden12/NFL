@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
@@ -13,9 +14,8 @@ import com.tryden.simplenfl.epoxy.controllers.news.headlines.HomeTopHeadlinesEpo
 
 class NewsFragment : Fragment() {
 
-    val viewModel: SharedViewModel by lazy {
-        ViewModelProvider(this)[SharedViewModel::class.java]
-    }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController()
 
@@ -33,10 +33,10 @@ class NewsFragment : Fragment() {
 
         val epoxyNewsTopHeadlinesRecyclerView= view.findViewById<EpoxyRecyclerView>(R.id.epoxy_news_top_headlines_RecyclerView)
 
-        viewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
+        sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
         }
-        viewModel.refreshBreakingNews()
+        sharedViewModel.refreshBreakingNews()
 
         epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
 
