@@ -39,6 +39,10 @@ class ApiClient(
         return safeApiCall { nflService.getBreakingNews(type, limit) }
     }
 
+    suspend fun getNewsByTeamId(teamId: String, limit: String): SimpleResponse<NewsResponse> {
+        return safeApiCall { nflService.getNewsByTeamId(teamId, limit) }
+    }
+
     suspend fun getArticleById(articleId: String) : SimpleResponse<ArticleResponse> {
         return safeApiCall { articleByIDService.getArticleById(articleId) }
     }

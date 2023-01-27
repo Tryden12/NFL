@@ -101,6 +101,9 @@
         <action
             android:id="@+id/action_teamFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_teamFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/playerFragment"
@@ -140,5 +143,14 @@
         <action
             android:id="@+id/action_articleFragment_to_teamsListFragment"
             app:destination="@id/teamsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamNewsFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.team.TeamNewsFragment"
+        android:label="fragment_team_news"
+        tools:layout="@layout/fragment_team_news" >
+        <action
+            android:id="@+id/action_teamNewsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
 </navigation>

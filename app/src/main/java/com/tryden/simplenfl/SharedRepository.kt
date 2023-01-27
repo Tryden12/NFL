@@ -74,6 +74,17 @@ class SharedRepository {
         return request.body
     }
 
+    // Get news by team id
+    suspend fun getNewsByTeamId(teamId: String, limit: String): NewsResponse? {
+        val request = NetworkLayer.apiClient.getNewsByTeamId(teamId, limit)
+
+        if (request.failed || !request.isSuccessful) {
+            return null
+        }
+
+        return request.body
+    }
+
     // Get article by id
     suspend fun getArticleById(articleId: String): ArticleResponse? {
         val request = NetworkLayer.apiClient.getArticleById(articleId)

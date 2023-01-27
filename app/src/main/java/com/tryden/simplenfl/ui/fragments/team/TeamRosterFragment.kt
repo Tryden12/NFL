@@ -33,13 +33,13 @@ class TeamRosterFragment : Fragment() {
 
         val epoxyRosterRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_roster_RecyclerView)
 
+        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
+            sharedViewModel.refreshRoster(teamId = teamId.toInt())
+        }
         sharedViewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
             epoxyControllerRoster.rosterResponse = response
         }
 
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            sharedViewModel.refreshRoster(teamId = teamId.toInt())
-        }
 
 
         epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)

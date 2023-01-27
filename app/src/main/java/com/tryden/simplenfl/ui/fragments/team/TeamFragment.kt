@@ -55,6 +55,10 @@ class TeamFragment : Fragment() {
 
     private fun setupComponents() {
         val epoxyTeamRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
+
+        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
+            sharedViewModel.refreshTeam(teamId = teamId.toInt())
+        }
         sharedViewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTeam.teamResponse = response
             if (response == null) {
@@ -78,9 +82,7 @@ class TeamFragment : Fragment() {
             setupTabLayoutAndViewPager(teamColor)
 
         }
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            sharedViewModel.refreshTeam(teamId = teamId.toInt())
-        }
+
         epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
     }
 

@@ -32,6 +32,9 @@ class SharedViewModel: ViewModel() {
     private val _newsBreakingLiveData = MutableLiveData<NewsResponse?>()
     val newsBreakingLiveData: LiveData<NewsResponse?> = _newsBreakingLiveData
 
+    private val _newsByTeamIdLiveData = MutableLiveData<NewsResponse?>()
+    val newsByTeamIdLiveData: LiveData<NewsResponse?> = _newsByTeamIdLiveData
+
     private val _articleByIdLiveDataResponse = MutableLiveData<ArticleResponse?>()
     val articleByIdLiveDataResponse: LiveData<ArticleResponse?> = _articleByIdLiveDataResponse
 
@@ -92,6 +95,14 @@ class SharedViewModel: ViewModel() {
             val response = repository.getBreakingNews(type, limit)
 
             _newsBreakingLiveData.postValue(response)
+        }
+    }
+
+    fun refreshNewsByTeamId(teamId: String, limit: String) {
+        viewModelScope.launch {
+            val response = repository.getNewsByTeamId(teamId, limit)
+
+            _newsByTeamIdLiveData.postValue(response)
         }
     }
 

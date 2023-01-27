@@ -38,4 +38,11 @@ interface NFLService {
         @Query("limit") limit: String
     ) : Response<NewsResponse>
 
+    @GET("news")
+    suspend fun getNewsByTeamId(
+        @Query("team") teamId: String,
+        @Query("limit") limit: String
+    ) : Response<NewsResponse>
+
+
 }
