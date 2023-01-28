@@ -4,8 +4,6 @@ import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.databinding.ModelScoresSeasonTypeHeaderBinding
-import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamPageHeaderBinding
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.LoadingNoCircleEpoxyModel
@@ -72,24 +70,4 @@ class TeamPageHeaderEpoxyController: EpoxyController() {
         }
     }
 
-    // Add section header item model
-    data class SectionHeaderEpoxyModel(
-        val title: String
-    ): ViewBindingKotlinModel<ModelSectionHeaderBinding>(R.layout.model_section_header) {
-
-        override fun ModelSectionHeaderBinding.bind() {
-            titleSectionTextView.text = title
-        }
-    }
-
-    // Add scores season type header
-    data class ScoresSeasonTypeEpoxyModel(
-        val seasonType: String
-    ): ViewBindingKotlinModel<ModelScoresSeasonTypeHeaderBinding>(R.layout.model_scores_season_type_header) {
-
-        override fun ModelScoresSeasonTypeHeaderBinding.bind() {
-
-            seasonTypeTextview.text = seasonType
-        }
-    }
 }

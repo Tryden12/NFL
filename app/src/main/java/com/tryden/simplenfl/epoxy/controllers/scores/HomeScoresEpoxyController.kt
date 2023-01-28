@@ -231,7 +231,7 @@ class HomeScoresEpoxyController: EpoxyController() {
         }
     }
 
-    data class ScoresFinalEpoxyController(
+    data class ScoresFinalHomeEpoxyController(
         val sectionHeader: String,
         val useSectionHeader: Boolean,
         val logoAway: String,

@@ -11,8 +11,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.google.android.material.tabs.TabLayout
@@ -21,8 +19,6 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
 class TeamFragment : Fragment() {

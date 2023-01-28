@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.activitiesbackup.MainActivityTeamsList
-import com.tryden.simplenfl.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.teams.TeamListHomeEpoxyController
 
 

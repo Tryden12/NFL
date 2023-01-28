@@ -6,16 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/dark_grey">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/awayLogoImageView"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic[7]" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/awayLogoImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="25dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic[7]" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/teamNameAwayTextview"
@@ -31,16 +31,15 @@
         app:layout_constraintTop_toTopOf="@id/awayLogoImageView"
         tools:text="Away Team"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/homeLogoImageView"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview"
-            tools:src="@tools:sample/backgrounds/scenic[7]" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/homeLogoImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@id/awayLogoImageView"
+        app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview"
+        tools:src="@tools:sample/backgrounds/scenic[7]" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/teamNameHomeTextview"
@@ -55,6 +54,8 @@
         app:layout_constraintStart_toEndOf="@id/homeLogoImageView"
         app:layout_constraintTop_toTopOf="@id/homeLogoImageView"
         tools:text="Home Team Team Team Team Team Team"/>
+
+    <!--     For games status: Pre    -->
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/datePreGameItemTextview"
@@ -191,10 +192,5 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="invisible"
         />
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
