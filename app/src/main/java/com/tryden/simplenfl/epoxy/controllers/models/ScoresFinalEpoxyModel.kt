@@ -7,7 +7,6 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalItemBinding
-import com.tryden.simplenfl.databinding.ModelScoresFinalWithHeaderItemBinding
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 

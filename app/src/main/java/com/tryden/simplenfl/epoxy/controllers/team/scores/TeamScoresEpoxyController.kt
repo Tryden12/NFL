@@ -67,13 +67,13 @@ class TeamScoresEpoxyController: EpoxyController() {
 
                             // Add scores upcoming item
                             ScoresScheduledEpoxyModel(
-                                    logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                    logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                    recordAway = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(
+                                    logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                                    logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                    recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(
                                         0)?.summary.toString(),
-                                    recordHome = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(
+                                    recordHome = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(
                                         0)?.summary.toString(),
                                     dateScheduled = scoresResponse!!.events[i].date,
                                     broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
@@ -96,14 +96,15 @@ class TeamScoresEpoxyController: EpoxyController() {
                             }
                             // Add scores final item
                             ScoresFinalEpoxyModel(
-                                    logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                    logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                    pointsAway = scoresResponse!!.events[i].competitions[0].competitors[0].score,
-                                    pointsHome = scoresResponse!!.events[i].competitions[0].competitors[1].score,
+                                    logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                                    logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                    pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
+                                    pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
                                     datePlayed = scoresResponse!!.events[i].date,
-                                    statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description
+                                    statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description,
+                                    headline = scoresResponse!!.events[i].competitions[0].notes[0].headline
                                 ).id(scoresResponse!!.events[i].id).addTo(this)
                         }
                     }
@@ -143,13 +144,13 @@ class TeamScoresEpoxyController: EpoxyController() {
 
                             // Add scores upcoming item
                             ScoresScheduledEpoxyModel(
-                                logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                recordAway = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(
+                                logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                                logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(
                                     0)?.summary.toString(),
-                                recordHome = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(
+                                recordHome = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(
                                     0)?.summary.toString(),
                                 dateScheduled = scoresResponse!!.events[i].date,
                                 broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
@@ -179,12 +180,12 @@ class TeamScoresEpoxyController: EpoxyController() {
 
                             // Add scores final item
                             ScoresFinalEpoxyModel(
-                                logoAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                logoHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                pointsAway = scoresResponse!!.events[i].competitions[0].competitors[0].score,
-                                pointsHome = scoresResponse!!.events[i].competitions[0].competitors[1].score,
+                                logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                                logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
+                                pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
                                 datePlayed = scoresResponse!!.events[i].date,
                                 statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description
                             ).id(scoresResponse!!.events[i].id).addTo(this)
