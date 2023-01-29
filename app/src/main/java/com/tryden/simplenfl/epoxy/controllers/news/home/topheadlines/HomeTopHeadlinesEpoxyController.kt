@@ -68,7 +68,7 @@ class HomeTopHeadlinesEpoxyController(
                         logoVisible = true,
                         usePlaceholderLogo = true, /** Use NFL Logo **/
                         logoUrl = ""
-                    ).id("team_top_headlines").addTo(this)
+                    ).id("home_top_headlines").addTo(this)
                     headerTopFilled = true
                 }
 

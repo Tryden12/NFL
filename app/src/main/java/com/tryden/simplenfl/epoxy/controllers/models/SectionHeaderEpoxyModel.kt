@@ -20,7 +20,7 @@ data class SectionHeaderEpoxyModel(
         if (logoVisible && usePlaceholderLogo) {
             /** Use NFL logo **/
             logoSectionImageView.visibility = View.VISIBLE
-            logoSectionImageView.setBackgroundResource(R.drawable.placeholder_logo)
+            logoSectionImageView.setImageResource(R.drawable.placeholder_logo)
         } else if (logoVisible && !usePlaceholderLogo) {
             /** Use Team logo **/
             if (logoUrl.isNotEmpty()) {
