@@ -1,6 +1,7 @@
 package com.tryden.simplenfl.epoxy.controllers.team.scores
 
 import com.airbnb.epoxy.EpoxyController
+import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.*
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 
@@ -32,7 +33,7 @@ class TeamScoresEpoxyController: EpoxyController() {
 
     override fun buildModels() {
         if (isLoading) {
-//            LoadingEpoxyModel().id("loading").addTo(this)
+            LoadingEpoxyModel().id("loading").addTo(this)
             return
         }
 

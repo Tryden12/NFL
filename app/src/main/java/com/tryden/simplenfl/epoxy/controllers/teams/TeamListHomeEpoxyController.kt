@@ -70,6 +70,8 @@ class TeamListHomeEpoxyController(
         override fun ModelSectionHeaderBinding.bind() {
             if (!useLogo) {
                 logoSectionImageView.visibility = View.GONE
+            } else {
+                logoSectionImageView.setImageResource(R.drawable.placeholder_logo)
             }
             titleSectionTextView.text = title
         }
