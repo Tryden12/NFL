@@ -7,6 +7,7 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamsListVerticalItemBinding
+import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
 
 class TeamListHomeEpoxyController(
@@ -30,11 +31,10 @@ class TeamListHomeEpoxyController(
             }
         }
 
-//    val teamsList = teamsListResponse!!.sports[0].leagues[0].teams
 
     override fun buildModels() {
         if (isLoading) {
-//            LoadingEpoxyModel().id("loading").addTo(this)
+            LoadingEpoxyModel().id("loading").addTo(this)
             return
         }
         if (teamsListResponse == null) {
@@ -43,9 +43,8 @@ class TeamListHomeEpoxyController(
         }
 
         TitleTeamsListEpoxyModel(
-            useLogo = false,
-            title = "Select Team"
-//        ).id("title-teams").addTo(this)
+            useLogo = true,
+            title = "Choose Team"
         ).id("title-teams").spanSizeOverride { _, _, _ -> 4 }.addTo(this)
 
 
