@@ -44,13 +44,16 @@ class TeamRosterEpoxyController: EpoxyController() {
         val rosterType = rosterResponse!!.athletes
         var headshot = rosterResponse!!.athletes[0].items[0].fullName
 
+        /**
+         * Add Header and Player items
+         **/
         for (i in rosterResponse!!.athletes.indices) {
             // Add the roster header by roster type (Offense, Defense, Special Teams
             RosterTypeHeaderEpoxyHeader(rosterType = rosterType[i].position)
                 .id(rosterType[i].position).addTo(this)
 
             // Add all players listed in the roster type
-            for (j in rosterResponse!!.athletes[i].items.indices)
+            for (j in rosterResponse!!.athletes[i].items.indices) {
                 if (j % 2 == 0) {
                     RosterPlayerItemEpoxyModel(
                         imageUrl = rosterResponse!!.athletes[i].items[j].headshot.href,
@@ -59,7 +62,8 @@ class TeamRosterEpoxyController: EpoxyController() {
                         position = rosterResponse!!.athletes[i].items[j].position.abbreviation,
                         age = rosterResponse!!.athletes[i].items[j].age.toString(),
                         height = rosterResponse!!.athletes[i].items[j].displayHeight,
-                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.dark_grey) // dark background
+                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context,
+                            R.color.dark_grey) // dark background
                     ).id(rosterResponse!!.athletes[i].items[j].id).addTo(this)
                 } else {
                     RosterPlayerItemEpoxyModel(
@@ -69,9 +73,12 @@ class TeamRosterEpoxyController: EpoxyController() {
                         position = rosterResponse!!.athletes[i].items[j].position.abbreviation,
                         age = rosterResponse!!.athletes[i].items[j].age.toString(),
                         height = rosterResponse!!.athletes[i].items[j].displayHeight,
-                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.darkish_grey) // lighter background
+                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context,
+                            R.color.darkish_grey) // lighter background
                     ).id(rosterResponse!!.athletes[i].items[j].id).addTo(this)
                 }
+            }
+
 
         }
     }
