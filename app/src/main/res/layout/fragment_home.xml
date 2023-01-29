@@ -44,18 +44,16 @@
                 android:id="@+id/epoxy_home_scores_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_rounded_corners_16_dark_grey"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical"
-                android:padding="8dp"
                 app:itemSpacing="0dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/epoxy_home_top_headlines_RecyclerView"
                 app:spanCount="1"
-                tools:itemCount="12"
+                tools:itemCount="10"
                 tools:listitem="@layout/model_scores_final_item"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

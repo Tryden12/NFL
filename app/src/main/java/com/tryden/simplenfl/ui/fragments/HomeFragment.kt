@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
 
         }
         sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerScores.scoresHomeResponse = response
+            epoxyControllerScores.scoresResponse = response
 
         }
         sharedViewModel.refreshBreakingNews("", "50")

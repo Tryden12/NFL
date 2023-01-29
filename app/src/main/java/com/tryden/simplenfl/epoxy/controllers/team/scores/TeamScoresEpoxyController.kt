@@ -62,7 +62,6 @@ class TeamScoresEpoxyController: EpoxyController() {
                                 SectionHeaderCenteredEpoxyModel(
                                     sectionHeader = "Playoffs"
                                 ).id("header-playoffs-$i").addTo(this)
-                                scheduledCount++
                                 headerTopFilled = true
                             }
 
@@ -80,6 +79,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                                     broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
                                     headline = scoresResponse!!.events[i].competitions[0].notes[0].headline
                                 ).id(scoresResponse!!.events[i].id).addTo(this)
+                            scheduledCount++
+
                         }
                     }
                 } else if (scoresResponse!!.events[i].competitions[0].status.type.description.contains("final", ignoreCase = true)) {
@@ -92,7 +93,6 @@ class TeamScoresEpoxyController: EpoxyController() {
                                 SectionHeaderCenteredEpoxyModel(
                                     sectionHeader = "Playoffs"
                                 ).id("header-playoffs-$i").addTo(this)
-                                scheduledCount++
                                 headerTopFilled = true
                             }
                             // Add scores final item
@@ -107,6 +107,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                                     statusDesc = scoresResponse!!.events[i].competitions[0].status.type.description,
                                     headline = scoresResponse!!.events[i].competitions[0].notes[0].headline
                                 ).id(scoresResponse!!.events[i].id).addTo(this)
+                            scheduledCount++
+
                         }
                     }
 
@@ -140,7 +142,6 @@ class TeamScoresEpoxyController: EpoxyController() {
                                 SectionHeaderCenteredEpoxyModel(
                                     sectionHeader = "Regular Season"
                                 ).id("header-regular-season-$i").addTo(this)
-                                scheduledCount++
                                 headerTopFilled = true
                             }
 
@@ -176,7 +177,6 @@ class TeamScoresEpoxyController: EpoxyController() {
                                 SectionHeaderCenteredEpoxyModel(
                                     sectionHeader = "Regular Season"
                                 ).id("header-regular-season-$i").addTo(this)
-                                scheduledCount++
                                 headerTopFilled = true
                             }
 

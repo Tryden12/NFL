@@ -35,7 +35,7 @@ class ScoresFragment : Fragment() {
 
         // refresh scoreboard
         sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerScores.scoresHomeResponse = response
+            epoxyControllerScores.scoresResponse = response
         }
 
         sharedViewModel.refreshScoreboard("20220914-20230212","1000")

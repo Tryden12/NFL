@@ -5,6 +5,7 @@
     android:id="@+id/mainConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="8dp"
     android:fitsSystemWindows="true"
     android:background="@color/black">
 
@@ -12,8 +13,6 @@
         android:id="@+id/epoxy_scores_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/bg_rounded_corners_16_dark_grey"
         android:orientation="vertical"
         app:itemSpacing="0dp"

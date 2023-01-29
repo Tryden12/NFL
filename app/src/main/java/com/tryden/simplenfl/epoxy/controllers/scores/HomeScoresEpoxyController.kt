@@ -9,6 +9,9 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalWithHeaderItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
+import com.tryden.simplenfl.epoxy.controllers.models.ScoresScheduledEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -23,7 +26,7 @@ class HomeScoresEpoxyController: EpoxyController() {
             }
         }
 
-    var scoresHomeResponse: ScoreboardResponse? = null
+    var scoresResponse: ScoreboardResponse? = null
         set(value) {
             field = value
             if (value != null) {
@@ -38,110 +41,81 @@ class HomeScoresEpoxyController: EpoxyController() {
             return
         }
 
-        if (scoresHomeResponse == null) {
+        if (scoresResponse == null) {
             // todo error state
             return
         }
 
+        /**
+         * Upcoming games
+         **/
+        var headerTopFilled = false
         var scheduledCount = 0
+//        for (i in scoresResponse!!.events.size-1 downTo 0) { // reverse
+        for (i in scoresResponse!!.events.indices) {
 
-        // Scheduled scores
-//        for (i in scoresHomeResponse!!.events.size-1 downTo 0) { // reverse
-        for (i in scoresHomeResponse!!.events.indices) {
-
-            when (scoresHomeResponse!!.events[i].competitions[0].status.type.state) {
+            when (scoresResponse!!.events[i].competitions[0].status.type.state) {
                 "pre" -> {
-                    if (scoresHomeResponse!!.events[i].competitions[0].notes[0].headline.contains("bowl", ignoreCase = true)
+                    if (scoresResponse!!.events[i].competitions[0].notes[0].headline.contains("bowl", ignoreCase = true)
                     ) {
-                        ScoresScheduledEpoxyController(
-                            sectionHeader = "Upcoming",
-                            useSectionHeader = false,
-                            logoAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                            logoHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                            teamNameAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
-                            teamNameHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
+
+                        // Use header
+                        if (scheduledCount == 0) {
+                            SectionHeaderCenteredEpoxyModel(
+                                sectionHeader = "Upcoming"
+                            ).id("header-playoffs-$i").addTo(this)
+                            headerTopFilled = true
+                        }
+
+                        // Add scores upcoming item
+                        ScoresScheduledEpoxyModel(
+                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
                             recordAway = "",
                             recordHome = "",
-                            dateScheduled = scoresHomeResponse!!.events[i].date,
-                            broadcast = scoresHomeResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
-                            headline = scoresHomeResponse!!.events[i].competitions[0].notes[0].headline
-                        ).id(scoresHomeResponse!!.events[i].id).addTo(this)
+                            dateScheduled = scoresResponse!!.events[i].date,
+                            broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
+                            headline = scoresResponse!!.events[i].competitions[0].notes[0].headline
+                        ).id(scoresResponse!!.events[i].id).addTo(this)
                         scheduledCount++
 
                     } else {
+
+                        // Use header
                         if (scheduledCount == 0) {
-                            ScoresScheduledEpoxyController(
-                                sectionHeader = "Upcoming",
-                                useSectionHeader = true,
-                                logoAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                logoHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                                teamNameAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-                                teamNameHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                recordAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].records?.get(0)?.summary.toString(),
-                                recordHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].records?.get(0)?.summary.toString(),
-                                dateScheduled = scoresHomeResponse!!.events[i].date,
-                                broadcast = scoresHomeResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
-                                headline = scoresHomeResponse!!.events[i].competitions[0].notes[0].headline
-                            ).id(scoresHomeResponse!!.events[i].id).addTo(this)
-                            scheduledCount++
-
-                        } else {
-                            ScoresScheduledEpoxyController(
-                                sectionHeader = "Upcoming",
-                                useSectionHeader = false,
-                                logoAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                logoHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-                                teamNameAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-                                teamNameHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                recordAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].records?.get(0)?.summary.toString(),
-                                recordHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].records?.get(0)?.summary.toString(),
-                                dateScheduled = scoresHomeResponse!!.events[i].date,
-                                broadcast = scoresHomeResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
-                                headline = scoresHomeResponse!!.events[i].competitions[0].notes[0].headline
-                            ).id(scoresHomeResponse!!.events[i].id).addTo(this)
-                            scheduledCount++
-
+                            SectionHeaderCenteredEpoxyModel(
+                                sectionHeader = "Upcoming"
+                            ).id("header-playoffs-$i").addTo(this)
+                            headerTopFilled = true
                         }
+
+                        // Add scores upcoming item
+                        ScoresScheduledEpoxyModel(
+                            logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
+                            logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
+                            teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
+                            teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                            recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(0)?.summary.toString(),
+                            recordHome = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(0)?.summary.toString(),
+                            dateScheduled = scoresResponse!!.events[i].date,
+                            broadcast = scoresResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
+                            headline = scoresResponse!!.events[i].competitions[0].notes[0].headline
+                        ).id(scoresResponse!!.events[i].id).addTo(this)
+                        scheduledCount++
                     }
                 }
             }
         }
 
-        // Final scores
-//        for (i in scoresHomeResponse!!.events.size-1 downTo 0) { // reverse
-//        for (i in scoresHomeResponse!!.events.indices) {
-//            when (scoresHomeResponse!!.events[i].competitions[0].status.type.state) {
-//                "post" -> {
-//                    if (i == 0) {
-//                        ScoresFinalEpoxyController(
-//                            sectionHeader = "Final",
-//                            useSectionHeader = true,
-//                            logoAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-//                            logoHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-//                            teamNameAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-//                            teamNameHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-//                            pointsAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].score,
-//                            pointsHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].score,
-//                            datePlayed = scoresHomeResponse!!.events[i].date,
-//                            statusDesc = scoresHomeResponse!!.events[i].competitions[0].status.type.description
-//                        ).id(scoresHomeResponse!!.events[i].id).addTo(this)
-//                    } else {
-//                        ScoresFinalEpoxyController(
-//                            sectionHeader = "",
-//                            useSectionHeader = false,
-//                            logoAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-//                            logoHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
-//                            teamNameAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
-//                            teamNameHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-//                            pointsAway = scoresHomeResponse!!.events[i].competitions[0].competitors[0].score,
-//                            pointsHome = scoresHomeResponse!!.events[i].competitions[0].competitors[1].score,
-//                            datePlayed = scoresHomeResponse!!.events[i].date,
-//                            statusDesc = scoresHomeResponse!!.events[i].competitions[0].status.type.description
-//                        ).id(scoresHomeResponse!!.events[i].id).addTo(this)
-//                    }
-//                }
-//            }
-//        }
+        // Add bottom to section
+        if (headerTopFilled) {
+            SectionBottomEpoxyModel(
+                useSection = true
+            ).id("bottom-home-upcoming-1").addTo(this)
+        }
+        
     }
 
     // Scores
