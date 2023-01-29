@@ -10,6 +10,7 @@ import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderCenteredEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
@@ -70,9 +71,10 @@ class TeamNewsTopHeadlinesEpoxyController(
 
                 // Use header
                 if (storyCount == 1) {
-                    SectionHeaderHeadlinesEpoxyModel(
+                    SectionHeaderEpoxyModel(
                         title = "Top Headlines",
                         logoVisible = true,
+                        usePlaceholderLogo = false, /** Use Team Logo **/
                         logoUrl = teamDetailsResponse!!.team.logos[0].href
                     ).id("team_top_headlines").addTo(this)
                     headerTopFilled = true
@@ -107,35 +109,6 @@ class TeamNewsTopHeadlinesEpoxyController(
      */
     private fun getArticleIdFromUrl(url: String?): String? {
         return url?.split("sports/news/")?.get(1)
-    }
-
-    // Section header for headlines
-    data class SectionHeaderHeadlinesEpoxyModel(
-        val title: String,
-        val logoVisible: Boolean,
-        val logoUrl: String
-    ): ViewBindingKotlinModel<ModelSectionHeaderBinding>
-        (R.layout.model_section_header) {
-
-        override fun ModelSectionHeaderBinding.bind() {
-            titleSectionTextView.text = title
-
-            // If logo present
-            if (logoVisible && logoUrl.isNotEmpty()) {
-                logoSectionImageView.visibility = View.VISIBLE
-                if (logoUrl.isEmpty()) {
-                    Picasso.get()
-                        .load(R.drawable.placeholder_logo)
-                        .placeholder(R.drawable.placeholder_logo)
-                        .error(R.drawable.placeholder_logo)
-                        .into(logoSectionImageView)
-                } else {
-                    Picasso.get().load(logoUrl).into(logoSectionImageView)
-                }
-            } else {
-                logoSectionImageView.visibility = View.GONE
-            }
-        }
     }
 
     // Headline items

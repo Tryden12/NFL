@@ -7,6 +7,8 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 
 class HomeTopHeadlinesEpoxyController(
@@ -47,26 +49,44 @@ class HomeTopHeadlinesEpoxyController(
             return
         }
 
-        SectionHeaderHeadlinesEpoxyModel(
-            title = "Top Headlines",
-            logoVisible = true
-        ).id("home_top_headlines").addTo(this)
 
+        /**
+         * Headline News
+         **/
+        var headerTopFilled = false
         var storyCount = 1
         for (i in newsResponse!!.articles.indices) {
             // article type must NOT be media
             if (newsResponse!!.articles[i].type.equals("HeadlineNews", ignoreCase = true)
                 && storyCount <= maxHeadlines
             ) {
+
+                // Use header
+                if (storyCount == 1) {
+                    SectionHeaderEpoxyModel(
+                        title = "Top Headlines",
+                        logoVisible = true,
+                        usePlaceholderLogo = true, /** Use NFL Logo **/
+                        logoUrl = ""
+                    ).id("team_top_headlines").addTo(this)
+                    headerTopFilled = true
+                }
+
                 getArticleIdFromUrl(newsResponse!!.articles[i].links.api.news.href)?.let { articleId ->
                     HomeNewsHeadlineItemEpoxyModel(
                         headlineTitle = newsResponse!!.articles[i].headline,
                         articleId = articleId,
                         onArticleSelected = onArticleSelected
                     ).id("news-$storyCount").addTo(this)
+                    storyCount++
                 }
-                storyCount++
             }
+        }
+        // Add bottom to section
+        if (headerTopFilled) {
+            SectionBottomEpoxyModel(
+                useSection = true
+            ).id("bottom-home-headlines-1").addTo(this)
         }
     }
 
