@@ -17,9 +17,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <activity android:name=".activitiesbackup.MainActivityHome"/>
-        <activity android:name=".activitiesbackup.MainActivityRoster"/>
-
         <activity android:name=".ui.activity.NavGraphActivity"
             android:exported="true">
             <intent-filter>
@@ -32,6 +29,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <!-- Backup Activity for testing-->
+        <activity android:name=".activitiesbackup.MainActivityBackupForTesting"/>
+
     </application>
 
 </manifest>

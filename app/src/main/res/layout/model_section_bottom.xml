@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black_darkest">
+    android:background="@color/black">
 
     <View
         android:layout_width="match_parent"
