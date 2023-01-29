@@ -6,7 +6,8 @@
     android:id="@+id/homeScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:paddingTop="8dp"
+    android:background="@color/black_darkest"
     android:fillViewport="true"
     android:fitsSystemWindows="true">
 
@@ -31,10 +32,7 @@
                 android:id="@+id/epoxy_team_news_headlines_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_rounded_corners_16_dark_grey"
                 android:orientation="vertical"
-                android:padding="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

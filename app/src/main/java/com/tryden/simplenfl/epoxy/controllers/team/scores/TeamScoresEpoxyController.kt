@@ -113,6 +113,7 @@ class TeamScoresEpoxyController: EpoxyController() {
             }
         }
 
+        // Add bottom to section
         if (headerTopFilled) {
             SectionBottomEpoxyModel(
                 useSection = true

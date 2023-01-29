@@ -8,6 +8,8 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
@@ -55,19 +57,27 @@ class TeamNewsTopHeadlinesEpoxyController(
             return
         }
 
-        SectionHeaderHeadlinesEpoxyModel(
-            title = "Top Headlines",
-            logoVisible = true,
-            logoUrl = teamDetailsResponse!!.team.logos[0].href
-        ).id("team_top_headlines").addTo(this)
-
-
+        /**
+         * Headline News
+         **/
+        var headerTopFilled = false
         var storyCount = 1
         for (i in teamNewsResponse!!.articles.indices) {
             // article type must NOT be media
             if (teamNewsResponse!!.articles[i].type.equals("HeadlineNews", ignoreCase = true)
                 && storyCount <= maxHeadlines
             ) {
+
+                // Use header
+                if (storyCount == 1) {
+                    SectionHeaderHeadlinesEpoxyModel(
+                        title = "Top Headlines",
+                        logoVisible = true,
+                        logoUrl = teamDetailsResponse!!.team.logos[0].href
+                    ).id("team_top_headlines").addTo(this)
+                    headerTopFilled = true
+                }
+
                 getArticleIdFromUrl(teamNewsResponse!!.articles[i].links.api.news.href)?.let { articleId ->
                     TeamNewsHeadlineItemEpoxyModel(
                         headlineTitle = teamNewsResponse!!.articles[i].headline,
@@ -77,6 +87,12 @@ class TeamNewsTopHeadlinesEpoxyController(
                 }
                 storyCount++
             }
+        }
+        // Add bottom to section
+        if (headerTopFilled) {
+            SectionBottomEpoxyModel(
+                useSection = true
+            ).id("bottom-playoffs-1").addTo(this)
         }
     }
 
@@ -105,7 +121,7 @@ class TeamNewsTopHeadlinesEpoxyController(
             titleSectionTextView.text = title
 
             // If logo present
-            if (logoVisible) {
+            if (logoVisible && logoUrl.isNotEmpty()) {
                 logoSectionImageView.visibility = View.VISIBLE
                 if (logoUrl.isEmpty()) {
                     Picasso.get()
