@@ -69,8 +69,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                             ScoresScheduledEpoxyModel(
                                     logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                     logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
+                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
                                     recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(
                                         0)?.summary.toString(),
                                     recordHome = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(
@@ -99,8 +99,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                             ScoresFinalEpoxyModel(
                                     logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                     logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                    teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
+                                    teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
                                     pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
                                     pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
                                     datePlayed = scoresResponse!!.events[i].date,
@@ -149,8 +149,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                             ScoresScheduledEpoxyModel(
                                 logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                 logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
+                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
                                 recordAway = scoresResponse!!.events[i].competitions[0].competitors[1].records?.get(
                                     0)?.summary.toString(),
                                 recordHome = scoresResponse!!.events[i].competitions[0].competitors[0].records?.get(
@@ -184,8 +184,8 @@ class TeamScoresEpoxyController: EpoxyController() {
                             ScoresFinalEpoxyModel(
                                 logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                 logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
-                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.name.toString(),
-                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.name.toString(),
+                                teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
+                                teamNameHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
                                 pointsAway = scoresResponse!!.events[i].competitions[0].competitors[1].score,
                                 pointsHome = scoresResponse!!.events[i].competitions[0].competitors[0].score,
                                 datePlayed = scoresResponse!!.events[i].date,
