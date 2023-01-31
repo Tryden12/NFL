@@ -35,6 +35,14 @@ class ApiClient(
         return safeApiCall { nflService.getScoreboardRange(dates, limit) }
     }
 
+    suspend fun getScoresByWeek(week: String) : SimpleResponse<ScoreboardResponse> {
+        return safeApiCall { nflService.getScoresByWeek(week) }
+    }
+
+    suspend fun getScoresCalendar(limit: String) : SimpleResponse<ScoreboardResponse> {
+        return safeApiCall { nflService.getScoresCalendar(limit) }
+    }
+
     suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<NewsResponse> {
         return safeApiCall { nflService.getBreakingNews(type, limit) }
     }

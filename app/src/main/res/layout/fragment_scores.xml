@@ -9,17 +9,25 @@
     android:fitsSystemWindows="true"
     android:background="@color/black">
 
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/epoxy_scores_RecyclerView"
+        android:id="@+id/epoxy_scores_by_week_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_rounded_corners_16_dark_grey"
         android:orientation="vertical"
         app:itemSpacing="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/testButton"
         app:spanCount="1"
         tools:itemCount="12"
         tools:listitem="@layout/model_scores_final_item"/>

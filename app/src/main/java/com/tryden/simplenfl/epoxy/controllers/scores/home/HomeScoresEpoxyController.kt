@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.epoxy.controllers.scores
+package com.tryden.simplenfl.epoxy.controllers.scores.home
 
 import android.view.View
 import androidx.core.content.ContextCompat

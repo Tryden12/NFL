@@ -32,6 +32,16 @@ interface NFLService {
         @Query("limit") limit: String
     ): Response<ScoreboardResponse>
 
+    @GET("scoreboard")
+    suspend fun getScoresByWeek(
+        @Query("week") week: String
+    ): Response<ScoreboardResponse>
+
+    @GET("scoreboard")
+    suspend fun getScoresCalendar(
+        @Query("limit") limit: String
+    ): Response<ScoreboardResponse>
+
     @GET("news")
     suspend fun getBreakingNews(
         @Query("type") type: String,

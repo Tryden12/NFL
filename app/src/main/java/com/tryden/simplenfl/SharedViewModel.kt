@@ -29,6 +29,12 @@ class SharedViewModel: ViewModel() {
     private val _scoreboardByRangeLiveData = MutableLiveData<ScoreboardResponse?>()
     val scoreboardByRangeLiveData: LiveData<ScoreboardResponse?> = _scoreboardByRangeLiveData
 
+    private val _scoresByWeekLiveData = MutableLiveData<ScoreboardResponse?>()
+    val scoresByWeekLiveData: LiveData<ScoreboardResponse?> = _scoresByWeekLiveData
+
+    private val _scoresCalendarLiveData = MutableLiveData<ScoreboardResponse?>()
+    val scoresCalendarLiveData: LiveData<ScoreboardResponse?> = _scoresCalendarLiveData
+
     private val _newsBreakingLiveData = MutableLiveData<NewsResponse?>()
     val newsBreakingLiveData: LiveData<NewsResponse?> = _newsBreakingLiveData
 
@@ -87,6 +93,22 @@ class SharedViewModel: ViewModel() {
             val response = repository.getScoreboardRange(dates, limit)
 
             _scoreboardByRangeLiveData.postValue(response)
+        }
+    }
+
+    fun refreshScoresCalendar(limit: String) {
+        viewModelScope.launch {
+            val response = repository.getScoresCalendar(limit)
+
+            _scoresCalendarLiveData.postValue(response)
+        }
+    }
+
+    fun refreshScoresByWeek(week: String) {
+        viewModelScope.launch {
+            val response = repository.getScoresByWeek(week)
+
+            _scoresByWeekLiveData.postValue(response)
         }
     }
 

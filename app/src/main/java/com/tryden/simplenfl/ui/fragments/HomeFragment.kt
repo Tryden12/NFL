@@ -12,7 +12,7 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.scores.HomeScoresEpoxyController
+import com.tryden.simplenfl.epoxy.controllers.scores.home.HomeScoresEpoxyController
 
 class HomeFragment : Fragment() {
 

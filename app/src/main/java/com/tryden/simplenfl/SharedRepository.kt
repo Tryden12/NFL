@@ -63,6 +63,26 @@ class SharedRepository {
         return request.body
     }
 
+    suspend fun getScoresByWeek(week: String) : ScoreboardResponse? {
+        val request = NetworkLayer.apiClient.getScoresByWeek(week)
+
+        if (request.failed || !request.isSuccessful) {
+            return null
+        }
+
+        return request.body
+     }
+
+    suspend fun getScoresCalendar(limit: String) : ScoreboardResponse? {
+        val request = NetworkLayer.apiClient.getScoresCalendar(limit)
+
+        if (request.failed || !request.isSuccessful) {
+            return null
+        }
+
+        return request.body
+    }
+
     // Get breaking news
     suspend fun getBreakingNews(type: String, limit: String): NewsResponse? {
         val request = NetworkLayer.apiClient.getBreakingNews(type, limit)
