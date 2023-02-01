@@ -83,7 +83,7 @@ class TeamFragment : Fragment() {
     }
 
     private fun setupTabLayoutAndViewPager(teamColor: String) {
-        teamAdapter = TeamViewPagerAdapter(parentFragmentManager, lifecycle)
+        teamAdapter = TeamViewPagerAdapter(childFragmentManager, lifecycle)
         teamViewPager = view?.findViewById(R.id.teamViewPager)!!
         teamTabLayout = view?.findViewById(R.id.teamsTabLayout)!!
         teamViewPager?.adapter = teamAdapter

@@ -50,10 +50,6 @@ class ArticleFragment : Fragment() {
             if (response != null) {
                 epoxyControllerArticle.articleResponse = response
                 Log.e("ArticleFragment", "onViewCreated: ${response!!.headlines[0].headline}")
-
-                // access article via web view
-//                val mobileLink = response.headlines[0].links.mobile.href
-//                webViewSetup(mobileLink)
             }
         }
         epoxyArticleRecyclerView?.setControllerAndBuildModels(epoxyControllerArticle)
@@ -79,35 +75,14 @@ class ArticleFragment : Fragment() {
     private fun shareArticle() {
         val articleUrl = "https://a.espncdn.com/photo/2023/0126/r1122544_608x342_16-9.jpg"
         val uri = Uri.parse(articleUrl)
-//
-//        val shareIntent = Intent()
-//        shareIntent.action = Intent.ACTION_SEND
-//        shareIntent.type = "text/plain"
-//        shareIntent.putExtra(Intent.EXTRA_TEXT, articleUrl)
-//        startActivity(Intent.createChooser(shareIntent,"Share article link to:"))
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.type = "image/*"
         sendIntent.clipData = ClipData.newRawUri("", uri)
         sendIntent.putExtra(Intent.EXTRA_TITLE, "title")
 
-
         sendIntent.putExtra(Intent.EXTRA_TEXT,"http://now.core.api.espn.com/v1/sports/news/35539696" )
 
         startActivity(Intent.createChooser(sendIntent, null))
     }
-
-
-
-//    private fun webViewSetup(url: String) {
-//        val webView = view?.findViewById<WebView>(R.id.articleWebView)
-//        webView?.webViewClient = WebViewClient()
-//        webView?.apply {
-//            loadUrl(url)
-//            settings.javaScriptEnabled = true
-//            settings.safeBrowsingEnabled = true
-//
-//        }
-//    }
-
 }
