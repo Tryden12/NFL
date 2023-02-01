@@ -69,7 +69,7 @@ class ScoresFragment : Fragment() {
             epoxyControllerScores.scoresByWeekResponse = response
 
         }
-        sharedViewModel.refreshScoreboard("20230208-20230215", "1000")
+        sharedViewModel.refreshScoreboard("20220908-20220914", "1000")
         epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
 
 //        Log.e("ScoresFragment", "getCurrentWeek: ${getCurrentTimeIso()}")

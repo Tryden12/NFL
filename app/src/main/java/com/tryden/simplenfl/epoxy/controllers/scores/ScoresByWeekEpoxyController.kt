@@ -87,6 +87,11 @@ class ScoresByWeekEpoxyController(
                         headerTopFilled = true
                     }
                 }
+                var headline = if (events[i].competitions[0].notes.isNotEmpty() && events[i].competitions[0].notes[0].headline.isNotEmpty()) {
+                    events[i].competitions[0].notes[0].headline
+                } else {
+                    ""
+                }
 
                 if (events[i].competitions[0].status.type.completed) {
                     // Add scores final item
@@ -99,7 +104,7 @@ class ScoresByWeekEpoxyController(
                         pointsHome = events[i].competitions[0].competitors[0].score,
                         datePlayed = events[i].date,
                         statusDesc = events[i].competitions[0].status.type.description,
-                        headline = ""
+                        headline = headline
                     ).id(events[i].id).addTo(this)
                     eventCount++
                 } else {
