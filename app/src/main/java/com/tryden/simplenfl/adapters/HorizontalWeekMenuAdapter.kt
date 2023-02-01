@@ -40,6 +40,8 @@ class HorizontalWeekMenuAdapter(
         notifyDataSetChanged()
     }
 
+    var selectedIndex = 0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(ModelScoresCarouselDateItemBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -55,6 +57,16 @@ class HorizontalWeekMenuAdapter(
             datesTextView.text = week.dates
             root.setOnClickListener {
                 onWeekSelected(weeks[position].range)
+                selectedIndex = position
+                notifyDataSetChanged()
+            }
+
+            if (selectedIndex == position) {
+                holder.binding.labelTextView.setTextColor(Color.WHITE)
+                holder.binding.datesTextView.setTextColor(Color.WHITE)
+            } else {
+                holder.binding.labelTextView.setTextColor(Color.GRAY)
+                holder.binding.datesTextView.setTextColor(Color.GRAY)
             }
 
         }
