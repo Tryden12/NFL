@@ -11,6 +11,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalWithHeaderItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
+import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.*
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
@@ -28,15 +29,6 @@ class ScoresByWeekEpoxyController(
             }
         }
 
-    var calendarResponse: ScoreboardResponse? = null
-        set(value) {
-            field = value
-            if (value != null) {
-                isLoading = false
-                requestModelBuild()
-            }
-        }
-
     var scoresByWeekResponse: ScoreboardResponse? = null
         set(value) {
             field = value
@@ -46,22 +38,8 @@ class ScoresByWeekEpoxyController(
             }
         }
 
-    var useCurrentTimeIso: Boolean? = true
-        set(value) {
-            field = value
-        }
-
-    fun getWeekRange(startIso: String, endIso: String): String {
-        val formatter = DateTimeFormatter.ofPattern("uMMdd")
-        val startDateOffSet = OffsetDateTime.parse(startIso, DateTimeFormatter.ISO_DATE_TIME)
-        val endDateOffSet = OffsetDateTime.parse(endIso, DateTimeFormatter.ISO_DATE_TIME)
-
-        val start = startDateOffSet.format(formatter)
-        val end = endDateOffSet.format(formatter)
 
 
-        return "$start-$end"
-    }
 
     fun convertIsoDateToHeaderTitle(isoDate: String): String {
         // Parse ISO format to "Sun, 10/18"
@@ -73,53 +51,53 @@ class ScoresByWeekEpoxyController(
 
     override fun buildModels() {
         if (isLoading) {
-//            LoadingEpoxyModel().id("loading").addTo(this)
+            LoadingEpoxyModel().id("loading").addTo(this)
             return
         }
 
-        if (calendarResponse == null) {
+        if (scoresByWeekResponse == null) {
             // todo error state
             return
         }
 
-        // Carousel
-        val weeks = mutableListOf<Week>()
-        val calendar = calendarResponse!!.leagues[0].calendar
-        if (calendar.isNotEmpty()) {
-            for (i in calendar.indices) {
-
-                // Only add the regular season and postseason weeks
-                if (calendar[i].label!!.contains("regular", ignoreCase = true)
-                    || calendar[i].label!!.contains("postseason", ignoreCase = true)) {
-                        for (j in calendar[i].entries!!.indices) {
-                            Log.e("ScoresByWeekEpoxyController", "${calendar[i].entries?.get(j)?.alternateLabel}\n" )
-
-                            calendar[i].entries?.get(j)?.let {
-                                weeks.add(Week(
-                                    label = it.alternateLabel,
-                                    dates = it.detail,
-                                    number = it.value,
-                                    range = getWeekRange(it.startDate, it.endDate), /** Converts iso strings to "20220908-20220914" format **/
-                                    onWeekSelected = onWeekSelected
-                                ))
-                            }
-                        }
-                }
-
-            }
-        }
-        val items = weeks.map {
-            WeekCarouselEpoxyModel(it).id(it.dates)
-        }
-
-        CarouselModel_()
-            .id("weeks-carousel")
-            .models(items)
-            .numViewsToShowOnScreen(4.2f)
-            .paddingDp(0)
-            .hasFixedSize(true)
-            .addTo(this)
-        Log.e("ScoresByWeekEpoxyController", "weeks size = ${weeks.size}" )
+//        // Carousel
+//        val weeks = mutableListOf<Week>()
+//        val calendar = calendarResponse!!.leagues[0].calendar
+//        if (calendar.isNotEmpty()) {
+//            for (i in calendar.indices) {
+//
+//                // Only add the regular season and postseason weeks
+//                if (calendar[i].label!!.contains("regular", ignoreCase = true)
+//                    || calendar[i].label!!.contains("postseason", ignoreCase = true)) {
+//                        for (j in calendar[i].entries!!.indices) {
+//                            Log.e("ScoresByWeekEpoxyController", "${calendar[i].entries?.get(j)?.alternateLabel}\n" )
+//
+//                            calendar[i].entries?.get(j)?.let {
+//                                weeks.add(Week(
+//                                    label = it.alternateLabel,
+//                                    dates = it.detail,
+//                                    number = it.value,
+//                                    range = getWeekRange(it.startDate, it.endDate), /** Converts iso strings to "20220908-20220914" format **/
+//                                    onWeekSelected = onWeekSelected
+//                                ))
+//                            }
+//                        }
+//                }
+//
+//            }
+//        }
+//        val items = weeks.map {
+//            WeekCarouselEpoxyModel(it).id(it.dates)
+//        }
+//
+//        CarouselModel_()
+//            .id("weeks-carousel")
+//            .models(items)
+//            .numViewsToShowOnScreen(4.2f)
+//            .paddingDp(0)
+//            .hasFixedSize(true)
+//            .addTo(this)
+//        Log.e("ScoresByWeekEpoxyController", "weeks size = ${weeks.size}" )
 
 
 

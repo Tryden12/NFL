@@ -41,6 +41,14 @@ data class Scores(
         val names: List<String> = listOf()
     )
 
+    data class Calendar(
+        val endDate: String? = "",
+        val entries: List<Entry> = listOf(),
+        val label: String? = "",
+        val startDate: String? = "",
+        val value: String? = ""
+    )
+
     data class Competition(
         val attendance: Int = 0,
         val broadcasts: List<Broadcast> = listOf(),
@@ -78,6 +86,22 @@ data class Scores(
         val type: String = "",
         val uid: String = "",
         val winner: Boolean? = false
+    )
+
+    data class Entry(
+        val alternateLabel: String = "",
+        val detail: String = "",
+        val endDate: String = "",
+        val label: String = "",
+        val startDate: String = "",
+        val value: String = ""
+    )
+
+    data class EntryWeek(
+        val label: String,
+        val dates: String,
+        val number: String,
+        val range: String,
     )
 
     data class Event(
@@ -144,7 +168,7 @@ data class Scores(
 
     data class League(
         val abbreviation: String = "",
-        val calendar: List<Any> = listOf(),
+        val calendar: List<Calendar> = listOf(),
         val id: String = "",
         val logos: List<Logo> = listOf(),
         val name: String = "",
