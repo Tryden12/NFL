@@ -4,9 +4,11 @@ import android.view.View
 import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
+import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresScheduledItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
 import java.time.OffsetDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 data class ScoresScheduledEpoxyModel(
@@ -66,12 +68,18 @@ data class ScoresScheduledEpoxyModel(
         }
 
         // Parse ISO format to "Sun, 10/18"
-        val responseDate = OffsetDateTime.parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+        val responseDate = OffsetDateTime
+            .parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+            .atZoneSameInstant(
+                ZoneId.of(SimpleNFLApplication.zoneId))
         val formatter = DateTimeFormatter.ofPattern("E',' M/d")
         val formatDate = responseDate.format(formatter)
 
         // Parse ISO format to "4:30 PM"
-        val actual = OffsetDateTime.parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+        val actual = OffsetDateTime
+            .parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+            .atZoneSameInstant(
+                ZoneId.of(SimpleNFLApplication.zoneId))
         val formatter2 = DateTimeFormatter.ofPattern("h:mm a")
         val gameTime = actual.format(formatter2)
 

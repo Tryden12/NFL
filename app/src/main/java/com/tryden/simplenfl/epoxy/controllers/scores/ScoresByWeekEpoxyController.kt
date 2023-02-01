@@ -93,6 +93,12 @@ class ScoresByWeekEpoxyController(
                     ""
                 }
 
+                var broadcast = if (events[i].competitions[0].geoBroadcasts.isNotEmpty()) {
+                    events[i].competitions[0].geoBroadcasts[0].media.shortName
+                } else {
+                    ""
+                }
+
                 if (events[i].competitions[0].status.type.completed) {
                     // Add scores final item
                     ScoresFinalEpoxyModel(
@@ -119,9 +125,9 @@ class ScoresByWeekEpoxyController(
                             teamNameHome = scoresByWeekResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
                             recordAway = "",
                             recordHome = "",
-                            dateScheduled = scoresByWeekResponse!!.events[i].date,
-                            broadcast = scoresByWeekResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
-                            headline = scoresByWeekResponse!!.events[i].competitions[0].notes[0].headline
+                            dateScheduled = events[i].date,
+                            broadcast = broadcast,
+                            headline = headline
                         ).id(events[i].id).addTo(this)
                     } else {
                         ScoresScheduledEpoxyModel(
@@ -131,9 +137,9 @@ class ScoresByWeekEpoxyController(
                             teamNameHome = scoresByWeekResponse!!.events[i].competitions[0].competitors[0].team.shortDisplayName,
                             recordAway = scoresByWeekResponse!!.events[i].competitions[0].competitors[1].records?.get(0)?.summary.toString(),
                             recordHome = scoresByWeekResponse!!.events[i].competitions[0].competitors[0].records?.get(0)?.summary.toString(),
-                            dateScheduled = scoresByWeekResponse!!.events[i].date,
-                            broadcast = scoresByWeekResponse!!.events[i].competitions[0].geoBroadcasts[0].media.shortName,
-                            headline = scoresByWeekResponse!!.events[i].competitions[0].notes[0].headline
+                            dateScheduled = events[i].date,
+                            broadcast = broadcast,
+                            headline = headline
                         ).id(events[i].id).addTo(this)
                     }
                 }
