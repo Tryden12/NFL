@@ -1,5 +1,5 @@
 # SimpleNFL
-SimpleNFL is a Kotlin app utilizing the ESPN API to provide league news & scores and team news, rosters, and scores. 
+SimpleNFL is a Kotlin app utilizing the [ESPN API](https://gist.github.com/nntrn/ee26cb2a0716de0947a0a4e9a157bc1c#apisv2scoreboardheader) to provide league news, scores, and rosters. 
 
 ## Here is what is used:
   * MVVM
