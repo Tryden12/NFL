@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_player_header"
+    android:padding="4dp">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/playerImagecardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/playerImageImageView"
+            android:layout_width="160dp"
+            android:layout_height="119dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic[5]" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/firstNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/opensans_light"
+        android:gravity="left"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/playerImagecardView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Marquez"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/lastNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:gravity="left"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/firstNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/firstNameTextView"
+        tools:text="Valdez-Scantling"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/numberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="left"
+        android:maxLength="5"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/firstNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
+        tools:text="#11"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/positionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="left"
+        android:maxLength="5"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/numberTextView"
+        app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
+        tools:text="WR"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelHeightWeightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="left"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:text="HT/WT:"
+        android:textAllCaps="true"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/numberTextView"
+        app:layout_constraintTop_toBottomOf="@id/numberTextView"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/heightWeightTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:gravity="left"
+        android:maxLength="18"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/collegeTextView"
+        app:layout_constraintTop_toTopOf="@id/labelHeightWeightTextView"
+        tools:text="6'4  , 206 lbs"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelCollegeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="left"
+        android:maxLines="1"
+        android:text="College:"
+        android:textAllCaps="true"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/labelHeightWeightTextView"
+        app:layout_constraintTop_toBottomOf="@id/labelHeightWeightTextView"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/collegeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:gravity="left"
+        android:maxLength="18"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/labelCollegeTextView"
+        app:layout_constraintTop_toTopOf="@id/labelCollegeTextView"
+        tools:text="Texas A M"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

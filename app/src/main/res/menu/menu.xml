@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_bottom_menu_item_home_24"
+        android:checked="true"
+        android:title="@string/home">
+
+    </item>
+
+    <item
+        android:id="@+id/scoresFragment"
+        android:icon="@drawable/ic_bottom_menu_item_scores_24"
+        android:checked="false"
+        android:title="@string/scores">
+
+    </item>
+
+    <item
+        android:id="@+id/teamsListFragment"
+        android:icon="@drawable/ic_bottom_menu_item_team_24"
+        android:checked="false"
+        android:title="@string/teams">
+
+    </item>
+
+    <item
+        android:id="@+id/newsFragment"
+        android:icon="@drawable/ic_bottom_menu_item_news_24"
+        android:checked="false"
+        android:title="@string/news">
+
+    </item>
+
+</menu>

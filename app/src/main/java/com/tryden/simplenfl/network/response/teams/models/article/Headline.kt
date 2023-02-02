@@ -1,0 +1,31 @@
+package com.tryden.simplenfl.network.response.teams.models.article
+
+data class Headline(
+    val allowAMP: Boolean = false,
+    val allowAds: Boolean = false,
+    val allowComments: Boolean = false,
+    val allowCommerce: Boolean = false,
+    val allowSearch: Boolean = false,
+    val byline: String = "",
+    val categories: List<Category> = listOf(),
+    val dataSourceIdentifier: String = "",
+    val description: String = "",
+    val headline: String = "",
+    val id: Int = 0,
+    val images: List<Image> = listOf(),
+    val keywords: List<Any> = listOf(),
+    val lastModified: String = "",
+    val linkText: String = "",
+    val links: Links = Links(),
+    val metrics: List<Metric> = listOf(),
+    val nowId: String = "",
+    val originallyPosted: String = "",
+    val premium: Boolean = false,
+    val published: String = "",
+    val related: List<Related> = listOf(),
+    val source: String = "",
+    val story: String = "",
+    val title: String = "",
+    val type: String = "",
+    val video: List<Any> = listOf()
+)

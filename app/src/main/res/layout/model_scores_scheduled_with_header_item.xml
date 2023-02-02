@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_scores_header">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/scoresHeaderTextview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:lineHeight="28dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+        tools:text="Regular Season"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/awayLogoImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="25dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scoresHeaderTextview"
+            tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/teamNameAwayTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:maxLength="20"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/awayLogoImageView"
+        app:layout_constraintTop_toTopOf="@id/awayLogoImageView"
+        tools:text="Away Team"/>
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/homeLogoImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="@id/awayLogoImageView"
+            app:layout_constraintTop_toBottomOf="@id/teamNameAwayTextview"
+            tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/teamNameHomeTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:maxLength="20"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/homeLogoImageView"
+        app:layout_constraintTop_toTopOf="@id/homeLogoImageView"
+        tools:text="Home Team Team Team Team Team Team"/>
+
+    <!--     For games status: Pre    -->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/datePreGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:maxLines="1"
+        android:maxLength="13"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
+        app:layout_constraintTop_toTopOf="@id/teamNameAwayTextview"
+        android:visibility="visible"
+        tools:text="Sat, 10/21"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timePreGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:maxLines="1"
+        android:maxLength="10"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
+        app:layout_constraintTop_toBottomOf="@id/datePreGameItemTextview"
+        android:visibility="visible"
+        tools:text="4:30 PM"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/broadcastPreGameItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semi_bold"
+        android:maxLines="1"
+        android:maxLength="10"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/rightSideMarginEndView"
+        app:layout_constraintTop_toBottomOf="@id/timePreGameItemTextview"
+        android:visibility="visible"
+        tools:text="CBS"/>
+
+    <View
+        android:id="@+id/dividerVerticalScoresView"
+        android:layout_width="2px"
+        android:layout_height="40dp"
+        android:background="@color/light_grey"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@id/datePreGameItemTextview"
+        app:layout_constraintTop_toTopOf="@id/teamNameAwayTextview"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
+        />
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/recordAwayItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:maxLength="7"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
+        app:layout_constraintTop_toTopOf="@id/awayLogoImageView"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameAwayTextview"
+        tools:text="9-7-1"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/recordHomeItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:maxLength="7"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/dividerVerticalScoresView"
+        app:layout_constraintTop_toTopOf="@id/teamNameHomeTextview"
+        app:layout_constraintBottom_toBottomOf="@id/teamNameHomeTextview"
+        tools:text="14-3"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/descriptionGameBottomItemTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:maxLines="1"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/homeLogoImageView"
+        app:layout_constraintTop_toBottomOf="@id/homeLogoImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        tools:text="AFC Wild Card Playoffs"/>
+
+    <!--
+            View below acts as margin-bottom for when bottom
+            description visibility is set to "gone"
+    -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="@id/homeLogoImageView"
+        app:layout_constraintTop_toBottomOf="@id/homeLogoImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"
+        />
+
+    <!--
+           View below acts as margin-end for right side of scoreboard
+   -->
+
+    <View
+        android:id="@+id/rightSideMarginEndView"
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_marginEnd="100dp"
+        android:background="?attr/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
+        />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
