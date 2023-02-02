@@ -42,7 +42,7 @@ class TeamNewsTopHeadlinesEpoxyController(
         }
 
     // default to 5 headlines
-    var maxHeadlines: Int = 5
+    var maxHeadlines: Int = 8
         set(value) {
             field = value
         }

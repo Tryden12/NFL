@@ -38,7 +38,7 @@ class TeamNewsFragment : Fragment() {
 
         sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
             Log.e("TeamNewsFragment", "teamId: $teamId")
-            sharedViewModel.refreshNewsByTeamId(teamId = teamId, "20")
+            sharedViewModel.refreshNewsByTeamId(teamId = teamId, "50")
         }
         sharedViewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
             teamNewsEpoxyController.teamDetailsResponse = response
@@ -53,7 +53,7 @@ class TeamNewsFragment : Fragment() {
                 ).show()
             } else {
                teamNewsEpoxyController.teamNewsResponse = response
-                teamNewsEpoxyController.maxHeadlines = 5
+                teamNewsEpoxyController.maxHeadlines = 8
             }
         }
 
