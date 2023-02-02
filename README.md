@@ -13,8 +13,8 @@ SimpleNFL is a Kotlin app utilizing the ESPN API to provide league news & scores
   * ViewPager2
 
 ## Screenshots:
-![Home](/screenshots/home.png | width=100)
-![Article](/screenshots/article.png)
+![Home|200](/screenshots/home.png)
+![Article|200](/screenshots/article.png)
 ![Scores](/screenshots/scores_week_div_rd.png)
 ![Team](/screenshots/team_chiefs.png)
 ![Roster](/screenshots/team_chiefs_roster.png)
