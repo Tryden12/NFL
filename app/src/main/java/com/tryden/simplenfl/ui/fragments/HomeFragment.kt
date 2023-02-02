@@ -8,33 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
+import com.tryden.simplenfl.databinding.FragmentHomeBinding
 import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.scores.home.HomeScoresEpoxyController
 
 class HomeFragment : Fragment() {
 
+    private lateinit var binding: FragmentHomeBinding
+
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
-
     private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController(::onArticleSelected)
     private val epoxyControllerScores = HomeScoresEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyHomeTopHeadlinesRecyclerView= view.findViewById<EpoxyRecyclerView>(R.id.epoxy_home_top_headlines_RecyclerView)
-        val epoxyHomeScoresRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_home_scores_RecyclerView)
+        val epoxyHomeTopHeadlinesRecyclerView = binding.epoxyHomeTopHeadlinesRecyclerView
+        val epoxyHomeScoresRecyclerView = binding.epoxyHomeScoresRecyclerView
 
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response

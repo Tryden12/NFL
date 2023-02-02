@@ -12,23 +12,23 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.airbnb.epoxy.EpoxyRecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
+import com.tryden.simplenfl.databinding.FragmentTeamBinding
 import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
 class TeamFragment : Fragment() {
 
-    private var tabTitles = arrayOf("Scores","Roster", "News")
+    private lateinit var binding: FragmentTeamBinding
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
-
     private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
+    private var tabTitles = arrayOf("Scores","Roster", "News")
+
 
     private lateinit var teamAdapter: TeamViewPagerAdapter
     private lateinit var teamViewPager: ViewPager2
@@ -38,19 +38,18 @@ class TeamFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_team, container, false)
+    ): View {
+        binding = FragmentTeamBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupComponents()
     }
 
     private fun setupComponents() {
-        val epoxyTeamRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_RecyclerView)
+        val epoxyTeamRecyclerView = binding.epoxyTeamRecyclerView
 
         sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
             sharedViewModel.refreshTeam(teamId = teamId.toInt())
@@ -70,32 +69,25 @@ class TeamFragment : Fragment() {
             // status bar
             requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
-//            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//            activity?.window?.setBackgroundDrawable(ColorDrawable(Color.parseColor(teamColor)))
             // header
-            epoxyTeamRecyclerView?.background = getTeamColorGradient(teamColor)
+            epoxyTeamRecyclerView.background = getTeamColorGradient(teamColor)
             // Setup tab layout
             setupTabLayoutAndViewPager(teamColor)
 
         }
-
-        epoxyTeamRecyclerView?.setControllerAndBuildModels(epoxyControllerTeam)
+        epoxyTeamRecyclerView.setControllerAndBuildModels(epoxyControllerTeam)
     }
 
     private fun setupTabLayoutAndViewPager(teamColor: String) {
         teamAdapter = TeamViewPagerAdapter(childFragmentManager, lifecycle)
-        teamViewPager = view?.findViewById(R.id.teamViewPager)!!
-        teamTabLayout = view?.findViewById(R.id.teamsTabLayout)!!
-        teamViewPager?.adapter = teamAdapter
+        teamViewPager = binding.teamViewPager
+        teamTabLayout = binding.teamsTabLayout
+        teamViewPager.adapter = teamAdapter
 
-        if (teamTabLayout != null) {
-            teamTabLayout.setBackgroundColor(Color.parseColor(teamColor))
-            if (teamViewPager != null) {
-                TabLayoutMediator(teamTabLayout, teamViewPager) { tab, position ->
-                    tab.text = tabTitles[position]
-                }.attach()
-            }
-        }
+        teamTabLayout.setBackgroundColor(Color.parseColor(teamColor))
+        TabLayoutMediator(teamTabLayout, teamViewPager) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
     }
 
     private fun getTeamColorGradient(teamColor: String) : GradientDrawable{

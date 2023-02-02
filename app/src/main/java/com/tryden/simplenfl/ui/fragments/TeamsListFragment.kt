@@ -8,31 +8,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
+import com.tryden.simplenfl.databinding.FragmentTeamsListBinding
 import com.tryden.simplenfl.epoxy.controllers.teams.TeamListHomeEpoxyController
 
 
 class TeamsListFragment : Fragment() {
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var binding: FragmentTeamsListBinding
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected) // function pointer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_teams_list, container, false)
+    ): View {
+        binding = FragmentTeamsListBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val epoxyTeamListRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_team_list_RecyclerView)
+        val epoxyTeamListRecyclerView = binding.epoxyTeamListRecyclerView
         sharedViewModel.allTeamsListLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTeamList.teamsListResponse = response
         }

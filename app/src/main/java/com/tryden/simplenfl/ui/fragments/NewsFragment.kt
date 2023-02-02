@@ -8,32 +8,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
+import com.tryden.simplenfl.databinding.FragmentNewsBinding
 import com.tryden.simplenfl.epoxy.controllers.news.NewsTopHeadlinesEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 
 class NewsFragment : Fragment() {
 
+    private lateinit var binding: FragmentNewsBinding
+
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
-
     private val epoxyControllerTopHeadlines = NewsTopHeadlinesEpoxyController(::onArticleSelected)
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+    ): View {
+        binding = FragmentNewsBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyNewsTopHeadlinesRecyclerView= view.findViewById<EpoxyRecyclerView>(R.id.epoxy_news_top_headlines_RecyclerView)
+        val epoxyNewsTopHeadlinesRecyclerView= binding.epoxyNewsTopHeadlinesRecyclerView
 
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
@@ -42,7 +40,6 @@ class NewsFragment : Fragment() {
         sharedViewModel.refreshBreakingNews("","100")
 
         epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
-
     }
 
     private fun onArticleSelected(articleId: String) {

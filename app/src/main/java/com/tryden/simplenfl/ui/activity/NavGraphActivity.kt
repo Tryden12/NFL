@@ -9,8 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
+import com.tryden.simplenfl.databinding.ActivityNavGraphBinding
 
 class NavGraphActivity: AppCompatActivity() {
+
+    private lateinit var binding: ActivityNavGraphBinding
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
@@ -19,7 +22,8 @@ class NavGraphActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nav_graph)
+        binding = ActivityNavGraphBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
         window.statusBarColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.black)
 
@@ -37,7 +41,7 @@ class NavGraphActivity: AppCompatActivity() {
 
     // Handles bottom nav actions based off current fragment
     private fun bottomNavActions() {
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnItemSelectedListener { item ->
             val currentFragmentId = navController.currentDestination?.id
 

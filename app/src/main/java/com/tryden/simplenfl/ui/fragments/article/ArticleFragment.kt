@@ -11,26 +11,26 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.airbnb.epoxy.EpoxyRecyclerView
-import com.google.android.material.appbar.MaterialToolbar
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
+import com.tryden.simplenfl.databinding.FragmentArticleBinding
 import com.tryden.simplenfl.epoxy.controllers.article.ArticleEpoxyController
-import kotlin.reflect.jvm.internal.impl.builtins.StandardNames.FqNames.collection
 
 
 class ArticleFragment : Fragment() {
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var binding: FragmentArticleBinding
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val epoxyControllerArticle = ArticleEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_article, container, false)
+    ): View {
+
+        binding = FragmentArticleBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class ArticleFragment : Fragment() {
     }
 
     private fun epoxySetup() {
-        val epoxyArticleRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_article_RecyclerView)
+        val epoxyArticleRecyclerView = binding.epoxyArticleRecyclerView
         sharedViewModel.onArticleSelectedLiveData.observe(viewLifecycleOwner) { articleId ->
             Log.e("ArticleFragment", "onArticleSelected: $articleId" )
 
@@ -52,15 +52,15 @@ class ArticleFragment : Fragment() {
                 Log.e("ArticleFragment", "onViewCreated: ${response!!.headlines[0].headline}")
             }
         }
-        epoxyArticleRecyclerView?.setControllerAndBuildModels(epoxyControllerArticle)
+        epoxyArticleRecyclerView.setControllerAndBuildModels(epoxyControllerArticle)
     }
 
     private fun topToolbarSetup() {
-        val toolbar = view?.findViewById<MaterialToolbar>(R.id.topMenuMaterialToolbar)
-        toolbar?.setNavigationOnClickListener {
+        val toolbar = binding.topMenuMaterialToolbar
+        toolbar.setNavigationOnClickListener {
             (activity as AppCompatActivity?)!!.onBackPressed()
         }
-        toolbar?.setOnMenuItemClickListener { menuItem ->
+        toolbar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.shareArticleTopBarMenuItem -> {
                     // Share the url to the article
@@ -80,7 +80,6 @@ class ArticleFragment : Fragment() {
         sendIntent.type = "image/*"
         sendIntent.clipData = ClipData.newRawUri("", uri)
         sendIntent.putExtra(Intent.EXTRA_TITLE, "title")
-
         sendIntent.putExtra(Intent.EXTRA_TEXT,"http://now.core.api.espn.com/v1/sports/news/35539696" )
 
         startActivity(Intent.createChooser(sendIntent, null))

@@ -6,16 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.EpoxyRecyclerView
-import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.adapters.HorizontalWeekMenuAdapter
 import com.tryden.simplenfl.databinding.FragmentScoresBinding
 import com.tryden.simplenfl.domain.models.scores.Scores.EntryWeek
-import com.tryden.simplenfl.domain.models.scoresmenu.Week
 import com.tryden.simplenfl.epoxy.controllers.scores.ScoresByWeekEpoxyController
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
@@ -26,54 +22,39 @@ import java.time.format.DateTimeFormatter
 
 class ScoresFragment : Fragment() {
 
-    private var binding: FragmentScoresBinding? = null
-
+    private lateinit var binding: FragmentScoresBinding
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
     private val epoxyControllerScores = ScoresByWeekEpoxyController(::onWeekSelected)
-
     private lateinit var weeksMenuAdapter: HorizontalWeekMenuAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_scores, container, false)
+    ): View {
         binding = FragmentScoresBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
 
-        val epoxyScoresRecyclerView = view.findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_by_week_RecyclerView)
+        val epoxyScoresRecyclerView = binding.epoxyScoresByWeekRecyclerView
         // refresh scoreboard
         sharedViewModel.scoresCalendarLiveData.observe(viewLifecycleOwner) { response ->
-//            epoxyControllerScores.calendarResponse = response
-//            epoxyControllerScores.useCurrentTimeIso = true
-
             // get the weeks list
             val weeks = createWeeksList(response)
-
             weeksMenuAdapter.differ.submitList(weeks)
             weeksMenuAdapter.notifyDataSetChanged()
-
         }
-        sharedViewModel.refreshScoresCalendar("1")
-
+        sharedViewModel.refreshScoresCalendar("1") // default to week 1
         // refresh scoreboard
         sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerScores.scoresByWeekResponse = response
-
         }
         sharedViewModel.refreshScoreboard("20220908-20220914", "1000")
         epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
-
-//        Log.e("ScoresFragment", "getCurrentWeek: ${getCurrentTimeIso()}")
-
     }
 
     private fun setupRecyclerView() = binding?.weeksListRecyclerView?.apply {
@@ -90,12 +71,11 @@ class ScoresFragment : Fragment() {
             // refresh scoreboard
             sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
                 epoxyControllerScores.scoresByWeekResponse = response
-
             }
             sharedViewModel.refreshScoreboard(range, "1000")
 
-            val epoxyScoresRecyclerView = view?.findViewById<EpoxyRecyclerView>(R.id.epoxy_scores_by_week_RecyclerView)
-            epoxyScoresRecyclerView?.setControllerAndBuildModels(epoxyControllerScores)
+            val epoxyScoresRecyclerView = binding.epoxyScoresByWeekRecyclerView
+            epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
         }
 
     }
@@ -127,7 +107,7 @@ class ScoresFragment : Fragment() {
         return items
     }
 
-    fun getWeekRange(startIso: String, endIso: String): String {
+    private fun getWeekRange(startIso: String, endIso: String): String {
         val formatter = DateTimeFormatter.ofPattern("uMMdd")
         val startDateOffSet = OffsetDateTime.parse(startIso, DateTimeFormatter.ISO_DATE_TIME)
         val endDateOffSet = OffsetDateTime.parse(endIso, DateTimeFormatter.ISO_DATE_TIME)
@@ -135,13 +115,11 @@ class ScoresFragment : Fragment() {
         val start = startDateOffSet.format(formatter)
         val end = endDateOffSet.format(formatter)
 
-
         return "$start-$end"
     }
 
     private fun getCurrentTimeIso(): OffsetDateTime {
         val currentTime = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME)
         return OffsetDateTime.parse(currentTime, DateTimeFormatter.ISO_DATE_TIME)
-
     }
 }
