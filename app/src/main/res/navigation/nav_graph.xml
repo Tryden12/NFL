@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/teamsListFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.TeamsListFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.teams2.TeamsListFragment2"
         android:label="fragment_teams_list"
         tools:layout="@layout/fragment_teams_list" >
 
