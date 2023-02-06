@@ -93,8 +93,8 @@ class ScoresByWeekEpoxyController(
                     ""
                 }
 
-                var broadcast = if (events[i].competitions[0].geoBroadcasts.isNotEmpty()) {
-                    events[i].competitions[0].geoBroadcasts[0].media.shortName
+                var broadcast = if (events[i].competitions[0].broadcasts.isNotEmpty()) {
+                    events[i].competitions[0].broadcasts[0].names[0]
                 } else {
                     ""
                 }
