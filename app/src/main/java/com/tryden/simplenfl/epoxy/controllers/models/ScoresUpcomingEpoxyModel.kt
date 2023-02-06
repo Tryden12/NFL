@@ -6,12 +6,11 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresScheduledItemBinding
-import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-data class ScoresScheduledEpoxyModel(
+data class ScoresUpcomingEpoxyModel(
     val logoAway: String,
     val logoHome: String,
     val teamNameAway: String,

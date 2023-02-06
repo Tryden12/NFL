@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.ScoresFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.scores.ScoresFragment"
         android:label="fragment_scores"
         tools:layout="@layout/fragment_scores" >
 

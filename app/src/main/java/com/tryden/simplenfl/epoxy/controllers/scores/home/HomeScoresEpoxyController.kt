@@ -9,7 +9,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalWithHeaderItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
-import com.tryden.simplenfl.epoxy.controllers.models.ScoresScheduledEpoxyModel
+import com.tryden.simplenfl.epoxy.controllers.models.ScoresUpcomingEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
@@ -68,7 +68,7 @@ class HomeScoresEpoxyController: EpoxyController() {
                         }
 
                         // Add scores upcoming item
-                        ScoresScheduledEpoxyModel(
+                        ScoresUpcomingEpoxyModel(
                             logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -92,7 +92,7 @@ class HomeScoresEpoxyController: EpoxyController() {
                         }
 
                         // Add scores upcoming item
-                        ScoresScheduledEpoxyModel(
+                        ScoresUpcomingEpoxyModel(
                             logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,

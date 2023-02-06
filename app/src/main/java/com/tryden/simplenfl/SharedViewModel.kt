@@ -88,9 +88,9 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    fun refreshScoreboard(dates: String, limit: String) {
+    fun refreshScores(dates: String, limit: String) {
         viewModelScope.launch {
-            val response = repository.getScoreboardRange(dates, limit)
+            val response = repository.getScoresRange(dates, limit)
 
             _scoreboardByRangeLiveData.postValue(response)
         }

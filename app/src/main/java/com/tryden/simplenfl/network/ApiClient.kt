@@ -31,8 +31,8 @@ class ApiClient(
         return safeApiCall { nflService.getRosterByTeamId(teamId) }
     }
 
-    suspend fun getScoreboardRange(dates: String, limit: String) : SimpleResponse<ScoreboardResponse> {
-        return safeApiCall { nflService.getScoreboardRange(dates, limit) }
+    suspend fun getScoresRange(dates: String, limit: String) : SimpleResponse<ScoreboardResponse> {
+        return safeApiCall { nflService.getScoresRange(dates, limit) }
     }
 
     suspend fun getScoresByWeek(week: String) : SimpleResponse<ScoreboardResponse> {

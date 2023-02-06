@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
 
         }
         sharedViewModel.refreshBreakingNews("", "50")
-        sharedViewModel.refreshScoreboard("20230114-20230212", "")
+        sharedViewModel.refreshScores("20230114-20230212", "")
 
         epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
         epoxyHomeScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)

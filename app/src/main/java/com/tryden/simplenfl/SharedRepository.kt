@@ -53,8 +53,8 @@ class SharedRepository {
     }
 
     // Get scoreboard by date range
-    suspend fun getScoreboardRange(dates: String, limit: String): ScoreboardResponse? {
-        val request = NetworkLayer.apiClient.getScoreboardRange(dates, limit)
+    suspend fun getScoresRange(dates: String, limit: String): ScoreboardResponse? {
+        val request = NetworkLayer.apiClient.getScoresRange(dates, limit)
 
         if (request.failed || !request.isSuccessful) {
             return null

@@ -66,7 +66,7 @@ class TeamScoresEpoxyController: EpoxyController() {
                             }
 
                             // Add scores upcoming item
-                            ScoresScheduledEpoxyModel(
+                            ScoresUpcomingEpoxyModel(
                                     logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                     logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                                     teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -96,7 +96,7 @@ class TeamScoresEpoxyController: EpoxyController() {
                                 headerTopFilled = true
                             }
                             // Add scores final item
-                            ScoresFinalEpoxyModel(
+                            ScoresCompletedEpoxyModel(
                                     logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                     logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                                     teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -146,7 +146,7 @@ class TeamScoresEpoxyController: EpoxyController() {
                             }
 
                             // Add scores upcoming item
-                            ScoresScheduledEpoxyModel(
+                            ScoresUpcomingEpoxyModel(
                                 logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                 logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                                 teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -181,7 +181,7 @@ class TeamScoresEpoxyController: EpoxyController() {
                             }
 
                             // Add scores final item
-                            ScoresFinalEpoxyModel(
+                            ScoresCompletedEpoxyModel(
                                 logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                                 logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                                 teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,

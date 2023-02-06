@@ -101,7 +101,7 @@ class ScoresByWeekEpoxyController(
 
                 if (events[i].competitions[0].status.type.completed) {
                     // Add scores final item
-                    ScoresFinalEpoxyModel(
+                    ScoresCompletedEpoxyModel(
                         logoAway = events[i].competitions[0].competitors[1].team.logo.toString(),
                         logoHome = events[i].competitions[0].competitors[0].team.logo.toString(),
                         teamNameAway =events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -118,7 +118,7 @@ class ScoresByWeekEpoxyController(
                         && events[i].competitions[0].notes[0].headline.contains("pro bowl", ignoreCase = true) ) {
 
                         // Add pro bowl
-                        ScoresScheduledEpoxyModel(
+                        ScoresUpcomingEpoxyModel(
                             logoAway = scoresByWeekResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             logoHome = scoresByWeekResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             teamNameAway = scoresByWeekResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -130,7 +130,7 @@ class ScoresByWeekEpoxyController(
                             headline = headline
                         ).id(events[i].id).addTo(this)
                     } else {
-                        ScoresScheduledEpoxyModel(
+                        ScoresUpcomingEpoxyModel(
                             logoAway = scoresByWeekResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             logoHome = scoresByWeekResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             teamNameAway = scoresByWeekResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,

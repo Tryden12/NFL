@@ -10,7 +10,7 @@ import com.tryden.simplenfl.databinding.ModelScoresFinalItemBinding
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-data class ScoresFinalEpoxyModel(
+data class ScoresCompletedEpoxyModel(
     val logoAway: String,
     val logoHome: String,
     val teamNameAway: String,

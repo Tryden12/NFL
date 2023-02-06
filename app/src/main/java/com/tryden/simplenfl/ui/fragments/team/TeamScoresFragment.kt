@@ -39,7 +39,7 @@ class TeamScoresFragment : Fragment() {
         sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
             epoxyControllerScores.onTeamSelected = teamId
         }
-        sharedViewModel.refreshScoreboard("20220914-20230212","1000")
+        sharedViewModel.refreshScores("20220914-20230212","1000")
         epoxyScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
 
     }
