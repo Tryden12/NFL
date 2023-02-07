@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.tryden.simplenfl.databinding.ModelScoresCarouselDateItemBinding
 import com.tryden.simplenfl.domain.models.scores.Scores.EntryWeek
+import com.tryden.simplenfl.ui.fragments.scores.calendar.UiCalendar
 
 
 class HorizontalWeekMenuAdapter(
@@ -18,27 +19,27 @@ class HorizontalWeekMenuAdapter(
 
     inner class CustomViewHolder(val binding: ModelScoresCarouselDateItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<EntryWeek>() {
-        override fun areItemsTheSame(oldItem: EntryWeek, newItem: EntryWeek) : Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<UiCalendar.UiWeek>() {
+        override fun areItemsTheSame(oldItem: UiCalendar.UiWeek, newItem: UiCalendar.UiWeek) : Boolean {
             return oldItem.range == newItem.range
         }
 
-        override fun areContentsTheSame(oldItem: EntryWeek, newItem: EntryWeek) : Boolean {
+        override fun areContentsTheSame(oldItem: UiCalendar.UiWeek, newItem: UiCalendar.UiWeek) : Boolean {
             return oldItem == newItem
         }
     } // end of diffCallback
 
     val differ = AsyncListDiffer(this, diffCallback)
 
-    var weeks: MutableList<EntryWeek>
+    var weeks: MutableList<UiCalendar.UiWeek>
         get() = differ.currentList
         set(value) {differ.submitList(value)}
 
-    fun updateWeeksList(newItems: MutableList<EntryWeek>) {
-        weeks.clear()
-        weeks.addAll(newItems)
-        notifyDataSetChanged()
-    }
+//    fun updateWeeksList(newItems: MutableList<UiCalendar.UiWeek>) {
+//        weeks.clear()
+//        weeks.addAll(newItems)
+//        notifyDataSetChanged()
+//    }
 
     var selectedIndex = 0
 
@@ -53,8 +54,8 @@ class HorizontalWeekMenuAdapter(
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.binding.apply {
             val week = weeks[position]
-            labelTextView.text = week.label
-            datesTextView.text = week.dates
+            labelTextView.text = week.shortLabel
+            datesTextView.text = week.formattedDates
             root.setOnClickListener {
                 onWeekSelected(weeks[position].range)
                 selectedIndex = position

@@ -24,7 +24,11 @@ class UiEventMapper {
                     UiCompetitorMapper().buildFrom(competitor)
                 },
                 broadcast = listOf(UiEvent.UiBroadcast(
-                    shortName = event.competitions[0].geoBroadcasts[0].media.shortName
+                    shortName = if (event.competitions[0].geoBroadcasts.isNotEmpty() && event.competitions[0].geoBroadcasts[0].media.shortName.isNotEmpty()) {
+                        event.competitions[0].geoBroadcasts[0].media.shortName
+                    } else {
+                        ""
+                    }
                 )),
                 notes = listOf(UiEvent.UiNote(
                     headline = if (event.competitions[0].notes.isNotEmpty() && event.competitions[0].notes[0].headline.isNotEmpty()) {
