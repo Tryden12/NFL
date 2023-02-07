@@ -62,9 +62,9 @@ data class ScoresCompletedEpoxyModel(
         pointsHomeItemTextview.text = pointsHome
 
         // Parse ISO format to "E, M/d"
-        val actual = OffsetDateTime.parse(datePlayed, DateTimeFormatter.ISO_DATE_TIME)
-        val formatter = DateTimeFormatter.ofPattern("E',' M/d")
-        val formatDateTime = actual.format(formatter)
+//        val actual = OffsetDateTime.parse(datePlayed, DateTimeFormatter.ISO_DATE_TIME)
+//        val formatter = DateTimeFormatter.ofPattern("E',' M/d")
+//        val formatDateTime = actual.format(formatter)
 
         if (pointsAway.toInt() > pointsHome.toInt()) {
             winnerArrowAwayImageView.visibility = View.VISIBLE
@@ -80,7 +80,7 @@ data class ScoresCompletedEpoxyModel(
             teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,
                 R.color.grey))
 
-            datePostGameItemTextview.text = formatDateTime.toString()
+            datePostGameItemTextview.text = datePlayed
 
 
         } else if (pointsAway.toInt() < pointsHome.toInt()) {
@@ -97,7 +97,7 @@ data class ScoresCompletedEpoxyModel(
             teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,
                 R.color.white))
 
-            datePostGameItemTextview.text = formatDateTime.toString()
+            datePostGameItemTextview.text = datePlayed
 
         } else { // cancelled or postponed
             winnerArrowAwayImageView.visibility = View.INVISIBLE

@@ -4,9 +4,7 @@ import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
 import com.tryden.simplenfl.epoxy.controllers.models.*
 
-class ScoresByWeekEpoxyController2(
-    private val onWeekSelected: (String) -> Unit
-): TypedEpoxyController<List<UiEvent>>() {
+class ScoresByWeekEpoxyController2(): TypedEpoxyController<List<UiEvent>>() {
 
     private val TAG = ScoresByWeekEpoxyController2::class.java.simpleName
 

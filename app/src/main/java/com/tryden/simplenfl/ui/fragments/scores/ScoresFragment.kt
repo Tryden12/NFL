@@ -25,15 +25,12 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val viewModel by viewModels<ScoresViewModel>()
-    private val epoxyControllerScoresByWeek = ScoresByWeekEpoxyController2 { selectedWeek ->
-
-        // todo
-    }
+    private val epoxyControllerScoresByWeek = ScoresByWeekEpoxyController2()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentScoresBinding.bind(view)
-        setupRecyclerView()
+        setupCalendarRecyclerView()
 
         /** Todo: convert to viewModel, away from sharedViewModel **/
         sharedViewModel.scoresCalendarLiveData.observe(viewLifecycleOwner) { response ->
@@ -56,7 +53,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
         viewModel.refreshScores("20220908-20220914", "50")
     }
 
-    private fun setupRecyclerView() = binding?.weeksListRecyclerView?.apply {
+    private fun setupCalendarRecyclerView() = binding?.weeksListRecyclerView?.apply {
         weeksMenuAdapter = HorizontalWeekMenuAdapter(::onWeekSelected)
         adapter = weeksMenuAdapter
         layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
