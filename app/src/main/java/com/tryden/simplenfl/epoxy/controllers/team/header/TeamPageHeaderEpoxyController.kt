@@ -5,8 +5,7 @@ import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelTeamPageHeaderBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.LoadingNoCircleEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.LoadingNoCircleEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
 
 class TeamPageHeaderEpoxyController: EpoxyController() {

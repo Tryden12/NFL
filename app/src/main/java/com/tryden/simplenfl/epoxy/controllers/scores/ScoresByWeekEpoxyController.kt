@@ -3,8 +3,11 @@ package com.tryden.simplenfl.epoxy.controllers.scores
 import android.util.Log
 import com.airbnb.epoxy.EpoxyController
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.*
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.ScoresCompletedEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.ScoresUpcomingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
 import java.time.ZoneId

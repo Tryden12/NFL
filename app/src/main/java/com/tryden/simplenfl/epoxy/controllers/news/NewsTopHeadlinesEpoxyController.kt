@@ -6,10 +6,9 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 
 class NewsTopHeadlinesEpoxyController(
@@ -67,7 +66,8 @@ class NewsTopHeadlinesEpoxyController(
                     SectionHeaderEpoxyModel(
                         title = "Top Headlines",
                         logoVisible = true,
-                        usePlaceholderLogo = true, /** Use NFL Logo **/
+                        usePlaceholderLogo = true,
+                        /** Use NFL Logo **/ /** Use NFL Logo **/
                         logoUrl = ""
                     ).id("home_top_headlines").addTo(this)
                     headerTopFilled = true

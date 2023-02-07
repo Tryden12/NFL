@@ -5,7 +5,7 @@ import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelPlayerHeaderBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
 
 class PlayerEpoxyController: EpoxyController() {

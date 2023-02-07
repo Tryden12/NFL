@@ -7,7 +7,9 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.databinding.ModelTeamsListVerticalItemBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.teams.TeamsListVerticalEpoxyModel
+import com.tryden.simplenfl.epoxy.models.teams.TitleTeamsListEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
 
 class TeamListHomeEpoxyController(
@@ -50,7 +52,7 @@ class TeamListHomeEpoxyController(
 
         for (i in teamsListResponse!!.sports[0].leagues[0].teams.indices) {
 
-            TeamVerticalListEpoxyModel(
+            TeamsListVerticalEpoxyModel(
                 teamId = teamsListResponse!!.sports[0].leagues[0].teams[i].team.id.toInt(),
                 logoUrl = teamsListResponse!!.sports[0].leagues[0].teams[i].team.logos[0].href,
                 teamName = teamsListResponse!!.sports[0].leagues[0].teams[i].team.shortDisplayName,
@@ -60,51 +62,4 @@ class TeamListHomeEpoxyController(
         }
     }
 
-    // Add list header
-    data class TitleTeamsListEpoxyModel(
-        val useLogo: Boolean,
-        val title: String
-    ): ViewBindingKotlinModel<ModelSectionHeaderBinding>
-        (R.layout.model_section_header) {
-
-        override fun ModelSectionHeaderBinding.bind() {
-            if (!useLogo) {
-                logoSectionImageView.visibility = View.GONE
-            } else {
-                logoSectionImageView.setImageResource(R.drawable.placeholder_logo)
-            }
-            titleSectionTextView.text = title
-        }
-    }
-
-    // Add teams
-    data class TeamVerticalListEpoxyModel(
-        val teamId: Int,
-        val logoUrl: String,
-        val teamName: String,
-        val onTeamSelected: (Int) -> Unit
-    ): ViewBindingKotlinModel<ModelTeamsListVerticalItemBinding>
-        (R.layout.model_teams_list_vertical_item) {
-
-        override fun ModelTeamsListVerticalItemBinding.bind() {
-
-            if (logoUrl.isEmpty()) {
-                Picasso.get()
-                    .load(R.drawable.placeholder_logo)
-                    .placeholder(R.drawable.placeholder_logo)
-                    .error(R.drawable.placeholder_logo)
-                    .into(logoImageView)
-            } else {
-                Picasso.get().load(logoUrl).into(logoImageView)
-            }
-            teamNameTextView.text = teamName
-
-
-
-            // Click listener for teams pages
-            root.setOnClickListener {
-                onTeamSelected(teamId)
-            }
-        }
-    }
 }

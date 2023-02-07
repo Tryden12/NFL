@@ -1,17 +1,12 @@
 package com.tryden.simplenfl.epoxy.controllers.team.news
 
-import android.view.View
 import com.airbnb.epoxy.EpoxyController
-import com.squareup.picasso.Picasso
 import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
-import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderCenteredEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
 import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
 
@@ -74,7 +69,8 @@ class TeamNewsTopHeadlinesEpoxyController(
                     SectionHeaderEpoxyModel(
                         title = "Top Headlines",
                         logoVisible = true,
-                        usePlaceholderLogo = false, /** Use Team Logo **/
+                        usePlaceholderLogo = false,
+                        /** Use Team Logo **/ /** Use Team Logo **/
                         logoUrl = teamDetailsResponse!!.team.logos[0].href
                     ).id("team_top_headlines").addTo(this)
                     headerTopFilled = true

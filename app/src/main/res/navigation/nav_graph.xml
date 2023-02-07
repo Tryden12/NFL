@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/teamsListFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.teams2.TeamsListFragment2"
+        android:name="com.tryden.simplenfl.ui.fragments.TeamsListFragment"
         android:label="fragment_teams_list"
         tools:layout="@layout/fragment_teams_list" >
 
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.scores.ScoresFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.ScoresFragment"
         android:label="fragment_scores"
         tools:layout="@layout/fragment_scores" >
 

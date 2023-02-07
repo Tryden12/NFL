@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <activity android:name=".ui.activity.NavGraphActivity"
+        <activity android:name=".ui.activities.NavGraphActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

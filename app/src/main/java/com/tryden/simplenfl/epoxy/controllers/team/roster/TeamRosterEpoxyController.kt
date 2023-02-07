@@ -8,7 +8,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelRosterHeaderBinding
 import com.tryden.simplenfl.databinding.ModelRosterPlayerItemBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
 
 class TeamRosterEpoxyController: EpoxyController() {

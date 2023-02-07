@@ -12,10 +12,9 @@ import com.tryden.simplenfl.databinding.ModelArticleHeaderImageBinding
 import com.tryden.simplenfl.databinding.ModelArticleStoryBinding
 import com.tryden.simplenfl.databinding.ModelArticleTitleBinding
 import com.tryden.simplenfl.databinding.ModelDividerSolidGreyBinding
-import com.tryden.simplenfl.epoxy.controllers.LoadingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
 import java.time.OffsetDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class ArticleEpoxyController: EpoxyController() {

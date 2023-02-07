@@ -9,9 +9,9 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalWithHeaderItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
-import com.tryden.simplenfl.epoxy.controllers.models.ScoresUpcomingEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionBottomEpoxyModel
-import com.tryden.simplenfl.epoxy.controllers.models.SectionHeaderCenteredEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.ScoresUpcomingEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.epoxy.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
