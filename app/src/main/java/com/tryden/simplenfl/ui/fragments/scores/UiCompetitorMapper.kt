@@ -14,7 +14,12 @@ class UiCompetitorMapper {
                 shortDisplayName = competitors.team.shortDisplayName,
                 abbreviation = competitors.team.abbreviation,
                 logo = competitors.team.logo
-            )
+            ),
+            record = listOf(UiEvent.UiRecord(
+                name = competitors.records!![0].name,
+                type = competitors.records[0].type,
+                record = competitors.records[0].summary
+            ))
         )
     }
 }

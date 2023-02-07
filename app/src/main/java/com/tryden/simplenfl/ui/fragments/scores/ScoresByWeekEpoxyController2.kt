@@ -82,8 +82,8 @@ class ScoresByWeekEpoxyController2(): TypedEpoxyController<List<UiEvent>>() {
                     logoHome = uiEvent.competitions[0].teams[0].team.logo.toString(),
                     teamNameAway = uiEvent.competitions[0].teams[1].team.shortDisplayName,
                     teamNameHome = uiEvent.competitions[0].teams[0].team.shortDisplayName,
-                    recordAway = "",
-                    recordHome = "",
+                    recordAway = uiEvent.competitions[0].teams[1].record[0].record,
+                    recordHome = uiEvent.competitions[0].teams[0].record[0].record,
                     dateScheduled = uiEvent.date,
                     broadcast = uiEvent.competitions[0].broadcast[0].shortName,
                     headline = uiEvent.competitions[0].notes[0].headline

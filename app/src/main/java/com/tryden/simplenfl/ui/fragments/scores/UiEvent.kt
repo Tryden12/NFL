@@ -29,6 +29,13 @@ data class UiEvent(
         val winner: Boolean?,
         val score: String,
         val team: UiEventTeam,
+        val record: List<UiRecord>
+    )
+
+    data class UiRecord(
+        val name: String,
+        val type: String,
+        val record: String
     )
 
     data class UiNote(
