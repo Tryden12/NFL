@@ -66,27 +66,20 @@ data class ScoresUpcomingEpoxyModel(
             descriptionGameBottomItemTextview.text = headline
         }
 
-        // Parse ISO format to "Sun, 10/18"
-        val responseDate = OffsetDateTime
-            .parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
-            .atZoneSameInstant(
-                ZoneId.of(SimpleNFLApplication.zoneId))
-        val formatter = DateTimeFormatter.ofPattern("E',' M/d")
-        val formatDate = responseDate.format(formatter)
 
         // Parse ISO format to "4:30 PM"
-        val actual = OffsetDateTime
-            .parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
-            .atZoneSameInstant(
-                ZoneId.of(SimpleNFLApplication.zoneId))
-        val formatter2 = DateTimeFormatter.ofPattern("h:mm a")
-        val gameTime = actual.format(formatter2)
+//        val actual = OffsetDateTime
+//            .parse(dateScheduled, DateTimeFormatter.ISO_DATE_TIME)
+//            .atZoneSameInstant(
+//                ZoneId.of(SimpleNFLApplication.zoneId))
+//        val formatter2 = DateTimeFormatter.ofPattern("h:mm a")
+//        val gameTime = actual.format(formatter2) // todo put in mapper?
 
         // Right side of item
         recordAwayItemTextview.text = recordAway
         recordHomeItemTextview.text = recordHome
-        datePreGameItemTextview.text = formatDate
-        timePreGameItemTextview.text = gameTime
+        datePreGameItemTextview.text = dateScheduled
+        timePreGameItemTextview.text = "GT" // todo fix
         broadcastPreGameItemTextview.text = broadcast
 
     }

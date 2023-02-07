@@ -46,8 +46,15 @@ data class ScoresCompletedEpoxyModel(
         }
 
         // Team names
-        teamNameAwayTextview.text = teamNameAway
-        teamNameHomeTextview.text = teamNameHome
+        when (teamNameAway.isEmpty()) {
+            true -> teamNameAwayTextview.text = "TBD"
+            false -> teamNameAwayTextview.text = teamNameAway
+        }
+
+        when (teamNameHome.isEmpty()) {
+            true -> teamNameHomeTextview.text = "TBD"
+            false -> teamNameHomeTextview.text = teamNameHome
+        }
 
         // Game headline (bottom)
         if (headline.isEmpty()) {
@@ -60,11 +67,6 @@ data class ScoresCompletedEpoxyModel(
         // Points
         pointsAwayItemTextview.text = pointsAway
         pointsHomeItemTextview.text = pointsHome
-
-        // Parse ISO format to "E, M/d"
-//        val actual = OffsetDateTime.parse(datePlayed, DateTimeFormatter.ISO_DATE_TIME)
-//        val formatter = DateTimeFormatter.ofPattern("E',' M/d")
-//        val formatDateTime = actual.format(formatter)
 
         if (pointsAway.toInt() > pointsHome.toInt()) {
             winnerArrowAwayImageView.visibility = View.VISIBLE
