@@ -96,12 +96,7 @@ class ScoresByWeekEpoxyController(): TypedEpoxyController<List<UiEvent>>() {
             }
         }
 
-        // Add bottom to last group of events
-        if (headerFilled) {
-            SectionBottomEpoxyModel(
-                useSection = true
-            ).id("bottom-1").addTo(this)
-        }
+
     }
 
 }
