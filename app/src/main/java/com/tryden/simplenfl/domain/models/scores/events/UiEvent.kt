@@ -4,18 +4,23 @@ data class UiEvent(
     val id: String,
     val date: String,
     val week: Int,
+    val season: UiSeasonType,
     val statusParent: UiStatusParent,
     val competitions: List<UiCompetition>
 ) {
 
     data class UiStatusParent(
         val status: UiEventStatus
-
     )
 
     data class UiEventStatus(
         val completed: Boolean,
         val description: String
+    )
+
+    data class UiSeasonType(
+        val year: Int,
+        val slug: String
     )
 
     data class UiCompetition(

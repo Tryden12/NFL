@@ -12,15 +12,12 @@ object UiEventMapper {
     fun buildFrom(event: Event): UiEvent {
         return UiEvent(
             id = event.id,
-            date = formatDate(event.date),
-            /** format example: Sun, 1/21 **/
-            /** format example: Sun, 1/21 **/
-            /** format example: Sun, 1/21 **/
-            /** format example: Sun, 1/21 **/
-            /** format example: Sun, 1/21 **/
-            /** format example: Sun, 1/21 **/
-            /** format example: Sun, 1/21 **/    /** format example: Sun, 1/21 **/
+            date = formatDate(event.date), /** format example: Sun, 1/21 **/
             week = event.week.number,
+            season = UiEvent.UiSeasonType(
+                slug = event.season.slug,
+                year = event.season.year
+            ),
             statusParent = UiEvent.UiStatusParent(
                 status = UiEvent.UiEventStatus(
                     completed = event.status.type.completed,

@@ -17,9 +17,17 @@ object UiCompetitorMapper {
                 logo = competitors.team.logo
             ),
             record = listOf(UiEvent.UiRecord(
-                name = competitors.records!![0].name,
-                type = competitors.records[0].type,
-                record = competitors.records[0].summary
+                name = if (competitors.records!!.isNotEmpty()) {
+                    competitors.records[0].name
+                } else { "" },
+
+                type = if (competitors.records.isNotEmpty()) {
+                    competitors.records[0].type
+                } else { "" },
+
+                record = if (competitors.records.isNotEmpty()) {
+                    competitors.records[0].summary
+                } else { "" },
             ))
         )
     }
