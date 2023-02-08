@@ -3,6 +3,7 @@ package com.tryden.simplenfl.domain.models.scores.events
 data class UiEvent(
     val id: String,
     val date: String,
+    val gameTime: String,
     val week: Int,
     val season: UiSeasonType,
     val statusParent: UiStatusParent,

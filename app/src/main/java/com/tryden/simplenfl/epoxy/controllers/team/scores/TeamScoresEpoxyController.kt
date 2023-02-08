@@ -137,6 +137,7 @@ class TeamScoresEpoxyController: TypedEpoxyController<List<UiEvent>>() {
                     recordAway = uiEvent.competitions[0].teams[1].record[0].record,
                     recordHome = uiEvent.competitions[0].teams[0].record[0].record,
                     dateScheduled = uiEvent.date,
+                    gameTime = uiEvent.gameTime,
                     broadcast = uiEvent.competitions[0].broadcast[0].shortName,
                     headline = uiEvent.competitions[0].notes[0].headline
                 ).id("event-${uiEvent.id}").addTo(this)

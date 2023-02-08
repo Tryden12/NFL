@@ -9,9 +9,9 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalWithHeaderItemBinding
 import com.tryden.simplenfl.databinding.ModelScoresScheduledWithHeaderItemBinding
-import com.tryden.simplenfl.epoxy.models.scores.ScoresUpcomingEpoxyModel
 import com.tryden.simplenfl.epoxy.models.SectionBottomEpoxyModel
 import com.tryden.simplenfl.epoxy.models.SectionHeaderCenteredEpoxyModel
+import com.tryden.simplenfl.epoxy.models.scores.ScoresUpcomingEpoxyModelOld
 import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -68,7 +68,7 @@ class HomeScoresEpoxyController: EpoxyController() {
                         }
 
                         // Add scores upcoming item
-                        ScoresUpcomingEpoxyModel(
+                        ScoresUpcomingEpoxyModelOld(
                             logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,
@@ -92,7 +92,7 @@ class HomeScoresEpoxyController: EpoxyController() {
                         }
 
                         // Add scores upcoming item
-                        ScoresUpcomingEpoxyModel(
+                        ScoresUpcomingEpoxyModelOld(
                             logoAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.logo.toString(),
                             logoHome = scoresResponse!!.events[i].competitions[0].competitors[0].team.logo.toString(),
                             teamNameAway = scoresResponse!!.events[i].competitions[0].competitors[1].team.shortDisplayName,

@@ -13,6 +13,7 @@ object UiEventMapper {
         return UiEvent(
             id = event.id,
             date = formatDate(event.date), /** format example: Sun, 1/21 **/
+            gameTime = formatGameTime(event.date), /** format example: 4:30 PM **/
             week = event.week.number,
             season = UiEvent.UiSeasonType(
                 slug = event.season.slug,
@@ -53,6 +54,17 @@ object UiEventMapper {
             .atZoneSameInstant(
                 ZoneId.of(SimpleNFLApplication.zoneId))
         val formatter = DateTimeFormatter.ofPattern("E',' M/d")
+
+        return responseDate.format(formatter)
+    }
+
+    fun formatGameTime(isoDate: String): String {
+        // Parse ISO format to "Sun, 10/18"
+        val responseDate = OffsetDateTime
+            .parse(isoDate, DateTimeFormatter.ISO_DATE_TIME)
+            .atZoneSameInstant(
+                ZoneId.of(SimpleNFLApplication.zoneId))
+        val formatter = DateTimeFormatter.ofPattern("h:mm a")
 
         return responseDate.format(formatter)
     }

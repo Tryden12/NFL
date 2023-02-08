@@ -6,7 +6,7 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelScoresScheduledItemBinding
 
-data class ScoresUpcomingEpoxyModel(
+data class ScoresUpcomingEpoxyModelOld(
     val logoAway: String,
     val logoHome: String,
     val teamNameAway: String,
@@ -14,7 +14,6 @@ data class ScoresUpcomingEpoxyModel(
     val recordAway: String,
     val recordHome: String,
     val dateScheduled: String,
-    val gameTime: String,
     val broadcast: String,
     val headline: String,
 ): ViewBindingKotlinModel<ModelScoresScheduledItemBinding>
@@ -68,7 +67,7 @@ data class ScoresUpcomingEpoxyModel(
         recordAwayItemTextview.text = recordAway
         recordHomeItemTextview.text = recordHome
         datePreGameItemTextview.text = dateScheduled
-        timePreGameItemTextview.text = gameTime // todo fixed?
+        timePreGameItemTextview.text = "GT"
         broadcastPreGameItemTextview.text = broadcast
 
     }
