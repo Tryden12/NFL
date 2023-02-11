@@ -6,7 +6,7 @@ data class Competitor(
     val leaders: List<Leader>? = listOf(),
     val linescores: List<Linescore>? = listOf(),
     val order: Int = 0,
-    val records: List<Record>? = listOf(),
+    val records: List<Record> = listOf(),
     val score: String = "",
     val statistics: List<Any> = listOf(),
     val team: TeamXX = TeamXX(),

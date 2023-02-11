@@ -10,6 +10,7 @@ import com.tryden.simplenfl.domain.models.calendar.UiCalendarMapper
 import com.tryden.simplenfl.domain.models.calendar.UiWeekMapper
 import com.tryden.simplenfl.ui.repositories.ScoresRepository
 import com.tryden.simplenfl.domain.mappers.events.UiEventMapper
+import com.tryden.simplenfl.domain.mappers.events.UiEventMapper2
 import kotlinx.coroutines.launch
 
 class ScoresViewModel : ViewModel(){
@@ -18,6 +19,7 @@ class ScoresViewModel : ViewModel(){
     val uiEventMapper = UiEventMapper
     val uiCalendarMapper = UiCalendarMapper()
     val uiWeeksMapper = UiWeekMapper()
+    val uiEventMapper2 = UiEventMapper2
 
     // List of events
     private val _eventList = MutableLiveData<List<Event>>(emptyList())

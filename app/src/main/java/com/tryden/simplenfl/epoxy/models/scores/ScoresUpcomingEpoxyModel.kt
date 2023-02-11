@@ -16,7 +16,7 @@ data class ScoresUpcomingEpoxyModel(
     val dateScheduled: String,
     val gameTime: String,
     val broadcast: String,
-    val headline: String,
+    val headline: String
 ): ViewBindingKotlinModel<ModelScoresScheduledItemBinding>
     (R.layout.model_scores_scheduled_item) {
 

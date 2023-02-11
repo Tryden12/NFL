@@ -10,7 +10,8 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.ui.adapters.HorizontalWeekMenuAdapter
 import com.tryden.simplenfl.databinding.FragmentScoresBinding
 import com.tryden.simplenfl.domain.models.calendar.UiCalendar
-import com.tryden.simplenfl.domain.models.scores.events.UiEvent
+import com.tryden.simplenfl.domain.interfaces.events.UiEvent
+import com.tryden.simplenfl.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.epoxy.controllers.scores.ScoresByWeekEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
 
@@ -23,6 +24,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
 
     private val viewModel by viewModels<ScoresViewModel>()
     private val epoxyControllerScoresByWeek = ScoresByWeekEpoxyController()
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,10 +49,11 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
         binding.epoxyScoresByWeekRecyclerView.setController(epoxyControllerScoresByWeek)
         epoxyControllerScoresByWeek.setData(emptyList())
         viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-            val uiEvents: List<UiEvent> = eventList.map { event ->
-                viewModel.uiEventMapper.buildFrom(event)
+            val events: List<UiEvent> = eventList.map { event ->
+                viewModel.uiEventMapper2.buildFrom(event)
             }
-            epoxyControllerScoresByWeek.setData(uiEvents)
+            epoxyDataManager.giveMeEpoxyItems(events)
+            epoxyControllerScoresByWeek.setData(events)
         }
         // Default loading to Week 1, todo: load to current week on default
         viewModel.refreshScores(date= "20220908-20220914", limit = "50")
@@ -68,10 +71,11 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
 
             epoxyControllerScoresByWeek.setData(emptyList())
             viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-                val uiEvents: List<UiEvent> = eventList.map { event ->
-                    viewModel.uiEventMapper.buildFrom(event)
+                val events: List<UiEvent> = eventList.map { event ->
+                    viewModel.uiEventMapper2.buildFrom(event)
                 }
-                epoxyControllerScoresByWeek.setData(uiEvents)
+
+                epoxyControllerScoresByWeek.setData(events)
             }
             viewModel.refreshScores(range, "50")
         }
