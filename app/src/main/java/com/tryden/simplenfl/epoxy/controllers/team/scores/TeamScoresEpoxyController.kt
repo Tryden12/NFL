@@ -1,9 +1,9 @@
 package com.tryden.simplenfl.epoxy.controllers.team.scores
 
 import com.airbnb.epoxy.TypedEpoxyController
-import com.tryden.simplenfl.domain.models.scores.events.UiEvent
 import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.epoxy.interfaces.events.EventEpoxyItem
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEpoxyItem.*
 import com.tryden.simplenfl.epoxy.models.SectionBottomEpoxyModel
 import com.tryden.simplenfl.epoxy.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
@@ -21,12 +21,12 @@ class TeamScoresEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() {
         var bottomId = 0
         items.forEach { item ->
             when (item) {
-                is EventEpoxyItem.HeaderItem -> {
+                is HeaderItem -> {
                     SectionHeaderCenteredEpoxyModel(
                         sectionHeader = item.header
                     ).id("gameday-${item.header}").addTo(this)
                 }
-                is EventEpoxyItem.EventItem -> {
+                is EventItem -> {
                     when (item.event) {
                         is EventEntity.Completed -> {
                             ScoresCompletedEpoxyModel(item.event)
@@ -38,7 +38,7 @@ class TeamScoresEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() {
                         }
                     }
                 }
-                is EventEpoxyItem.FooterItem -> {
+                is FooterItem -> {
                     SectionBottomEpoxyModel(
                         useSection = true
                     ).id("bottom-${bottomId++}").addTo(this)

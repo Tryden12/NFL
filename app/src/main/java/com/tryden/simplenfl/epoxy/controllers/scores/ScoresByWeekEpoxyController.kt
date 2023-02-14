@@ -43,38 +43,5 @@ class ScoresByWeekEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() 
                 }
             }
         }
-
-//        eventsList.forEach { event->
-//            when (event) {
-//                is EventEntity.Completed -> {
-//                    Log.e(TAG, "buildModels event completed" )
-//                    ScoresCompletedEpoxyModel(
-//                        logoAway = event.awayTeam.logo.toString(),
-//                        logoHome = event.homeTeam.logo.toString(),
-//                        teamNameAway = event.awayTeam.name,
-//                        teamNameHome = event.homeTeam.name,
-//                        pointsAway = event.scoreAway,
-//                        pointsHome = event.scoreHome,
-//                        datePlayed = event.datePlayed,
-//                        headline = event.headline
-//                    ).id("event-${event.id}").addTo(this)
-//                }
-//                is EventEntity.Upcoming -> {
-//                    Log.e(TAG, "buildModels event upcoming" )
-//                    ScoresUpcomingEpoxyModel(
-//                        logoAway = event.awayTeam.logo.toString(),
-//                        logoHome = event.homeTeam.logo.toString(),
-//                        teamNameAway = event.awayTeam.name,
-//                        teamNameHome = event.homeTeam.name,
-//                        recordAway = event.recordAway,
-//                        recordHome = event.recordHome,
-//                        dateScheduled = event.dateScheduled,
-//                        gameTime = event.gameTime,
-//                        broadcast = event.broadcast,
-//                        headline = event.headline
-//                    ).id("event-${event.id}").addTo(this)
-//                }
-//            }
-//        }
     }
 }
