@@ -10,8 +10,9 @@ sealed interface EventEntity {
         val scoreAway: String,
         val datePlayed: String,
         val statusDesc: String,
-        val headline: String
-    ): EventEntity
+        val headline: String,
+        val seasonType: String
+        ): EventEntity
 
     data class Upcoming(
         val id: String,
@@ -22,10 +23,12 @@ sealed interface EventEntity {
         val dateScheduled: String,
         val gameTime: String,
         val broadcast: String,
-        val headline: String
-    ): EventEntity
+        val headline: String,
+        val seasonType: String
+        ): EventEntity
 
     data class Team(
+        val id: String,
         val logo: String?,
         val name: String
     )

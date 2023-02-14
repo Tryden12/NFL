@@ -1,6 +1,5 @@
 package com.tryden.simplenfl.epoxy.controllers.scores
 
-import android.util.Log
 import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity.*
 import com.tryden.simplenfl.epoxy.interfaces.events.EventEpoxyItem
@@ -24,8 +23,8 @@ class ScoresByWeekEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() 
             when (item) {
                 is HeaderItem -> {
                     SectionHeaderCenteredEpoxyModel(
-                        sectionHeader = item.date
-                    ).id("gameday-${item.date}").addTo(this)
+                        sectionHeader = item.header
+                    ).id("gameday-${item.header}").addTo(this)
                 }
                 is EventItem -> {
                     when (item.event) {

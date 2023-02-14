@@ -7,6 +7,7 @@ object TeamEventMapper {
 
     fun buildFrom(competitor: Competitor) : EventEntity.Team {
         return EventEntity.Team(
+            id = competitor.team.id,
             name = competitor.team.shortDisplayName,
             logo = competitor.team.logo
         )

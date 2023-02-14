@@ -24,7 +24,8 @@ object EventMapper2 {
                         event.competitions[0].notes[0].headline
                     } else {
                         "" // leave it empty
-                    }
+                    },
+                    seasonType = event.season.slug
                 )
             }
             else -> { /** Event status = Upcoming **/
@@ -45,7 +46,8 @@ object EventMapper2 {
                         event.competitions[0].notes[0].headline
                     } else {
                         "" // leave it empty
-                    }
+                    },
+                    seasonType = event.season.slug
                 )
             }
         }
