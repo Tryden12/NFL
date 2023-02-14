@@ -3,6 +3,7 @@ package com.tryden.simplenfl.domain.mappers.events
 import com.tryden.simplenfl.domain.mappers.events.EventMapper.formatDate
 import com.tryden.simplenfl.domain.mappers.events.EventMapper.formatGameTime
 import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity.*
 import com.tryden.simplenfl.network.response.teams.models.scores.Event
 
 
@@ -11,7 +12,7 @@ object EventMapper2 {
     fun buildFrom(event: Event): EventEntity {
         return when (event.status.type.completed) {
             true -> { /** Event status = Completed **/
-                EventEntity.Completed(
+                Completed(
                     id = event.id,
                     homeTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
                     awayTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[1]),
@@ -27,7 +28,7 @@ object EventMapper2 {
                 )
             }
             else -> { /** Event status = Upcoming **/
-                EventEntity.Upcoming(
+                Upcoming(
                     id = event.id,
                     homeTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
                     awayTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[1]),

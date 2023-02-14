@@ -2,10 +2,6 @@ package com.tryden.simplenfl.epoxy.interfaces.events
 
 sealed interface EventEntity {
 
-    data class Date(
-        val date: String
-    )
-
     data class Completed(
         val id: String,
         val homeTeam: Team,

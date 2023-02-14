@@ -52,8 +52,8 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
             val events: List<EventEntity> = eventList.map { event ->
                 viewModel.uiEventMapper2.buildFrom(event)
             }
-            epoxyDataManager.giveMeEpoxyItems(events)
-            epoxyControllerScoresByWeek.setData(events)
+            val epoxyItemsList = epoxyDataManager.giveMeEventEpoxyItems(events)
+            epoxyControllerScoresByWeek.setData(epoxyItemsList)
         }
         // Default loading to Week 1, todo: load to current week on default
         viewModel.refreshScores(date= "20220908-20220914", limit = "50")
@@ -74,8 +74,8 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
                 val events: List<EventEntity> = eventList.map { event ->
                     viewModel.uiEventMapper2.buildFrom(event)
                 }
-
-                epoxyControllerScoresByWeek.setData(events)
+                val epoxyItemsList = epoxyDataManager.giveMeEventEpoxyItems(events)
+                epoxyControllerScoresByWeek.setData(epoxyItemsList)
             }
             viewModel.refreshScores(range, "50")
         }
