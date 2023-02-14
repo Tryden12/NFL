@@ -7,66 +7,68 @@ import com.tryden.mortyfacts.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelScoresFinalItemBinding
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
 
 data class ScoresCompletedEpoxyModel(
-    val logoAway: String,
-    val logoHome: String,
-    val teamNameAway: String,
-    val teamNameHome: String,
-    val pointsAway: String,
-    val pointsHome: String,
-    val datePlayed: String,
-    val statusDesc: String,
-    val headline: String = "",
+    val eventItemEntity: EventEntity.Completed
+//    val logoAway: String,
+//    val logoHome: String,
+//    val teamNameAway: String,
+//    val teamNameHome: String,
+//    val pointsAway: String,
+//    val pointsHome: String,
+//    val datePlayed: String,
+//    val statusDesc: String,
+//    val headline: String = "",
 ): ViewBindingKotlinModel<ModelScoresFinalItemBinding>
     (R.layout.model_scores_final_item) {
 
     override fun ModelScoresFinalItemBinding.bind() {
         // Logos
-        if (logoAway.isEmpty()) {
+        if (eventItemEntity.awayTeam.logo!!.isEmpty()) {
             Picasso.get()
                 .load(R.drawable.placeholder_logo)
                 .placeholder(R.drawable.placeholder_logo)
                 .error(R.drawable.placeholder_logo)
                 .into(awayLogoImageView)
         } else {
-            Picasso.get().load(logoAway).into(awayLogoImageView)
+            Picasso.get().load(eventItemEntity.awayTeam.logo).into(awayLogoImageView)
         }
 
-        if (logoHome.isEmpty()) {
+        if (eventItemEntity.homeTeam.logo!!.isEmpty()) {
             Picasso.get()
                 .load(R.drawable.placeholder_logo)
                 .placeholder(R.drawable.placeholder_logo)
                 .error(R.drawable.placeholder_logo)
                 .into(homeLogoImageView)
         } else {
-            Picasso.get().load(logoHome).into(homeLogoImageView)
+            Picasso.get().load(eventItemEntity.homeTeam.logo).into(homeLogoImageView)
         }
 
         // Team names
-        when (teamNameAway.isEmpty()) {
+        when (eventItemEntity.awayTeam.name.isEmpty()) {
             true -> teamNameAwayTextview.text = "TBD"
-            false -> teamNameAwayTextview.text = teamNameAway
+            false -> teamNameAwayTextview.text = eventItemEntity.awayTeam.name
         }
 
-        when (teamNameHome.isEmpty()) {
+        when (eventItemEntity.homeTeam.name.isEmpty()) {
             true -> teamNameHomeTextview.text = "TBD"
-            false -> teamNameHomeTextview.text = teamNameHome
+            false -> teamNameHomeTextview.text = eventItemEntity.homeTeam.name
         }
 
         // Game headline (bottom)
-        if (headline.isEmpty()) {
+        if (eventItemEntity.headline.isEmpty()) {
             descriptionGameBottomItemTextview.visibility = View.GONE
         } else {
             descriptionGameBottomItemTextview.visibility = View.VISIBLE
-            descriptionGameBottomItemTextview.text = headline
+            descriptionGameBottomItemTextview.text = eventItemEntity.headline
         }
 
         // Points
-        pointsAwayItemTextview.text = pointsAway
-        pointsHomeItemTextview.text = pointsHome
+        pointsAwayItemTextview.text = eventItemEntity.scoreAway
+        pointsHomeItemTextview.text = eventItemEntity.scoreHome
 
-        if (pointsAway.toInt() > pointsHome.toInt()) {
+        if (eventItemEntity.scoreAway.toInt() > eventItemEntity.scoreHome.toInt()) {
             winnerArrowAwayImageView.visibility = View.VISIBLE
             winnerArrowHomeImageView.visibility = View.INVISIBLE
 
@@ -80,10 +82,10 @@ data class ScoresCompletedEpoxyModel(
             teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,
                 R.color.grey))
 
-            datePostGameItemTextview.text = datePlayed
+            datePostGameItemTextview.text = eventItemEntity.datePlayed
 
 
-        } else if (pointsAway.toInt() < pointsHome.toInt()) {
+        } else if (eventItemEntity.scoreAway.toInt() < eventItemEntity.scoreHome.toInt()) {
             winnerArrowAwayImageView.visibility = View.INVISIBLE
             winnerArrowHomeImageView.visibility = View.VISIBLE
 
@@ -97,7 +99,7 @@ data class ScoresCompletedEpoxyModel(
             teamNameHomeTextview.setTextColor(ContextCompat.getColor(SimpleNFLApplication.context,
                 R.color.white))
 
-            datePostGameItemTextview.text = datePlayed
+            datePostGameItemTextview.text = eventItemEntity.datePlayed
 
         } else { // cancelled or postponed
             winnerArrowAwayImageView.visibility = View.INVISIBLE
@@ -117,7 +119,7 @@ data class ScoresCompletedEpoxyModel(
         }
 
         // Status TextView
-        statusGameItemTextview.text = statusDesc
+        statusGameItemTextview.text = eventItemEntity.statusDesc
     }
 
 }

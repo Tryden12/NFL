@@ -26,19 +26,19 @@ class ScoresUpcomingEpoxyController(): TypedEpoxyController<List<UiEvent>>(){
                     ).id("header-${uiEvent.date}").addTo(this)
                     headerFilled = true
                 }
-
-                ScoresUpcomingEpoxyModel(
-                    logoAway = uiEvent.competitions[0].teams[1].team.logo.toString(),
-                    logoHome = uiEvent.competitions[0].teams[0].team.logo.toString(),
-                    teamNameAway = uiEvent.competitions[0].teams[1].team.shortDisplayName,
-                    teamNameHome = uiEvent.competitions[0].teams[0].team.shortDisplayName,
-                    recordAway = uiEvent.competitions[0].teams[1].record[0].record,
-                    recordHome = uiEvent.competitions[0].teams[0].record[0].record,
-                    dateScheduled = uiEvent.date,
-                    gameTime = uiEvent.gameTime,
-                    broadcast = uiEvent.competitions[0].broadcast[0].shortName,
-                    headline = uiEvent.competitions[0].notes[0].headline
-                ).id("event-${uiEvent.id}").addTo(this)
+//
+//                ScoresUpcomingEpoxyModel(
+//                    logoAway = uiEvent.competitions[0].teams[1].team.logo.toString(),
+//                    logoHome = uiEvent.competitions[0].teams[0].team.logo.toString(),
+//                    teamNameAway = uiEvent.competitions[0].teams[1].team.shortDisplayName,
+//                    teamNameHome = uiEvent.competitions[0].teams[0].team.shortDisplayName,
+//                    recordAway = uiEvent.competitions[0].teams[1].record[0].record,
+//                    recordHome = uiEvent.competitions[0].teams[0].record[0].record,
+//                    dateScheduled = uiEvent.date,
+//                    gameTime = uiEvent.gameTime,
+//                    broadcast = uiEvent.competitions[0].broadcast[0].shortName,
+//                    headline = uiEvent.competitions[0].notes[0].headline
+//                ).id("event-${uiEvent.id}").addTo(this)
 
             }
         }

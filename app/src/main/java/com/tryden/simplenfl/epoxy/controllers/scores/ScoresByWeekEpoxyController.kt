@@ -22,45 +22,24 @@ class ScoresByWeekEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() 
         items.forEach { item ->
             when (item) {
                 is HeaderItem -> {
-                    SectionHeaderCenteredEpoxyModel(
-                        sectionHeader = item.header
-                    ).id("gameday-${item.header}").addTo(this)
+                    SectionHeaderCenteredEpoxyModel(sectionHeader = item.header)
+                        .id("gameday-${item.header}").addTo(this)
                 }
                 is EventItem -> {
                     when (item.event) {
                         is Completed -> {
-                            ScoresCompletedEpoxyModel(
-                                logoAway = item.event.awayTeam.logo.toString(),
-                                logoHome = item.event.homeTeam.logo.toString(),
-                                teamNameAway = item.event.awayTeam.name,
-                                teamNameHome = item.event.homeTeam.name,
-                                pointsAway = item.event.scoreAway,
-                                pointsHome = item.event.scoreHome,
-                                datePlayed = item.event.datePlayed,
-                                statusDesc = item.event.statusDesc,
-                                headline = item.event.headline
-                            ).id("event-${item.event.id}").addTo(this)
+                            ScoresCompletedEpoxyModel(item.event)
+                                .id("event-${item.event.id}").addTo(this)
                         }
                         is Upcoming -> {
-                            ScoresUpcomingEpoxyModel(
-                                logoAway = item.event.awayTeam.logo.toString(),
-                                logoHome = item.event.homeTeam.logo.toString(),
-                                teamNameAway = item.event.awayTeam.name,
-                                teamNameHome = item.event.homeTeam.name,
-                                recordAway = item.event.recordAway,
-                                recordHome = item.event.recordHome,
-                                dateScheduled = item.event.dateScheduled,
-                                gameTime = item.event.gameTime,
-                                broadcast = item.event.broadcast,
-                                headline = item.event.headline
-                            ).id("event-${item.event.id}").addTo(this)
+                            ScoresUpcomingEpoxyModel(item.event)
+                                .id("event-${item.event.id}").addTo(this)
                         }
                     }
                 }
                 is FooterItem -> {
-                    SectionBottomEpoxyModel(
-                        useSection = true
-                    ).id("bottom-${bottomId++}").addTo(this)
+                    SectionBottomEpoxyModel(useSection = true)
+                        .id("bottom-${bottomId++}").addTo(this)
                 }
             }
         }

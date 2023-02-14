@@ -24,7 +24,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController(::onArticleSelected)
-    private val epoxyControllerScoresUpcoming = ScoresUpcomingEpoxyController()
+//    private val epoxyControllerScoresUpcoming = ScoresUpcomingEpoxyController()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,16 +40,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         sharedViewModel.refreshBreakingNews("", "50")
         epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
 
-        binding.epoxyHomeScoresRecyclerView.setController(epoxyControllerScoresUpcoming)
-        epoxyControllerScoresUpcoming.setData(emptyList())
-        viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-            val uiEvents: List<UiEvent> = eventList.map { event ->
-                viewModel.uiEventMapper.buildFrom(event)
-            }
-            epoxyControllerScoresUpcoming.setData(uiEvents)
-        }
-        // Default loading to hard coded week, todo: load to current week on default
-        viewModel.refreshScores(date= "20230128-20230215", limit = "5")
+//        binding.epoxyHomeScoresRecyclerView.setController(epoxyControllerScoresUpcoming)
+//        epoxyControllerScoresUpcoming.setData(emptyList())
+//        viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
+//            val uiEvents: List<UiEvent> = eventList.map { event ->
+//                viewModel.uiEventMapper.buildFrom(event)
+//            }
+//            epoxyControllerScoresUpcoming.setData(uiEvents)
+//        }
+//        // Default loading to hard coded week, todo: load to current week on default
+//        viewModel.refreshScores(date= "20230128-20230215", limit = "5")
     }
 
     private fun onArticleSelected(articleId: String) {
