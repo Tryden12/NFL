@@ -2,17 +2,17 @@ package com.tryden.simplenfl.epoxy.controllers.scores
 
 import android.util.Log
 import com.airbnb.epoxy.TypedEpoxyController
-import com.tryden.simplenfl.domain.interfaces.events.UiEvent
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.epoxy.models.scores.ScoresCompletedEpoxyModel
 import com.tryden.simplenfl.epoxy.models.scores.ScoresUpcomingEpoxyModel
 
-class ScoresByWeekEpoxyController(): TypedEpoxyController<List<UiEvent>>() {
+class ScoresByWeekEpoxyController(): TypedEpoxyController<List<EventEntity>>() {
 
     private val TAG = ScoresByWeekEpoxyController::class.java.simpleName
 
 
-    override fun buildModels(eventsList: List<UiEvent>) {
+    override fun buildModels(eventsList: List<EventEntity>) {
         if (eventsList.isEmpty()) {
             LoadingEpoxyModel().id("loading").addTo(this)
             return
@@ -22,7 +22,7 @@ class ScoresByWeekEpoxyController(): TypedEpoxyController<List<UiEvent>>() {
 
         eventsList.forEach { event->
             when (event) {
-                is UiEvent.Completed -> {
+                is EventEntity.Completed -> {
                     Log.e(TAG, "buildModels event completed" )
                     ScoresCompletedEpoxyModel(
                         logoAway = event.awayTeam.logo.toString(),
@@ -36,7 +36,7 @@ class ScoresByWeekEpoxyController(): TypedEpoxyController<List<UiEvent>>() {
                         headline = event.headline
                     ).id("event-${event.id}").addTo(this)
                 }
-                is UiEvent.Upcoming -> {
+                is EventEntity.Upcoming -> {
                     Log.e(TAG, "buildModels event upcoming" )
                     ScoresUpcomingEpoxyModel(
                         logoAway = event.awayTeam.logo.toString(),

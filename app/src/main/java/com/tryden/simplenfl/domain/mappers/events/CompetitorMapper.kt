@@ -3,7 +3,7 @@ package com.tryden.simplenfl.domain.mappers.events
 import com.tryden.simplenfl.network.response.teams.models.scores.Competitor
 import com.tryden.simplenfl.domain.models.scores.events.UiEvent
 
-object UiCompetitorMapper {
+object CompetitorMapper {
 
     fun buildFrom(competitors: Competitor) : UiEvent.UiCompetitor {
         return UiEvent.UiCompetitor(

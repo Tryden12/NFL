@@ -1,20 +1,20 @@
 package com.tryden.simplenfl.domain.mappers.events
 
-import com.tryden.simplenfl.domain.interfaces.events.UiEvent
-import com.tryden.simplenfl.domain.mappers.events.UiEventMapper.formatDate
-import com.tryden.simplenfl.domain.mappers.events.UiEventMapper.formatGameTime
+import com.tryden.simplenfl.domain.mappers.events.EventMapper.formatDate
+import com.tryden.simplenfl.domain.mappers.events.EventMapper.formatGameTime
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.network.response.teams.models.scores.Event
 
 
-object UiEventMapper2 {
+object EventMapper2 {
 
-    fun buildFrom(event: Event): UiEvent {
+    fun buildFrom(event: Event): EventEntity {
         return when (event.status.type.completed) {
             true -> { /** Event status = Completed **/
-                UiEvent.Completed(
+                EventEntity.Completed(
                     id = event.id,
-                    homeTeam = UiTeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
-                    awayTeam = UiTeamEventMapper.buildFrom(event.competitions[0].competitors[1]),
+                    homeTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
+                    awayTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[1]),
                     scoreHome = event.competitions[0].competitors[0].score,
                     scoreAway = event.competitions[0].competitors[1].score,
                     datePlayed = formatDate(event.date), /** format example: Sun, 1/21 **/
@@ -27,10 +27,10 @@ object UiEventMapper2 {
                 )
             }
             else -> { /** Event status = Upcoming **/
-                UiEvent.Upcoming(
+                EventEntity.Upcoming(
                     id = event.id,
-                    homeTeam = UiTeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
-                    awayTeam = UiTeamEventMapper.buildFrom(event.competitions[0].competitors[1]),
+                    homeTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
+                    awayTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[1]),
                     recordHome = event.competitions[0].competitors[0].records[0].summary,
                     recordAway = event.competitions[0].competitors[1].records[0].summary,
                     dateScheduled = formatDate(event.date), /** format example: Sun, 1/21 **/

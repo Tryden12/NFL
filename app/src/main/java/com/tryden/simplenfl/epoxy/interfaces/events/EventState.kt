@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.domain.interfaces.events
+package com.tryden.simplenfl.epoxy.interfaces.events
 
 sealed interface EventState {
 

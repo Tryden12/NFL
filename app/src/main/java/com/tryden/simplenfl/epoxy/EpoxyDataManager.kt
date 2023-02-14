@@ -1,12 +1,12 @@
 package com.tryden.simplenfl.epoxy
 
 import android.util.Log
-import com.tryden.simplenfl.domain.interfaces.events.UiEvent
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
 
 class EpoxyDataManager {
 
 
-    fun giveMeEpoxyItems(events: List<UiEvent>?) {
+    fun giveMeEpoxyItems(events: List<EventEntity>?) {
         Log.e("EpoxyDataManager", "eventsList size = ${events?.size}" )
 
 

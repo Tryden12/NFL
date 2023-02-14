@@ -10,7 +10,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.ui.adapters.HorizontalWeekMenuAdapter
 import com.tryden.simplenfl.databinding.FragmentScoresBinding
 import com.tryden.simplenfl.domain.models.calendar.UiCalendar
-import com.tryden.simplenfl.domain.interfaces.events.UiEvent
+import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.epoxy.controllers.scores.ScoresByWeekEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
@@ -49,7 +49,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
         binding.epoxyScoresByWeekRecyclerView.setController(epoxyControllerScoresByWeek)
         epoxyControllerScoresByWeek.setData(emptyList())
         viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-            val events: List<UiEvent> = eventList.map { event ->
+            val events: List<EventEntity> = eventList.map { event ->
                 viewModel.uiEventMapper2.buildFrom(event)
             }
             epoxyDataManager.giveMeEpoxyItems(events)
@@ -71,7 +71,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
 
             epoxyControllerScoresByWeek.setData(emptyList())
             viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-                val events: List<UiEvent> = eventList.map { event ->
+                val events: List<EventEntity> = eventList.map { event ->
                     viewModel.uiEventMapper2.buildFrom(event)
                 }
 

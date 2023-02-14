@@ -7,7 +7,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-object UiEventMapper {
+object EventMapper {
 
     fun buildFrom(event: Event): UiEvent {
         return UiEvent(
@@ -27,7 +27,7 @@ object UiEventMapper {
             ),
             competitions = (listOf(UiEvent.UiCompetition(
                 teams = event.competitions[0].competitors.map { competitor ->
-                    UiCompetitorMapper.buildFrom(competitor)
+                    CompetitorMapper.buildFrom(competitor)
                 },
                 broadcast = listOf(UiEvent.UiBroadcast(
                     shortName = if (event.competitions[0].geoBroadcasts.isNotEmpty() && event.competitions[0].geoBroadcasts[0].media.shortName.isNotEmpty()) {

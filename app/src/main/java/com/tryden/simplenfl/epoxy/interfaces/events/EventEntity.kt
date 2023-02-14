@@ -1,6 +1,6 @@
-package com.tryden.simplenfl.domain.interfaces.events
+package com.tryden.simplenfl.epoxy.interfaces.events
 
-sealed interface UiEvent {
+sealed interface EventEntity {
 
     data class Date(
         val date: String
@@ -15,7 +15,7 @@ sealed interface UiEvent {
         val datePlayed: String,
         val statusDesc: String,
         val headline: String
-    ): UiEvent
+    ): EventEntity
 
     data class Upcoming(
         val id: String,
@@ -27,7 +27,7 @@ sealed interface UiEvent {
         val gameTime: String,
         val broadcast: String,
         val headline: String
-    ): UiEvent
+    ): EventEntity
 
     data class Team(
         val logo: String?,
