@@ -11,7 +11,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamsListBinding
 import com.tryden.simplenfl.domain.models.teamslist.UiTeam
-import com.tryden.simplenfl.epoxy.controllers.teams.TeamListHomeEpoxyController2
+import com.tryden.simplenfl.ui.epoxy.controllers.teams.TeamListHomeEpoxyController2
 import com.tryden.simplenfl.ui.viewmodels.TeamsListViewModel
 
 class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {

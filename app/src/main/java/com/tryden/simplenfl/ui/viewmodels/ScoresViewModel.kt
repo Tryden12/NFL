@@ -7,18 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.network.response.teams.models.scores.Calendar
 import com.tryden.simplenfl.network.response.teams.models.scores.Event
 import com.tryden.simplenfl.domain.models.calendar.UiCalendarMapper
-import com.tryden.simplenfl.domain.models.calendar.UiWeekMapper
 import com.tryden.simplenfl.ui.repositories.ScoresRepository
-import com.tryden.simplenfl.domain.mappers.events.EventMapper
 import com.tryden.simplenfl.domain.mappers.events.EventMapper2
 import kotlinx.coroutines.launch
 
 class ScoresViewModel : ViewModel(){
 
     private val repository = ScoresRepository()
-    val uiEventMapper = EventMapper
     val uiCalendarMapper = UiCalendarMapper()
-    val uiWeeksMapper = UiWeekMapper()
     val uiEventMapper2 = EventMapper2
 
     // List of events

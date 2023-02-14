@@ -10,9 +10,9 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.ui.adapters.HorizontalWeekMenuAdapter
 import com.tryden.simplenfl.databinding.FragmentScoresBinding
 import com.tryden.simplenfl.domain.models.calendar.UiCalendar
-import com.tryden.simplenfl.epoxy.interfaces.events.EventEntity
-import com.tryden.simplenfl.epoxy.EpoxyDataManager
-import com.tryden.simplenfl.epoxy.controllers.scores.ScoresByWeekEpoxyController
+import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
+import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
+import com.tryden.simplenfl.ui.epoxy.controllers.scores.ScoresByWeekEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
 
 class ScoresFragment: Fragment(R.layout.fragment_scores) {

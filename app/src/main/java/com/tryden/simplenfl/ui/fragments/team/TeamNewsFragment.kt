@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamNewsBinding
-import com.tryden.simplenfl.epoxy.controllers.team.news.TeamNewsTopHeadlinesEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsTopHeadlinesEpoxyController
 
 
 class TeamNewsFragment : Fragment() {

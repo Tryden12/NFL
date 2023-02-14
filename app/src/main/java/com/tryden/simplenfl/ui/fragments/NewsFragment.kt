@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentNewsBinding
-import com.tryden.simplenfl.epoxy.controllers.news.NewsTopHeadlinesEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.news.NewsTopHeadlinesEpoxyController
 
 class NewsFragment : Fragment() {
 

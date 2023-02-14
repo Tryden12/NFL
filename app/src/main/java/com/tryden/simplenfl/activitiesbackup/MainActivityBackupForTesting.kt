@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 
 class MainActivityBackupForTesting : AppCompatActivity() {
 

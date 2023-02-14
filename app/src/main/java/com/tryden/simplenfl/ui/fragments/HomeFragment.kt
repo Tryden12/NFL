@@ -10,9 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentHomeBinding
-import com.tryden.simplenfl.domain.models.scores.events.UiEvent
-import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.scores.ScoresUpcomingEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
