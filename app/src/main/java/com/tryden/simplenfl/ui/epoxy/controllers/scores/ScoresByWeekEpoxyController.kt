@@ -2,6 +2,7 @@ package com.tryden.simplenfl.ui.epoxy.controllers.scores
 
 import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
+import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity.*
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem.*
 import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
@@ -18,29 +19,21 @@ class ScoresByWeekEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() 
             return
         }
 
-        var bottomId = 0
-        items.forEach { item ->
+        items.forEachIndexed { index, item ->
             when (item) {
-                is HeaderItem -> {
+                is HeaderItem ->
                     SectionHeaderCenteredEpoxyModel(sectionHeader = item.header)
                         .id("gameday-${item.header}").addTo(this)
-                }
-                is EventItem -> {
+                is EventItem ->
                     when (item.event) {
-                        is EventEntity.Completed -> {
-                            ScoresCompletedEpoxyModel(item.event)
-                                .id("event-${item.event.id}").addTo(this)
-                        }
-                        is EventEntity.Upcoming -> {
-                            ScoresUpcomingEpoxyModel(item.event)
-                                .id("event-${item.event.id}").addTo(this)
-                        }
+                        is Completed -> ScoresCompletedEpoxyModel(item.event)
+                            .id("event-${item.event.id}").addTo(this)
+                        is Upcoming -> ScoresUpcomingEpoxyModel(item.event)
+                            .id("event-${item.event.id}").addTo(this)
                     }
-                }
-                is FooterItem -> {
+                is FooterItem ->
                     SectionBottomEpoxyModel(useSection = true)
-                        .id("bottom-${bottomId++}").addTo(this)
-                }
+                        .id("bottom-$index").addTo(this)
             }
         }
     }

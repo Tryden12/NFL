@@ -67,7 +67,7 @@ object EventMapper {
     }
 
     fun formatGameTime(isoDate: String): String {
-        // Parse ISO format to "Sun, 10/18"
+        // Parse ISO format to "4:30 PM"
         val responseDate = OffsetDateTime
             .parse(isoDate, DateTimeFormatter.ISO_DATE_TIME)
             .atZoneSameInstant(
