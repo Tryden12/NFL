@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentPlayerBinding
-import com.tryden.simplenfl.epoxy.controllers.team.player.PlayerEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.player.PlayerEpoxyController
 
 class PlayerFragment : Fragment() {
 

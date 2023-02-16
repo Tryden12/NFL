@@ -3,54 +3,51 @@ package com.tryden.simplenfl.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentHomeBinding
-import com.tryden.simplenfl.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
-import com.tryden.simplenfl.epoxy.controllers.scores.home.HomeScoresEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.news.home.topheadlines.HomeTopHeadlinesEpoxyController
+import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    val binding: FragmentHomeBinding get() = _binding!!
 
+    private val viewModel by viewModels<ScoresViewModel>()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController(::onArticleSelected)
-    private val epoxyControllerScores = HomeScoresEpoxyController()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    private val epoxyControllerTopHeadlines = HomeTopHeadlinesEpoxyController(::onArticleSelected)
+//    private val epoxyControllerScoresUpcoming = ScoresUpcomingEpoxyController()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentHomeBinding.bind(view)
 
         val epoxyHomeTopHeadlinesRecyclerView = binding.epoxyHomeTopHeadlinesRecyclerView
-        val epoxyHomeScoresRecyclerView = binding.epoxyHomeScoresRecyclerView
 
         sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerTopHeadlines.newsResponse = response
             // change the amount of headlines to display
             epoxyControllerTopHeadlines.maxHeadlines = 6
-
-        }
-        sharedViewModel.scoreboardByRangeLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerScores.scoresResponse = response
-
         }
         sharedViewModel.refreshBreakingNews("", "50")
-        sharedViewModel.refreshScoreboard("20230114-20230212", "")
-
         epoxyHomeTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
-        epoxyHomeScoresRecyclerView.setControllerAndBuildModels(epoxyControllerScores)
+
+//        binding.epoxyHomeScoresRecyclerView.setController(epoxyControllerScoresUpcoming)
+//        epoxyControllerScoresUpcoming.setData(emptyList())
+//        viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
+//            val uiEvents: List<UiEvent> = eventList.map { event ->
+//                viewModel.uiEventMapper.buildFrom(event)
+//            }
+//            epoxyControllerScoresUpcoming.setData(uiEvents)
+//        }
+//        // Default loading to hard coded week, todo: load to current week on default
+//        viewModel.refreshScores(date= "20230128-20230215", limit = "5")
     }
 
     private fun onArticleSelected(articleId: String) {

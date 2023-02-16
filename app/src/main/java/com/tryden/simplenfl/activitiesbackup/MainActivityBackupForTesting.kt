@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 
 class MainActivityBackupForTesting : AppCompatActivity() {
 
@@ -87,7 +87,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
 
 
         // refresh scoreboard
-        viewModel.refreshScoreboard("20220908-20230108","1")
+        viewModel.refreshScores("20220908-20230108","1")
         viewModel.scoreboardByRangeLiveData.observe(this) { response ->
             if (response == null) {
                 Toast.makeText(

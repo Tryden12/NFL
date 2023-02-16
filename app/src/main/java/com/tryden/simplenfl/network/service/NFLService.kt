@@ -27,7 +27,7 @@ interface NFLService {
 
     //scoreboard?limit=1000&dates=20220908-20230108
     @GET("scoreboard")
-    suspend fun getScoreboardRange(
+    suspend fun getScoresRange(
         @Query("dates") dates: String,
         @Query("limit") limit: String
     ): Response<ScoreboardResponse>

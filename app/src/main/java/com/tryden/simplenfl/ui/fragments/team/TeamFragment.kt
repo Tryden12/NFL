@@ -18,7 +18,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.FragmentTeamBinding
-import com.tryden.simplenfl.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
 class TeamFragment : Fragment() {

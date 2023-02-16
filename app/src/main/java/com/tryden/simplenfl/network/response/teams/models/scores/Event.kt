@@ -8,7 +8,7 @@ data class Event(
     val name: String = "",
     val season: Season = Season(),
     val shortName: String = "",
-    val status: StatusX = StatusX(),
+    val status: Status = Status(),
     val uid: String = "",
     val weather: Weather? = Weather(),
     val week: Week = Week()

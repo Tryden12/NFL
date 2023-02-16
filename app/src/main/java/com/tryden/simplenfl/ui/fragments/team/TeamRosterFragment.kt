@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamRosterBinding
-import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.roster.TeamRosterEpoxyController
 
 class TeamRosterFragment : Fragment() {
 

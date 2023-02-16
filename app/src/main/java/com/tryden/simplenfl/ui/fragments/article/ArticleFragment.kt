@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentArticleBinding
-import com.tryden.simplenfl.epoxy.controllers.article.ArticleEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.article.ArticleEpoxyController
 
 
 class ArticleFragment : Fragment() {
