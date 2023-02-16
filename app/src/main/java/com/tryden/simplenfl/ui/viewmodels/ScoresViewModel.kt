@@ -8,14 +8,14 @@ import com.tryden.simplenfl.network.response.teams.models.scores.Calendar
 import com.tryden.simplenfl.network.response.teams.models.scores.Event
 import com.tryden.simplenfl.domain.models.calendar.UiCalendarMapper
 import com.tryden.simplenfl.ui.repositories.ScoresRepository
-import com.tryden.simplenfl.domain.mappers.events.EventMapper2
+import com.tryden.simplenfl.domain.mappers.events.EventMapper
 import kotlinx.coroutines.launch
 
 class ScoresViewModel : ViewModel(){
 
     private val repository = ScoresRepository()
     val uiCalendarMapper = UiCalendarMapper()
-    val uiEventMapper2 = EventMapper2
+    val uiEventMapper = EventMapper
 
     // List of events
     private val _eventList = MutableLiveData<List<Event>>(emptyList())

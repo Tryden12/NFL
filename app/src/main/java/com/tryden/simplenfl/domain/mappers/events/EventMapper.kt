@@ -9,7 +9,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 
-object EventMapper2 {
+object EventMapper {
 
     fun buildFrom(event: Event): EventEntity {
         return when (event.status.type.completed) {

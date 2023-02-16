@@ -37,7 +37,7 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
         epoxyControllerScores.setData(emptyList())
         viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
             val events: List<EventEntity> = eventList.map { event ->
-                viewModel.uiEventMapper2.buildFrom(event)
+                viewModel.uiEventMapper.buildFrom(event)
             }
             val epoxyItemsList = epoxyDataManager.giveMeScoresBySeasonTypeEpoxyItems(events)
             epoxyControllerScores.setData(epoxyItemsList)

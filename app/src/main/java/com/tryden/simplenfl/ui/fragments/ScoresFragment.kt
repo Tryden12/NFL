@@ -50,7 +50,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
         epoxyControllerScoresByWeek.setData(emptyList())
         viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
             val events: List<EventEntity> = eventList.map { event ->
-                viewModel.uiEventMapper2.buildFrom(event)
+                viewModel.uiEventMapper.buildFrom(event)
             }
             val epoxyItemsList = epoxyDataManager.giveMeScoresByWeekEpoxyItems(events)
             epoxyControllerScoresByWeek.setData(epoxyItemsList)
@@ -72,7 +72,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
             epoxyControllerScoresByWeek.setData(emptyList())
             viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
                 val events: List<EventEntity> = eventList.map { event ->
-                    viewModel.uiEventMapper2.buildFrom(event)
+                    viewModel.uiEventMapper.buildFrom(event)
                 }
                 val epoxyItemsList = epoxyDataManager.giveMeScoresByWeekEpoxyItems(events)
                 epoxyControllerScoresByWeek.setData(epoxyItemsList)
