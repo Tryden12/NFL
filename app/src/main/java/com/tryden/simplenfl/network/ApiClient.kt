@@ -1,12 +1,12 @@
 package com.tryden.simplenfl.network
 
-import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
-import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
-import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
-import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
+import com.tryden.simplenfl.network.response.models.article.ArticleResponse
+import com.tryden.simplenfl.network.response.models.news.NewsResponse
+import com.tryden.simplenfl.network.response.models.player.PlayerResponse
+import com.tryden.simplenfl.network.response.models.roster.RosterResponse
+import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
+import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
+import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse
 import com.tryden.simplenfl.network.service.ArticleByIDService
 import com.tryden.simplenfl.network.service.NFLService
 import com.tryden.simplenfl.network.service.PlayerByIdService
@@ -19,43 +19,43 @@ class ApiClient(
     private val playerByIdService: PlayerByIdService
 ) {
 
-    suspend fun getAllTeams() : SimpleResponse<AllTeamsResponse> {
+    suspend fun getAllTeams() : SimpleResponse<com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse> {
         return safeApiCall { nflService.getAllTeams() }
     }
 
-    suspend fun getTeamById(teamId: Int) : SimpleResponse<TeamObjectResponse> {
+    suspend fun getTeamById(teamId: Int) : SimpleResponse<com.tryden.simplenfl.network.response.models.team.TeamObjectResponse> {
         return safeApiCall { nflService.getTeamById(teamId) }
     }
 
-    suspend fun getRosterByTeamId(teamId: Int) : SimpleResponse<RosterResponse> {
+    suspend fun getRosterByTeamId(teamId: Int) : SimpleResponse<com.tryden.simplenfl.network.response.models.roster.RosterResponse> {
         return safeApiCall { nflService.getRosterByTeamId(teamId) }
     }
 
-    suspend fun getScoresRange(dates: String, limit: String) : SimpleResponse<ScoreboardResponse> {
+    suspend fun getScoresRange(dates: String, limit: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse> {
         return safeApiCall { nflService.getScoresRange(dates, limit) }
     }
 
-    suspend fun getScoresByWeek(week: String) : SimpleResponse<ScoreboardResponse> {
+    suspend fun getScoresByWeek(week: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse> {
         return safeApiCall { nflService.getScoresByWeek(week) }
     }
 
-    suspend fun getScoresCalendar(limit: String) : SimpleResponse<ScoreboardResponse> {
+    suspend fun getScoresCalendar(limit: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse> {
         return safeApiCall { nflService.getScoresCalendar(limit) }
     }
 
-    suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<NewsResponse> {
+    suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<com.tryden.simplenfl.network.response.models.news.NewsResponse> {
         return safeApiCall { nflService.getBreakingNews(type, limit) }
     }
 
-    suspend fun getNewsByTeamId(teamId: String, limit: String): SimpleResponse<NewsResponse> {
+    suspend fun getNewsByTeamId(teamId: String, limit: String): SimpleResponse<com.tryden.simplenfl.network.response.models.news.NewsResponse> {
         return safeApiCall { nflService.getNewsByTeamId(teamId, limit) }
     }
 
-    suspend fun getArticleById(articleId: String) : SimpleResponse<ArticleResponse> {
+    suspend fun getArticleById(articleId: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.article.ArticleResponse> {
         return safeApiCall { articleByIDService.getArticleById(articleId) }
     }
 
-    suspend fun getPlayerById(playerId: String): SimpleResponse<PlayerResponse> {
+    suspend fun getPlayerById(playerId: String): SimpleResponse<com.tryden.simplenfl.network.response.models.player.PlayerResponse> {
         return safeApiCall { playerByIdService.getPlayerById(playerId) }
     }
 

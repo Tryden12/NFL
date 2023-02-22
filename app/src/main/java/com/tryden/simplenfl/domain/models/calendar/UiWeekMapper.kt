@@ -1,12 +1,12 @@
 package com.tryden.simplenfl.domain.models.calendar
 
-import com.tryden.simplenfl.network.response.teams.models.scores.Entry
+import com.tryden.simplenfl.network.response.models.scores.Entry
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 class UiWeekMapper {
 
-    fun buildFrom(week: Entry) : UiCalendar.UiWeek {
+    fun buildFrom(week: com.tryden.simplenfl.network.response.models.scores.Entry) : UiCalendar.UiWeek {
         return UiCalendar.UiWeek(
             longLabel = week.label,
             shortLabel = week.alternateLabel,

@@ -6,7 +6,7 @@ import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelTeamPageHeaderBinding
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingNoCircleEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
+import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
 
 class TeamPageHeaderEpoxyController: EpoxyController() {
 
@@ -17,7 +17,7 @@ class TeamPageHeaderEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var teamResponse: TeamObjectResponse? = null
+    var teamResponse: com.tryden.simplenfl.network.response.models.team.TeamObjectResponse? = null
         set(value) {
             field = value
             if (field != null) {

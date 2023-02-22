@@ -1,18 +1,18 @@
 package com.tryden.simplenfl
 
 import com.tryden.simplenfl.network.NetworkLayer
-import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
-import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
-import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
-import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
+import com.tryden.simplenfl.network.response.models.article.ArticleResponse
+import com.tryden.simplenfl.network.response.models.news.NewsResponse
+import com.tryden.simplenfl.network.response.models.player.PlayerResponse
+import com.tryden.simplenfl.network.response.models.roster.RosterResponse
+import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
+import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
+import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse
 
 class SharedRepository {
 
     // Team by Id
-    suspend fun getTeamById(teamId: Int): TeamObjectResponse? {
+    suspend fun getTeamById(teamId: Int): com.tryden.simplenfl.network.response.models.team.TeamObjectResponse? {
         val request = NetworkLayer.apiClient.getTeamById(teamId)
 
         // If the api call fails, network fails, or user loses internet
@@ -31,7 +31,7 @@ class SharedRepository {
     }
 
     // Get all teams
-    suspend fun getAllTeams(): AllTeamsResponse? {
+    suspend fun getAllTeams(): com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse? {
         val request = NetworkLayer.apiClient.getAllTeams()
 
         if (request.failed || !request.isSuccessful) {
@@ -42,7 +42,7 @@ class SharedRepository {
     }
 
     // Get roster by team id
-    suspend fun getRosterByTeamId(teamId: Int): RosterResponse? {
+    suspend fun getRosterByTeamId(teamId: Int): com.tryden.simplenfl.network.response.models.roster.RosterResponse? {
         val request = NetworkLayer.apiClient.getRosterByTeamId(teamId)
 
         if (request.failed || !request.isSuccessful) {
@@ -53,7 +53,7 @@ class SharedRepository {
     }
 
     // Get scoreboard by date range
-    suspend fun getScoresRange(dates: String, limit: String): ScoreboardResponse? {
+    suspend fun getScoresRange(dates: String, limit: String): com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse? {
         val request = NetworkLayer.apiClient.getScoresRange(dates, limit)
 
         if (request.failed || !request.isSuccessful) {
@@ -63,7 +63,7 @@ class SharedRepository {
         return request.body
     }
 
-    suspend fun getScoresByWeek(week: String) : ScoreboardResponse? {
+    suspend fun getScoresByWeek(week: String) : com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse? {
         val request = NetworkLayer.apiClient.getScoresByWeek(week)
 
         if (request.failed || !request.isSuccessful) {
@@ -73,7 +73,7 @@ class SharedRepository {
         return request.body
      }
 
-    suspend fun getScoresCalendar(limit: String) : ScoreboardResponse? {
+    suspend fun getScoresCalendar(limit: String) : com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse? {
         val request = NetworkLayer.apiClient.getScoresCalendar(limit)
 
         if (request.failed || !request.isSuccessful) {
@@ -84,7 +84,7 @@ class SharedRepository {
     }
 
     // Get breaking news
-    suspend fun getBreakingNews(type: String, limit: String): NewsResponse? {
+    suspend fun getBreakingNews(type: String, limit: String): com.tryden.simplenfl.network.response.models.news.NewsResponse? {
         val request = NetworkLayer.apiClient.getBreakingNews(type, limit)
 
         if (request.failed || !request.isSuccessful) {
@@ -95,7 +95,7 @@ class SharedRepository {
     }
 
     // Get news by team id
-    suspend fun getNewsByTeamId(teamId: String, limit: String): NewsResponse? {
+    suspend fun getNewsByTeamId(teamId: String, limit: String): com.tryden.simplenfl.network.response.models.news.NewsResponse? {
         val request = NetworkLayer.apiClient.getNewsByTeamId(teamId, limit)
 
         if (request.failed || !request.isSuccessful) {
@@ -106,7 +106,7 @@ class SharedRepository {
     }
 
     // Get article by id
-    suspend fun getArticleById(articleId: String): ArticleResponse? {
+    suspend fun getArticleById(articleId: String): com.tryden.simplenfl.network.response.models.article.ArticleResponse? {
         val request = NetworkLayer.apiClient.getArticleById(articleId)
 
         if (request.failed || !request.isSuccessful) {
@@ -117,7 +117,7 @@ class SharedRepository {
     }
 
     // Get player by id
-    suspend fun getPlayerById(playerId: String): PlayerResponse? {
+    suspend fun getPlayerById(playerId: String): com.tryden.simplenfl.network.response.models.player.PlayerResponse? {
         val request = NetworkLayer.apiClient.getPlayerById(playerId)
 
         if (request.failed || !request.isSuccessful) {

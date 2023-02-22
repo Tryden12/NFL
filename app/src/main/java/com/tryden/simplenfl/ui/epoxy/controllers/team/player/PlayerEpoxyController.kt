@@ -6,7 +6,7 @@ import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelPlayerHeaderBinding
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
+import com.tryden.simplenfl.network.response.models.player.PlayerResponse
 
 class PlayerEpoxyController: EpoxyController() {
 
@@ -17,7 +17,7 @@ class PlayerEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var playerResponse: PlayerResponse? = null
+    var playerResponse: com.tryden.simplenfl.network.response.models.player.PlayerResponse? = null
         set(value) {
             field = value
             if (value != null) {

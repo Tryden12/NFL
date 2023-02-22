@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.network.response.teams.models.scores.Calendar
-import com.tryden.simplenfl.network.response.teams.models.scores.Event
+import com.tryden.simplenfl.network.response.models.scores.Calendar
+import com.tryden.simplenfl.network.response.models.scores.Event
 import com.tryden.simplenfl.domain.models.calendar.UiCalendarMapper
 import com.tryden.simplenfl.ui.repositories.ScoresRepository
 import com.tryden.simplenfl.domain.mappers.events.EventMapper
@@ -18,12 +18,12 @@ class ScoresViewModel : ViewModel(){
     val uiEventMapper = EventMapper
 
     // List of events
-    private val _eventList = MutableLiveData<List<Event>>(emptyList())
-    val eventListLiveData: LiveData<List<Event>> = _eventList
+    private val _eventList = MutableLiveData<List<com.tryden.simplenfl.network.response.models.scores.Event>>(emptyList())
+    val eventListLiveData: LiveData<List<com.tryden.simplenfl.network.response.models.scores.Event>> = _eventList
 
     // List of weeks (calendar)
-    private val _calendarList = MutableLiveData<List<Calendar>>(emptyList())
-    val calendarListLiveData: LiveData<List<Calendar>> = _calendarList
+    private val _calendarList = MutableLiveData<List<com.tryden.simplenfl.network.response.models.scores.Calendar>>(emptyList())
+    val calendarListLiveData: LiveData<List<com.tryden.simplenfl.network.response.models.scores.Calendar>> = _calendarList
 
     fun refreshScores(date: String, limit: String) = viewModelScope.launch {
         val eventsResponse = repository.getScores(date, limit) ?: return@launch // todo error handling
