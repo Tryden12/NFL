@@ -27,7 +27,7 @@ class ArticleEpoxyController: EpoxyController() {
             }
         }
 
-    var articleResponse: com.tryden.simplenfl.network.response.models.article.ArticleResponse? = null
+    var articleResponse: ArticleResponse? = null
         set(value) {
             field = value
             if (value != null) {
