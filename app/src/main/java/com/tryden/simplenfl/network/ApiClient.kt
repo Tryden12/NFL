@@ -2,7 +2,6 @@ package com.tryden.simplenfl.network
 
 import com.tryden.simplenfl.network.response.models.article.ArticleResponse
 import com.tryden.simplenfl.network.response.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.models.player.PlayerResponse
 import com.tryden.simplenfl.network.response.models.roster.RosterResponse
 import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
 import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
@@ -53,10 +52,6 @@ class ApiClient(
 
     suspend fun getArticleById(articleId: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.article.ArticleResponse> {
         return safeApiCall { articleByIDService.getArticleById(articleId) }
-    }
-
-    suspend fun getPlayerById(playerId: String): SimpleResponse<com.tryden.simplenfl.network.response.models.player.PlayerResponse> {
-        return safeApiCall { playerByIdService.getPlayerById(playerId) }
     }
 
 

@@ -183,20 +183,20 @@ class MainActivityBackupForTesting : AppCompatActivity() {
         }
 
         // refresh player by id
-        viewModel.refreshPlayer("14876")
-        viewModel.playerByIdLiveData.observe(this) { response ->
-            if (response == null) {
-                Toast.makeText(
-                    this@MainActivityBackupForTesting,
-                    "Unsuccessful network call for refreshArticle!",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@observe
-            }
-
-            val playerByIdName = response.displayName
-            testPlayerByIdTextView.text = playerByIdName
-        }
+//        viewModel.refreshPlayer("14876")
+//        viewModel.playerByIdLiveData.observe(this) { response ->
+//            if (response == null) {
+//                Toast.makeText(
+//                    this@MainActivityBackupForTesting,
+//                    "Unsuccessful network call for refreshArticle!",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                return@observe
+//            }
+//
+//            val playerByIdName = response.displayName
+//            testPlayerByIdTextView.text = playerByIdName
+//        }
 
 
     }

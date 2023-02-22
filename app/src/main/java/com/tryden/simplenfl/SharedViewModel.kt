@@ -4,13 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.network.response.models.article.ArticleResponse
-import com.tryden.simplenfl.network.response.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.models.player.PlayerResponse
-import com.tryden.simplenfl.network.response.models.roster.RosterResponse
-import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
-import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
-import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse
 import kotlinx.coroutines.launch
 
 class SharedViewModel: ViewModel() {
@@ -43,9 +36,6 @@ class SharedViewModel: ViewModel() {
 
     private val _articleByIdLiveDataResponse = MutableLiveData<com.tryden.simplenfl.network.response.models.article.ArticleResponse?>()
     val articleByIdLiveDataResponse: LiveData<com.tryden.simplenfl.network.response.models.article.ArticleResponse?> = _articleByIdLiveDataResponse
-
-    private val _playerByIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.player.PlayerResponse?>()
-    val playerByIdLiveData: LiveData<com.tryden.simplenfl.network.response.models.player.PlayerResponse?> = _playerByIdLiveData
 
     private val _onTeamSelectedLiveData = MutableLiveData("1")
     val onTeamSelectedLiveData: LiveData<String> = _onTeamSelectedLiveData
@@ -136,11 +126,4 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    fun refreshPlayer(playerId: String) {
-        viewModelScope.launch {
-            val response = repository.getPlayerById(playerId)
-
-            _playerByIdLiveData.postValue(response)
-        }
-    }
 }
