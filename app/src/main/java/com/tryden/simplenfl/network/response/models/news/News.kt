@@ -1,5 +1,5 @@
 package com.tryden.simplenfl.network.response.models.news
 
-data class Self(
+data class News(
     val href: String = ""
 )

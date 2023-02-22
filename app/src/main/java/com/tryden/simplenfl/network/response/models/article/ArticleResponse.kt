@@ -1,21 +1,12 @@
 package com.tryden.simplenfl.network.response.models.article
 
+import com.tryden.simplenfl.network.response.models.news.Api
+import com.tryden.simplenfl.network.response.models.news.Category
+import com.tryden.simplenfl.network.response.models.news.Image
+
 data class ArticleResponse(
     val headlines: List<Headline> = listOf(),
 ) {
-    data class Api(
-        val news: News = News()
-    )
-
-    data class Category(
-        val description: String = "",
-        val id: Int = 0,
-        val sportId: Int = 0,
-        val team: Team? = Team(),
-        val teamId: Int? = 0,
-        val topicId: Int? = 0,
-        val type: String = "",
-    )
 
     data class Headline(
         val byline: String = "",
@@ -38,16 +29,6 @@ data class ArticleResponse(
         val title: String = "",
         val type: String = "",
         val video: List<Any> = listOf()
-    )
-
-    data class Image(
-        val credit: String = "",
-        val height: Int = 0,
-        val id: Int = 0,
-        val name: String = "",
-        val type: String = "",
-        val url: String = "",
-        val width: Int = 0
     )
 
     data class ImageRelated(

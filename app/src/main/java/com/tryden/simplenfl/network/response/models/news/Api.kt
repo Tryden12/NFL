@@ -1,6 +1,7 @@
 package com.tryden.simplenfl.network.response.models.news
 
+import com.tryden.simplenfl.network.response.models.article.ArticleResponse
+
 data class Api(
-    val news: com.tryden.simplenfl.network.response.models.news.NewsX = com.tryden.simplenfl.network.response.models.news.NewsX(),
-    val self: com.tryden.simplenfl.network.response.models.news.Self = com.tryden.simplenfl.network.response.models.news.Self()
+    val news: News = News()
 )
