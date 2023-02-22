@@ -33,7 +33,7 @@ class NavGraphActivity: AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
                 R.id.homeFragment,
-                R.id.scoresFragment,
+                R.id.nav_graph_scores,
                 R.id.nav_graph_teams,
                 R.id.nav_graph_news
             )
