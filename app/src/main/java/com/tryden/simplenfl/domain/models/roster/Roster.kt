@@ -4,7 +4,6 @@ package com.tryden.simplenfl.domain.models.roster
 data class Roster(
     val athletes: List<Athlete> = listOf(),
     val coach: List<Coach> = listOf(),
-    val season: Season = Season(),
     val team: Team = Team(),
 ) {
 
@@ -101,12 +100,6 @@ data class Roster(
         val leaf: Boolean = false,
         val name: String = "",
         val parent: Parent = Parent()
-    )
-
-    data class Season(
-        val name: String = "",
-        val type: Int = 0,
-        val year: Int = 0
     )
 
     data class Status(
