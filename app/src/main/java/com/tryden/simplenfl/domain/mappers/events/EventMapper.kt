@@ -3,7 +3,7 @@ package com.tryden.simplenfl.domain.mappers.events
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity.*
-import com.tryden.simplenfl.network.response.models.scores.Event
+import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Event
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter
 
 object EventMapper {
 
-    fun buildFrom(event: com.tryden.simplenfl.network.response.models.scores.Event): EventEntity {
+    fun buildFrom(event: Event): EventEntity {
         return when (event.status.type.completed) {
             true -> { /** Event status = Completed **/
                 Completed(

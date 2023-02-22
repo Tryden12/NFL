@@ -1,10 +1,10 @@
 package com.tryden.simplenfl.domain.models.calendar
 
-import com.tryden.simplenfl.network.response.models.scores.Calendar
+import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Calendar
 
 class UiCalendarMapper {
 
-    fun buildFrom(calendar: com.tryden.simplenfl.network.response.models.scores.Calendar) : UiCalendar {
+    fun buildFrom(calendar: Calendar) : UiCalendar {
         return UiCalendar(
             weeks = calendar.entries!!.map { week ->
                 UiWeekMapper().buildFrom(week)
