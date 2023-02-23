@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -30,18 +31,21 @@ class NavGraphActivity: AppCompatActivity() {
 
     // Setup nav host and controller
     private fun setupNavHost() {
-        val appBarConfiguration = AppBarConfiguration(
-            topLevelDestinationIds = setOf(
-                R.id.homeFragment,
-                R.id.nav_graph_scores,
-                R.id.nav_graph_teams,
-                R.id.nav_graph_news
-            )
-        )
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
+        binding.bottomNavigationView.apply {
+            navController.let {
+                NavigationUI.setupWithNavController(this, it)
+                setOnItemSelectedListener { item ->
+                    NavigationUI.onNavDestinationSelected(item, it)
+                    true
+                }
+                setOnItemReselectedListener { menuItem ->
+                    navController.popBackStack(destinationId = menuItem.itemId, false)
+                    NavigationUI.onNavDestinationSelected(menuItem, it)
+                }
+            }
+        }
     }
 }
