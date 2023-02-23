@@ -9,16 +9,12 @@
     android:fitsSystemWindows="true"
     android:background="@color/black">
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/epoxy_team_RecyclerView"
+    <include
+        android:id="@+id/teamPageHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        layout="@layout/model_team_page_header" />
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/teamsTabLayout"

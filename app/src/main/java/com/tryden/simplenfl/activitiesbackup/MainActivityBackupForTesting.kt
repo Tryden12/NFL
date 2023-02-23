@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.ui.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 
 class MainActivityBackupForTesting : AppCompatActivity() {
 
@@ -24,7 +23,6 @@ class MainActivityBackupForTesting : AppCompatActivity() {
         ViewModelProvider(this)[SharedViewModel::class.java]
     }
 
-    private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

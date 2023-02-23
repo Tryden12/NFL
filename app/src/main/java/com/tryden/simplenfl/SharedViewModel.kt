@@ -37,14 +37,14 @@ class SharedViewModel: ViewModel() {
     private val _articleByIdLiveDataResponse = MutableLiveData<com.tryden.simplenfl.network.response.models.article.ArticleResponse?>()
     val articleByIdLiveDataResponse: LiveData<com.tryden.simplenfl.network.response.models.article.ArticleResponse?> = _articleByIdLiveDataResponse
 
-    private val _onTeamSelectedLiveData = MutableLiveData("1")
-    val onTeamSelectedLiveData: LiveData<String> = _onTeamSelectedLiveData
+    private val _onTeamSelected = MutableLiveData("1")
+    val onTeamSelectedLiveData: LiveData<String> = _onTeamSelected
 
     private val _onArticleSelectedLiveData = MutableLiveData<String>()
     val onArticleSelectedLiveData: LiveData<String> = _onArticleSelectedLiveData
 
     fun saveCurrentTeamId(teamId: String) {
-        _onTeamSelectedLiveData.value = teamId
+        _onTeamSelected.value = teamId
     }
 
     fun saveCurrentArticleId(articleId: String) {
