@@ -3,9 +3,9 @@ package com.tryden.simplenfl.network
 import com.tryden.simplenfl.network.response.models.article.ArticleResponse
 import com.tryden.simplenfl.network.response.models.news.NewsResponse
 import com.tryden.simplenfl.network.response.models.roster.RosterResponse
-import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
-import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
 import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse
+import com.tryden.simplenfl.network.response.models.team.TeamResponse
+import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
 import com.tryden.simplenfl.network.service.ArticleByIDService
 import com.tryden.simplenfl.network.service.NFLService
 import com.tryden.simplenfl.network.service.PlayerByIdService
@@ -18,39 +18,39 @@ class ApiClient(
     private val playerByIdService: PlayerByIdService
 ) {
 
-    suspend fun getAllTeams() : SimpleResponse<com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse> {
+    suspend fun getAllTeams() : SimpleResponse<AllTeamsResponse> {
         return safeApiCall { nflService.getAllTeams() }
     }
 
-    suspend fun getTeamById(teamId: Int) : SimpleResponse<com.tryden.simplenfl.network.response.models.team.TeamObjectResponse> {
+    suspend fun getTeamById(teamId: Int) : SimpleResponse<TeamResponse> {
         return safeApiCall { nflService.getTeamById(teamId) }
     }
 
-    suspend fun getRosterByTeamId(teamId: Int) : SimpleResponse<com.tryden.simplenfl.network.response.models.roster.RosterResponse> {
+    suspend fun getRosterByTeamId(teamId: Int) : SimpleResponse<RosterResponse> {
         return safeApiCall { nflService.getRosterByTeamId(teamId) }
     }
 
-    suspend fun getScoresRange(dates: String, limit: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse> {
+    suspend fun getScoresRange(dates: String, limit: String) : SimpleResponse<ScoreboardResponse> {
         return safeApiCall { nflService.getScoresRange(dates, limit) }
     }
 
-    suspend fun getScoresByWeek(week: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse> {
+    suspend fun getScoresByWeek(week: String) : SimpleResponse<ScoreboardResponse> {
         return safeApiCall { nflService.getScoresByWeek(week) }
     }
 
-    suspend fun getScoresCalendar(limit: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse> {
+    suspend fun getScoresCalendar(limit: String) : SimpleResponse<ScoreboardResponse> {
         return safeApiCall { nflService.getScoresCalendar(limit) }
     }
 
-    suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<com.tryden.simplenfl.network.response.models.news.NewsResponse> {
+    suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<NewsResponse> {
         return safeApiCall { nflService.getBreakingNews(type, limit) }
     }
 
-    suspend fun getNewsByTeamId(teamId: String, limit: String): SimpleResponse<com.tryden.simplenfl.network.response.models.news.NewsResponse> {
+    suspend fun getNewsByTeamId(teamId: String, limit: String): SimpleResponse<NewsResponse> {
         return safeApiCall { nflService.getNewsByTeamId(teamId, limit) }
     }
 
-    suspend fun getArticleById(articleId: String) : SimpleResponse<com.tryden.simplenfl.network.response.models.article.ArticleResponse> {
+    suspend fun getArticleById(articleId: String) : SimpleResponse<ArticleResponse> {
         return safeApiCall { articleByIDService.getArticleById(articleId) }
     }
 

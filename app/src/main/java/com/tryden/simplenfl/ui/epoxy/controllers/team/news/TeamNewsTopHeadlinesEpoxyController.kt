@@ -7,8 +7,6 @@ import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
-import com.tryden.simplenfl.network.response.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.models.team.TeamObjectResponse
 
 class TeamNewsTopHeadlinesEpoxyController(
     private val onArticleSelected: (String) -> Unit
@@ -31,7 +29,7 @@ class TeamNewsTopHeadlinesEpoxyController(
             }
         }
 
-    var teamDetailsResponse: com.tryden.simplenfl.network.response.models.team.TeamObjectResponse? = null
+    var teamDetailsResponse: com.tryden.simplenfl.network.response.models.team.TeamResponse? = null
         set(value) {
             field = value
         }

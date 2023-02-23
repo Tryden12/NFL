@@ -10,8 +10,8 @@ class SharedViewModel: ViewModel() {
 
    private val repository = SharedRepository()
 
-    private val _teamByIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.team.TeamObjectResponse?>()
-    val teamByIdLiveData: LiveData<com.tryden.simplenfl.network.response.models.team.TeamObjectResponse?> = _teamByIdLiveData
+    private val _teamByIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.team.TeamResponse?>()
+    val teamByIdLiveData: LiveData<com.tryden.simplenfl.network.response.models.team.TeamResponse?> = _teamByIdLiveData
 
     private val _allTeamsListLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse?>()
     val allTeamsListLiveData: LiveData<com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse?> = _allTeamsListLiveData

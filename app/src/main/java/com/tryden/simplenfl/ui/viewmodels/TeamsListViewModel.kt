@@ -14,8 +14,8 @@ class TeamsListViewModel: ViewModel() {
     private val repository = TeamsRepository()
     val uiTeamMapper = UiTeamMapper()
 
-    private val _teamsList = MutableLiveData<List<com.tryden.simplenfl.network.response.models.teams.Teams>>(emptyList())
-    val teamListLiveData: LiveData<List<com.tryden.simplenfl.network.response.models.teams.Teams>> = _teamsList
+    private val _teamsList = MutableLiveData<List<Teams>>(emptyList())
+    val teamListLiveData: LiveData<List<Teams>> = _teamsList
 
     fun refreshTeams() = viewModelScope.launch {
         val teamsResponse = repository.getAllTeams() ?: return@launch // todo error handling

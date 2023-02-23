@@ -10,5 +10,5 @@ interface ArticleByIDService {
     @GET("{article-id}")
     suspend fun getArticleById(
         @Path("article-id") articleId: String
-    ) : Response<com.tryden.simplenfl.network.response.models.article.ArticleResponse>
+    ) : Response<ArticleResponse>
 }
