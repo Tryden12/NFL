@@ -4,7 +4,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.teams.TeamsListVerticalEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.teams.TitleTeamsListEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
+import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
 
 class TeamListHomeEpoxyController(
     private val onTeamSelected: (Int) -> Unit
@@ -18,7 +18,7 @@ class TeamListHomeEpoxyController(
                 requestModelBuild()
             }
         }
-    var teamsListResponse: AllTeamsResponse? = null
+    var teamsListResponse: com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse? = null
         set(value) {
             field = value
             if (value != null) {

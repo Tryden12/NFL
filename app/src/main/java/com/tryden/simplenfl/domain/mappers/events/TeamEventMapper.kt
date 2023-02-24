@@ -1,7 +1,7 @@
 package com.tryden.simplenfl.domain.mappers.events
 
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity.Team
-import com.tryden.simplenfl.network.response.teams.models.scores.Competitor
+import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Competitor
 
 object TeamEventMapper {
 

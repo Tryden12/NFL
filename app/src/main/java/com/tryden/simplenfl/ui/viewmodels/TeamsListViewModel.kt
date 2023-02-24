@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.network.response.teams.models.teams.Teams
+import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse.Teams
 import com.tryden.simplenfl.ui.repositories.TeamsRepository
 import com.tryden.simplenfl.domain.mappers.teamslist.UiTeamMapper
 import kotlinx.coroutines.launch

@@ -9,7 +9,7 @@ import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelRosterHeaderBinding
 import com.tryden.simplenfl.databinding.ModelRosterPlayerItemBinding
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
-import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
+import com.tryden.simplenfl.network.response.models.roster.RosterResponse
 
 class TeamRosterEpoxyController: EpoxyController() {
 
@@ -20,7 +20,7 @@ class TeamRosterEpoxyController: EpoxyController() {
                 requestModelBuild()
             }
         }
-    var rosterResponse: RosterResponse? = null
+    var rosterResponse: com.tryden.simplenfl.network.response.models.roster.RosterResponse? = null
         set(value) {
             field = value
             if (value != null) {

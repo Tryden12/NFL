@@ -1,6 +1,6 @@
 package com.tryden.simplenfl.network.service
 
-import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
+import com.tryden.simplenfl.network.response.models.article.ArticleResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

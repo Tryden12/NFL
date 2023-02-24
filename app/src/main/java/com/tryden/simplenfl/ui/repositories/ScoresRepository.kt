@@ -1,11 +1,11 @@
 package com.tryden.simplenfl.ui.repositories
 
 import com.tryden.simplenfl.network.NetworkLayer
-import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
+import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse
 
 class ScoresRepository {
 
-    suspend fun getScores(date: String, limit: String) : ScoreboardResponse? {
+    suspend fun getScores(date: String, limit: String) : com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse? {
         val request = NetworkLayer.apiClient.getScoresRange(date, limit)
 
         if (request.failed || !request.isSuccessful) {
@@ -15,7 +15,7 @@ class ScoresRepository {
         return request.body
     }
 
-    suspend fun getScoresCalendar(limit: String) : ScoreboardResponse? {
+    suspend fun getScoresCalendar(limit: String) : com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse? {
         val request = NetworkLayer.apiClient.getScoresCalendar(limit)
 
         if (request.failed || !request.isSuccessful) {

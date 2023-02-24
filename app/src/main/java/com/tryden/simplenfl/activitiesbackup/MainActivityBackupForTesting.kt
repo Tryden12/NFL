@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
-import com.tryden.simplenfl.ui.epoxy.controllers.team.header.TeamPageHeaderEpoxyController
 
 class MainActivityBackupForTesting : AppCompatActivity() {
 
@@ -24,7 +23,6 @@ class MainActivityBackupForTesting : AppCompatActivity() {
         ViewModelProvider(this)[SharedViewModel::class.java]
     }
 
-    private val epoxyControllerTeam = TeamPageHeaderEpoxyController()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -183,20 +181,20 @@ class MainActivityBackupForTesting : AppCompatActivity() {
         }
 
         // refresh player by id
-        viewModel.refreshPlayer("14876")
-        viewModel.playerByIdLiveData.observe(this) { response ->
-            if (response == null) {
-                Toast.makeText(
-                    this@MainActivityBackupForTesting,
-                    "Unsuccessful network call for refreshArticle!",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@observe
-            }
-
-            val playerByIdName = response.displayName
-            testPlayerByIdTextView.text = playerByIdName
-        }
+//        viewModel.refreshPlayer("14876")
+//        viewModel.playerByIdLiveData.observe(this) { response ->
+//            if (response == null) {
+//                Toast.makeText(
+//                    this@MainActivityBackupForTesting,
+//                    "Unsuccessful network call for refreshArticle!",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                return@observe
+//            }
+//
+//            val playerByIdName = response.displayName
+//            testPlayerByIdTextView.text = playerByIdName
+//        }
 
 
     }

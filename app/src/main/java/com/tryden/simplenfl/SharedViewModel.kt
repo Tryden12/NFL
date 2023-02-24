@@ -4,57 +4,47 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.network.response.teams.models.article.ArticleResponse
-import com.tryden.simplenfl.network.response.teams.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.teams.models.player.PlayerResponse
-import com.tryden.simplenfl.network.response.teams.models.roster.RosterResponse
-import com.tryden.simplenfl.network.response.teams.models.team.TeamObjectResponse
-import com.tryden.simplenfl.network.response.teams.models.teams.AllTeamsResponse
-import com.tryden.simplenfl.network.response.teams.models.scores.ScoreboardResponse
 import kotlinx.coroutines.launch
 
 class SharedViewModel: ViewModel() {
 
    private val repository = SharedRepository()
 
-    private val _teamByIdLiveData = MutableLiveData<TeamObjectResponse?>()
-    val teamByIdLiveData: LiveData<TeamObjectResponse?> = _teamByIdLiveData
+    private val _teamByIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.team.TeamResponse?>()
+    val teamByIdLiveData: LiveData<com.tryden.simplenfl.network.response.models.team.TeamResponse?> = _teamByIdLiveData
 
-    private val _allTeamsListLiveData = MutableLiveData<AllTeamsResponse?>()
-    val allTeamsListLiveData: LiveData<AllTeamsResponse?> = _allTeamsListLiveData
+    private val _allTeamsListLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse?>()
+    val allTeamsListLiveData: LiveData<com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse?> = _allTeamsListLiveData
 
-    private val _rosterByTeamIdLiveData = MutableLiveData<RosterResponse?>()
-    val rosterByTeamId: LiveData<RosterResponse?> = _rosterByTeamIdLiveData
+    private val _rosterByTeamIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.roster.RosterResponse?>()
+    val rosterByTeamId: LiveData<com.tryden.simplenfl.network.response.models.roster.RosterResponse?> = _rosterByTeamIdLiveData
 
-    private val _scoreboardByRangeLiveData = MutableLiveData<ScoreboardResponse?>()
-    val scoreboardByRangeLiveData: LiveData<ScoreboardResponse?> = _scoreboardByRangeLiveData
+    private val _scoreboardByRangeLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse?>()
+    val scoreboardByRangeLiveData: LiveData<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse?> = _scoreboardByRangeLiveData
 
-    private val _scoresByWeekLiveData = MutableLiveData<ScoreboardResponse?>()
-    val scoresByWeekLiveData: LiveData<ScoreboardResponse?> = _scoresByWeekLiveData
+    private val _scoresByWeekLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse?>()
+    val scoresByWeekLiveData: LiveData<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse?> = _scoresByWeekLiveData
 
-    private val _scoresCalendarLiveData = MutableLiveData<ScoreboardResponse?>()
-    val scoresCalendarLiveData: LiveData<ScoreboardResponse?> = _scoresCalendarLiveData
+    private val _scoresCalendarLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse?>()
+    val scoresCalendarLiveData: LiveData<com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse?> = _scoresCalendarLiveData
 
-    private val _newsBreakingLiveData = MutableLiveData<NewsResponse?>()
-    val newsBreakingLiveData: LiveData<NewsResponse?> = _newsBreakingLiveData
+    private val _newsBreakingLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.news.NewsResponse?>()
+    val newsBreakingLiveData: LiveData<com.tryden.simplenfl.network.response.models.news.NewsResponse?> = _newsBreakingLiveData
 
-    private val _newsByTeamIdLiveData = MutableLiveData<NewsResponse?>()
-    val newsByTeamIdLiveData: LiveData<NewsResponse?> = _newsByTeamIdLiveData
+    private val _newsByTeamIdLiveData = MutableLiveData<com.tryden.simplenfl.network.response.models.news.NewsResponse?>()
+    val newsByTeamIdLiveData: LiveData<com.tryden.simplenfl.network.response.models.news.NewsResponse?> = _newsByTeamIdLiveData
 
-    private val _articleByIdLiveDataResponse = MutableLiveData<ArticleResponse?>()
-    val articleByIdLiveDataResponse: LiveData<ArticleResponse?> = _articleByIdLiveDataResponse
+    private val _articleByIdLiveDataResponse = MutableLiveData<com.tryden.simplenfl.network.response.models.article.ArticleResponse?>()
+    val articleByIdLiveDataResponse: LiveData<com.tryden.simplenfl.network.response.models.article.ArticleResponse?> = _articleByIdLiveDataResponse
 
-    private val _playerByIdLiveData = MutableLiveData<PlayerResponse?>()
-    val playerByIdLiveData: LiveData<PlayerResponse?> = _playerByIdLiveData
-
-    private val _onTeamSelectedLiveData = MutableLiveData("1")
-    val onTeamSelectedLiveData: LiveData<String> = _onTeamSelectedLiveData
+    private val _onTeamSelected = MutableLiveData("1")
+    val onTeamSelectedLiveData: LiveData<String> = _onTeamSelected
 
     private val _onArticleSelectedLiveData = MutableLiveData<String>()
     val onArticleSelectedLiveData: LiveData<String> = _onArticleSelectedLiveData
 
     fun saveCurrentTeamId(teamId: String) {
-        _onTeamSelectedLiveData.value = teamId
+        _onTeamSelected.value = teamId
     }
 
     fun saveCurrentArticleId(articleId: String) {
@@ -136,11 +126,4 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    fun refreshPlayer(playerId: String) {
-        viewModelScope.launch {
-            val response = repository.getPlayerById(playerId)
-
-            _playerByIdLiveData.postValue(response)
-        }
-    }
 }
