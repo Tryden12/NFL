@@ -1,11 +1,12 @@
 package com.tryden.simplenfl.ui.repositories
 
 import com.tryden.simplenfl.network.NetworkLayer
+import com.tryden.simplenfl.network.response.models.news.NewsResponse
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
 
 class TeamRepository {
 
-    // Team by Id
+    // Team by id
     suspend fun getTeamById(teamId: Int): TeamResponse? {
         val request = NetworkLayer.apiClient.getTeamById(teamId)
 
@@ -22,5 +23,18 @@ class TeamRepository {
         }
 
         return request.body
+    }
+
+    // News by team id
+    suspend fun getNewsByTeamId(teamId: String, limit: String): NewsResponse? {
+        val request = NetworkLayer.apiClient.getNewsByTeamId(teamId, limit)
+
+        if (request.failed || !request.isSuccessful) {
+            return null
+        }
+
+        return request.body!!
+
+
     }
 }
