@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_scores"
+    app:startDestination="@id/scoresFragment">
+
+    <fragment
+        android:id="@+id/scoresFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.ScoresFragment"
+        android:label="fragment_scores"
+        tools:layout="@layout/fragment_scores" >
+
+        <action
+            android:id="@+id/action_scoresFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
+    </fragment>
+
+    <!-- Todo: complete when event fragment is created -->
+    <fragment android:id="@+id/eventFragment" />
+
+</navigation>
