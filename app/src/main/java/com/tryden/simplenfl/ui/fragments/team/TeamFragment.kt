@@ -69,6 +69,7 @@ class TeamFragment : Fragment() {
                 // status bar
                 requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
                 requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
+//                requireActivity().window.statusBarColor = Color.parseColor(teamColor);
 
                 // header
                 val record = "(${team.record})"
