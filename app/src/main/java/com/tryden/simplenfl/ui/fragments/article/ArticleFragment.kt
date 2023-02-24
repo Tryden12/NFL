@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentArticleBinding
@@ -23,6 +24,8 @@ class ArticleFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private val epoxyControllerArticle = ArticleEpoxyController()
+
+    private val safeArgs: ArticleFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,12 +43,12 @@ class ArticleFragment : Fragment() {
     }
 
     private fun epoxySetup() {
-        val epoxyArticleRecyclerView = binding.epoxyArticleRecyclerView
-        sharedViewModel.onArticleSelectedLiveData.observe(viewLifecycleOwner) { articleId ->
-            Log.e("ArticleFragment", "onArticleSelected: $articleId" )
+        // Set articleId
+        val articleId = safeArgs.articleId
+        sharedViewModel.refreshArticle(articleId)
+        Log.e("ArticleFragment", "onArticleSelected: $articleId" )
 
-            sharedViewModel.refreshArticle(articleId)
-        }
+        val epoxyArticleRecyclerView = binding.epoxyArticleRecyclerView
         sharedViewModel.articleByIdLiveDataResponse.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 epoxyControllerArticle.articleResponse = response

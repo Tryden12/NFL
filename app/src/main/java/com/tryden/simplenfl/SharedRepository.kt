@@ -5,7 +5,7 @@ import com.tryden.simplenfl.network.NetworkLayer
 class SharedRepository {
 
     // Team by Id
-    suspend fun getTeamById(teamId: Int): com.tryden.simplenfl.network.response.models.team.TeamResponse? {
+    suspend fun getTeamById(teamId: String): com.tryden.simplenfl.network.response.models.team.TeamResponse? {
         val request = NetworkLayer.apiClient.getTeamById(teamId)
 
         // If the api call fails, network fails, or user loses internet
@@ -35,7 +35,7 @@ class SharedRepository {
     }
 
     // Get roster by team id
-    suspend fun getRosterByTeamId(teamId: Int): com.tryden.simplenfl.network.response.models.roster.RosterResponse? {
+    suspend fun getRosterByTeamId(teamId: String): com.tryden.simplenfl.network.response.models.roster.RosterResponse? {
         val request = NetworkLayer.apiClient.getRosterByTeamId(teamId)
 
         if (request.failed || !request.isSuccessful) {

@@ -17,12 +17,12 @@ interface NFLService {
 
     @GET("teams/{team-id}")
     suspend fun getTeamById(
-        @Path("team-id") teamId: Int
+        @Path("team-id") teamId: String
     ): Response<TeamResponse>
 
     @GET("teams/{team-id}/roster")
     suspend fun getRosterByTeamId(
-        @Path("team-id") teamId: Int
+        @Path("team-id") teamId: String
     ): Response<RosterResponse>
 
     //scoreboard?limit=1000&dates=20220908-20230108

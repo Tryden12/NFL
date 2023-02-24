@@ -54,7 +54,7 @@ class SharedViewModel: ViewModel() {
 
 
 
-    fun refreshTeam(teamId: Int) {
+    fun refreshTeam(teamId: String) {
         viewModelScope.launch {
             val response = repository.getTeamById(teamId)
 
@@ -70,7 +70,7 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    fun refreshRoster(teamId: Int) {
+    fun refreshRoster(teamId: String) {
         viewModelScope.launch {
             val response = repository.getRosterByTeamId(teamId)
 

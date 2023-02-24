@@ -6,10 +6,10 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelTeamsListVerticalItemBinding
 
 data class TeamsListVerticalEpoxyModel(
-    val teamId: Int,
+    val teamId: String,
     val logoUrl: String,
     val teamName: String,
-    val onTeamSelected: (Int) -> Unit
+    val onTeamSelected: (String) -> Unit
 ): ViewBindingKotlinModel<ModelTeamsListVerticalItemBinding>
     (R.layout.model_teams_list_vertical_item) {
 

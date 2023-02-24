@@ -24,7 +24,7 @@ class TeamViewModel : ViewModel() {
     private val _newsByTeamId = MutableLiveData<List<Article?>>()
     val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
 
-    fun refreshTeam(teamId: Int) {
+    fun refreshTeam(teamId: String) {
         viewModelScope.launch {
             val response = repository.getTeamById(teamId)
 

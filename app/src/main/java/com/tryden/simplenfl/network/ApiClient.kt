@@ -22,11 +22,11 @@ class ApiClient(
         return safeApiCall { nflService.getAllTeams() }
     }
 
-    suspend fun getTeamById(teamId: Int) : SimpleResponse<TeamResponse> {
+    suspend fun getTeamById(teamId: String) : SimpleResponse<TeamResponse> {
         return safeApiCall { nflService.getTeamById(teamId) }
     }
 
-    suspend fun getRosterByTeamId(teamId: Int) : SimpleResponse<RosterResponse> {
+    suspend fun getRosterByTeamId(teamId: String) : SimpleResponse<RosterResponse> {
         return safeApiCall { nflService.getRosterByTeamId(teamId) }
     }
 

@@ -18,6 +18,7 @@ import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsEpoxyController
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsTopHeadlinesEpoxyController
+import com.tryden.simplenfl.ui.fragments.NewsFragmentDirections
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 
 
@@ -42,14 +43,15 @@ class TeamNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // set team id
+        val teamId = (parentFragment as TeamFragment).getTeamId()
+        Log.e("TeamNewsFragment", "teamId: $teamId")
+        viewModel.refreshNewsByTeamId(teamId = teamId, "50")
+        viewModel.refreshTeam(teamId)
+
+
         binding.epoxyTeamNewsHeadlinesRecyclerView.setController(epoxyController)
         epoxyController.setData(emptyList())
-
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            Log.e("TeamNewsFragment", "teamId: $teamId")
-            viewModel.refreshNewsByTeamId(teamId = teamId, "50")
-            viewModel.refreshTeam(teamId.toInt())
-        }
         viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { team ->
             epoxyDataManager.teamDetails = team
         }
@@ -66,7 +68,7 @@ class TeamNewsFragment : Fragment() {
     private fun onArticleSelected(articleId: String) {
         Log.e("TeamNewsFragment", "onArticleSelected: $articleId" )
 
-        sharedViewModel.saveCurrentArticleId(articleId = articleId)
-        findNavController().navigate(R.id.action_teamFragment_to_articleFragment)
+        val directions = TeamFragmentDirections.actionTeamFragmentToArticleFragment(articleId)
+        findNavController().navigate(directions)
     }
 }

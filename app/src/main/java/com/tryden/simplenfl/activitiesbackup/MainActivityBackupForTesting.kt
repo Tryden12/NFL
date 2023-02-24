@@ -48,7 +48,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
 
 
         // refresh team
-        viewModel.refreshTeam(2)
+        viewModel.refreshTeam("2")
         viewModel.teamByIdLiveData.observe(this) { response ->
             if (response == null) {
                 Toast.makeText(
@@ -110,7 +110,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
         }
 
         // refresh roster
-        viewModel.refreshRoster(2)
+        viewModel.refreshRoster("2")
         viewModel.rosterByTeamId.observe(this) { response ->
             if (response == null) {
                 Toast.makeText(

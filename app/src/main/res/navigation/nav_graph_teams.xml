@@ -14,6 +14,7 @@
         <action
             android:id="@+id/action_teamsListFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/teamFragment"
@@ -27,6 +28,12 @@
         <action
             android:id="@+id/action_teamFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
+
+        <argument
+            android:name="teamId"
+            android:defaultValue="1"
+            app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/playerFragment"
@@ -41,6 +48,11 @@
         android:name="com.tryden.simplenfl.ui.fragments.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" >
+
+        <argument
+            android:name="articleId"
+            android:defaultValue="35712187"
+            app:argType="string" />
 
     </fragment>
 </navigation>

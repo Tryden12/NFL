@@ -53,8 +53,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun onArticleSelected(articleId: String) {
         Log.e("HomeFragment", "onArticleSelected: $articleId" )
 
-        sharedViewModel.saveCurrentArticleId(articleId = articleId)
-        findNavController().navigate(R.id.action_homeFragment_to_articleFragment)
+        val directions = HomeFragmentDirections.actionHomeFragmentToArticleFragment(articleId)
+        findNavController().navigate(directions)
     }
 
 

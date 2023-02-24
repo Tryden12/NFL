@@ -7,7 +7,7 @@ import com.tryden.simplenfl.network.response.models.team.TeamResponse
 class TeamRepository {
 
     // Team by id
-    suspend fun getTeamById(teamId: Int): TeamResponse? {
+    suspend fun getTeamById(teamId: String): TeamResponse? {
         val request = NetworkLayer.apiClient.getTeamById(teamId)
 
         // If the api call fails, network fails, or user loses internet

@@ -21,16 +21,13 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
     private val epoxyControllerScores = TeamScoresEpoxyController()
     private val epoxyDataManager = com.tryden.simplenfl.ui.epoxy.EpoxyDataManager()
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTeamScoresBinding.bind(view)
 
         // set team id
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            epoxyDataManager.onTeamSelected = teamId
-        }
+        val teamId = (parentFragment as TeamFragment).getTeamId()
+        epoxyDataManager.onTeamSelected = teamId
 
         // set data for team selected
         binding.epoxyScoresRecyclerView.setController(epoxyControllerScores)

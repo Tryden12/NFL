@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -38,6 +39,8 @@ class TeamFragment : Fragment() {
     private lateinit var teamViewPager: ViewPager2
     private lateinit var teamTabLayout: TabLayout
 
+    private val safeArgs: TeamFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -55,9 +58,8 @@ class TeamFragment : Fragment() {
     private fun setupComponents() {
 
         // Refresh team data
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            viewModel.refreshTeam(teamId = teamId.toInt())
-        }
+        viewModel.refreshTeam(teamId = safeArgs.teamId)
+
         // Use response to map to domain model, then set components
         viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
             if (response != null) {
@@ -121,5 +123,7 @@ class TeamFragment : Fragment() {
         gradientDrawable.cornerRadius = 0f;
         return gradientDrawable
     }
+
+    fun getTeamId() = safeArgs.teamId
 
 }

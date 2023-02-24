@@ -7,7 +7,7 @@ import com.tryden.simplenfl.ui.epoxy.models.teams.TitleTeamsListEpoxyModel
 import com.tryden.simplenfl.domain.models.teamslist.UiTeam
 
 class TeamListHomeEpoxyController2(
-    private val onTeamSelected: (Int) -> Unit
+    private val onTeamSelected: (String) -> Unit
 ): TypedEpoxyController<List<UiTeam>>() {
 
     override fun buildModels(data: List<UiTeam>) {

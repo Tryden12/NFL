@@ -39,11 +39,12 @@ class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {
         viewModel.refreshTeams()
     }
 
-    private fun onTeamSelected(teamId: Int) {
+    private fun onTeamSelected(teamId: String) {
         Log.e("TeamsListFragment", "onTeamSelected: $teamId")
 
-        sharedViewModel.saveCurrentTeamId(teamId = teamId.toString())
-        findNavController().navigate(R.id.action_teamsListFragment_to_teamFragment)
+        sharedViewModel.saveCurrentTeamId(teamId = teamId)
+        val directions = TeamsListFragmentDirections.actionTeamsListFragmentToTeamFragment(teamId = teamId)
+        findNavController().navigate(directions)
     }
 
     override fun onDestroyView() {

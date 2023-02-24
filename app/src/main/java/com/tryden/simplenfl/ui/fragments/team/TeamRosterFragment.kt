@@ -28,15 +28,15 @@ class TeamRosterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyRosterRecyclerView = binding.epoxyRosterRecyclerView
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            sharedViewModel.refreshRoster(teamId = teamId.toInt())
-        }
+        // set team id
+        val teamId = (parentFragment as TeamFragment).getTeamId()
+        sharedViewModel.refreshRoster(teamId = teamId)
         sharedViewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
             epoxyControllerRoster.rosterResponse = response
         }
-        epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)
 
+        val epoxyRosterRecyclerView = binding.epoxyRosterRecyclerView
+        epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)
     }
 
 }
