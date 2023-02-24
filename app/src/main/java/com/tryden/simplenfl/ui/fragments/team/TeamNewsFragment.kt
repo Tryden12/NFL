@@ -14,6 +14,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamNewsBinding
 import com.tryden.simplenfl.domain.models.team.ArticleHeadline
+import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsEpoxyController
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsTopHeadlinesEpoxyController
@@ -41,24 +42,22 @@ class TeamNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.epoxyTeamNewsHeadlinesRecyclerView.setController(epoxyController)
         epoxyController.setData(emptyList())
 
         sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
             Log.e("TeamNewsFragment", "teamId: $teamId")
-            viewModel.refreshNewsByTeamId(teamId = teamId, "10")
+            viewModel.refreshNewsByTeamId(teamId = teamId, "50")
             viewModel.refreshTeam(teamId.toInt())
         }
         viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { team ->
             epoxyDataManager.teamDetails = team
         }
         viewModel.newsByTeamIdLiveData.observe(viewLifecycleOwner) { articleList ->
-            val articles: List<ArticleHeadline> = articleList.map { article ->
+            val articleListFiltered = articleList.filter { article -> article!!.type == "HeadlineNews" }
+            val articles: List<ArticleHeadline> = articleListFiltered.map { article ->
                 viewModel.teamNewsMapper.buildFrom(article!!)
             }
-            Log.e("TeamNewsFragment", "items headline: ${articles[0].articleHeadline}")
-
             val epoxyItems = epoxyDataManager.giveMeTeamNewsEpoxyItems(articles)
             epoxyController.setData(epoxyItems)
         }

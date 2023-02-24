@@ -10,9 +10,7 @@ object TeamNewsMapper {
         return ArticleHeadline(
             type = article.type,
             articleHeadline = article.headline,
-//            articleId = getArticleIdFromUrl(article.links.api.news.href)
-            articleId = "2"
-
+            articleId = getArticleIdFromUrl(article.links.api.news.href)
         )
     }
 

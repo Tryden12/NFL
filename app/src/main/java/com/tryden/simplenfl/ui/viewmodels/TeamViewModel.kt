@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class TeamViewModel : ViewModel() {
 
-    val repository = TeamRepository()
+    private val repository = TeamRepository()
     val teamMapper = TeamMapper
     val teamNewsMapper = TeamNewsMapper
 
