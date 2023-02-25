@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.domain.mappers.team.TeamMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
 import com.tryden.simplenfl.network.response.models.news.Article
+import com.tryden.simplenfl.network.response.models.roster.RosterResponse
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.repositories.TeamRepository
 import kotlinx.coroutines.launch
@@ -24,6 +25,9 @@ class TeamViewModel : ViewModel() {
     private val _newsByTeamId = MutableLiveData<List<Article?>>()
     val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
 
+    private val _rosterByTeamId = MutableLiveData<RosterResponse?>()
+    val rosterByTeamIdLiveData: LiveData<RosterResponse?> = _rosterByTeamId
+
     fun refreshTeam(teamId: String) {
         viewModelScope.launch {
             val response = repository.getTeamById(teamId)
@@ -37,6 +41,14 @@ class TeamViewModel : ViewModel() {
             val response = repository.getNewsByTeamId(teamId, limit)
 
             _newsByTeamId.postValue(response?.articles)
+        }
+    }
+
+    fun refreshRoster(teamId: String) {
+        viewModelScope.launch {
+            val response = repository.getRosterByTeamId(teamId)
+
+            _rosterByTeamId.postValue(response)
         }
     }
 }

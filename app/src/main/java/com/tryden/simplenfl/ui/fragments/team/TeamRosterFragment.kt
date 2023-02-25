@@ -6,15 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamRosterBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.team.roster.TeamRosterEpoxyController
+import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 
 class TeamRosterFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamRosterBinding
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val viewModel: TeamViewModel by viewModels()
     private val epoxyControllerRoster = TeamRosterEpoxyController()
 
     override fun onCreateView(
@@ -30,8 +32,8 @@ class TeamRosterFragment : Fragment() {
 
         // set team id
         val teamId = (parentFragment as TeamFragment).getTeamId()
-        sharedViewModel.refreshRoster(teamId = teamId)
-        sharedViewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
+        viewModel.refreshRoster(teamId = teamId)
+        viewModel.rosterByTeamIdLiveData.observe(viewLifecycleOwner) { response ->
             epoxyControllerRoster.rosterResponse = response
         }
 
