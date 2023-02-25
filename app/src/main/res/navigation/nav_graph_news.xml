@@ -23,6 +23,11 @@
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" >
 
+        <argument
+            android:name="articleId"
+            android:defaultValue="35712187"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>
