@@ -36,7 +36,7 @@ class TeamViewModel : ViewModel() {
         viewModelScope.launch {
             val response = repository.getNewsByTeamId(teamId, limit)
 
-            _newsByTeamId.postValue(response!!.articles)
+            _newsByTeamId.postValue(response?.articles)
         }
     }
 }
