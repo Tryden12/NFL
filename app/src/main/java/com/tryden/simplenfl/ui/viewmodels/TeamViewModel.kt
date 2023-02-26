@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.domain.mappers.team.TeamMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
+import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
 import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.network.response.models.roster.RosterResponse
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
+import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.repositories.TeamRepository
 import kotlinx.coroutines.launch
 
@@ -25,8 +27,8 @@ class TeamViewModel : ViewModel() {
     private val _newsByTeamId = MutableLiveData<List<Article?>>()
     val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
 
-    private val _rosterByTeamId = MutableLiveData<RosterResponse?>()
-    val rosterByTeamIdLiveData: LiveData<RosterResponse?> = _rosterByTeamId
+    private val _rosterByTeamId = MutableLiveData<List<RosterEpoxyItem>>()
+    val rosterByTeamIdLiveData: LiveData<List<RosterEpoxyItem>> = _rosterByTeamId
 
     fun refreshTeam(teamId: String) {
         viewModelScope.launch {
@@ -46,9 +48,23 @@ class TeamViewModel : ViewModel() {
 
     fun refreshRoster(teamId: String) {
         viewModelScope.launch {
-            val response = repository.getRosterByTeamId(teamId)
+            val rosterMap = repository.getRosterByTeamId(teamId)
 
-            _rosterByTeamId.postValue(response)
+           val epoxyItems = buildList {
+               rosterMap!!.forEach {
+                   if (it.key.contains("special")) {
+                       add(RosterEpoxyItem.HeaderItem(header = "Special Teams"))
+                   } else {
+                       add(RosterEpoxyItem.HeaderItem(header = it.key))
+                   }
+                   it.value.forEach { player ->
+                       add(RosterEpoxyItem.PlayerItem(player = player))
+                   }
+                   add(RosterEpoxyItem.FooterItem)
+               }
+           }
+
+            _rosterByTeamId.postValue(epoxyItems)
         }
     }
 }

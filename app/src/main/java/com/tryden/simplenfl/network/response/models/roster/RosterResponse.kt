@@ -45,12 +45,16 @@ data class RosterResponse(
         val weight: Int = 0
     )
 
+    data class Parent(
+        val displayName: String = ""
+    )
+
     data class Position(
         val abbreviation: String = "",
         val displayName: String = "",
         val id: String = "",
-        val leaf: Boolean = false,
         val name: String = "",
+        val parent: Parent = Parent()
     )
 
     data class Team(
