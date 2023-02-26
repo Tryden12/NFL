@@ -8,23 +8,15 @@
     android:layout_height="40dp"
     android:background="@color/darkish_grey">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/playerImageCardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/playerImageImageView"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/nameTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/playerImageImageView"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic[7]" />
-
-    </com.google.android.material.card.MaterialCardView>
+        tools:src="@tools:sample/backgrounds/scenic[7]" />
 
 
         <androidx.appcompat.widget.AppCompatTextView

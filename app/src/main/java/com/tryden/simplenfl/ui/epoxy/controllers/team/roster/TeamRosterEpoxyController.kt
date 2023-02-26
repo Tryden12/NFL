@@ -19,7 +19,6 @@ class TeamRosterEpoxyController: TypedEpoxyController<List<RosterEpoxyItem>>() {
         }
 
         items.forEachIndexed { index, item ->
-
             when (item) {
                 is RosterEpoxyItem.HeaderItem -> {
                     RosterHeaderEpoxyModel(rosterType = item.header)
@@ -33,7 +32,12 @@ class TeamRosterEpoxyController: TypedEpoxyController<List<RosterEpoxyItem>>() {
                         position = item.player.position,
                         age = item.player.age,
                         height = item.player.displayHeight,
-                        backgroundColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.dark_grey) // TODO
+                        backgroundColor = if (index % 2 == 0) {
+                            ContextCompat.getColor(SimpleNFLApplication.context, R.color.dark_grey)
+                        } else {
+                            ContextCompat.getColor(SimpleNFLApplication.context, R.color.darkish_grey)
+                        }
+
                     ).id(index).addTo(this)
                     SpacerRosterItemEpoxyItem().id("spacer-${item.player.id}").addTo(this)
 
