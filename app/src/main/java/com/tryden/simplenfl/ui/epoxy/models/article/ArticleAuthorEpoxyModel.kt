@@ -20,9 +20,9 @@ data class ArticleAuthorEpoxyModel(
         // Author image
         if (authorImage.isEmpty()) {
             Picasso.get()
-                .load(R.drawable.ic_author_24)
-                .placeholder(R.drawable.ic_author_24)
-                .error(R.drawable.ic_author_24)
+                .load(R.drawable.placeholder_author_headshot)
+                .placeholder(R.drawable.placeholder_author_headshot)
+                .error(R.drawable.placeholder_author_headshot)
                 .into(authorImageView)
         } else {
             Picasso.get().load(authorImage).into(authorImageView)
