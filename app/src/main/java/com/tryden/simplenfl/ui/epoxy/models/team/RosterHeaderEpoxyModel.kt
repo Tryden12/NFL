@@ -1,25 +1,42 @@
 package com.tryden.simplenfl.ui.epoxy.models.team
 
+import android.graphics.Color
+import androidx.core.content.ContextCompat
 import com.tryden.simplenfl.R
+import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelRosterHeaderBinding
 import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
+import com.tryden.simplenfl.ui.models.RosterViewState
+import com.tryden.simplenfl.updateLabelColor
 
 // Roster type header
 data class RosterHeaderEpoxyModel(
-    val rosterType: String
+    val rosterType: String,
+    val onSelectedSort: (RosterViewState.Sort) -> Unit
 ): ViewBindingKotlinModel<ModelRosterHeaderBinding>(R.layout.model_roster_header) {
 
     override fun ModelRosterHeaderBinding.bind() {
         seasonTypeTextview.text = rosterType
 
+        labelNameTextView.setOnClickListener {
+            onSelectedSort(RosterViewState.Sort.NAME)
+            updateLabelColor(RosterViewState.Sort.NAME)
+        }
+
         labelPositionTextView.setOnClickListener {
-            // todo
+            onSelectedSort(RosterViewState.Sort.POSITION)
+            updateLabelColor(RosterViewState.Sort.POSITION)
+
         }
         labelAgeTextView.setOnClickListener {
-            // todo
+            onSelectedSort(RosterViewState.Sort.AGE)
+            updateLabelColor(RosterViewState.Sort.AGE)
+
         }
         labelHeightTextView.setOnClickListener {
-            // todo
+            onSelectedSort(RosterViewState.Sort.HEIGHT)
+            updateLabelColor(RosterViewState.Sort.HEIGHT)
+
         }
     }
 }

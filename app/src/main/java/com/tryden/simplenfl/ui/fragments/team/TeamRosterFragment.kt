@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.tryden.simplenfl.databinding.FragmentTeamRosterBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.team.roster.TeamRosterEpoxyController
-import com.tryden.simplenfl.ui.epoxy.controllers.team.roster.TeamRosterEpoxyController2
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 
@@ -18,7 +17,7 @@ class TeamRosterFragment : Fragment() {
     private lateinit var binding: FragmentTeamRosterBinding
 
     private val viewModel: TeamViewModel by viewModels()
-    private val epoxyController = TeamRosterEpoxyController2()
+    private val epoxyController = TeamRosterEpoxyController(::onSelectedSort)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,16 +40,20 @@ class TeamRosterFragment : Fragment() {
         viewModel.rosterMapByTeamIdLiveData.observe(viewLifecycleOwner) { rosterMap ->
             Log.e("TeamRosterFragment", "rosterMap size: ${rosterMap.size}" )
 
-            viewModel.currentSort = RosterViewState.Sort.POSITION
-
+            viewModel.currentSort = RosterViewState.Sort.NAME
+            onSelectedSort(viewModel.currentSort)
+            epoxyController.setData(viewModel.rosterViewStateLiveData.value)
         }
+    }
+
+    private fun onSelectedSort(sort: RosterViewState.Sort) {
+        viewModel.currentSort = sort
 
         viewModel.rosterViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
-            Log.e("TeamRosterFragment", "epoxyItems size: ${viewState.dataList.size}" )
+            Log.e("TeamRosterFragment", "onSelectedSort: ${viewModel.currentSort}" )
             epoxyController.setData(viewState)
 
         }
-
     }
 
 }

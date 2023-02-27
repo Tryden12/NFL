@@ -29,7 +29,7 @@ class TeamViewModel : ViewModel() {
     val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
 
     // Roster page
-    var currentSort: RosterViewState.Sort = RosterViewState.Sort.NONE
+    var currentSort: RosterViewState.Sort = RosterViewState.Sort.NAME
         set(value) {
             field = value
             updateRosterViewState(rosterMapByTeamIdLiveData.value)
@@ -90,7 +90,7 @@ class TeamViewModel : ViewModel() {
     private fun updateRosterViewState(dataMap: Map<String, List<Player>>?){
         var dataListSorted: List<RosterEpoxyItem> = emptyList()
         when (currentSort) {
-            RosterViewState.Sort.NONE -> {
+            RosterViewState.Sort.NAME -> {
                  dataListSorted = buildList {
                      dataMap!!.forEach {
                          add(RosterEpoxyItem.HeaderItem(header = it.key))
@@ -113,10 +113,26 @@ class TeamViewModel : ViewModel() {
                 }
             }
             RosterViewState.Sort.AGE -> {
-                // implement me
+                dataListSorted = buildList {
+                    dataMap!!.forEach {
+                        add(RosterEpoxyItem.HeaderItem(header = it.key))
+                        it.value.sortedBy { it.age }.forEach { player ->
+                            add(RosterEpoxyItem.PlayerItem(player = player))
+                        }
+                        add(RosterEpoxyItem.FooterItem)
+                    }
+                }
             }
             RosterViewState.Sort.HEIGHT -> {
-                // implement me
+                dataListSorted = buildList {
+                    dataMap!!.forEach {
+                        add(RosterEpoxyItem.HeaderItem(header = it.key))
+                        it.value.sortedBy { it.displayHeight }.forEach { player ->
+                            add(RosterEpoxyItem.PlayerItem(player = player))
+                        }
+                        add(RosterEpoxyItem.FooterItem)
+                    }
+                }
             }
         }
 
