@@ -7,10 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.domain.mappers.team.TeamMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
+import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.network.response.models.news.Article
-import com.tryden.simplenfl.network.response.models.roster.RosterResponse
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
+import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.repositories.TeamRepository
 import kotlinx.coroutines.launch
 
@@ -27,8 +28,23 @@ class TeamViewModel : ViewModel() {
     private val _newsByTeamId = MutableLiveData<List<Article?>>()
     val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
 
-    private val _rosterByTeamId = MutableLiveData<List<RosterEpoxyItem>>()
-    val rosterByTeamIdLiveData: LiveData<List<RosterEpoxyItem>> = _rosterByTeamId
+    // Roster page
+    var currentSort: RosterViewState.Sort = RosterViewState.Sort.NONE
+        set(value) {
+            field = value
+            updateRosterViewState(rosterMapByTeamIdLiveData.value)
+        }
+
+//    private val _rosterByTeamId = MutableLiveData<List<RosterEpoxyItem>>()
+//    val rosterByTeamIdLiveData: LiveData<List<RosterEpoxyItem>> = _rosterByTeamId
+    private val _rosterMapByTeamId = MutableLiveData<Map<String, List<Player>>>()
+    val rosterMapByTeamIdLiveData: LiveData<Map<String, List<Player>>> = _rosterMapByTeamId
+
+    private val _rosterViewState = MutableLiveData<RosterViewState>()
+    val rosterViewStateLiveData: LiveData<RosterViewState>
+        get() = _rosterViewState
+
+
 
     fun refreshTeam(teamId: String) {
         viewModelScope.launch {
@@ -49,22 +65,67 @@ class TeamViewModel : ViewModel() {
     fun refreshRoster(teamId: String) {
         viewModelScope.launch {
             val rosterMap = repository.getRosterByTeamId(teamId)
+            _rosterMapByTeamId.postValue(rosterMap!!)
 
-           val epoxyItems = buildList {
-               rosterMap!!.forEach {
-                   if (it.key.contains("special")) {
-                       add(RosterEpoxyItem.HeaderItem(header = "Special Teams"))
-                   } else {
-                       add(RosterEpoxyItem.HeaderItem(header = it.key))
-                   }
-                   it.value.forEach { player ->
-                       add(RosterEpoxyItem.PlayerItem(player = player))
-                   }
-                   add(RosterEpoxyItem.FooterItem)
-               }
-           }
-
-            _rosterByTeamId.postValue(epoxyItems)
+//            WORKS
+//           val epoxyItems = buildList {
+//               rosterMap!!.forEach {
+//                   if (it.key.contains("special")) {
+//                       add(RosterEpoxyItem.HeaderItem(header = "Special Teams"))
+//                   } else {
+//                       add(RosterEpoxyItem.HeaderItem(header = it.key))
+//                   }
+//                   it.value.forEach { player ->
+//                       add(RosterEpoxyItem.PlayerItem(player = player))
+//                   }
+//                   add(RosterEpoxyItem.FooterItem)
+//               }
+//           }
+//
+//            _rosterByTeamId.postValue(epoxyItems)
         }
+    }
+
+
+    private fun updateRosterViewState(dataMap: Map<String, List<Player>>?){
+        var dataListSorted: List<RosterEpoxyItem> = emptyList()
+        when (currentSort) {
+            RosterViewState.Sort.NONE -> {
+                 dataListSorted = buildList {
+                     dataMap!!.forEach {
+                         add(RosterEpoxyItem.HeaderItem(header = it.key))
+                         it.value.sortedBy { it.firstName }.forEach { player ->
+                             add(RosterEpoxyItem.PlayerItem(player = player))
+                         }
+                         add(RosterEpoxyItem.FooterItem)
+                     }
+                 }
+            }
+            RosterViewState.Sort.POSITION -> {
+                dataListSorted = buildList {
+                    dataMap!!.forEach {
+                        add(RosterEpoxyItem.HeaderItem(header = it.key))
+                        it.value.sortedBy { it.position }.forEach { player ->
+                            add(RosterEpoxyItem.PlayerItem(player = player))
+                        }
+                        add(RosterEpoxyItem.FooterItem)
+                    }
+                }
+            }
+            RosterViewState.Sort.AGE -> {
+                // implement me
+            }
+            RosterViewState.Sort.HEIGHT -> {
+                // implement me
+            }
+        }
+
+        _rosterViewState.postValue(
+            RosterViewState(
+                dataList = dataListSorted,
+                isLoading = false,
+                sort = currentSort
+            )
+        )
     }
 }

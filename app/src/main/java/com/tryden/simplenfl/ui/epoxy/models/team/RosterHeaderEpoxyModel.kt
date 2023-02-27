@@ -11,5 +11,15 @@ data class RosterHeaderEpoxyModel(
 
     override fun ModelRosterHeaderBinding.bind() {
         seasonTypeTextview.text = rosterType
+
+        labelPositionTextView.setOnClickListener {
+            // todo
+        }
+        labelAgeTextView.setOnClickListener {
+            // todo
+        }
+        labelHeightTextView.setOnClickListener {
+            // todo
+        }
     }
 }

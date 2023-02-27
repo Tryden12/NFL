@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.ui.epoxy.models.team
 
+import android.util.Log
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelRosterPlayerItemBinding
