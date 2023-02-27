@@ -2,12 +2,9 @@ package com.tryden.simplenfl.ui.repositories
 
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
-import com.tryden.simplenfl.domain.models.roster.Roster
 import com.tryden.simplenfl.network.NetworkLayer
 import com.tryden.simplenfl.network.response.models.news.NewsResponse
-import com.tryden.simplenfl.network.response.models.roster.RosterResponse
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
-import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 
 class TeamRepository {
 
