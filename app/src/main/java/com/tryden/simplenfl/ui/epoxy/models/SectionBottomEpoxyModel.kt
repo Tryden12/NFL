@@ -6,7 +6,7 @@ import com.tryden.simplenfl.databinding.ModelSectionBottomBinding
 
 
 data class SectionBottomEpoxyModel(
-    val useSection: Boolean
+    val useSection: Boolean = true
 ): ViewBindingKotlinModel<ModelSectionBottomBinding>
     (R.layout.model_section_bottom) {
 

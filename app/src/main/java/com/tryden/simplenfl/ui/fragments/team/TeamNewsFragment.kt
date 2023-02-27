@@ -27,7 +27,6 @@ class TeamNewsFragment : Fragment() {
     private lateinit var binding: FragmentTeamNewsBinding
 
     private val viewModel by viewModels<TeamViewModel>()
-    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val epoxyController = TeamNewsEpoxyController(::onArticleSelected)
     private val epoxyDataManager = EpoxyDataManager()
 

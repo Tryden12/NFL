@@ -2,7 +2,6 @@ package com.tryden.simplenfl.ui.repositories
 
 import com.tryden.simplenfl.domain.mappers.article.ArticleMapper
 import com.tryden.simplenfl.domain.models.article.Article
-import com.tryden.simplenfl.domain.models.news.News
 import com.tryden.simplenfl.network.NetworkLayer
 
 class ArticleRepository {
