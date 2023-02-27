@@ -45,7 +45,7 @@ class TeamRepository {
 
         if (request.failed || !request.isSuccessful) { return null }
 
-
+        // Return a map containing domain layer model (Player)
         return buildMap {
             request.body.athletes.forEach { group ->
                val playersBuilt = buildList {
@@ -58,23 +58,5 @@ class TeamRepository {
                 put(group.position, playersBuilt)
             }
         }
-
-        // WORKS
-//        val rosterEpoxyItems = buildList {
-//            request.body.athletes.groupBy {
-//                it.position
-//            }.forEach { mapEntry ->
-//                add(RosterEpoxyItem.HeaderItem(header = mapEntry.key))
-//                mapEntry.value.forEach { group ->
-//                    group.items.forEach { player ->
-//                        val playerBuilt = TeamRosterMapper.buildFrom(player)
-//                        add(RosterEpoxyItem.PlayerItem(player = playerBuilt))
-//                    }
-//                }
-//            }
-//            add(RosterEpoxyItem.FooterItem)
-//        }
-//        return rosterEpoxyItems
-
     }
 }

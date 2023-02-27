@@ -21,10 +21,11 @@ class TeamViewModel : ViewModel() {
     val teamMapper = TeamMapper
     val teamNewsMapper = TeamNewsMapper
 
-
+    // Team id
     private val _teamById = MutableLiveData<TeamResponse.Team?>()
     val teamByIdLiveData: LiveData<TeamResponse.Team?> = _teamById
 
+    // News by team id
     private val _newsByTeamId = MutableLiveData<List<Article?>>()
     val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
 
@@ -35,16 +36,12 @@ class TeamViewModel : ViewModel() {
             updateRosterViewState(rosterMapByTeamIdLiveData.value)
         }
 
-//    private val _rosterByTeamId = MutableLiveData<List<RosterEpoxyItem>>()
-//    val rosterByTeamIdLiveData: LiveData<List<RosterEpoxyItem>> = _rosterByTeamId
     private val _rosterMapByTeamId = MutableLiveData<Map<String, List<Player>>>()
     val rosterMapByTeamIdLiveData: LiveData<Map<String, List<Player>>> = _rosterMapByTeamId
 
     private val _rosterViewState = MutableLiveData<RosterViewState>()
     val rosterViewStateLiveData: LiveData<RosterViewState>
         get() = _rosterViewState
-
-
 
     fun refreshTeam(teamId: String) {
         viewModelScope.launch {
@@ -62,31 +59,16 @@ class TeamViewModel : ViewModel() {
         }
     }
 
+    // Refresh roster response, and post domain model
     fun refreshRoster(teamId: String) {
         viewModelScope.launch {
             val rosterMap = repository.getRosterByTeamId(teamId)
-            _rosterMapByTeamId.postValue(rosterMap!!)
 
-//            WORKS
-//           val epoxyItems = buildList {
-//               rosterMap!!.forEach {
-//                   if (it.key.contains("special")) {
-//                       add(RosterEpoxyItem.HeaderItem(header = "Special Teams"))
-//                   } else {
-//                       add(RosterEpoxyItem.HeaderItem(header = it.key))
-//                   }
-//                   it.value.forEach { player ->
-//                       add(RosterEpoxyItem.PlayerItem(player = player))
-//                   }
-//                   add(RosterEpoxyItem.FooterItem)
-//               }
-//           }
-//
-//            _rosterByTeamId.postValue(epoxyItems)
+            _rosterMapByTeamId.postValue(rosterMap!!)
         }
     }
 
-
+    // Post & update roster view state
     private fun updateRosterViewState(dataMap: Map<String, List<Player>>?){
         var dataListSorted: List<RosterEpoxyItem> = emptyList()
         when (currentSort) {
