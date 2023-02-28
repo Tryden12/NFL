@@ -1,23 +1,39 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.home
 
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.EpoxyController
+import com.tryden.simplenfl.addLoadingModel
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.news.HeadlineItemEpoxyModel
-import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 
 class HomeEpoxyController(
     private val onArticleSelected: (String) -> Unit
-): TypedEpoxyController<List<HeadlinesEpoxyItem>>() {
+): EpoxyController() {
 
-    override fun buildModels(items: List<HeadlinesEpoxyItem>) {
-        if (items.isEmpty()) {
-            LoadingEpoxyModel().id("loading").addTo(this)
+    var isLoading: Boolean = true
+        set(value) {
+            field = value
+            if (field) {
+                requestModelBuild()
+            }
+        }
+
+    var headlineEpoxyItems: List<HeadlinesEpoxyItem> = emptyList()
+        set(value) {
+            field = value
+            isLoading = false
+            requestModelBuild()
+        }
+
+    override fun buildModels() {
+        if (isLoading) {
+            addLoadingModel()
             return
         }
 
-        items.forEach { item ->
+        // Add headline items
+        headlineEpoxyItems.forEach { item ->
             when (item) {
                 is HeadlinesEpoxyItem.HeaderItem -> {
                     SectionHeaderEpoxyModel(
@@ -43,4 +59,5 @@ class HomeEpoxyController(
             }
         }
     }
+
 }

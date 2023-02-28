@@ -23,14 +23,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
 
-        binding.epoxyRecyclerView.setController(epoxyController)
-        epoxyController.setData(emptyList())
 
         newsViewModel.refreshHeadlines("", "30")
         newsViewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
-            epoxyController.setData(epoxyItems)
+            epoxyController.headlineEpoxyItems = epoxyItems
         }
 
+        binding.epoxyRecyclerView.setControllerAndBuildModels(epoxyController)
     }
 
     private fun onArticleSelected(articleId: String) {
