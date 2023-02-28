@@ -2,9 +2,9 @@ package com.tryden.simplenfl.ui.epoxy.controllers.team.news
 
 import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
-import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
-import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel2
+import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.news.HeadlineItemEpoxyModel
 
 class TeamNewsEpoxyController(
@@ -25,7 +25,7 @@ class TeamNewsEpoxyController(
         items.forEach { item ->
             when (item) {
                 is HeadlinesEpoxyItem.HeaderItem -> {
-                    SectionHeaderEpoxyModel2(
+                    SectionHeaderEpoxyModel(
                         title = item.headerTitle,
                         logo = logoUrl,
                         logoVisible = true
@@ -39,7 +39,7 @@ class TeamNewsEpoxyController(
                     ).id(item.headline.articleId).addTo(this)
                 }
                 is HeadlinesEpoxyItem.FooterItem -> {
-                    SectionBottomEpoxyModel().id("footer-headlines").addTo(this)
+                    SectionFooterEpoxyModel().id("footer-headlines").addTo(this)
                 }
                 is HeadlinesEpoxyItem.Spacer -> {
                     // do nothing

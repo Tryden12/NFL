@@ -4,24 +4,20 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.databinding.ActivityNavGraphBinding
+import com.tryden.simplenfl.databinding.ActivityMainBinding
 
-class NavGraphActivity: AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
-    private lateinit var binding: ActivityNavGraphBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNavGraphBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
         window.statusBarColor = ContextCompat.getColor(SimpleNFLApplication.context, R.color.black)

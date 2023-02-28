@@ -72,7 +72,7 @@ class TeamViewModel : ViewModel() {
             // create epoxy items list
             val epoxyItems = buildList {
                 add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
-                headlines!!.forEach {
+                headlines?.forEach {
                     add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
                 }
                 add(HeadlinesEpoxyItem.FooterItem)

@@ -1,17 +1,10 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.news
 
-import android.view.View
-import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.TypedEpoxyController
-import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
-import com.tryden.simplenfl.R
-import com.tryden.simplenfl.databinding.ModelNewsBreakingHeadlineItemBinding
-import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
-import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
-import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
-import com.tryden.simplenfl.network.response.models.news.NewsResponse
+import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
+import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.news.HeadlineItemEpoxyModel
 
 class NewsEpoxyController(
@@ -30,9 +23,8 @@ class NewsEpoxyController(
                 is HeadlinesEpoxyItem.HeaderItem -> {
                     SectionHeaderEpoxyModel(
                         title = item.headerTitle,
-                        logoVisible = true,
-                        usePlaceholderLogo = true,
-                        logoUrl = ""
+                        logo = "",
+                        logoVisible = true
                     ).id("header-headlines").addTo(this)
                 }
                 is HeadlinesEpoxyItem.HeadlineItem -> {
@@ -43,7 +35,7 @@ class NewsEpoxyController(
                     ).id(item.headline.articleId).addTo(this)
                 }
                 is HeadlinesEpoxyItem.FooterItem -> {
-                    SectionBottomEpoxyModel().id("footer-headlines").addTo(this)
+                    SectionFooterEpoxyModel().id("footer-headlines").addTo(this)
                 }
                 is HeadlinesEpoxyItem.Spacer -> {
                     // do nothing

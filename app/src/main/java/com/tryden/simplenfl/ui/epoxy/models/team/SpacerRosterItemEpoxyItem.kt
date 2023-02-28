@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.ui.epoxy.models
+package com.tryden.simplenfl.ui.epoxy.models.team
 
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelSpacerRosterItemBinding

@@ -1,11 +1,10 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.scores
 
 import com.airbnb.epoxy.TypedEpoxyController
-import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity.*
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem.*
-import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.scores.ScoresCompletedEpoxyModel
@@ -32,7 +31,7 @@ class ScoresByWeekEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() 
                             .id("event-${item.event.id}").addTo(this)
                     }
                 is FooterItem ->
-                    SectionBottomEpoxyModel(useSection = true)
+                    SectionFooterEpoxyModel(useSection = true)
                         .id("bottom-$index").addTo(this)
             }
         }

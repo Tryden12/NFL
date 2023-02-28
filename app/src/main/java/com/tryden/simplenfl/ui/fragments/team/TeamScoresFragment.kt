@@ -3,10 +3,8 @@ package com.tryden.simplenfl.ui.fragments.team
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamScoresBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity

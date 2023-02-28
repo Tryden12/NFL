@@ -6,19 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.tryden.simplenfl.R
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamNewsBinding
-import com.tryden.simplenfl.domain.models.team.ArticleHeadline
-import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsEpoxyController
-import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsTopHeadlinesEpoxyController
-import com.tryden.simplenfl.ui.fragments.NewsFragmentDirections
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 
 
@@ -28,8 +20,6 @@ class TeamNewsFragment : Fragment() {
 
     private val viewModel by viewModels<TeamViewModel>()
     private val epoxyController = TeamNewsEpoxyController(::onArticleSelected)
-    private val epoxyDataManager = EpoxyDataManager()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +47,7 @@ class TeamNewsFragment : Fragment() {
         epoxyController.setData(emptyList())
 
         // Get headlines
-        viewModel.refreshHeadlinesByTeamId(teamId = teamId, limit = "30")
+        viewModel.refreshHeadlinesByTeamId(teamId = teamId, limit = "50")
         viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
             epoxyController.setData(epoxyItems)
         }

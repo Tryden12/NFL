@@ -4,7 +4,7 @@ import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem.*
-import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.scores.ScoresCompletedEpoxyModel
@@ -39,7 +39,7 @@ class TeamScoresEpoxyController: TypedEpoxyController<List<EventEpoxyItem>>() {
                     }
                 }
                 is FooterItem -> {
-                    SectionBottomEpoxyModel(
+                    SectionFooterEpoxyModel(
                         useSection = true
                     ).id("bottom-${bottomId++}").addTo(this)
                 }

@@ -2,7 +2,7 @@ package com.tryden.simplenfl.ui.epoxy.controllers.scores
 
 import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.domain.models.scores.events.UiEvent
-import com.tryden.simplenfl.ui.epoxy.models.SectionBottomEpoxyModel
+import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderCenteredEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 
@@ -44,7 +44,7 @@ class ScoresUpcomingEpoxyController(): TypedEpoxyController<List<UiEvent>>(){
 
         // Add bottom to last group of events
         if (headerFilled) {
-            SectionBottomEpoxyModel(
+            SectionFooterEpoxyModel(
                 useSection = true
             ).id("bottom-1").addTo(this)
         }

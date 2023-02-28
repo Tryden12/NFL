@@ -5,16 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentPlayerBinding
 
 class PlayerFragment : Fragment() {
 
     private lateinit var binding: FragmentPlayerBinding
-
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-//    private val epoxyControllerPlayer = PlayerEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

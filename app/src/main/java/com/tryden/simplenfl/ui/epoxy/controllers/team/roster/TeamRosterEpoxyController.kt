@@ -6,7 +6,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.ui.epoxy.models.scores.LoadingEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
-import com.tryden.simplenfl.ui.epoxy.models.SpacerRosterItemEpoxyItem
+import com.tryden.simplenfl.ui.epoxy.models.team.SpacerRosterItemEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.team.RosterHeaderEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.team.RosterPlayerItemEpoxyModel
 import com.tryden.simplenfl.ui.models.RosterViewState

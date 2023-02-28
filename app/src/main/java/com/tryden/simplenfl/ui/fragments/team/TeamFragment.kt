@@ -19,10 +19,8 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.FragmentTeamBinding
-import com.tryden.simplenfl.domain.models.team.Team
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
