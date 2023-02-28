@@ -18,7 +18,7 @@ class NewsViewModel: ViewModel() {
 
     fun refreshHeadlines(type: String, limit: String) {
         viewModelScope.launch {
-            val headlines = repository.getBreakingNews(type, limit)
+            val headlines = repository.getHeadlines(type, limit)
 
             // create epoxy items list
             val epoxyItems = buildList {

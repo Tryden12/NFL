@@ -6,8 +6,8 @@ import com.tryden.simplenfl.network.NetworkLayer
 
 class NewsRepository {
 
-    // Get breaking news
-    suspend fun getBreakingNews(type: String, limit: String): List<Headline>? {
+    // Get headline news
+    suspend fun getHeadlines(type: String, limit: String): List<Headline>? {
         val request = NetworkLayer.apiClient.getBreakingNews(type, limit)
 
         if (request.failed || !request.isSuccessful) return null
