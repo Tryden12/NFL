@@ -6,14 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.tryden.simplenfl.R
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentNewsBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.news.NewsEpoxyController
-import com.tryden.simplenfl.ui.epoxy.controllers.news.NewsTopHeadlinesEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
 
 class NewsFragment : Fragment() {
@@ -38,7 +34,7 @@ class NewsFragment : Fragment() {
         epoxyNewsRecyclerView.setController(epoxyController)
         epoxyController.setData(emptyList())
 
-        viewModel.refreshHeadlines("", "50")
+        viewModel.refreshHeadlines("", "30")
         viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
             epoxyController.setData(epoxyItems)
         }

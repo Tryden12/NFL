@@ -15,3 +15,12 @@ fun addBrTags(html: String) : String {
     }
     return builder.toString()
 }
+
+/**
+ * To navigate on click from headline to view the article,
+ * we must grab the article id in the given url.
+ *
+ */
+fun getArticleIdFromUrl(url: String): String {
+    return url.split("sports/news/")[1]
+}

@@ -1,5 +1,7 @@
 package com.tryden.simplenfl.domain.models.news
 
 data class Headline(
-    private val title: String = "",
+    val title: String = "",
+    val articleId: String = ""
+
 )

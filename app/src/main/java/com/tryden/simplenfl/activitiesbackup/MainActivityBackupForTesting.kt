@@ -157,7 +157,7 @@ class MainActivityBackupForTesting : AppCompatActivity() {
 
             val articleHeadline = response.articles[0].headline
 
-            testBreakingNewsTextView.text = articleHeadline
+//            testBreakingNewsTextView.text = articleHeadline
 
         }
 

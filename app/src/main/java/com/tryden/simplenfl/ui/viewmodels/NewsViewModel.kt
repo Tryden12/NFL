@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,12 +20,13 @@ class NewsViewModel: ViewModel() {
         viewModelScope.launch {
             val headlines = repository.getBreakingNews(type, limit)
 
-             val epoxyItems = buildList {
-                add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
-                headlines!!.forEach { headline ->
-                    add(HeadlinesEpoxyItem.HeadlineItem(headline = headline))
-                }
-                add(HeadlinesEpoxyItem.FooterItem)
+            // create epoxy items list
+            val epoxyItems = buildList {
+                    add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
+                    headlines!!.forEach {
+                        add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
+                    }
+                    add(HeadlinesEpoxyItem.FooterItem)
             }
 
             _headlines.postValue(epoxyItems)

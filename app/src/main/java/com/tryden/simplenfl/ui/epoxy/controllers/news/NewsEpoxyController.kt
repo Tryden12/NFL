@@ -36,7 +36,11 @@ class NewsEpoxyController(
                     ).id("header-headlines").addTo(this)
                 }
                 is HeadlinesEpoxyItem.HeadlineItem -> {
-                    // todo
+                    HeadlineItemEpoxyModel(
+                        headlineTitle = item.headline.title,
+                        articleId = item.headline.articleId,
+                        onArticleSelected = onArticleSelected
+                    ).id(item.headline.articleId).addTo(this)
                 }
                 is HeadlinesEpoxyItem.FooterItem -> {
                     SectionBottomEpoxyModel().id("footer-headlines").addTo(this)

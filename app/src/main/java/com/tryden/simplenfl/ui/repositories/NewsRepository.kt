@@ -12,10 +12,14 @@ class NewsRepository {
 
         if (request.failed || !request.isSuccessful) return null
 
+        val articles = request.body.articles
+
         return buildList {
-            request.body.articles.map { article ->
-                HeadlinesMapper.buildFrom(article)
-            }
+            articles
+                .filter { it.type == "HeadlineNews" }
+                .forEachIndexed { index, article ->
+                    if (index < 8) { add(HeadlinesMapper.buildFrom(article))}
+                }
         }
     }
 }
