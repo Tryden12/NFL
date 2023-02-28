@@ -1,9 +1,11 @@
 package com.tryden.simplenfl.ui.repositories
 
 import com.tryden.simplenfl.domain.mappers.news.HeadlinesMapper
+import com.tryden.simplenfl.domain.mappers.team.TeamLogoMapper
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
 import com.tryden.simplenfl.domain.models.news.Headline
+import com.tryden.simplenfl.domain.models.team.Logo
 import com.tryden.simplenfl.network.NetworkLayer
 import com.tryden.simplenfl.network.response.models.news.NewsResponse
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
@@ -27,6 +29,15 @@ class TeamRepository {
         }
 
         return request.body
+    }
+
+    // Get Team Logo only
+    suspend fun getTeamLogo(teamId: String) : Logo? {
+        val request = NetworkLayer.apiClient.getTeamById(teamId)
+
+        if (request.failed || !request.isSuccessful) return null
+
+        return TeamLogoMapper.buildFrom(request.body.team.logos[0].href)
     }
 
     // News by team id

@@ -8,6 +8,7 @@ import com.tryden.simplenfl.domain.mappers.team.TeamMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
 import com.tryden.simplenfl.domain.models.roster.Player
+import com.tryden.simplenfl.domain.models.team.Logo
 import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
@@ -20,11 +21,14 @@ class TeamViewModel : ViewModel() {
 
     private val repository = TeamRepository()
     val teamMapper = TeamMapper
-    val teamNewsMapper = TeamNewsMapper
 
     // Team id
     private val _teamById = MutableLiveData<TeamResponse.Team?>()
     val teamByIdLiveData: LiveData<TeamResponse.Team?> = _teamById
+
+    // Team logo
+    private val _teamLogo = MutableLiveData<Logo?>()
+    val teamLogoLiveData: LiveData<Logo?> = _teamLogo
 
     // Headlines by team id
     private val _headlines = MutableLiveData<List<HeadlinesEpoxyItem>>()
@@ -49,6 +53,14 @@ class TeamViewModel : ViewModel() {
             val response = repository.getTeamById(teamId)
 
             _teamById.postValue(response?.team)
+        }
+    }
+
+    fun refreshTeamLogo(teamId: String) {
+        viewModelScope.launch {
+            val logo = repository.getTeamLogo(teamId)
+
+            _teamLogo.postValue(logo)
         }
     }
 
