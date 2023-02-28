@@ -18,7 +18,7 @@ class NewsRepository {
             articles
                 .filter { it.type == "HeadlineNews" }
                 .forEachIndexed { index, article ->
-                    if (index < 8) { add(HeadlinesMapper.buildFrom(article))}
+                    if (index < 8)  add(HeadlinesMapper.buildFrom(article))
                 }
         }
     }

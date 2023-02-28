@@ -30,8 +30,7 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyNewsRecyclerView = binding.epoxyNewsRecyclerView
-        epoxyNewsRecyclerView.setController(epoxyController)
+        binding.epoxyNewsRecyclerView.setController(epoxyController)
         epoxyController.setData(emptyList())
 
         viewModel.refreshHeadlines("", "30")

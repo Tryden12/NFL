@@ -45,21 +45,18 @@ class TeamNewsFragment : Fragment() {
         // set team id
         val teamId = (parentFragment as TeamFragment).getTeamId()
         Log.e("TeamNewsFragment", "teamId: $teamId")
-        viewModel.refreshNewsByTeamId(teamId = teamId, "50")
         viewModel.refreshTeam(teamId)
-
-
-        binding.epoxyTeamNewsHeadlinesRecyclerView.setController(epoxyController)
-        epoxyController.setData(emptyList())
         viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { team ->
-            epoxyDataManager.teamDetails = team
+            epoxyDataManager.teamDetails = team // todo send to epoxy controller
+            epoxyController.logoUrl = team!!.logos[0].href
         }
-        viewModel.newsByTeamIdLiveData.observe(viewLifecycleOwner) { articleList ->
-            val articleListFiltered = articleList.filter { article -> article!!.type == "HeadlineNews" }
-            val articles: List<ArticleHeadline> = articleListFiltered.map { article ->
-                viewModel.teamNewsMapper.buildFrom(article!!)
-            }
-            val epoxyItems = epoxyDataManager.giveMeTeamNewsEpoxyItems(articles)
+
+
+        binding.epoxyRecyclerView.setController(epoxyController)
+        epoxyController.setData(emptyList())
+
+        viewModel.refreshHeadlinesByTeamId(teamId = teamId, limit = "30")
+        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
             epoxyController.setData(epoxyItems)
         }
     }

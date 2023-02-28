@@ -10,6 +10,7 @@ import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
+import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.repositories.TeamRepository
@@ -25,9 +26,9 @@ class TeamViewModel : ViewModel() {
     private val _teamById = MutableLiveData<TeamResponse.Team?>()
     val teamByIdLiveData: LiveData<TeamResponse.Team?> = _teamById
 
-    // News by team id
-    private val _newsByTeamId = MutableLiveData<List<Article?>>()
-    val newsByTeamIdLiveData: LiveData<List<Article?>> = _newsByTeamId
+    // Headlines by team id
+    private val _headlines = MutableLiveData<List<HeadlinesEpoxyItem>>()
+    val headlinesLiveData: LiveData<List<HeadlinesEpoxyItem>> = _headlines
 
     // Roster page
     var currentSort: RosterViewState.Sort = RosterViewState.Sort.NAME
@@ -51,11 +52,20 @@ class TeamViewModel : ViewModel() {
         }
     }
 
-    fun refreshNewsByTeamId(teamId: String, limit: String) {
+    fun refreshHeadlinesByTeamId(teamId: String, limit: String) {
         viewModelScope.launch {
-            val response = repository.getNewsByTeamId(teamId, limit)
+            val headlines = repository.getHeadlinesByTeamId(teamId, limit)
 
-            _newsByTeamId.postValue(response?.articles)
+            // create epoxy items list
+            val epoxyItems = buildList {
+                add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
+                headlines!!.forEach {
+                    add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
+                }
+                add(HeadlinesEpoxyItem.FooterItem)
+            }
+
+            _headlines.postValue(epoxyItems)
         }
     }
 

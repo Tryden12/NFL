@@ -1,11 +1,9 @@
 package com.tryden.simplenfl.ui.epoxy
 
 import android.util.Log
-import com.tryden.simplenfl.domain.models.team.ArticleHeadline
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
-import com.tryden.simplenfl.ui.epoxy.interfaces.team.TeamNewsEpoxyItem
 
 class EpoxyDataManager {
 
@@ -75,28 +73,6 @@ class EpoxyDataManager {
                 }
                 add(EventEpoxyItem.FooterItem)
             }
-        }
-    }
-
-    /**
-     * This method provides the epoxy items for TeamNewsEpoxyController.
-     *
-     * @return the list of epoxy news headlines with header and footer.
-     */
-    fun giveMeTeamNewsEpoxyItems(articles: List<ArticleHeadline>) : List<TeamNewsEpoxyItem> {
-        Log.e("EpoxyDataManager", "articleList size = ${articles.size}" )
-
-        return buildList {
-            add(TeamNewsEpoxyItem.HeaderItem(
-                header = "Top Headlines",
-                logo = teamDetails!!.logos[0].href
-            ))
-            articles.forEach { article ->
-                add(TeamNewsEpoxyItem.HeadlineItem(
-                    headline = article
-                ))
-            }
-            add(TeamNewsEpoxyItem.FooterItem)
         }
     }
 }
