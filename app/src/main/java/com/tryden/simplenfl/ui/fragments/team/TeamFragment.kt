@@ -31,7 +31,6 @@ class TeamFragment : Fragment() {
     private lateinit var binding: FragmentTeamBinding
 
     private val viewModel by viewModels<TeamViewModel>()
-    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var tabTitles = arrayOf("Scores","Roster", "News")
 
@@ -55,49 +54,41 @@ class TeamFragment : Fragment() {
         setupComponents()
     }
 
-    private fun setupComponents() {
-
-        // Refresh team data
-        viewModel.refreshTeam(teamId = safeArgs.teamId)
-
-        // Use response to map to domain model, then set components
-        viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                // Map to domain model
-                val team: Team = viewModel.teamMapper.buildFrom(response)
-
-                // Set header colors
-                val teamColor = "#${team.color}"
-                // status bar
-                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
-//                requireActivity().window.statusBarColor = Color.parseColor(teamColor);
-
-                // header
-                val record = "(${team.record})"
-                binding.teamPageHeader.root.background = getTeamColorGradient(teamColor)
-                binding.teamPageHeader.teamNameTextView.text = team.shortName
-                binding.teamPageHeader.recordTextView.text = record
-                if (team.logo.isEmpty()) {
-                    Picasso.get()
-                        .load(R.drawable.placeholder_logo)
-                        .placeholder(R.drawable.placeholder_logo)
-                        .error(R.drawable.placeholder_logo)
-                        .into(binding.teamPageHeader.logoImageView)
-                } else {
-                    Picasso.get().load(team.logo).into(binding.teamPageHeader.logoImageView)
-                }
-
-                // Setup tab layout
-                setupTabLayoutAndViewPager(teamColor)
-            }
-        }
-    }
-
     private fun topToolbarSetup() {
         val toolbar = binding.topMenuMaterialToolbar
         toolbar.setNavigationOnClickListener {
             (activity as AppCompatActivity?)!!.onBackPressed()
+        }
+    }
+
+    private fun setupComponents() {
+        // Refresh team header
+        viewModel.refreshTeamHeader(teamId = safeArgs.teamId)
+        viewModel.teamHeaderLiveData.observe(viewLifecycleOwner) { team ->
+            // Set header colors
+            val teamColor = "#${team!!.color}"
+            // status bar
+            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
+//                requireActivity().window.statusBarColor = Color.parseColor(teamColor);
+
+            // header
+            val record = "(${team.record})"
+            binding.teamPageHeader.root.background = getTeamColorGradient(teamColor)
+            binding.teamPageHeader.teamNameTextView.text = team.shortName
+            binding.teamPageHeader.recordTextView.text = record
+            if (team.logo.isEmpty()) {
+                Picasso.get()
+                    .load(R.drawable.placeholder_logo)
+                    .placeholder(R.drawable.placeholder_logo)
+                    .error(R.drawable.placeholder_logo)
+                    .into(binding.teamPageHeader.logoImageView)
+            } else {
+                Picasso.get().load(team.logo).into(binding.teamPageHeader.logoImageView)
+            }
+
+            // Setup tab layout
+            setupTabLayoutAndViewPager(teamColor)
         }
     }
 

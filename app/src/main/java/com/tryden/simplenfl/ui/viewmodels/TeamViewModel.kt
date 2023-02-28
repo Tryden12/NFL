@@ -9,6 +9,7 @@ import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.domain.models.team.Logo
+import com.tryden.simplenfl.domain.models.team.Team
 import com.tryden.simplenfl.network.response.models.news.Article
 import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
@@ -20,11 +21,10 @@ import kotlinx.coroutines.launch
 class TeamViewModel : ViewModel() {
 
     private val repository = TeamRepository()
-    val teamMapper = TeamMapper
 
-    // Team id
-    private val _teamById = MutableLiveData<TeamResponse.Team?>()
-    val teamByIdLiveData: LiveData<TeamResponse.Team?> = _teamById
+    // Team Header
+    private val _teamHeader = MutableLiveData<Team?>()
+    val teamHeaderLiveData: LiveData<Team?> = _teamHeader
 
     // Team logo
     private val _teamLogo = MutableLiveData<Logo?>()
@@ -48,11 +48,12 @@ class TeamViewModel : ViewModel() {
     val rosterViewStateLiveData: LiveData<RosterViewState>
         get() = _rosterViewState
 
-    fun refreshTeam(teamId: String) {
-        viewModelScope.launch {
-            val response = repository.getTeamById(teamId)
 
-            _teamById.postValue(response?.team)
+    fun refreshTeamHeader(teamId: String) {
+        viewModelScope.launch {
+            val team = repository.getTeamHeader(teamId)
+
+            _teamHeader.postValue(team)
         }
     }
 
