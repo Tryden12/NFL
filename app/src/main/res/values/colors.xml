@@ -22,5 +22,6 @@
 
     <!-- Blues-->
     <color name="blue_link">#0E86D4</color>
+    <color name="blue_highlight">#330E86D4</color>
 
 </resources>

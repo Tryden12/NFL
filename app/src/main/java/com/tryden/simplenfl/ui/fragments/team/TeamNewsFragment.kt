@@ -27,7 +27,6 @@ class TeamNewsFragment : Fragment() {
     private lateinit var binding: FragmentTeamNewsBinding
 
     private val viewModel by viewModels<TeamViewModel>()
-    private val sharedViewModel: SharedViewModel by activityViewModels()
     private val epoxyController = TeamNewsEpoxyController(::onArticleSelected)
     private val epoxyDataManager = EpoxyDataManager()
 
@@ -43,24 +42,23 @@ class TeamNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // set team id
+        // Get team id
         val teamId = (parentFragment as TeamFragment).getTeamId()
         Log.e("TeamNewsFragment", "teamId: $teamId")
-        viewModel.refreshNewsByTeamId(teamId = teamId, "50")
-        viewModel.refreshTeam(teamId)
 
-
-        binding.epoxyTeamNewsHeadlinesRecyclerView.setController(epoxyController)
-        epoxyController.setData(emptyList())
-        viewModel.teamByIdLiveData.observe(viewLifecycleOwner) { team ->
-            epoxyDataManager.teamDetails = team
+        // Get team logo
+        viewModel.refreshTeamLogo(teamId = teamId)
+        viewModel.teamLogoLiveData.observe(viewLifecycleOwner) { logo ->
+            epoxyController.logoUrl = logo!!.logoUrl
         }
-        viewModel.newsByTeamIdLiveData.observe(viewLifecycleOwner) { articleList ->
-            val articleListFiltered = articleList.filter { article -> article!!.type == "HeadlineNews" }
-            val articles: List<ArticleHeadline> = articleListFiltered.map { article ->
-                viewModel.teamNewsMapper.buildFrom(article!!)
-            }
-            val epoxyItems = epoxyDataManager.giveMeTeamNewsEpoxyItems(articles)
+
+
+        binding.epoxyRecyclerView.setController(epoxyController)
+        epoxyController.setData(emptyList())
+
+        // Get headlines
+        viewModel.refreshHeadlinesByTeamId(teamId = teamId, limit = "30")
+        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
             epoxyController.setData(epoxyItems)
         }
     }
