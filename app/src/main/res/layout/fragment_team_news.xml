@@ -29,7 +29,7 @@
             >
 
             <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/epoxy_team_news_headlines_RecyclerView"
+                android:id="@+id/epoxy_RecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

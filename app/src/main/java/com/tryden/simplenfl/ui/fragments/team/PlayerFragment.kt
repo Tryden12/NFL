@@ -5,17 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentPlayerBinding
-import com.tryden.simplenfl.epoxy.controllers.team.player.PlayerEpoxyController
 
 class PlayerFragment : Fragment() {
 
     private lateinit var binding: FragmentPlayerBinding
-
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val epoxyControllerPlayer = PlayerEpoxyController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +23,11 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val epoxyPlayerRecyclerView = binding.epoxyPlayerRecyclerView
-        sharedViewModel.playerByIdLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerPlayer.playerResponse = response
-        }
-        sharedViewModel.refreshPlayer("14876")
-        epoxyPlayerRecyclerView.setControllerAndBuildModels(epoxyControllerPlayer)
+//        sharedViewModel.playerByIdLiveData.observe(viewLifecycleOwner) { response ->
+//            epoxyControllerPlayer.playerResponse = response
+//        }
+//        sharedViewModel.refreshPlayer("14876")
+//        epoxyPlayerRecyclerView.setControllerAndBuildModels(epoxyControllerPlayer)
 
     }
 }

@@ -6,19 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.tryden.simplenfl.R
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentNewsBinding
-import com.tryden.simplenfl.epoxy.controllers.news.NewsTopHeadlinesEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.news.NewsEpoxyController
+import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
 
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val epoxyControllerTopHeadlines = NewsTopHeadlinesEpoxyController(::onArticleSelected)
+    private val viewModel: NewsViewModel by viewModels()
+    private val epoxyController = NewsEpoxyController(::onArticleSelected)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,21 +30,20 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyNewsTopHeadlinesRecyclerView= binding.epoxyNewsTopHeadlinesRecyclerView
+        binding.epoxyNewsRecyclerView.setController(epoxyController)
+        epoxyController.setData(emptyList())
 
-        sharedViewModel.newsBreakingLiveData.observe(viewLifecycleOwner) { response ->
-            epoxyControllerTopHeadlines.newsResponse = response
-            epoxyControllerTopHeadlines.maxHeadlines = 8
+        viewModel.refreshHeadlines("", "30")
+        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
+            epoxyController.setData(epoxyItems)
         }
-        sharedViewModel.refreshBreakingNews("","100")
 
-        epoxyNewsTopHeadlinesRecyclerView.setControllerAndBuildModels(epoxyControllerTopHeadlines)
     }
 
     private fun onArticleSelected(articleId: String) {
         Log.e("NewsFragment", "onArticleSelected: $articleId" )
 
-        sharedViewModel.saveCurrentArticleId(articleId = articleId)
-        findNavController().navigate(R.id.action_newsFragment_to_articleFragment)
+        val directions = NewsFragmentDirections.actionNewsFragmentToArticleFragment(articleId)
+        findNavController().navigate(directions)
     }
 }

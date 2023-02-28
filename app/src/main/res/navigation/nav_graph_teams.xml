@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_teams"
+    app:startDestination="@id/teamsListFragment">
+    <fragment
+        android:id="@+id/teamsListFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.TeamsListFragment"
+        android:label="fragment_teams_list"
+        tools:layout="@layout/fragment_teams_list">
+
+        <action
+            android:id="@+id/action_teamsListFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.team.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team">
+
+        <action
+            android:id="@+id/action_teamFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_teamFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+
+        <argument
+            android:name="teamId"
+            android:defaultValue="1"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.team.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.tryden.simplenfl.ui.fragments.article.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" >
+
+        <argument
+            android:name="articleId"
+            android:defaultValue="35712187"
+            app:argType="string" />
+
+    </fragment>
+</navigation>

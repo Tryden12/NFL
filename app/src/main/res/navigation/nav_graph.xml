@@ -10,147 +10,40 @@
         android:name="com.tryden.simplenfl.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
+
         <action
             android:id="@+id/action_homeFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/teamsListFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.TeamsListFragment"
-        android:label="fragment_teams_list"
-        tools:layout="@layout/fragment_teams_list" >
 
         <action
-            android:id="@+id/action_teamsListFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_teamsListFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
-        <action
-            android:id="@+id/action_teamsListFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-        <action
-            android:id="@+id/action_teamsListFragment_to_teamFragment"
-            app:destination="@id/teamFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/scoresFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.ScoresFragment"
-        android:label="fragment_scores"
-        tools:layout="@layout/fragment_scores" >
+            android:id="@+id/action_homeFragment_to_nav_graph_scores"
+            app:destination="@id/nav_graph_scores" />
 
         <action
-            android:id="@+id/action_scoresFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_homeFragment_to_nav_graph_teams"
+            app:destination="@id/nav_graph_teams" />
         <action
-            android:id="@+id/action_scoresFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
-        <action
-            android:id="@+id/action_scoresFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.NewsFragment"
-        android:label="fragment_news"
-        tools:layout="@layout/fragment_news" >
-        <action
-            android:id="@+id/action_newsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_newsFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
-        <action
-            android:id="@+id/action_newsFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
-        <action
-            android:id="@+id/action_newsFragment_to_articleFragment"
-            app:destination="@id/articleFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/teamFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.team.TeamFragment"
-        android:label="fragment_team"
-        tools:layout="@layout/fragment_team" >
+            android:id="@+id/action_homeFragment_to_nav_graph_news2"
+            app:destination="@id/nav_graph_news" />
 
-        <argument android:name="teamId"
-            app:argType="integer"
-            android:defaultValue="1"/>
+    </fragment>
 
-        <action
-            android:id="@+id/action_teamFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
-        <action
-            android:id="@+id/action_teamFragment_to_playerFragment"
-            app:destination="@id/playerFragment" />
-        <action
-            android:id="@+id/action_teamFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_teamFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
-        <action
-            android:id="@+id/action_teamFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-        <action
-            android:id="@+id/action_teamFragment_to_articleFragment"
-            app:destination="@id/articleFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/playerFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.team.PlayerFragment"
-        android:label="fragment_player"
-        tools:layout="@layout/fragment_player" >
-        <action
-            android:id="@+id/action_playerFragment_to_teamFragment"
-            app:destination="@id/teamFragment" />
-        <action
-            android:id="@+id/action_playerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_playerFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
-        <action
-            android:id="@+id/action_playerFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
-        <action
-            android:id="@+id/action_playerFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-    </fragment>
+    <include app:graph="@navigation/nav_graph_scores" />
+    <include app:graph="@navigation/nav_graph_teams" />
+    <include app:graph="@navigation/nav_graph_news" />
+
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.tryden.simplenfl.ui.fragments.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" >
-        <action
-            android:id="@+id/action_articleFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_articleFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
-        <action
-            android:id="@+id/action_articleFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
-        <action
-            android:id="@+id/action_articleFragment_to_teamsListFragment"
-            app:destination="@id/teamsListFragment" />
+
+        <argument
+            android:name="articleId"
+            android:defaultValue="35712187"
+            app:argType="string" />
+
     </fragment>
-    <fragment
-        android:id="@+id/teamNewsFragment"
-        android:name="com.tryden.simplenfl.ui.fragments.team.TeamNewsFragment"
-        android:label="fragment_team_news"
-        tools:layout="@layout/fragment_team_news" >
-        <action
-            android:id="@+id/action_teamNewsFragment_to_articleFragment"
-            app:destination="@id/articleFragment" />
-    </fragment>
+
+
 </navigation>

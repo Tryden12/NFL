@@ -1,21 +1,23 @@
 package com.tryden.simplenfl.ui.fragments.team
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.tryden.simplenfl.SharedViewModel
+import androidx.fragment.app.viewModels
 import com.tryden.simplenfl.databinding.FragmentTeamRosterBinding
-import com.tryden.simplenfl.epoxy.controllers.team.roster.TeamRosterEpoxyController
+import com.tryden.simplenfl.ui.epoxy.controllers.team.roster.TeamRosterEpoxyController
+import com.tryden.simplenfl.ui.models.RosterViewState
+import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 
 class TeamRosterFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamRosterBinding
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val epoxyControllerRoster = TeamRosterEpoxyController()
+    private val viewModel: TeamViewModel by viewModels()
+    private val epoxyController = TeamRosterEpoxyController(::onSelectedSort)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,15 +30,30 @@ class TeamRosterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val epoxyRosterRecyclerView = binding.epoxyRosterRecyclerView
-        sharedViewModel.onTeamSelectedLiveData.observe(viewLifecycleOwner) { teamId ->
-            sharedViewModel.refreshRoster(teamId = teamId.toInt())
-        }
-        sharedViewModel.rosterByTeamId.observe(viewLifecycleOwner) { response ->
-            epoxyControllerRoster.rosterResponse = response
-        }
-        epoxyRosterRecyclerView.setControllerAndBuildModels(epoxyControllerRoster)
+        // get team id
+        val teamId = (parentFragment as TeamFragment).getTeamId()
 
+        // Epoxy controller setup
+        binding.epoxyRosterRecyclerView.setController(epoxyController)
+        epoxyController.setData(RosterViewState())
+        viewModel.refreshRoster(teamId = teamId)
+        viewModel.rosterMapByTeamIdLiveData.observe(viewLifecycleOwner) { rosterMap ->
+            Log.e("TeamRosterFragment", "rosterMap size: ${rosterMap.size}" )
+
+            viewModel.currentSort = RosterViewState.Sort.NAME
+            onSelectedSort(viewModel.currentSort)
+            epoxyController.setData(viewModel.rosterViewStateLiveData.value)
+        }
+    }
+
+    private fun onSelectedSort(sort: RosterViewState.Sort) {
+        viewModel.currentSort = sort
+
+        viewModel.rosterViewStateLiveData.observe(viewLifecycleOwner) { viewState ->
+            Log.e("TeamRosterFragment", "onSelectedSort: ${viewModel.currentSort}" )
+            epoxyController.setData(viewState)
+
+        }
     }
 
 }

@@ -10,7 +10,7 @@
     </item>
 
     <item
-        android:id="@+id/scoresFragment"
+        android:id="@+id/nav_graph_scores"
         android:icon="@drawable/ic_bottom_menu_item_scores_24"
         android:checked="false"
         android:title="@string/scores">
@@ -18,7 +18,7 @@
     </item>
 
     <item
-        android:id="@+id/teamsListFragment"
+        android:id="@+id/nav_graph_teams"
         android:icon="@drawable/ic_bottom_menu_item_team_24"
         android:checked="false"
         android:title="@string/teams">
@@ -26,7 +26,7 @@
     </item>
 
     <item
-        android:id="@+id/newsFragment"
+        android:id="@+id/nav_graph_news"
         android:icon="@drawable/ic_bottom_menu_item_news_24"
         android:checked="false"
         android:title="@string/news">

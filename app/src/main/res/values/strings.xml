@@ -10,6 +10,13 @@
     <!-- Team -->
     <string name="team_id_key">team_id_key</string>
     <string name="roster">Roster</string>
+    <string name="roster_label_name"><u>NAME</u></string>
+    <string name="roster_label_pos"><u>POS</u></string>
+    <string name="roster_label_age"><u>AGE</u></string>
+    <string name="roster_label_ht"><u>HT</u></string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -10,19 +10,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentArticleBinding
-import com.tryden.simplenfl.epoxy.controllers.article.ArticleEpoxyController
+import com.tryden.simplenfl.domain.models.article.Article
+import com.tryden.simplenfl.ui.epoxy.controllers.article.ArticleEpoxyController
+import com.tryden.simplenfl.ui.viewmodels.ArticleViewModel
 
 
 class ArticleFragment : Fragment() {
 
     private lateinit var binding: FragmentArticleBinding
 
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val epoxyControllerArticle = ArticleEpoxyController()
+    private val viewModel: ArticleViewModel by viewModels()
+    private val epoxyController = ArticleEpoxyController()
+
+    private val safeArgs: ArticleFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +44,18 @@ class ArticleFragment : Fragment() {
     }
 
     private fun epoxySetup() {
-        val epoxyArticleRecyclerView = binding.epoxyArticleRecyclerView
-        sharedViewModel.onArticleSelectedLiveData.observe(viewLifecycleOwner) { articleId ->
-            Log.e("ArticleFragment", "onArticleSelected: $articleId" )
+        // Set articleId
+        val articleId = safeArgs.articleId
+        viewModel.refreshArticle(articleId)
+        Log.e("ArticleFragment", "onArticleSelected: $articleId" )
 
-            sharedViewModel.refreshArticle(articleId)
+        val epoxyArticleRecyclerView = binding.epoxyArticleRecyclerView
+        epoxyArticleRecyclerView.setController(epoxyController)
+        epoxyController.setData(Article())
+        viewModel.articleByIdLiveData.observe(viewLifecycleOwner) { article ->
+            Log.e("ArticleFragment", "onViewCreated: ${article!!.headline}")
+            epoxyController.setData(article)
         }
-        sharedViewModel.articleByIdLiveDataResponse.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                epoxyControllerArticle.articleResponse = response
-                Log.e("ArticleFragment", "onViewCreated: ${response!!.headlines[0].headline}")
-            }
-        }
-        epoxyArticleRecyclerView.setControllerAndBuildModels(epoxyControllerArticle)
     }
 
     private fun topToolbarSetup() {
