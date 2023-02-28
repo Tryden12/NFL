@@ -11,7 +11,7 @@ import com.tryden.simplenfl.R
 import com.tryden.simplenfl.SharedViewModel
 import com.tryden.simplenfl.databinding.FragmentTeamsListBinding
 import com.tryden.simplenfl.domain.models.teamslist.UiTeam
-import com.tryden.simplenfl.ui.epoxy.controllers.teams.TeamListHomeEpoxyController2
+import com.tryden.simplenfl.ui.epoxy.controllers.teams.TeamListHomeEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.TeamsListViewModel
 
 class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {
@@ -20,8 +20,7 @@ class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {
     val binding: FragmentTeamsListBinding get() = _binding!!
 
     private val viewModel by viewModels<TeamsListViewModel>()
-    private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val epoxyControllerTeamList = TeamListHomeEpoxyController2(::onTeamSelected)
+    private val epoxyControllerTeamList = TeamListHomeEpoxyController(::onTeamSelected)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +41,6 @@ class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {
     private fun onTeamSelected(teamId: String) {
         Log.e("TeamsListFragment", "onTeamSelected: $teamId")
 
-        sharedViewModel.saveCurrentTeamId(teamId = teamId)
         val directions = TeamsListFragmentDirections.actionTeamsListFragmentToTeamFragment(teamId = teamId)
         findNavController().navigate(directions)
     }
