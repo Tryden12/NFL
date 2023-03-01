@@ -82,6 +82,17 @@ class TeamFragment : Fragment() {
             // Setup tab layout
             setupTabLayoutAndViewPager(teamColor)
         }
+
+        var isFavorite = false
+        binding.favoriteButton.setOnClickListener {
+            val imageRes = if (isFavorite) {
+                R.drawable.ic_star_outline_24
+            } else {
+                R.drawable.ic_star_24
+            }
+            binding.favoriteButton.setIconResource(imageRes)
+            isFavorite = !isFavorite
+        }
     }
 
     private fun setupTabLayoutAndViewPager(teamColor: String) {

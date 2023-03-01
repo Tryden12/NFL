@@ -25,9 +25,7 @@
             android:id="@+id/topMenuMaterialToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:navigationIcon="@drawable/ic_arrow_back_white_24"
-            app:menu="@menu/menu_top_bar_team">
+            app:navigationIcon="@drawable/ic_arrow_back_white_24">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/logoImageView"
@@ -36,6 +34,21 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/placeholder_logo"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/favoriteButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:insetTop="2dp"
+                android:insetBottom="0dp"
+                android:background="@android:color/transparent"
+                app:icon="@drawable/ic_star_outline_24"
+                app:iconGravity="top"
+                app:iconSize="26dp"
+                />
+
 
 <!--            <androidx.appcompat.widget.AppCompatTextView-->
 <!--                android:id="@+id/teamNameTextView"-->
