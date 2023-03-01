@@ -13,7 +13,7 @@ object TeamMapper {
             abbreviation = team.abbreviation,
             color = team.color,
             alternateColor = team.alternateColor,
-            logo = team.logos[0].href,
+            logo = team.logos[2].href,
             record = team.record.items[0].summary,
             stadium = team.franchise.venue.fullName
         )

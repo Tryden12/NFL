@@ -1,17 +1,15 @@
 package com.tryden.simplenfl.ui.fragments.team
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -66,24 +64,20 @@ class TeamFragment : Fragment() {
             // Set header colors
             val teamColor = "#${team!!.color}"
             // status bar
-            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
-//                requireActivity().window.statusBarColor = Color.parseColor(teamColor);
+//            requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
+            requireActivity().window.statusBarColor = Color.parseColor(teamColor)
 
-            // header
-            val record = "(${team.record})"
-            binding.teamPageHeader.root.background = getTeamColorGradient(teamColor)
-            binding.teamPageHeader.teamNameTextView.text = team.shortName
-            binding.teamPageHeader.recordTextView.text = record
+            binding.appBar.background = ColorDrawable(Color.parseColor(teamColor))
             if (team.logo.isEmpty()) {
                 Picasso.get()
                     .load(R.drawable.placeholder_logo)
                     .placeholder(R.drawable.placeholder_logo)
                     .error(R.drawable.placeholder_logo)
-                    .into(binding.teamPageHeader.logoImageView)
+                    .into(binding.logoImageView)
             } else {
-                Picasso.get().load(team.logo).into(binding.teamPageHeader.logoImageView)
+                Picasso.get().load(team.logo).into(binding.logoImageView)
             }
+//            binding.teamNameTextView.text = team.shortName
 
             // Setup tab layout
             setupTabLayoutAndViewPager(teamColor)
@@ -114,5 +108,10 @@ class TeamFragment : Fragment() {
     }
 
     fun getTeamId() = safeArgs.teamId
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
+    }
 
 }

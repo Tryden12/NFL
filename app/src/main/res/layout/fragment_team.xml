@@ -12,29 +12,55 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:elevation="0dp"
+        android:layout_height="50dp"
+        app:elevation="0dp"
         android:fadingEdge="none"
-        android:background="@color/black"
+        android:background="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topMenuMaterialToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+
             app:navigationIcon="@drawable/ic_arrow_back_white_24"
-            />
+            app:menu="@menu/menu_top_bar_team">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/placeholder_logo"/>
+
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/teamNameTextView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="25dp"-->
+<!--                android:fontFamily="@font/opensans_semi_bold"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="24sp"-->
+<!--                android:maxLength="12"-->
+<!--                android:maxLines="1"-->
+<!--                tools:text="Commanders"/>-->
+
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        android:id="@+id/teamPageHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/model_team_page_header" />
+<!--    <include-->
+<!--        android:id="@+id/teamPageHeader"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        layout="@layout/model_team_page_header" />-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/teamsTabLayout"
@@ -44,7 +70,7 @@
         app:tabIndicatorColor="@color/white"
         app:tabRippleColor="@null"
         android:elevation="0dp"
-        android:background="@color/black"
+        android:background="@color/darkish_grey"
         />
 
 
