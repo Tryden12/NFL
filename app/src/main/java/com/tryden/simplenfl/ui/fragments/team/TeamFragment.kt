@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.ui.fragments.team
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
@@ -7,13 +8,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
@@ -38,6 +43,7 @@ class TeamFragment : Fragment() {
     private lateinit var teamAdapter: TeamViewPagerAdapter
     private lateinit var teamViewPager: ViewPager2
     private lateinit var teamTabLayout: TabLayout
+
 
     private val safeArgs: TeamFragmentArgs by navArgs()
 
@@ -97,7 +103,8 @@ class TeamFragment : Fragment() {
 
             binding.favoriteButton.setOnClickListener {
                 if (isFavorite) {
-                    deleteFavoriteTeamFromDatabase(team) /** delete favorite here **/
+                    // Launching the custom alert dialog
+                    launchCustomAlertDialog(team) /** delete favorite option within this method **/
                 } else {
                     saveFavoriteTeamToDatabase(team)  /** save favorite here **/
                 }
@@ -111,6 +118,27 @@ class TeamFragment : Fragment() {
 
         // Setup tab layout
         setupTabLayoutAndViewPager()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun launchCustomAlertDialog(team: Team) {
+        val builder = AlertDialog.Builder(requireContext(),R.style.CustomAlertDialog)
+            .create()
+        val view = layoutInflater.inflate(R.layout.dialog_alert_unfavorite,null)
+        val titleTextView = view.findViewById<AppCompatTextView>(R.id.titleTextView)
+        val acceptButton = view.findViewById<MaterialButton>(R.id.acceptDialogButton)
+        val cancelButton = view.findViewById<MaterialButton>(R.id.cancelDialogButton)
+
+        builder.setView(view)
+        cancelButton.setOnClickListener {
+            builder.dismiss()
+        }
+        acceptButton.setOnClickListener {
+            deleteFavoriteTeamFromDatabase(team)
+            builder.dismiss()
+        }
+        titleTextView.text = getString(R.string.are_you_sure) + " ${team.shortName} " + getString(R.string.as_a_favorite)
+        builder.show()
     }
 
     private fun setupTabLayoutAndViewPager() {
