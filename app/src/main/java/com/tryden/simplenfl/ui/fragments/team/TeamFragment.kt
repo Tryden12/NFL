@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -18,7 +19,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
+import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.databinding.FragmentTeamBinding
+import com.tryden.simplenfl.domain.models.team.Team
+import com.tryden.simplenfl.ui.viewmodels.FavoritesViewModel
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
 
@@ -26,7 +30,8 @@ class TeamFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamBinding
 
-    private val viewModel by viewModels<TeamViewModel>()
+    private val teamViewModel by viewModels<TeamViewModel>()
+    private val favoritesViewModel by viewModels<FavoritesViewModel>()
 
     private var tabTitles = arrayOf("Scores","Roster", "News")
 
@@ -59,10 +64,13 @@ class TeamFragment : Fragment() {
 
     private fun setupComponents() {
         // Refresh team header
-        viewModel.refreshTeamHeader(teamId = safeArgs.teamId)
-        viewModel.teamHeaderLiveData.observe(viewLifecycleOwner) { team ->
+        teamViewModel.refreshTeamHeader(teamId = safeArgs.teamId)
+        teamViewModel.teamHeaderFlow.asLiveData().observe(viewLifecycleOwner) { teamHeader ->
+
+            val team = teamHeader?.team ?: return@observe
+
             // Set header colors
-            val teamColor = "#${team!!.color}"
+            val teamColor = "#${team.color}"
             // status bar
 //            requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
             requireActivity().window.statusBarColor = Color.parseColor(teamColor)
@@ -77,34 +85,71 @@ class TeamFragment : Fragment() {
             } else {
                 Picasso.get().load(team.logo).into(binding.logoImageView)
             }
-//            binding.teamNameTextView.text = team.shortName
 
-            // Setup tab layout
-            setupTabLayoutAndViewPager(teamColor)
-        }
-
-        var isFavorite = false
-        binding.favoriteButton.setOnClickListener {
+            // Favorite icon
+            val isFavorite = teamHeader.isFavorite
             val imageRes = if (isFavorite) {
-                R.drawable.ic_star_outline_24
-            } else {
                 R.drawable.ic_star_24
+            } else {
+                R.drawable.ic_star_outline_24
             }
             binding.favoriteButton.setIconResource(imageRes)
-            isFavorite = !isFavorite
+
+            binding.favoriteButton.setOnClickListener {
+                if (isFavorite) {
+                    deleteFavoriteTeamFromDatabase(team) /** delete favorite here **/
+                } else {
+                    saveFavoriteTeamToDatabase(team)  /** save favorite here **/
+                }
+            }
+
+            // Tab layout background
+            teamTabLayout.setBackgroundColor(Color.parseColor(teamColor))
+
+
         }
+
+        // Setup tab layout
+        setupTabLayoutAndViewPager()
     }
 
-    private fun setupTabLayoutAndViewPager(teamColor: String) {
+    private fun setupTabLayoutAndViewPager() {
         teamAdapter = TeamViewPagerAdapter(childFragmentManager, lifecycle)
         teamViewPager = binding.teamViewPager
         teamTabLayout = binding.teamsTabLayout
         teamViewPager.adapter = teamAdapter
 
-        teamTabLayout.setBackgroundColor(Color.parseColor(teamColor))
         TabLayoutMediator(teamTabLayout, teamViewPager) { tab, position ->
             tab.text = tabTitles[position]
         }.attach()
+    }
+
+    private fun saveFavoriteTeamToDatabase(team: Team) {
+
+        val favoriteTeamEntity = FavoriteTeamEntity(
+            id = team.id,
+            shortName = team.shortName,
+            longName = team.longName,
+            abbreviation = team.abbreviation,
+            color = team.color,
+            logo = team.logo
+        )
+
+        favoritesViewModel.addFavoriteTeam(favoriteTeamEntity)
+    }
+
+    private fun deleteFavoriteTeamFromDatabase(team: Team) {
+
+        val favoriteTeamEntity = FavoriteTeamEntity(
+            id = team.id,
+            shortName = team.shortName,
+            longName = team.longName,
+            abbreviation = team.abbreviation,
+            color = team.color,
+            logo = team.logo
+        )
+
+        favoritesViewModel.deleteFavoriteTeam(favoriteTeamEntity)
     }
 
     private fun getTeamColorGradient(teamColor: String) : GradientDrawable{

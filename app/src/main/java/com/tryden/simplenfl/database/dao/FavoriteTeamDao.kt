@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
 import kotlinx.coroutines.flow.Flow
@@ -12,11 +13,12 @@ interface FavoriteTeamDao {
     fun getAllFavoriteTeams(): Flow<List<FavoriteTeamEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(favoriteTeamEntity: FavoriteTeamEntity)
+    suspend fun insert(favoriteTeamEntity: FavoriteTeamEntity)
 
     @Delete
-    fun delete(favoriteTeamEntity: FavoriteTeamEntity)
+    suspend fun delete(favoriteTeamEntity: FavoriteTeamEntity)
 
     @Update
-    fun update(favoriteTeamEntity: FavoriteTeamEntity)
+    suspend fun update(favoriteTeamEntity: FavoriteTeamEntity)
+
 }

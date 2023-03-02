@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tryden.simplenfl.application.SimpleNFLApplication
+import com.tryden.simplenfl.database.AppDatabase
 import com.tryden.simplenfl.domain.mappers.team.TeamMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
@@ -15,20 +17,35 @@ import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
+import com.tryden.simplenfl.ui.models.TeamHeader
 import com.tryden.simplenfl.ui.repositories.TeamRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class TeamViewModel : ViewModel() {
 
     private val repository = TeamRepository()
+    private val dao = AppDatabase.getDatabase(SimpleNFLApplication.context).favoriteTeamDao()
 
-    // Team Header
-    private val _teamHeader = MutableLiveData<Team?>()
-    val teamHeaderLiveData: LiveData<Team?> = _teamHeader
+
+    // region Team Header
+    private val teamFlow = MutableStateFlow<Team?>(null)
+    val teamHeaderFlow: Flow<TeamHeader?> = combine(dao.getAllFavoriteTeams(), teamFlow) { favoriteTeams, team ->
+        team?.let {
+            TeamHeader(
+                team = it,
+                isFavorite = favoriteTeams.find { it.id == team.id } != null
+            )
+        }
+    }
 
     // Team logo
     private val _teamLogo = MutableLiveData<Logo?>()
     val teamLogoLiveData: LiveData<Logo?> = _teamLogo
+
+    // endregion Team Header
 
     // Headlines by team id
     private val _headlines = MutableLiveData<List<HeadlinesEpoxyItem>>()
@@ -49,11 +66,12 @@ class TeamViewModel : ViewModel() {
         get() = _rosterViewState
 
 
+
     fun refreshTeamHeader(teamId: String) {
         viewModelScope.launch {
             val team = repository.getTeamHeader(teamId)
 
-            _teamHeader.postValue(team)
+            teamFlow.emit(team)
         }
     }
 
