@@ -29,7 +29,7 @@ class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {
         viewModel.teamListLiveData.observe(viewLifecycleOwner) { teamsList ->
             val uiTeams: List<UiTeam> = teamsList.map {
                 viewModel.uiTeamMapper.buildFrom(it.team)
-            }
+            }.sortedBy { it.name }
             epoxyControllerTeamList.setData(uiTeams)
         }
 

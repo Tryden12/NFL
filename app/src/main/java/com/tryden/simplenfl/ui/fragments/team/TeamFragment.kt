@@ -62,8 +62,7 @@ class TeamFragment : Fragment() {
     }
 
     private fun topToolbarSetup() {
-        val toolbar = binding.topMenuMaterialToolbar
-        toolbar.setNavigationOnClickListener {
+        binding.backButton.setOnClickListener {
             (activity as AppCompatActivity?)!!.onBackPressed()
         }
     }
