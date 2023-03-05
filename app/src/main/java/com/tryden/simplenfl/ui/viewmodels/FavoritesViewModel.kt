@@ -64,12 +64,12 @@ class FavoritesViewModel() : ViewModel() {
                    news.add(FavoriteHeadline(
                        articleId = headline.articleId,
                        headline = headline.title,
-                       shortDescription = "", // todo
-                       articleImage = "", // todo
+                       shortDescription = headline.shortDescription,
+                       articleImage = headline.articleImage,
                        teamLogo = team.logo,
                        teamName = team.shortName,
-                       timeSincePosted = "", // todo,
-                       author = "" // todo
+                       timeSincePosted = headline.published, // todo,
+                       author = headline.author
                    ))
                }
 
