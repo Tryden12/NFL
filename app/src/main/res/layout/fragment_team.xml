@@ -32,7 +32,19 @@
                 android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
+                android:visibility="visible"
                 tools:src="@drawable/placeholder_logo"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/teamNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/opensans_bold"
+                android:textColor="?attr/colorSurface"
+                android:textSize="28sp"
+                android:visibility="gone"
+                tools:text="Commanders"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/favoriteButton"

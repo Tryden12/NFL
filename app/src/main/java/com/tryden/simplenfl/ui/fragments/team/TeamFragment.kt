@@ -77,18 +77,21 @@ class TeamFragment : Fragment() {
             // Set header colors
             val teamColor = "#${team.color}"
             // status bar
-//            requireActivity().window.statusBarColor = getColor(SimpleNFLApplication.context, R.color.black)
             requireActivity().window.statusBarColor = Color.parseColor(teamColor)
 
             binding.appBar.background = ColorDrawable(Color.parseColor(teamColor))
-            if (team.logo.isEmpty()) {
-                Picasso.get()
-                    .load(R.drawable.placeholder_logo)
-                    .placeholder(R.drawable.placeholder_logo)
-                    .error(R.drawable.placeholder_logo)
-                    .into(binding.logoImageView)
+            if (!team.logo.isEmpty()) {
+                binding.logoImageView.visibility = View.GONE
+                binding.teamNameTextView.apply {
+                    visibility = View.VISIBLE
+                    text = team.shortName
+                }
             } else {
-                Picasso.get().load(team.logo).into(binding.logoImageView)
+                binding.teamNameTextView.visibility = View.GONE
+                binding.logoImageView.apply {
+                    visibility = View.VISIBLE
+                    Picasso.get().load(team.logo).into(this)
+                }
             }
 
             // Favorite icon
@@ -111,8 +114,6 @@ class TeamFragment : Fragment() {
 
             // Tab layout background
             teamTabLayout.setBackgroundColor(Color.parseColor(teamColor))
-
-
         }
 
         // Setup tab layout
