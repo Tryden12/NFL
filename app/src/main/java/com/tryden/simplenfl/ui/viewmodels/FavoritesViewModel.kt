@@ -10,6 +10,7 @@ import com.tryden.simplenfl.database.AppDatabase
 import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
 import com.tryden.simplenfl.domain.models.news.Headline
+import com.tryden.simplenfl.formatArticlePublishedTime
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.repositories.FavoritesRepository
@@ -68,7 +69,7 @@ class FavoritesViewModel() : ViewModel() {
                        articleImage = headline.articleImage,
                        teamLogo = team.logo,
                        teamName = team.shortName,
-                       timeSincePosted = headline.published, // todo,
+                       timeSincePosted = formatArticlePublishedTime(headline.published), // todo,
                        author = headline.author
                    ))
                }
