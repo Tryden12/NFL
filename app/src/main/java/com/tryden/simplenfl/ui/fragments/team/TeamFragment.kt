@@ -80,7 +80,7 @@ class TeamFragment : Fragment() {
             requireActivity().window.statusBarColor = Color.parseColor(teamColor)
 
             binding.appBar.background = ColorDrawable(Color.parseColor(teamColor))
-            if (!team.logo.isEmpty()) {
+            if (team.logo.isEmpty()) {
                 binding.logoImageView.visibility = View.GONE
                 binding.teamNameTextView.apply {
                     visibility = View.VISIBLE
