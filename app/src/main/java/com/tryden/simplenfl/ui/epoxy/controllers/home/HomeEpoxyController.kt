@@ -1,7 +1,9 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.home
 
+import android.util.Log
 import com.airbnb.epoxy.EpoxyController
 import com.tryden.simplenfl.addLoadingModel
+import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
@@ -23,6 +25,12 @@ class HomeEpoxyController(
         set(value) {
             field = value
             isLoading = false
+            requestModelBuild()
+        }
+
+    var favoriteHeadlinesEpoxyItems: List<FavoritesHeadlinesEpoxyItem> = emptyList()
+        set(value) {
+            field = value
             requestModelBuild()
         }
 
@@ -54,6 +62,30 @@ class HomeEpoxyController(
                 }
                 is HeadlinesEpoxyItem.Spacer -> {
                     // do nothing
+                }
+            }
+        }
+
+        if (favoriteHeadlinesEpoxyItems.isNotEmpty()) {
+            favoriteHeadlinesEpoxyItems.forEach { item ->
+                when (item) {
+                    is FavoritesHeadlinesEpoxyItem.HeaderItem -> {
+                        SectionHeaderEpoxyModel(
+                            title = item.headerTitle,
+                            logo = "",
+                            logoVisible = false
+                        ).id("header-my-news-headlines").addTo(this)
+                    }
+                    is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
+                        // todo
+                        Log.e("HomeEpoxyController", "favorite carousel: ${item.newsItem.headline}" )
+                    }
+                    is FavoritesHeadlinesEpoxyItem.FooterItem -> {
+                        SectionFooterEpoxyModel().id("footer-my-news-headlines").addTo(this)
+                    }
+                    is FavoritesHeadlinesEpoxyItem.Spacer -> {
+                        // do nothing
+                    }
                 }
             }
         }
