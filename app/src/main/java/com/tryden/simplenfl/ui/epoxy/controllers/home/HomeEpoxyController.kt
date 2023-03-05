@@ -1,13 +1,16 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.home
 
 import android.util.Log
+import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.carousel
 import com.tryden.simplenfl.addLoadingModel
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.news.HeadlineItemEpoxyModel
+import com.tryden.simplenfl.ui.epoxy.models.news.MyNewsCarouselEpoxyItem
 
 class HomeEpoxyController(
     private val onArticleSelected: (String) -> Unit
@@ -66,8 +69,19 @@ class HomeEpoxyController(
             }
         }
 
-        if (favoriteHeadlinesEpoxyItems.isNotEmpty()) {
+        val carouselItems = buildList {
             favoriteHeadlinesEpoxyItems.forEach { item ->
+                when (item) {
+                    is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
+                        add(MyNewsCarouselEpoxyItem(item.newsItem))
+                    }
+
+                }
+            }
+        }
+
+        if (favoriteHeadlinesEpoxyItems.isNotEmpty()) {
+            favoriteHeadlinesEpoxyItems.forEachIndexed { index, item ->
                 when (item) {
                     is FavoritesHeadlinesEpoxyItem.HeaderItem -> {
                         SectionHeaderEpoxyModel(
@@ -77,8 +91,13 @@ class HomeEpoxyController(
                         ).id("header-my-news-headlines").addTo(this)
                     }
                     is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
-                        // todo
                         Log.e("HomeEpoxyController", "favorite carousel: ${item.newsItem.headline}" )
+                        Log.e("HomeEpoxyController", "carousel size: ${carouselItems.size}" )
+
+                        // todo add carousel items
+//                        MyNewsCarouselEpoxyItem(newsItem = item.newsItem)
+//                            .id("carousel-item-${item.newsItem.articleId}")
+//                            .addTo(this)
                     }
                     is FavoritesHeadlinesEpoxyItem.FooterItem -> {
                         SectionFooterEpoxyModel().id("footer-my-news-headlines").addTo(this)
