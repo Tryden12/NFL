@@ -72,18 +72,22 @@ class HomeEpoxyController(
             }
         }
 
-        val carouselItems = buildList {
-            favoriteHeadlinesEpoxyItems.forEach { item ->
-                when (item) {
-                    is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
-                        add(MyNewsCarouselEpoxyItem(item.newsItem, onArticleSelected).id("carousel-item-${item.newsItem.articleId}"))
-                    }
-
-                }
-            }
-        }
 
         if (favoriteHeadlinesEpoxyItems.isNotEmpty()) {
+            // Get items
+            val carouselItems = buildList {
+                favoriteHeadlinesEpoxyItems.forEach { item ->
+                    when (item) {
+                        is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
+                            add(MyNewsCarouselEpoxyItem(item.newsItem, onArticleSelected).id("carousel-item-${item.newsItem.articleId}"))
+                        }
+
+                    }
+                }
+            }
+
+
+            // Build items
             favoriteHeadlinesEpoxyItems.forEachIndexed { index, item ->
                 when (item) {
                     is FavoritesHeadlinesEpoxyItem.HeaderItem -> {
@@ -111,10 +115,10 @@ class HomeEpoxyController(
                                     }
                                 }
                                 .padding(Carousel.Padding.dp(
-                                    16, //left
-                                    4, //top
-                                    16, //right
-                                    4, //bottom
+                                    12, //left
+                                    0, //top
+                                    0, //right
+                                    0, //bottom
                                     0 //itemspacing
                                 ))
                                 .models(carouselItems)
