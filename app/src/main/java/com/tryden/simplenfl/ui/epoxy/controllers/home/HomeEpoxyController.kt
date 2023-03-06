@@ -1,9 +1,13 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.home
 
 import android.util.Log
+import androidx.core.content.ContextCompat
+import com.airbnb.epoxy.Carousel
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
+import com.tryden.simplenfl.R
 import com.tryden.simplenfl.addLoadingModel
+import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
@@ -93,20 +97,26 @@ class HomeEpoxyController(
                         Log.e("HomeEpoxyController", "favorite carousel: ${item.newsItem.headline}" )
                         Log.e("HomeEpoxyController", "carousel size: ${carouselItems.size}" )
 
-                        // todo add carousel items
-//                        MyNewsCarouselEpoxyItem(newsItem = item.newsItem)
-//                            .id("carousel-item-${item.newsItem.articleId}")
-//                            .addTo(this)
-
                         if (index == favoriteHeadlinesEpoxyItems.lastIndex-1) {
-//                            carousel {
-//                                id("my-news-carousel")
-//                                models(carouselItems)
-//                                numViewsToShowOnScreen(1.35f)
-//                            }
-//
+
                             CarouselModel_()
                                 .id("my-news-carousel")
+                                .onBind { _, view, _ ->
+                                    view.apply {
+                                        setBackgroundColor(
+                                            ContextCompat.getColor(
+                                                SimpleNFLApplication.context, R.color.dark_grey
+                                            )
+                                        )
+                                    }
+                                }
+                                .padding(Carousel.Padding.dp(
+                                    16, //left
+                                    4, //top
+                                    16, //right
+                                    4, //bottom
+                                    0 //itemspacing
+                                ))
                                 .models(carouselItems)
                                 .numViewsToShowOnScreen(1.35f)
                                 .addTo(this)
@@ -123,5 +133,4 @@ class HomeEpoxyController(
             }
         }
     }
-
 }

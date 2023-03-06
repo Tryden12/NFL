@@ -2,7 +2,6 @@ package com.tryden.simplenfl.ui.epoxy.models.news
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelCarouselMyNewsItemBinding
@@ -39,9 +38,9 @@ data class MyNewsCarouselEpoxyItem(
         titleTextView.text = newsItem.headline
 
         // Published
-        publishedTextView.text = newsItem.timeSincePosted
+        publishedTextView.text = newsItem.timeSincePosted.ifEmpty { "3:00 PM" }
 
         // Author
-        authorTextView.text = newsItem.author
+        authorTextView.text = newsItem.author.ifEmpty { "Adam Schefter" }
     }
 }
