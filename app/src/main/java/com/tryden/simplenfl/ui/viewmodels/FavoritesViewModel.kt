@@ -69,6 +69,7 @@ class FavoritesViewModel() : ViewModel() {
                        articleImage = headline.articleImage,
                        teamLogo = team.logo,
                        teamName = team.shortName,
+                       teamColor = team.color,
                        timeSincePosted = formatArticlePublishedTime(headline.published), // todo,
                        author = headline.author
                    ))

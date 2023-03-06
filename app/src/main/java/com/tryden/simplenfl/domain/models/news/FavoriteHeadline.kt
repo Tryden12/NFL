@@ -7,6 +7,7 @@ data class FavoriteHeadline(
     val articleImage: String = "",
     val teamLogo: String = "",
     val teamName: String = "",
+    val teamColor: String = "",
     val timeSincePosted: String = "",
     val author: String = "",
 )

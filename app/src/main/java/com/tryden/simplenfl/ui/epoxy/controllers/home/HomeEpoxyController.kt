@@ -3,7 +3,6 @@ package com.tryden.simplenfl.ui.epoxy.controllers.home
 import android.util.Log
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
-import com.airbnb.epoxy.carousel
 import com.tryden.simplenfl.addLoadingModel
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
@@ -73,7 +72,7 @@ class HomeEpoxyController(
             favoriteHeadlinesEpoxyItems.forEach { item ->
                 when (item) {
                     is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
-                        add(MyNewsCarouselEpoxyItem(item.newsItem))
+                        add(MyNewsCarouselEpoxyItem(item.newsItem).id("carousel-item-${item.newsItem.articleId}"))
                     }
 
                 }
@@ -98,6 +97,21 @@ class HomeEpoxyController(
 //                        MyNewsCarouselEpoxyItem(newsItem = item.newsItem)
 //                            .id("carousel-item-${item.newsItem.articleId}")
 //                            .addTo(this)
+
+                        if (index == favoriteHeadlinesEpoxyItems.lastIndex-1) {
+//                            carousel {
+//                                id("my-news-carousel")
+//                                models(carouselItems)
+//                                numViewsToShowOnScreen(1.35f)
+//                            }
+//
+                            CarouselModel_()
+                                .id("my-news-carousel")
+                                .models(carouselItems)
+                                .numViewsToShowOnScreen(1.35f)
+                                .addTo(this)
+                        }
+
                     }
                     is FavoritesHeadlinesEpoxyItem.FooterItem -> {
                         SectionFooterEpoxyModel().id("footer-my-news-headlines").addTo(this)
