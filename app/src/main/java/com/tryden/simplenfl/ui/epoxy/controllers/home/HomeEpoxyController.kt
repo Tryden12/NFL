@@ -76,7 +76,7 @@ class HomeEpoxyController(
             favoriteHeadlinesEpoxyItems.forEach { item ->
                 when (item) {
                     is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
-                        add(MyNewsCarouselEpoxyItem(item.newsItem).id("carousel-item-${item.newsItem.articleId}"))
+                        add(MyNewsCarouselEpoxyItem(item.newsItem, onArticleSelected).id("carousel-item-${item.newsItem.articleId}"))
                     }
 
                 }

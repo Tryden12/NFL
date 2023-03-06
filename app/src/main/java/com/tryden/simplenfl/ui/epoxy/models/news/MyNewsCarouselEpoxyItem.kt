@@ -9,10 +9,17 @@ import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
 import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
 
 data class MyNewsCarouselEpoxyItem(
-    val newsItem: FavoriteHeadline
+    val newsItem: FavoriteHeadline,
+    val onArticleSelected: (String) -> Unit
 ): ViewBindingKotlinModel<ModelCarouselMyNewsItemBinding>(R.layout.model_carousel_my_news_item) {
 
     override fun ModelCarouselMyNewsItemBinding.bind() {
+
+        // On click listener
+        root.setOnClickListener {
+            onArticleSelected(newsItem.articleId)
+        }
+
         // Article image
         Picasso.get().load(newsItem.articleImage).into(imageImageView)
 
