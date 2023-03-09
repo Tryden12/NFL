@@ -1,6 +1,5 @@
 package com.tryden.simplenfl.ui.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,10 +8,8 @@ import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.database.AppDatabase
 import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
-import com.tryden.simplenfl.domain.models.news.Headline
-import com.tryden.simplenfl.formatArticlePublishedTime
+import com.tryden.simplenfl.formatPublishedTime
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
-import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.repositories.FavoritesRepository
 import com.tryden.simplenfl.ui.repositories.TeamRepository
 import kotlinx.coroutines.flow.Flow
@@ -70,7 +67,7 @@ class FavoritesViewModel() : ViewModel() {
                        teamLogo = team.logo,
                        teamName = team.shortName,
                        teamColor = team.color,
-                       timeSincePosted = formatArticlePublishedTime(headline.published), // todo,
+                       timeSincePosted = formatPublishedTime(headline.published),
                        author = headline.author
                    ))
                }
@@ -80,7 +77,7 @@ class FavoritesViewModel() : ViewModel() {
             // build epoxy items
             val epoxyItems = buildList {
                 add(FavoritesHeadlinesEpoxyItem.HeaderItem(headerTitle = "My News"))
-                news.shuffled().forEach {
+                news.sortedByDescending { it.timeSincePosted }.forEach {
                     add(FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem(it))
                 }
                 add(FavoritesHeadlinesEpoxyItem.FooterItem)
