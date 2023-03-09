@@ -18,7 +18,6 @@ fun EpoxyController.addLoadingModel() {
 }
 
 fun formatPublishedTime(date: String): String{
-    // Format date to "4:30 PM"
     val actual = OffsetDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME)
 
     val now: Instant = Instant.now()
@@ -30,21 +29,7 @@ fun formatPublishedTime(date: String): String{
     } else {
         hours.toString() + "h"
     }
-
-//    val formatter = DateTimeFormatter.ofPattern("h:mm a")
-//    return actual.format(formatter)
-
-
-
 }
-
-//fun formatPublished(date: String): String {
-//
-//
-//
-//
-//    return ""
-//}
 
 fun ModelRosterHeaderBinding.updateLabelColor(sortBy: RosterViewState.Sort) {
     when (sortBy) {
