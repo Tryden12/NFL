@@ -42,7 +42,15 @@ class HomeEpoxyController(
 
     override fun buildModels() {
         if (isLoading) {
-            addLoadingModel()
+//            addLoadingModel()
+            SectionHeaderEpoxyModel(null, "", true).id("shimmer-header-headlines").addTo(this)
+            repeat(7) {
+                HeadlineItemEpoxyModel(
+                    headline = null,
+                    onArticleSelected = onArticleSelected
+                ).id("shimmer-headline-item-$it").addTo(this)
+            }
+            SectionFooterEpoxyModel().id("shimmmer-footer-headlines").addTo(this)
             return
         }
 
@@ -58,8 +66,7 @@ class HomeEpoxyController(
                 }
                 is HeadlinesEpoxyItem.HeadlineItem -> {
                     HeadlineItemEpoxyModel(
-                        headlineTitle = item.headline.title,
-                        articleId = item.headline.articleId,
+                        headline = item.headline,
                         onArticleSelected = onArticleSelected
                     ).id(item.headline.articleId).addTo(this)
                 }

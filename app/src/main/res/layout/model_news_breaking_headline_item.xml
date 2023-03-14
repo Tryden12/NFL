@@ -1,42 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_grey"
     android:padding="8dp"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:background="@color/dark_grey">
+    android:paddingEnd="16dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iconHeadlineItemImageView"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="2dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_article_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/newsHomeHeadlineShortTitleTextView"
-        />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/newsHomeHeadlineShortTitleTextView"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_semi_bold"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:layout_marginStart="8dp"
-        android:lineHeight="18dp"
-        android:maxLines="2"
-        app:layout_constraintStart_toEndOf="@id/iconHeadlineItemImageView"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Sources: O'Brien returns to Patriots as new OC words to get to second line"
-        />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:visibility="invisible">
 
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iconHeadlineItemImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_article_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/newsHomeHeadlineShortTitleTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/newsHomeHeadlineShortTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/opensans_semi_bold"
+            android:lineHeight="18dp"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconHeadlineItemImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Sources: O'Brien returns to Patriots as new OC words to get to second line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            android:visibility="visible">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iconHeadlineItemImageViewShimmer"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="2dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_rounded_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/newsHomeHeadlineShortTitleTextViewShimmer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/newsHomeHeadlineShortTitleTextViewShimmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/opensans_semi_bold"
+                android:lineHeight="18dp"
+                android:maxLines="2"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:background="@drawable/bg_rounded_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iconHeadlineItemImageViewShimmer"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Sources: O'Brien returns to Patriots as new OC words to get to second line" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

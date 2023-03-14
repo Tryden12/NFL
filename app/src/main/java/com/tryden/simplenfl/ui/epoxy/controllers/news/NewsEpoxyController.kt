@@ -29,8 +29,7 @@ class NewsEpoxyController(
                 }
                 is HeadlinesEpoxyItem.HeadlineItem -> {
                     HeadlineItemEpoxyModel(
-                        headlineTitle = item.headline.title,
-                        articleId = item.headline.articleId,
+                        headline = item.headline,
                         onArticleSelected = onArticleSelected
                     ).id(item.headline.articleId).addTo(this)
                 }
