@@ -4,13 +4,9 @@ import com.tryden.simplenfl.database.dao.FavoriteTeamDao
 import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.mappers.news.HeadlinesMapper
 import com.tryden.simplenfl.domain.models.news.Headline
-import com.tryden.simplenfl.formatPublishedForSorting
+import com.tryden.simplenfl.ui.formatPublishedForSorting
 import com.tryden.simplenfl.network.NetworkLayer
 import kotlinx.coroutines.flow.Flow
-import java.time.Instant
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 
 class FavoritesRepository(private val favoriteTeamDao: FavoriteTeamDao) {
 

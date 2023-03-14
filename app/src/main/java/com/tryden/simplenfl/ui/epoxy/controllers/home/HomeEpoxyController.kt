@@ -6,7 +6,7 @@ import com.airbnb.epoxy.Carousel
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.addLoadingModel
+import com.tryden.simplenfl.ui.addLoadingModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem

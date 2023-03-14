@@ -8,7 +8,7 @@ import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.database.AppDatabase
 import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
-import com.tryden.simplenfl.formatPublishedTime
+import com.tryden.simplenfl.ui.formatPublishedTime
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.repositories.FavoritesRepository
 import com.tryden.simplenfl.ui.repositories.TeamRepository

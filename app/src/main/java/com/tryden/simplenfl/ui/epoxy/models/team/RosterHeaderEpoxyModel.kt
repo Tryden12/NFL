@@ -1,13 +1,10 @@
 package com.tryden.simplenfl.ui.epoxy.models.team
 
-import android.graphics.Color
-import androidx.core.content.ContextCompat
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.databinding.ModelRosterHeaderBinding
 import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.ui.models.RosterViewState
-import com.tryden.simplenfl.updateLabelColor
+import com.tryden.simplenfl.ui.updateLabelColor
 
 // Roster type header
 data class RosterHeaderEpoxyModel(
