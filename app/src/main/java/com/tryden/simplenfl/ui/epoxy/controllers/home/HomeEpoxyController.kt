@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.Carousel
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.carousel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.ui.addLoadingModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
@@ -51,6 +52,38 @@ class HomeEpoxyController(
                 ).id("shimmer-headline-item-$it").addTo(this)
             }
             SectionFooterEpoxyModel().id("shimmmer-footer-headlines").addTo(this)
+
+            SectionHeaderEpoxyModel(null, "", true).id("shimmer-header-my-news").addTo(this)
+
+            val shimmerCarouselModels = buildList {
+                repeat(2) {
+                    add(MyNewsCarouselEpoxyItem(null, onArticleSelected)
+                        .id("carousel-item-$it"))
+                }
+            }
+            carousel {
+                id("shimmer-carousel")
+                models(shimmerCarouselModels)
+                numViewsToShowOnScreen(1.35f)
+                onBind { _, view, _ ->
+                    view.apply {
+                        setBackgroundColor(
+                            ContextCompat.getColor(
+                                SimpleNFLApplication.context, R.color.dark_grey
+                            )
+                        )
+                    }
+                }
+
+                padding(Carousel.Padding.dp(
+                    12, //left
+                    0, //top
+                    0, //right
+                    0, //bottom
+                    0 //itemspacing
+                ))
+            }
+
             return
         }
 
@@ -86,7 +119,8 @@ class HomeEpoxyController(
                 favoriteHeadlinesEpoxyItems.forEach { item ->
                     when (item) {
                         is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
-                            add(MyNewsCarouselEpoxyItem(item.newsItem, onArticleSelected).id("carousel-item-${item.newsItem.articleId}"))
+                            add(MyNewsCarouselEpoxyItem(item.newsItem, onArticleSelected)
+                                .id("carousel-item-${item.newsItem.articleId}"))
                         }
 
                     }
