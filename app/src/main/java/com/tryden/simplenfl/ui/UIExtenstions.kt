@@ -13,14 +13,26 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 
+/**
+ * Method for adding the a loading epoxy model to the controller.
+ */
 fun EpoxyController.addLoadingModel() {
     LoadingEpoxyModel().id("loading").addTo(this)
 }
 
+/**
+ * Function for returning an OffsetDateTime to be used for sorting.
+ */
 fun formatPublishedForSorting(isoDate: String): String{
     return OffsetDateTime.parse(isoDate, DateTimeFormatter.ISO_DATE_TIME).toString()
 }
 
+/**
+ * Function for calculating the time between current time and the parameter date.
+ * Returns a formatted String similar to the examples below:
+ * '21d' = 21 days ago
+ * '5h' = 5 days ago
+ */
 fun formatPublishedTime(date: String): String{
     val actual = OffsetDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME)
 
@@ -35,6 +47,11 @@ fun formatPublishedTime(date: String): String{
     }
 }
 
+
+/**
+ * Method for updating roster label colors onClick whenever a label is chosen to sort:
+ * Name, Position, Age, Height
+ */
 fun ModelRosterHeaderBinding.updateLabelColor(sortBy: RosterViewState.Sort) {
     when (sortBy) {
         NAME -> {
