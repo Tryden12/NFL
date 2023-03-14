@@ -17,6 +17,10 @@ fun EpoxyController.addLoadingModel() {
     LoadingEpoxyModel().id("loading").addTo(this)
 }
 
+fun formatPublishedForSorting(isoDate: String): String{
+    return OffsetDateTime.parse(isoDate, DateTimeFormatter.ISO_DATE_TIME).toString()
+}
+
 fun formatPublishedTime(date: String): String{
     val actual = OffsetDateTime.parse(date, DateTimeFormatter.ISO_DATE_TIME)
 

@@ -77,12 +77,11 @@ class FavoritesViewModel() : ViewModel() {
             // build epoxy items
             val epoxyItems = buildList {
                 add(FavoritesHeadlinesEpoxyItem.HeaderItem(headerTitle = "My News"))
-                news.sortedByDescending { it.timeSincePosted }.forEach {
+                news.forEach {
                     add(FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem(it))
                 }
                 add(FavoritesHeadlinesEpoxyItem.FooterItem)
             }
-
             _newsFromFavorites.postValue(epoxyItems)
         }
     }
