@@ -4,37 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
-    android:background="@drawable/bg_rounded_corners_16_grey">
+    android:background="@drawable/bg_rounded_corners_16_grey"
+    android:padding="4dp">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="centerCrop"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic[7]" />
+        app:layout_constraintVertical_bias="0.5"
+        android:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic[7]" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/teamNameTextView"
-        android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/teamNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textColor="@color/light_grey"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="@id/logoImageView"
+            app:layout_constraintStart_toStartOf="@id/logoImageView"
+            app:layout_constraintTop_toBottomOf="@id/logoImageView"
+            tools:text="Commanders" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/opensans_regular"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:textColor="@color/light_grey"
-        android:textSize="8sp"
-        android:textAllCaps="true"
-        android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        app:layout_constraintStart_toStartOf="@id/logoImageView"
-        app:layout_constraintEnd_toEndOf="@id/logoImageView"
-        tools:text="Commanders"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:visibility="invisible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImageViewShimmer"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic[7]" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/teamNameTextViewShimmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textColor="@color/light_grey"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@id/logoImageViewShimmer"
+                app:layout_constraintStart_toStartOf="@id/logoImageViewShimmer"
+                app:layout_constraintTop_toBottomOf="@id/logoImageViewShimmer"
+                tools:text="Commanders" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
