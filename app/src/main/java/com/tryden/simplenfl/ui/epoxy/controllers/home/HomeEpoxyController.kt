@@ -7,8 +7,8 @@ import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.carousel
 import com.tryden.simplenfl.R
-import com.tryden.simplenfl.ui.addLoadingModel
 import com.tryden.simplenfl.application.SimpleNFLApplication
+import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
@@ -40,6 +40,12 @@ class HomeEpoxyController(
             field = value
             requestModelBuild()
         }
+
+    // Todo: implement data class and simplify favoriteHeadlines list
+    data class NewsState(
+        val header: String,
+        val newsItems: List<FavoriteHeadline>
+    )
 
     override fun buildModels() {
         if (isLoading) {
