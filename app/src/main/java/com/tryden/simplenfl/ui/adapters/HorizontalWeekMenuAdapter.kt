@@ -33,11 +33,6 @@ class HorizontalWeekMenuAdapter(
         get() = differ.currentList
         set(value) {differ.submitList(value)}
 
-//    fun updateWeeksList(newItems: MutableList<UiCalendar.UiWeek>) {
-//        weeks.clear()
-//        weeks.addAll(newItems)
-//        notifyDataSetChanged()
-//    }
 
     var selectedIndex = 0
 

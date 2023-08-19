@@ -30,6 +30,7 @@ class TeamsListFragment : Fragment(R.layout.fragment_teams_list) {
             val uiTeams: List<UiTeam> = teamsList.map {
                 viewModel.uiTeamMapper.buildFrom(it.team)
             }.sortedBy { it.name }
+            Log.d("TeamLeastFragment()", "${teamsList.size} ")
             epoxyControllerTeamList.setData(uiTeams)
         }
 

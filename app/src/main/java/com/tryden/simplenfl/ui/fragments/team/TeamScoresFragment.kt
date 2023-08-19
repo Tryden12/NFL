@@ -37,7 +37,7 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
             val epoxyItemsList = epoxyDataManager.giveMeScoresBySeasonTypeEpoxyItems(events)
             epoxyControllerScores.setData(epoxyItemsList)
         }
-        viewModel.refreshScores("20220801-20230212", "1000")
+        viewModel.refreshScores("20230801-20240212", "1000")
     }
 
 }

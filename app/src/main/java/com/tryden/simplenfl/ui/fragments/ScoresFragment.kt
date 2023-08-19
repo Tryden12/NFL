@@ -37,7 +37,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
                 viewModel.uiCalendarMapper.buildFrom(calendar)
             }
             // submit weeks to adapter
-            var uiWeeks = mutableListOf<UiCalendar.UiWeek>()
+            val uiWeeks = mutableListOf<UiCalendar.UiWeek>()
             for (i in 0 until uiCalendar.size-1) {
                 uiWeeks.addAll(uiCalendar[i].weeks)
             }
@@ -56,7 +56,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
             epoxyControllerScoresByWeek.setData(epoxyItemsList)
         }
         // Default loading to HOF Game, todo: load to current week on default
-        viewModel.refreshScores(date= "20220801-20220809", limit = "50")
+        viewModel.refreshScores(date= "20230801-20230809", limit = "50")
     }
 
     private fun setupCalendarRecyclerView() = binding?.weeksListRecyclerView?.apply {
