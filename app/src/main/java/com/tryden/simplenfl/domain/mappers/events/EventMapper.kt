@@ -35,8 +35,16 @@ object EventMapper {
                     id = event.id,
                     homeTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[0]),
                     awayTeam = TeamEventMapper.buildFrom(event.competitions[0].competitors[1]),
-                    recordHome = event.competitions[0].competitors[0].records[0].summary,
-                    recordAway = event.competitions[0].competitors[1].records[0].summary,
+                    recordHome = if (event.competitions[0]?.competitors?.get(0)?.records?.size!! > 0) {
+                        event.competitions[0]?.competitors?.get(0)?.records?.get(0)?.summary ?: ""
+                    } else {
+                        "" // leave it empty
+                    },
+                    recordAway = if (event.competitions[0]?.competitors?.get(1)?.records?.size!! > 0) {
+                        event.competitions[0]?.competitors?.get(1)?.records?.get(0)?.summary ?: ""
+                    } else {
+                        "" // leave it empty
+                    },
                     dateScheduled = formatDate(event.date), /** format example: Sun, 1/21 **/
                     gameTime = formatGameTime(event.date), /** format example: 4:30 PM **/
                     broadcast = if (event.competitions[0].geoBroadcasts.isNotEmpty() && event.competitions[0].geoBroadcasts[0].media.shortName.isNotEmpty()) {

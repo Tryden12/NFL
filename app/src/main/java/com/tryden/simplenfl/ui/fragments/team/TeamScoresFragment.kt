@@ -1,6 +1,7 @@
 package com.tryden.simplenfl.ui.fragments.team
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,6 +32,7 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
         binding.epoxyScoresRecyclerView.setController(epoxyControllerScores)
         epoxyControllerScores.setData(emptyList())
         viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
+            Log.d("TeamScoresFragment()", "eventList = ${eventList.size}")
             val events: List<EventEntity> = eventList.map { event ->
                 viewModel.uiEventMapper.buildFrom(event)
             }
