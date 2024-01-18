@@ -2,10 +2,10 @@ package com.tryden.simplenfl.ui.repositories
 
 import android.util.Log
 import com.tryden.simplenfl.network.NetworkLayer
-import com.tryden.simplenfl.network.response.models.teams.AllTeamsResponse
+import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 
 class TeamsRepository {
-    suspend fun getAllTeams(): AllTeamsResponse? {
+    suspend fun getAllTeams(): AllTeamsDto? {
         val request = NetworkLayer.apiClient.getAllTeams()
 
         if (request.failed || !request.isSuccessful) {

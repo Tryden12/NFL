@@ -1,20 +1,16 @@
-package com.tryden.simplenfl.network.response.models.article
+package com.tryden.simplenfl.data.remote.dto
 
-import com.tryden.simplenfl.network.response.models.news.Api
-import com.tryden.simplenfl.network.response.models.news.Category
-import com.tryden.simplenfl.network.response.models.news.Image
-
-data class ArticleResponse(
+data class ArticleDto(
     val headlines: List<Headline> = listOf(),
 ) {
 
     data class Headline(
         val byline: String = "",
-        val categories: List<Category> = listOf(),
+        val categories: List<NewsDto.Category> = listOf(),
         val description: String = "",
         val headline: String = "",
         val id: Int = 0,
-        val images: List<Image> = listOf(),
+        val images: List<NewsDto.Image> = listOf(),
         val keywords: List<Any> = listOf(),
         val lastModified: String = "",
         val linkText: String = "",
@@ -44,7 +40,7 @@ data class ArticleResponse(
     )
 
     data class Links(
-        val api: Api = Api(),
+        val api: NewsDto.Api = NewsDto.Api(),
         val mobile: Mobile = Mobile(),
     )
 

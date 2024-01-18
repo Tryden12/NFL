@@ -1,10 +1,10 @@
 package com.tryden.simplenfl.domain.mappers.team
 
 import com.tryden.simplenfl.domain.models.roster.Player
-import com.tryden.simplenfl.network.response.models.roster.RosterResponse
+import com.tryden.simplenfl.data.remote.dto.RosterDto
 
 object TeamRosterMapper {
-    fun buildFrom(player: RosterResponse.Item) : Player {
+    fun buildFrom(player: RosterDto.Item) : Player {
         return Player(
             id = player.id,
             displayName = player.displayName,

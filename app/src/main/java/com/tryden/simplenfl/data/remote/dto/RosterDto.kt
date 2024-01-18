@@ -1,6 +1,6 @@
-package com.tryden.simplenfl.network.response.models.roster
+package com.tryden.simplenfl.data.remote.dto
 
-data class RosterResponse(
+data class RosterDto(
     val athletes: List<Athlete> = listOf(),
     val coach: List<Coach> = listOf(),
     val team: Team = Team(),

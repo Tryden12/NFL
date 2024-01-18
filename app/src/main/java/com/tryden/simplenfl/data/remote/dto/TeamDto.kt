@@ -1,6 +1,6 @@
-package com.tryden.simplenfl.network.response.models.team
+package com.tryden.simplenfl.data.remote.dto
 
-data class TeamResponse(
+data class TeamDto(
     val team: Team = Team()
 ) {
     data class Team(

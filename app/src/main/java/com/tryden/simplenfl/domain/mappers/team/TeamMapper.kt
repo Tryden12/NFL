@@ -1,11 +1,11 @@
 package com.tryden.simplenfl.domain.mappers.team
 
 import com.tryden.simplenfl.domain.models.team.Team
-import com.tryden.simplenfl.network.response.models.team.TeamResponse
+import com.tryden.simplenfl.data.remote.dto.TeamDto
 
 object TeamMapper {
 
-    fun buildFrom(team: TeamResponse.Team) : Team {
+    fun buildFrom(team: TeamDto.Team) : Team {
         return Team (
             id = team.id,
             shortName = team.shortDisplayName,

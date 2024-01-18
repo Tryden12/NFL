@@ -3,7 +3,7 @@ package com.tryden.simplenfl.domain.mappers.events
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity.*
-import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Event
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto.Event
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

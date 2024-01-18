@@ -1,7 +1,7 @@
-package com.tryden.simplenfl.network.response.models.scores
+package com.tryden.simplenfl.data.remote.dto
 
 
-data class ScoreboardResponse(
+data class ScoreboardDto(
     val events: List<Event> = listOf(),
     val leagues: List<League> = listOf(),
     val week: Week = Week()

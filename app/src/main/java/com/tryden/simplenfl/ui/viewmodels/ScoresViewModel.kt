@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Event
-import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Calendar
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto.Event
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto.Calendar
 import com.tryden.simplenfl.domain.models.calendar.UiCalendarMapper
 import com.tryden.simplenfl.ui.repositories.ScoresRepository
 import com.tryden.simplenfl.domain.mappers.events.EventMapper

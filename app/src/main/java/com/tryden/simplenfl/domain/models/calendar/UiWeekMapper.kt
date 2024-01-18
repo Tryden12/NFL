@@ -1,6 +1,6 @@
 package com.tryden.simplenfl.domain.models.calendar
 
-import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Entry
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto.Entry
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 

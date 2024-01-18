@@ -1,7 +1,7 @@
 package com.tryden.simplenfl.ui.epoxy
 
 import android.util.Log
-import com.tryden.simplenfl.network.response.models.team.TeamResponse
+import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
 
@@ -23,7 +23,7 @@ class EpoxyDataManager {
      *
      * Updates from Fragment by observing the teamByIdLiveData in the TeamViewModel.
      */
-    var teamDetails: TeamResponse.Team? = null
+    var teamDetails: TeamDto.Team? = null
         set(value) {
             field = value
         }

@@ -2,19 +2,19 @@ package com.tryden.simplenfl.domain.mappers.article
 
 import com.tryden.simplenfl.domain.addBrTags
 import com.tryden.simplenfl.domain.models.article.Article
-import com.tryden.simplenfl.network.response.models.article.ArticleResponse
+import com.tryden.simplenfl.data.remote.dto.ArticleDto
 
 object ArticleMapper {
 
-    fun buildFrom(articleResponse: ArticleResponse.Headline) : Article {
+    fun buildFrom(articleDto: ArticleDto.Headline) : Article {
         return Article(
-            headline = articleResponse.headline,
-            headerImage = articleResponse.images[0].url,
-            authorName = articleResponse.byline,
+            headline = articleDto.headline,
+            headerImage = articleDto.images[0].url,
+            authorName = articleDto.byline,
             authorImage = "",
-            source = articleResponse.source,
-            date = articleResponse.published,
-            story = addBrTags(articleResponse.story)
+            source = articleDto.source,
+            date = articleDto.published,
+            story = addBrTags(articleDto.story)
         )
     }
 }

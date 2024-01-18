@@ -1,11 +1,10 @@
 package com.tryden.simplenfl.domain.mappers.news
 
-import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
-import com.tryden.simplenfl.network.response.models.news.Article
+import com.tryden.simplenfl.data.remote.dto.NewsDto
 
 object FavoriteHeadlineMapper {
 
-    fun buildFrom(article: Article)  {
+    fun buildFrom(article: NewsDto.Article)  {
 
     }
 }

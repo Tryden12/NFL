@@ -1,16 +1,16 @@
 package com.tryden.simplenfl.domain.mappers.team
 
 import android.util.Log
+import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.domain.models.team.ArticleHeadline
-import com.tryden.simplenfl.network.response.models.news.Article
 
 object TeamNewsMapper {
-    fun buildFrom(article: Article) : ArticleHeadline {
-        Log.e("Mapper", "getArticleIdFromUrl: ${article.links.api.news.href}" )
+    fun buildFrom(articleDto: NewsDto.Article) : ArticleHeadline {
+        Log.e("Mapper", "getArticleIdFromUrl: ${articleDto.links.api.news.href}" )
         return ArticleHeadline(
-            type = article.type,
-            articleHeadline = article.headline,
-            articleId = getArticleIdFromUrl(article.links.api.news.href)
+            type = articleDto.type,
+            articleHeadline = articleDto.headline,
+            articleId = getArticleIdFromUrl(articleDto.links.api.news.href)
         )
     }
 

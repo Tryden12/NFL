@@ -1,6 +1,6 @@
-package com.tryden.simplenfl.network.response.models.teams
+package com.tryden.simplenfl.data.remote.dto
 
-data class AllTeamsResponse(
+data class AllTeamsDto(
     val sports: List<Sport> = listOf()
 ) {
     data class Sport(
