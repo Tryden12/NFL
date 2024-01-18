@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.database.AppDatabase
-import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
+import com.tryden.simplenfl.data.local.AppDatabase
+import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
 import com.tryden.simplenfl.ui.formatPublishedTime
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem

@@ -1,11 +1,11 @@
-package com.tryden.simplenfl.database
+package com.tryden.simplenfl.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.tryden.simplenfl.database.dao.FavoriteTeamDao
-import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
+import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
+import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 
 
 @Database(

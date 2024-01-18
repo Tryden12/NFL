@@ -1,8 +1,7 @@
-package com.tryden.simplenfl.database.dao
+package com.tryden.simplenfl.data.local.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
+import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import kotlinx.coroutines.flow.Flow
 
 

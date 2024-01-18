@@ -18,13 +18,12 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.database.entity.FavoriteTeamEntity
+import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.databinding.FragmentTeamBinding
 import com.tryden.simplenfl.domain.models.team.Team
 import com.tryden.simplenfl.ui.viewmodels.FavoritesViewModel

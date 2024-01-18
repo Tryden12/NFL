@@ -5,15 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.database.AppDatabase
-import com.tryden.simplenfl.domain.mappers.team.TeamMapper
-import com.tryden.simplenfl.domain.mappers.team.TeamNewsMapper
-import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
+import com.tryden.simplenfl.data.local.AppDatabase
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.domain.models.team.Logo
 import com.tryden.simplenfl.domain.models.team.Team
-import com.tryden.simplenfl.network.response.models.news.Article
-import com.tryden.simplenfl.network.response.models.team.TeamResponse
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
