@@ -1,5 +1,6 @@
-package com.tryden.simplenfl.data.remote
+package com.tryden.simplenfl.data.remote.source
 
+import com.tryden.simplenfl.data.remote.ResponseResource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 
