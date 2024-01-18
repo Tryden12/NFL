@@ -1,24 +1,24 @@
-package com.tryden.simplenfl.network
+package com.tryden.simplenfl.data.remote
 
 import retrofit2.Response
 import java.lang.Exception
 
-data class SimpleResponse<T>(
+data class ResponseResource<T>(
     val status: Status,
     val data: Response<T>?,
     val exception: Exception?
     ) {
 
     companion object {
-        fun <T> success(data: Response<T>): SimpleResponse<T> {
-            return SimpleResponse(
+        fun <T> success(data: Response<T>): ResponseResource<T> {
+            return ResponseResource(
                 status = Status.Success,
                 data = data,
                 exception = null
             )
         }
-        fun <T> failure(exception: Exception): SimpleResponse<T> {
-            return SimpleResponse(
+        fun <T> failure(exception: Exception): ResponseResource<T> {
+            return ResponseResource(
                 status = Status.Failure,
                 data = null,
                 exception = exception

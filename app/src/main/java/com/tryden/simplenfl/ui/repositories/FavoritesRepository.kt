@@ -5,7 +5,7 @@ import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.mappers.news.HeadlinesMapper
 import com.tryden.simplenfl.domain.models.news.Headline
 import com.tryden.simplenfl.ui.formatPublishedForSorting
-import com.tryden.simplenfl.network.NetworkLayer
+import com.tryden.simplenfl.data.remote.NetworkLayer
 import kotlinx.coroutines.flow.Flow
 
 class FavoritesRepository(private val favoriteTeamDao: FavoriteTeamDao) {

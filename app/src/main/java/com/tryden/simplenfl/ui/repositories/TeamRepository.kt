@@ -8,7 +8,7 @@ import com.tryden.simplenfl.domain.mappers.team.TeamRosterMapper
 import com.tryden.simplenfl.domain.models.news.Headline
 import com.tryden.simplenfl.domain.models.team.Logo
 import com.tryden.simplenfl.domain.models.team.Team
-import com.tryden.simplenfl.network.NetworkLayer
+import com.tryden.simplenfl.data.remote.NetworkLayer
 
 class TeamRepository {
 

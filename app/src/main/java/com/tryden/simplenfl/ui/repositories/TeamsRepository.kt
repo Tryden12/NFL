@@ -1,7 +1,7 @@
 package com.tryden.simplenfl.ui.repositories
 
 import android.util.Log
-import com.tryden.simplenfl.network.NetworkLayer
+import com.tryden.simplenfl.data.remote.NetworkLayer
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 
 class TeamsRepository {

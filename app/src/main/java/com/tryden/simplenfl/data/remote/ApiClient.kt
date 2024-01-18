@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.network
+package com.tryden.simplenfl.data.remote
 
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
@@ -18,48 +18,48 @@ class ApiClient(
     private val playerByIdService: PlayerByIdService
 ) {
 
-    suspend fun getAllTeams() : SimpleResponse<AllTeamsDto> {
+    suspend fun getAllTeams() : ResponseResource<AllTeamsDto> {
         return safeApiCall { nflService.getAllTeams() }
     }
 
-    suspend fun getTeamById(teamId: String) : SimpleResponse<TeamDto> {
+    suspend fun getTeamById(teamId: String) : ResponseResource<TeamDto> {
         return safeApiCall { nflService.getTeamById(teamId) }
     }
 
-    suspend fun getRosterByTeamId(teamId: String) : SimpleResponse<RosterDto> {
+    suspend fun getRosterByTeamId(teamId: String) : ResponseResource<RosterDto> {
         return safeApiCall { nflService.getRosterByTeamId(teamId) }
     }
 
-    suspend fun getScoresRange(dates: String, limit: String) : SimpleResponse<ScoreboardDto> {
+    suspend fun getScoresRange(dates: String, limit: String) : ResponseResource<ScoreboardDto> {
         return safeApiCall { nflService.getScoresRange(dates, limit) }
     }
 
-    suspend fun getScoresByWeek(week: String) : SimpleResponse<ScoreboardDto> {
+    suspend fun getScoresByWeek(week: String) : ResponseResource<ScoreboardDto> {
         return safeApiCall { nflService.getScoresByWeek(week) }
     }
 
-    suspend fun getScoresCalendar(limit: String) : SimpleResponse<ScoreboardDto> {
+    suspend fun getScoresCalendar(limit: String) : ResponseResource<ScoreboardDto> {
         return safeApiCall { nflService.getScoresCalendar(limit) }
     }
 
-    suspend fun getBreakingNews(type: String, limit: String): SimpleResponse<NewsDto> {
+    suspend fun getBreakingNews(type: String, limit: String): ResponseResource<NewsDto> {
         return safeApiCall { nflService.getBreakingNews(type, limit) }
     }
 
-    suspend fun getNewsByTeamId(teamId: String, limit: String): SimpleResponse<NewsDto> {
+    suspend fun getNewsByTeamId(teamId: String, limit: String): ResponseResource<NewsDto> {
         return safeApiCall { nflService.getNewsByTeamId(teamId, limit) }
     }
 
-    suspend fun getArticleById(articleId: String) : SimpleResponse<ArticleDto> {
+    suspend fun getArticleById(articleId: String) : ResponseResource<ArticleDto> {
         return safeApiCall { articleByIDService.getArticleById(articleId) }
     }
 
 
-    private inline fun <T> safeApiCall(apiCall: () -> Response<T>): SimpleResponse<T> {
+    private inline fun <T> safeApiCall(apiCall: () -> Response<T>): ResponseResource<T> {
         return try {
-            SimpleResponse.success(apiCall.invoke())
+            ResponseResource.success(apiCall.invoke())
         } catch (e: Exception) {
-            SimpleResponse.failure(e)
+            ResponseResource.failure(e)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.network
+package com.tryden.simplenfl.data.remote
 
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
