@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.network.service
+package com.tryden.simplenfl.data.remote.service
 
 import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.data.remote.dto.RosterDto

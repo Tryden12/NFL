@@ -6,9 +6,9 @@ import com.tryden.simplenfl.data.remote.dto.RosterDto
 import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
-import com.tryden.simplenfl.network.service.ArticleByIDService
-import com.tryden.simplenfl.network.service.NFLService
-import com.tryden.simplenfl.network.service.PlayerByIdService
+import com.tryden.simplenfl.data.remote.service.ArticleByIDService
+import com.tryden.simplenfl.data.remote.service.NFLService
+import com.tryden.simplenfl.data.remote.service.PlayerByIdService
 import retrofit2.Response
 import java.lang.Exception
 

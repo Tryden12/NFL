@@ -5,9 +5,9 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.network.service.ArticleByIDService
-import com.tryden.simplenfl.network.service.NFLService
-import com.tryden.simplenfl.network.service.PlayerByIdService
+import com.tryden.simplenfl.data.remote.service.ArticleByIDService
+import com.tryden.simplenfl.data.remote.service.NFLService
+import com.tryden.simplenfl.data.remote.service.PlayerByIdService
 import com.tryden.simplenfl.util.Constants.ARTICLE_BY_ID_URL
 import com.tryden.simplenfl.util.Constants.BASE_URL_NFL
 import com.tryden.simplenfl.util.Constants.PLAYER_BY_ID_URL
