@@ -3,13 +3,14 @@ package com.tryden.simplenfl.ui.epoxy.controllers.teams
 import com.airbnb.epoxy.TypedEpoxyController
 import com.tryden.simplenfl.ui.epoxy.models.teams.TeamsListVerticalEpoxyModel
 import com.tryden.simplenfl.domain.models.teamslist.UiTeam
+import com.tryden.simplenfl.domain.newmodels.TeamList
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
 
 class TeamListHomeEpoxyController(
     private val onTeamSelected: (String) -> Unit
-): TypedEpoxyController<List<UiTeam>>() {
+): TypedEpoxyController<List<TeamList>>() {
 
-    override fun buildModels(data: List<UiTeam>) {
+    override fun buildModels(data: List<TeamList>) {
         if (data.isEmpty()) {
 //            addLoadingModel()
             /** add shimmer loading model(s) **/

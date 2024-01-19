@@ -1,5 +1,6 @@
 package com.tryden.simplenfl.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto.Teams
 import com.tryden.simplenfl.ui.repositories.TeamsRepository
 import com.tryden.simplenfl.domain.mappers.teamslist.UiTeamMapper
+import com.tryden.simplenfl.domain.newmodels.TeamList
 import com.tryden.simplenfl.domain.usecase.teams.TeamsListUseCase
 import com.tryden.simplenfl.ui.uistate.TeamsListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +29,28 @@ import javax.inject.Inject
 class TeamsListViewModel @Inject constructor(
     private val teamsListUseCase: TeamsListUseCase
 ) : ViewModel() {
+
+    private val _teamsList = MutableLiveData<List<TeamList>>(emptyList())
+    val teamListLiveData: LiveData<List<TeamList>> = _teamsList
+
+    fun refreshTeams() = viewModelScope.launch {
+        // CoroutineScope tied to this ViewModel
+        // Scope will be cleared when ViewModel will be cleared
+        viewModelScope.launch {
+            teamsListUseCase.getAllTeams().collect { result ->
+                if (result.isNotEmpty()) {
+                    _teamsList.postValue(result)
+                } else {
+                    Log.d("TeamsListViewModel()", "Teams list size = 0")
+                }
+            }
+        }
+
+    }
+
+
+
+/** Migrate to below ****************************************************************************/
 
     private val _uiState = MutableStateFlow(TeamsListUiState())
     val uiState: StateFlow<TeamsListUiState> = _uiState
@@ -61,20 +85,6 @@ class TeamsListViewModel @Inject constructor(
         }
     }
 
-
-
-
-/** Deprecated ****************************************************************************/
-    private val repository = TeamsRepository()
-    val uiTeamMapper = UiTeamMapper()
-
-    private val _teamsList = MutableLiveData<List<Teams>>(emptyList())
-    val teamListLiveData: LiveData<List<Teams>> = _teamsList
-
-    fun refreshTeams() = viewModelScope.launch {
-        val teamsResponse = repository.getAllTeams() ?: return@launch // todo error handling
-        _teamsList.postValue(teamsResponse.sports[0].leagues[0].teams)
-    }
 /****************************************************************************************/
 
 }
