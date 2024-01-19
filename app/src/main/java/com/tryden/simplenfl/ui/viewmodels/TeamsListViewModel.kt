@@ -5,16 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.data.remote.dto.AllTeamsDto.Teams
-import com.tryden.simplenfl.ui.repositories.TeamsRepository
-import com.tryden.simplenfl.domain.mappers.teamslist.UiTeamMapper
 import com.tryden.simplenfl.domain.newmodels.TeamList
 import com.tryden.simplenfl.domain.usecase.teams.TeamsListUseCase
 import com.tryden.simplenfl.ui.uistate.TeamsListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
