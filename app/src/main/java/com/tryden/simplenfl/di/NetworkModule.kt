@@ -3,6 +3,8 @@ package com.tryden.simplenfl.di
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tryden.simplenfl.data.remote.service.NFLService
+import com.tryden.simplenfl.data.remote.source.RemoteDataSource
+import com.tryden.simplenfl.data.remote.source.RemoteSource
 import com.tryden.simplenfl.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -25,7 +27,14 @@ object NetworkModule {
     fun provideMoshi(): Moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
 
     @Provides
+    @Singleton
     fun provideNflApi(retrofitFactory: RetrofitFactory, moshi: Moshi,): NFLService =
         retrofitFactory.create(Constants.BASE_URL_NFL, moshi).build()
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(api: NFLService): RemoteSource {
+        return RemoteDataSource(api)
+    }
 
 }

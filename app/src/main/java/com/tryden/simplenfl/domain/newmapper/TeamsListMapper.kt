@@ -2,8 +2,9 @@ package com.tryden.simplenfl.domain.newmapper
 
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.domain.newmodels.TeamList
+import javax.inject.Inject
 
-class TeamsListMapper : Mapper<TeamList, AllTeamsDto.Team> {
+class TeamsListMapper @Inject constructor() : Mapper<TeamList, AllTeamsDto.Team> {
 
     override fun buildFrom(value: AllTeamsDto.Team) : TeamList {
         return TeamList(

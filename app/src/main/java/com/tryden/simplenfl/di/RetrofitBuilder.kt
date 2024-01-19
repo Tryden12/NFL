@@ -15,7 +15,7 @@ import retrofit2.create
 class RetrofitBuilder @AssistedInject constructor(
     @Assisted val baseUrl: String,
     @Assisted val moshi: Moshi,
-    val okHttpClient: OkHttpClient
+//    val okHttpClient: OkHttpClient
 ) {
     inline fun <reified T> build(): T {
         return Retrofit.Builder()
