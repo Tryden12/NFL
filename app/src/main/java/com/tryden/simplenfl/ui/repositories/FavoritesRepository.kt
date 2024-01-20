@@ -14,16 +14,16 @@ class FavoritesRepository(private val favoriteTeamDao: FavoriteTeamDao) {
         return favoriteTeamDao.getAllFavoriteTeams()
     }
 
-    suspend fun insert(favoriteTeamEntity: FavoriteTeamEntity) {
-        favoriteTeamDao.insert(favoriteTeamEntity)
+    suspend fun insert(entity: FavoriteTeamEntity) {
+        favoriteTeamDao.insertFavoriteTeam(entity)
     }
 
-    suspend fun delete(favoriteTeamEntity: FavoriteTeamEntity) {
-        favoriteTeamDao.delete(favoriteTeamEntity)
+    suspend fun delete(entity: FavoriteTeamEntity) {
+        favoriteTeamDao.deleteFavoriteTeam(entity)
     }
 
-    suspend fun update(favoriteTeamEntity: FavoriteTeamEntity) {
-        favoriteTeamDao.update(favoriteTeamEntity)
+    suspend fun update(entity: FavoriteTeamEntity) {
+        favoriteTeamDao.updateFavoriteTeam(entity)
     }
 
     // News by team id
