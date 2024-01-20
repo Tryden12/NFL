@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.data.local.AppDatabase
+import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.domain.models.team.Logo
 import com.tryden.simplenfl.domain.models.team.Team
@@ -14,20 +15,24 @@ import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.models.TeamHeader
 import com.tryden.simplenfl.ui.repositories.TeamRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TeamViewModel : ViewModel() {
+@HiltViewModel
+class TeamViewModel @Inject constructor(
+    private val favoriteTeamDao: FavoriteTeamDao
+) : ViewModel() {
 
     private val repository = TeamRepository()
-    private val dao = AppDatabase.getDatabase(SimpleNFLApplication.context).favoriteTeamDao()
 
 
     // region Team Header
     private val teamFlow = MutableStateFlow<Team?>(null)
-    val teamHeaderFlow: Flow<TeamHeader?> = combine(dao.getAllFavoriteTeams(), teamFlow) { favoriteTeams, team ->
+    val teamHeaderFlow: Flow<TeamHeader?> = combine(favoriteTeamDao.getAllFavoriteTeams(), teamFlow) { favoriteTeams, team ->
         team?.let {
             TeamHeader(
                 team = it,

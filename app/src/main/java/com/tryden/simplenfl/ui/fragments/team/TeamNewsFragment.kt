@@ -12,8 +12,11 @@ import com.tryden.simplenfl.databinding.FragmentTeamNewsBinding
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 
+@AndroidEntryPoint
 class TeamNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamNewsBinding

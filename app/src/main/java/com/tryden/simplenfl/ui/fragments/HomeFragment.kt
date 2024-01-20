@@ -12,7 +12,9 @@ import com.tryden.simplenfl.databinding.FragmentHomeBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.home.HomeEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.FavoritesViewModel
 import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
@@ -33,14 +35,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             epoxyController.headlineEpoxyItems = epoxyItems
         }
 
-        favoritesViewModel.allFavoriteTeamsFlow.asLiveData().observe(viewLifecycleOwner) { favoritesList ->
+        favoritesViewModel.allFavoriteTeams.observe(viewLifecycleOwner) { favoritesList ->
             favoritesList.forEach {
-                Log.e("HomeFragment", "favorites: ${it.shortName}", )
+                Log.d("HomeFragment", "favorites: ${it.shortName}", )
             }
-            favoritesViewModel.refreshHeadlinesByTeamId(favoritesList, "30")
+            favoritesViewModel.getNewsByTeamId(favoritesList, "30")
         }
         favoritesViewModel.newsFromFavorites.observe(viewLifecycleOwner) { epoxyItems ->
-            Log.e("HomeFragment", "favorites epoxy items: ${epoxyItems.size}", )
+            Log.d("HomeFragment", "favorites epoxy items: ${epoxyItems.size}", )
             epoxyController.favoriteHeadlinesEpoxyItems = epoxyItems
         }
         binding.epoxyRecyclerView.setControllerAndBuildModels(epoxyController)

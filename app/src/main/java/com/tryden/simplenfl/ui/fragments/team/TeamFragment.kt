@@ -29,7 +29,10 @@ import com.tryden.simplenfl.domain.models.team.Team
 import com.tryden.simplenfl.ui.viewmodels.FavoritesViewModel
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
 import com.tryden.simplenfl.ui.viewpager.TeamViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@AndroidEntryPoint
 class TeamFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamBinding
