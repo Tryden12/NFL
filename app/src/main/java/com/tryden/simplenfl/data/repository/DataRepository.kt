@@ -1,7 +1,9 @@
 package com.tryden.simplenfl.data.repository
 
 import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
+import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
+import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import kotlinx.coroutines.flow.Flow
 
@@ -17,6 +19,9 @@ interface DataRepository {
     fun getAllTeams(): Flow<List<AllTeamsDto.Teams>>
 
     suspend fun getTeamById(teamId: String): TeamDto.Team?
+
+    suspend fun getNewsByTeamId(teamId: String, limit: String) : List<NewsDto.Article>?
+
 
 
     /**
