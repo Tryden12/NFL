@@ -4,34 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
 import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 
 
+/**
+ * This class is to create Dog Breeds database.
+ */
 @Database(
     entities = [FavoriteTeamEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 
 abstract class AppDatabase : RoomDatabase() {
-
-    companion object {
-        private var appDatabase: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase {
-            if (appDatabase != null) {
-                return appDatabase!!
-            }
-
-            appDatabase = Room.databaseBuilder(
-                context.applicationContext,
-                AppDatabase::class.java,
-                name = "simple-nfl-database"
-            )
-                .build()
-            return appDatabase!!
-        }
-    }
 
     abstract fun favoriteTeamDao(): FavoriteTeamDao
 }

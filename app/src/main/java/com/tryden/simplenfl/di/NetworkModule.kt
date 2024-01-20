@@ -2,6 +2,9 @@ package com.tryden.simplenfl.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
+import com.tryden.simplenfl.data.local.source.LocalDataSource
+import com.tryden.simplenfl.data.local.source.LocalSource
 import com.tryden.simplenfl.data.remote.service.NFLService
 import com.tryden.simplenfl.data.remote.source.RemoteDataSource
 import com.tryden.simplenfl.data.remote.source.RemoteSource
@@ -35,6 +38,12 @@ object NetworkModule {
     @Singleton
     fun provideRemoteDataSource(api: NFLService): RemoteSource {
         return RemoteDataSource(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(dao: FavoriteTeamDao): LocalSource {
+        return LocalDataSource(dao)
     }
 
 }
