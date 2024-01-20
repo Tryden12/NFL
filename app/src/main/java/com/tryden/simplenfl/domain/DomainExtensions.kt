@@ -1,5 +1,7 @@
 package com.tryden.simplenfl.domain
 
+import android.util.Log
+
 
 /**
  * Parse through the html and add <br> tags after every closing </p>
@@ -22,5 +24,7 @@ fun addBrTags(html: String) : String {
  *
  */
 fun getArticleIdFromUrl(url: String): String {
-    return url.split("sports/news/")[1]
+    val id = url.split("sports/news/")[1]
+    Log.d("getArticleIdFromUrl()", "URL: $url , articleID: $id")
+    return id
 }
