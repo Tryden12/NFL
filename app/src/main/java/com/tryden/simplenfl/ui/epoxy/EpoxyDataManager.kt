@@ -2,8 +2,11 @@ package com.tryden.simplenfl.ui.epoxy
 
 import android.util.Log
 import com.tryden.simplenfl.data.remote.dto.TeamDto
+import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
+import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
+import com.tryden.simplenfl.util.Constants.MY_NEWS
 
 class EpoxyDataManager {
 
@@ -73,6 +76,28 @@ class EpoxyDataManager {
                 }
                 add(EventEpoxyItem.FooterItem)
             }
+        }
+    }
+
+    /**
+     * Provides epoxy items for favorite team(s) news.
+     */
+    fun giveMeFavoriteTeamsNewsEpoxyItems(
+        list: List<FavoriteHeadline>
+    ) : List<FavoritesHeadlinesEpoxyItem> {
+        // build epoxy items
+        return if (list.isNotEmpty()) {
+            buildList {
+                add(FavoritesHeadlinesEpoxyItem.HeaderItem(headerTitle = MY_NEWS))
+                list
+                    .sortedByDescending { it.timeSincePosted }
+                    .forEach {
+                        add(FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem(it))
+                    }
+                add(FavoritesHeadlinesEpoxyItem.FooterItem)
+            }
+        } else {
+            emptyList()
         }
     }
 }

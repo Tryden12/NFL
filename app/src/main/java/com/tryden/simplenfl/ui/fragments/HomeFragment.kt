@@ -9,6 +9,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.FragmentHomeBinding
+import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.home.HomeEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.FavoritesViewModel
 import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
@@ -24,6 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val favoritesViewModel by viewModels<FavoritesViewModel>()
 
     private val epoxyController = HomeEpoxyController(::onArticleSelected)
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,9 +43,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             favoritesViewModel.getNewsByTeamId(favoritesList, "30")
         }
-        favoritesViewModel.newsFromFavorites.observe(viewLifecycleOwner) { epoxyItems ->
-            Log.d("HomeFragment", "favorites epoxy items: ${epoxyItems.size}", )
-            epoxyController.favoriteHeadlinesEpoxyItems = epoxyItems
+        favoritesViewModel.newsFromFavorites.observe(viewLifecycleOwner) { list ->
+            Log.d("HomeFragment", "favorites epoxy items: ${list.size}", )
+            epoxyController.favoriteHeadlinesEpoxyItems = epoxyDataManager.giveMeFavoriteTeamsNewsEpoxyItems(list)
         }
         binding.epoxyRecyclerView.setControllerAndBuildModels(epoxyController)
     }
