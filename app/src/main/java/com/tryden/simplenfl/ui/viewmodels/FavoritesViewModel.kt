@@ -1,56 +1,75 @@
 package com.tryden.simplenfl.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.application.SimpleNFLApplication
 import com.tryden.simplenfl.data.local.AppDatabase
+import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
 import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
+import com.tryden.simplenfl.domain.newmodels.TeamList
+import com.tryden.simplenfl.domain.usecase.favoriteTeams.FavoriteTeamsUseCase
 import com.tryden.simplenfl.ui.formatPublishedTime
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.repositories.FavoritesRepository
 import com.tryden.simplenfl.ui.repositories.TeamRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavoritesViewModel() : ViewModel() {
-
-    val allFavoriteTeamsFlow: Flow<List<FavoriteTeamEntity>>
-    private val repository: FavoritesRepository
-    private val teamRepository: TeamRepository
+@HiltViewModel
+class FavoritesViewModel @Inject constructor(
+    private val favoriteTeamsUseCase: FavoriteTeamsUseCase,
+) : ViewModel() {
 
     init {
-        val dao = AppDatabase.getDatabase(SimpleNFLApplication.context).favoriteTeamDao()
-        repository = FavoritesRepository(dao)
-        allFavoriteTeamsFlow = repository.getAllFavoriteTeams()
-
-        teamRepository = TeamRepository()
+        getAllFavoriteTeams()
     }
 
-    // region LiveData and Flow variables
+    // region LiveData variables
+    private val _allFavoriteTeams = MutableLiveData<List<FavoriteTeamEntity>>(emptyList())
+    val allFavoriteTeams: LiveData<List<FavoriteTeamEntity>> = _allFavoriteTeams
+
     private val _newsFromFavorites = MutableLiveData<List<FavoritesHeadlinesEpoxyItem>>()
     val newsFromFavorites: LiveData<List<FavoritesHeadlinesEpoxyItem>> = _newsFromFavorites
+    // endregion LiveData variables
 
-    // endregion LiveData and Flow variables
 
     // region FavoriteTeamEntity
-    fun deleteFavoriteTeam(favoriteTeamEntity: FavoriteTeamEntity) = viewModelScope.launch {
-        repository.delete(favoriteTeamEntity)
+    fun getAllFavoriteTeams() {
+        viewModelScope.launch {
+            favoriteTeamsUseCase.getAllFavoriteTeams().collect { result ->
+                if (result.isNotEmpty()) {
+                    _allFavoriteTeams.postValue(result)
+                } else {
+                    _allFavoriteTeams.postValue(result)
+                    Log.d("FavoritesViewModel()", "Favorite teams list size = 0")
+                }
+            }
+        }
     }
 
-    fun updateFavoriteTeam(favoriteTeamEntity: FavoriteTeamEntity) = viewModelScope.launch {
-        repository.update(favoriteTeamEntity)
+    fun deleteFavoriteTeam(entity: FavoriteTeamEntity) = viewModelScope.launch {
+        favoriteTeamsUseCase.deleteFavoriteTeam(entity)
     }
 
-    fun addFavoriteTeam(favoriteTeamEntity: FavoriteTeamEntity) = viewModelScope.launch {
-        repository.insert(favoriteTeamEntity)
+    fun updateFavoriteTeam(entity: FavoriteTeamEntity) = viewModelScope.launch {
+        favoriteTeamsUseCase.updateFavoriteTeam(entity)
+    }
+
+    fun addFavoriteTeam(entity: FavoriteTeamEntity) = viewModelScope.launch {
+        favoriteTeamsUseCase.insertFavoriteTeam(entity)
     }
 
     // endregion FavoriteTeamEntity
 
 
+    //TODO: Fix the section below
     // region HomeFragment news from favorites
     fun refreshHeadlinesByTeamId(favoriteTeams: List<FavoriteTeamEntity>, limit: String) {
         val news = mutableListOf<FavoriteHeadline>()
