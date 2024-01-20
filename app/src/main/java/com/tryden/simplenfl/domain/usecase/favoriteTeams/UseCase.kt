@@ -3,6 +3,9 @@ package com.tryden.simplenfl.domain.usecase.favoriteTeams
 import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Interface for the FavoriteTeamsUseCase
+ */
 interface UseCase {
     fun getAllFavoriteTeams(): Flow<List<FavoriteTeamEntity>>
 
