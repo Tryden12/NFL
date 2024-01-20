@@ -72,12 +72,14 @@ class RemoteDataSource @Inject constructor(
 
             when (res.isSuccessful) {
                 true -> {
-                    res.body()?.articles.let { articles ->
-                        return Resource.Success(data = articles)
+                    res.body()?.articles.let { news ->
+                        Log.d("RemoteDataSource", "getNews() size: ${news?.size}")
+
+                        return Resource.Success(data = news)
                     }
                 }
                 false -> {
-                    Log.d("RemoteDataSource", "getTeamById(): NOT SUCCESSFUL, res code: ${res.code()}" )
+                    Log.d("RemoteDataSource", "getNews(): NOT SUCCESSFUL, res code: ${res.code()}" )
                     return Resource.DataError(errorCode = res.code())
                 }
             }
