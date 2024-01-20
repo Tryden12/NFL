@@ -9,7 +9,7 @@ class TeamsListMapper @Inject constructor() : Mapper<TeamList, AllTeamsDto.Team>
     override fun buildFrom(value: AllTeamsDto.Team) : TeamList {
         return TeamList(
             imageUrl = value.logos[2].href,
-            name = value.displayName,
+            name = value.shortDisplayName,
             id = value.id
         )
     }
