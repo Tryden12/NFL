@@ -11,5 +11,7 @@ interface RemoteSource {
 
     suspend fun getTeamById(teamId: String) : Resource<TeamDto.Team>
 
+    suspend fun getNews(type: String, limit: String): Resource<List<NewsDto.Article>>
+
     suspend fun getNewsByTeamId(teamId: String, limit: String) : Resource<List<NewsDto.Article>>
 }

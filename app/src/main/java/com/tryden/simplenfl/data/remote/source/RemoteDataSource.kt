@@ -66,6 +66,27 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
+    override suspend fun getNews(type: String, limit: String): Resource<List<NewsDto.Article>> {
+        try {
+            val res = nflService.getNews(type, limit)
+
+            when (res.isSuccessful) {
+                true -> {
+                    res.body()?.articles.let { articles ->
+                        return Resource.Success(data = articles)
+                    }
+                }
+                false -> {
+                    Log.d("RemoteDataSource", "getTeamById(): NOT SUCCESSFUL, res code: ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("RemoteDataSource", "getNews(): Exception hash code: ${e.hashCode()}")
+            return Resource.DataError(errorCode = e.hashCode())
+        }
+    }
+
     // News by team ID
     override suspend fun getNewsByTeamId(teamId: String, limit: String): Resource<List<NewsDto.Article>> {
         try {
@@ -75,9 +96,6 @@ class RemoteDataSource @Inject constructor(
                 true -> {
                     res.body()?.articles?.let { articles ->
                         Log.d("RemoteDataSource", "getNewsByTeamId(): ${articles.size}, teamId: $teamId" )
-                        for (article in articles) {
-                            Log.d("RemoteDataSource", "getNewsByTeamId(): type ${article.type}, teamId: $teamId" )
-                        }
                         return Resource.Success(data = articles)
                     } ?: return Resource.DataError(errorCode = res.code())
                 }
