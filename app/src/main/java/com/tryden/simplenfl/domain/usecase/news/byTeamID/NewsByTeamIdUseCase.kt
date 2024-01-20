@@ -3,6 +3,7 @@ package com.tryden.simplenfl.domain.usecase.news.byTeamID
 import com.tryden.simplenfl.data.repository.DataRepository
 import com.tryden.simplenfl.domain.models.news.Headline
 import com.tryden.simplenfl.domain.newmapper.HeadlinesMapper
+import com.tryden.simplenfl.util.Constants
 import javax.inject.Inject
 
 
@@ -17,9 +18,10 @@ class NewsByTeamIdUseCase @Inject constructor(
     private val headlinesMapper: HeadlinesMapper
 ) : UseCase {
     override suspend fun getNewsByTeamId(teamId: String, limit: String): List<Headline>? {
-        return dataRepository.getNewsByTeamId(teamId, limit)?.map {
+        return dataRepository.getNewsByTeamId(teamId, limit)?.filter {
+            it.type == Constants.HEADLINE_NEWS
+        }?.map {
             headlinesMapper.buildFrom(it)
         }
     }
-
 }

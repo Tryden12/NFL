@@ -74,9 +74,10 @@ class RemoteDataSource @Inject constructor(
             when (res.isSuccessful) {
                 true -> {
                     res.body()?.articles?.let { articles ->
-                        articles.filter { it.type == HEADLINE_NEWS }
                         Log.d("RemoteDataSource", "getNewsByTeamId(): ${articles.size}, teamId: $teamId" )
-
+                        for (article in articles) {
+                            Log.d("RemoteDataSource", "getNewsByTeamId(): type ${article.type}, teamId: $teamId" )
+                        }
                         return Resource.Success(data = articles)
                     } ?: return Resource.DataError(errorCode = res.code())
                 }
