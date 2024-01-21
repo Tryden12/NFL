@@ -3,6 +3,7 @@ package com.tryden.simplenfl.data.remote.source
 import android.util.Log
 import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
+import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.service.ArticleService
@@ -70,7 +71,7 @@ class RemoteDataSource @Inject constructor(
     }
 
     /**
-     * News
+     * News & Article(s)
      */
     override suspend fun getNews(type: String, limit: String): Resource<List<NewsDto.Article>> {
         try {
@@ -114,6 +115,29 @@ class RemoteDataSource @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e("RemoteDataSource", "getNewsByTeamId(): Exception hash code: ${e.hashCode()}")
+            return Resource.DataError(errorCode = e.hashCode())
+        }
+    }
+
+    // Article by ID
+    override suspend fun getArticleById(id: String): Resource<ArticleDto.Headline> {
+        try {
+            val res = articleService.getArticleById(id)
+
+            when (res.isSuccessful) {
+                true -> {
+                    res.body()?.headlines?.get(0)?.let { articleDto ->
+                        Log.d("RemoteDataSource", "getArticleById(): ${articleDto.title}" )
+                        return Resource.Success(data = articleDto)
+                    } ?: return Resource.DataError(errorCode = res.code())
+                }
+                false -> {
+                    Log.d("RemoteDataSource", "getArticleById(): NOT SUCCESSFUL, res code: ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("RemoteDataSource", "getArticleById(): Exception hash code: ${e.hashCode()}")
             return Resource.DataError(errorCode = e.hashCode())
         }
     }

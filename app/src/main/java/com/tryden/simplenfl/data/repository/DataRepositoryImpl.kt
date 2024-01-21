@@ -3,7 +3,9 @@ package com.tryden.simplenfl.data.repository
 import android.util.Log
 import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.data.local.source.LocalSource
+import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
+import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.source.RemoteSource
@@ -39,8 +41,8 @@ class DataRepositoryImpl @Inject constructor(
     override suspend fun getTeamById(teamId: String): TeamDto.Team? {
         return remoteDataSource.getTeamById(teamId).data
     }
-    // endregion team(s)
 
+    // endregion team(s)
 
     // region news
     override suspend fun getNews(type: String, limit: String): List<NewsDto.Article>? {
@@ -49,6 +51,10 @@ class DataRepositoryImpl @Inject constructor(
 
     override suspend fun getNewsByTeamId(teamId: String, limit: String): List<NewsDto.Article>? {
         return remoteDataSource.getNewsByTeamId(teamId, limit).data
+    }
+
+    override suspend fun getArticleById(id: String): Resource<ArticleDto.Headline> {
+        return remoteDataSource.getArticleById(id)
     }
     // endregion news
 

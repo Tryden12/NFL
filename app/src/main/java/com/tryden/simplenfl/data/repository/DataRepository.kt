@@ -3,6 +3,7 @@ package com.tryden.simplenfl.data.repository
 import com.tryden.simplenfl.data.local.entity.FavoriteTeamEntity
 import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
+import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +24,8 @@ interface DataRepository {
     suspend fun getNews(type: String, limit: String): List<NewsDto.Article>?
 
     suspend fun getNewsByTeamId(teamId: String, limit: String) : List<NewsDto.Article>?
+
+    suspend fun getArticleById(id: String) : Resource<ArticleDto.Headline>
 
 
 
