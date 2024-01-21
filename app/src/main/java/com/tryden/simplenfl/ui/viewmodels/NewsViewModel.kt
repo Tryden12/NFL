@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.domain.models.news.Headline
 import com.tryden.simplenfl.domain.usecase.news.allNews.AllNewsUseCase
-import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
-import com.tryden.simplenfl.ui.repositories.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
