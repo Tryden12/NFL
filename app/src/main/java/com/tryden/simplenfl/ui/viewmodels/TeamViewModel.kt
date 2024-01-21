@@ -13,6 +13,8 @@ import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.models.TeamHeader
 import com.tryden.simplenfl.data.repository.TeamRepository
+import com.tryden.simplenfl.domain.models.news.Headline
+import com.tryden.simplenfl.domain.usecase.news.byTeamID.NewsByTeamIdUseCase
 import com.tryden.simplenfl.domain.usecase.team.TeamByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamViewModel @Inject constructor(
     private val favoriteTeamDao: FavoriteTeamDao,
-    private val teamByIdUseCase: TeamByIdUseCase
+    private val teamByIdUseCase: TeamByIdUseCase,
+    private val newsByTeamIdUseCase: NewsByTeamIdUseCase
 ) : ViewModel() {
 
     private val repository = TeamRepository()
@@ -48,8 +51,8 @@ class TeamViewModel @Inject constructor(
     // endregion Team Header
 
     // Headlines by team id
-    private val _headlines = MutableLiveData<List<HeadlinesEpoxyItem>>()
-    val headlinesLiveData: LiveData<List<HeadlinesEpoxyItem>> = _headlines
+    private val _headlines = MutableLiveData<List<Headline>?>()
+    val headlinesLiveData: LiveData<List<Headline>?> = _headlines
 
     // Roster page
     var currentSort: RosterViewState.Sort = RosterViewState.Sort.NAME
@@ -85,18 +88,9 @@ class TeamViewModel @Inject constructor(
 
     fun refreshHeadlinesByTeamId(teamId: String, limit: String) {
         viewModelScope.launch {
-            val headlines = repository.getHeadlinesByTeamId(teamId, limit)
+            val headlines = newsByTeamIdUseCase.getNewsByTeamId(teamId,limit)
 
-            // create epoxy items list
-            val epoxyItems = buildList {
-                add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
-                headlines?.forEach {
-                    add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
-                }
-                add(HeadlinesEpoxyItem.FooterItem)
-            }
-
-            _headlines.postValue(epoxyItems)
+            _headlines.postValue(headlines)
         }
     }
 

@@ -117,4 +117,20 @@ class EpoxyDataManager {
             emptyList()
         }
     }
+
+    /**
+     * Provides epoxy items for selected team by id.
+     */
+    fun giveMeTeamNewsEpoxyItems(
+        list: List<Headline>?
+    ) : List<HeadlinesEpoxyItem> {
+        // create epoxy items list
+        return buildList {
+            add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
+            list?.forEach {
+                add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
+            }
+            add(HeadlinesEpoxyItem.FooterItem)
+        }
+    }
 }

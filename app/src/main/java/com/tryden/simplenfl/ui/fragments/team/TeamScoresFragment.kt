@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.FragmentTeamScoresBinding
+import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
@@ -20,7 +21,7 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
 
     private val viewModel by viewModels<ScoresViewModel>()
     private val epoxyControllerScores = TeamScoresEpoxyController()
-    private val epoxyDataManager = com.tryden.simplenfl.ui.epoxy.EpoxyDataManager()
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

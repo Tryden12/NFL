@@ -23,6 +23,7 @@ class TeamNewsFragment : Fragment() {
 
     private val viewModel by viewModels<TeamViewModel>()
     private val epoxyController = TeamNewsEpoxyController(::onArticleSelected)
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +52,8 @@ class TeamNewsFragment : Fragment() {
 
         // Get headlines
         viewModel.refreshHeadlinesByTeamId(teamId = teamId, limit = "50")
-        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
+        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { headlines ->
+            val epoxyItems = epoxyDataManager.giveMeTeamNewsEpoxyItems(headlines)
             epoxyController.setData(epoxyItems)
         }
     }
