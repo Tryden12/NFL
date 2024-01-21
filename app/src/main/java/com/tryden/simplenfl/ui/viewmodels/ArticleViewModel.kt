@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.domain.models.article.Article
 import com.tryden.simplenfl.domain.usecase.news.articleById.ArticleByIdUseCase
-import com.tryden.simplenfl.ui.repositories.ArticleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
