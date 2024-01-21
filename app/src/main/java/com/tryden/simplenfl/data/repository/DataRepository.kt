@@ -5,6 +5,7 @@ import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
+import com.tryden.simplenfl.data.remote.dto.RosterDto
 import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,8 @@ interface DataRepository {
     fun getAllTeams(): Flow<List<AllTeamsDto.Teams>>
 
     suspend fun getTeamById(teamId: String): TeamDto.Team?
+
+    suspend fun getRosterByTeamId(teamId: String) : List<RosterDto.Athlete>?
 
     suspend fun getNews(type: String, limit: String): List<NewsDto.Article>?
 

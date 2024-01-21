@@ -5,6 +5,7 @@ import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
+import com.tryden.simplenfl.data.remote.dto.RosterDto
 import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.service.ArticleService
@@ -67,6 +68,30 @@ class RemoteDataSource @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e("RemoteDataSource", "getTeamById(): Exception hash code: ${e.hashCode()}")
+            return Resource.DataError(errorCode = e.hashCode())
+        }
+    }
+
+    override suspend fun getRosterByTeamId(teamId: String): Resource<List<RosterDto.Athlete>> {
+        try {
+            val res = nflService.getRosterByTeamId(teamId)
+
+            when (res.isSuccessful) {
+                true -> {
+                    res.body()?.athletes?.let { playersDto ->
+                        Log.d("RemoteDataSource", "getRosterByTeamId(): size ${playersDto.size}" )
+
+                        return Resource.Success(data = playersDto)
+                    } ?: return Resource.DataError(errorCode = res.code())
+                }
+                false -> {
+                    Log.d("RemoteDataSource", "getRosterByTeamId(): NOT SUCCESSFUL, res code: ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
+
+            }
+        } catch (e: Exception) {
+            Log.e("RemoteDataSource", "getRosterByTeamId(): Exception hash code: ${e.hashCode()}")
             return Resource.DataError(errorCode = e.hashCode())
         }
     }

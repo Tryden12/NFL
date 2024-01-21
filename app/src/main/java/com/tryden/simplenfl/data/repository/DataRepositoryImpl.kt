@@ -7,6 +7,7 @@ import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
+import com.tryden.simplenfl.data.remote.dto.RosterDto
 import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.source.RemoteSource
@@ -43,7 +44,10 @@ class DataRepositoryImpl @Inject constructor(
         return remoteDataSource.getTeamById(teamId).data
     }
 
-    // endregion Team(s)
+    override suspend fun getRosterByTeamId(teamId: String): List<RosterDto.Athlete>? {
+        return remoteDataSource.getRosterByTeamId(teamId).data
+    }
+// endregion Team(s)
 
     // region News
     override suspend fun getNews(type: String, limit: String): List<NewsDto.Article>? {
