@@ -43,7 +43,7 @@ class ApiClient(
     }
 
     suspend fun getBreakingNews(type: String, limit: String): ResponseResource<NewsDto> {
-        return safeApiCall { nflService.getBreakingNews(type, limit) }
+        return safeApiCall { nflService.getNews(type, limit) }
     }
 
     suspend fun getNewsByTeamId(teamId: String, limit: String): ResponseResource<NewsDto> {

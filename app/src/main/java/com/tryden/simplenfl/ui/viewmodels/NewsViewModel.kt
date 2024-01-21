@@ -5,31 +5,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tryden.simplenfl.domain.models.news.Headline
+import com.tryden.simplenfl.domain.usecase.news.allNews.AllNewsUseCase
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.repositories.NewsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsViewModel: ViewModel() {
+/**
+ * ViewModel for news headlines.
+ */
+@HiltViewModel
+class NewsViewModel @Inject constructor(
+    private val allNewsUseCase: AllNewsUseCase
+): ViewModel() {
 
-    private val repository = NewsRepository()
-
-    private val _headlines = MutableLiveData<List<HeadlinesEpoxyItem>>()
-    val headlinesLiveData: LiveData<List<HeadlinesEpoxyItem>> = _headlines
+    private val _headlines = MutableLiveData<List<Headline>>()
+    val headlinesLiveData: LiveData<List<Headline>> = _headlines
 
     fun refreshHeadlines(type: String, limit: String) {
         viewModelScope.launch {
-            val headlines = repository.getHeadlines(type, limit)
-
-            // create epoxy items list
-            val epoxyItems = buildList {
-                    add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
-                    headlines!!.forEach {
-                        add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
-                    }
-                    add(HeadlinesEpoxyItem.FooterItem)
+            val headlines = allNewsUseCase.getNews(type, limit)
+            if (!headlines.isNullOrEmpty()) {
+                _headlines.postValue(headlines!!)
+            } else {
+                Log.d("NewsViewModel()", "news list size = ${headlines?.size}")
             }
-
-            _headlines.postValue(epoxyItems)
         }
     }
 }

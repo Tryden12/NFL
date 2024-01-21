@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.FragmentHomeBinding
@@ -33,8 +32,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
         newsViewModel.refreshHeadlines("", "30")
-        newsViewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
-            epoxyController.headlineEpoxyItems = epoxyItems
+        newsViewModel.headlinesLiveData.observe(viewLifecycleOwner) { headlines ->
+            epoxyController.headlineEpoxyItems = epoxyDataManager.giveMeNewsHeadlines(headlines)
         }
 
         favoritesViewModel.allFavoriteTeams.observe(viewLifecycleOwner) { favoritesList ->

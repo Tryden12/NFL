@@ -20,6 +20,7 @@ object Constants {
 
     const val DB_NAME = "nfl-db"
     const val HEADLINE_NEWS = "HeadlineNews"
+    const val TOP_HEADLINES = "Top Headlines"
     const val MY_NEWS = "My News"
 
 }
