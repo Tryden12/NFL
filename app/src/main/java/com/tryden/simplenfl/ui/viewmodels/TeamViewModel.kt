@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.data.local.AppDatabase
 import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
 import com.tryden.simplenfl.domain.models.roster.Player
 import com.tryden.simplenfl.domain.models.team.Logo
@@ -14,7 +12,7 @@ import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.models.TeamHeader
-import com.tryden.simplenfl.ui.repositories.TeamRepository
+import com.tryden.simplenfl.data.repository.TeamRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

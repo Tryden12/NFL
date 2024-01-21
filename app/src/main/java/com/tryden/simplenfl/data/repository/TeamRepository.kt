@@ -1,4 +1,4 @@
-package com.tryden.simplenfl.ui.repositories
+package com.tryden.simplenfl.data.repository
 
 import com.tryden.simplenfl.domain.mappers.news.HeadlinesMapper
 import com.tryden.simplenfl.domain.mappers.team.TeamLogoMapper
