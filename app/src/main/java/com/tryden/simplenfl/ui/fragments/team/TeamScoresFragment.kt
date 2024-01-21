@@ -10,7 +10,9 @@ import com.tryden.simplenfl.databinding.FragmentTeamScoresBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
 
     private var _binding: FragmentTeamScoresBinding? = null
@@ -31,11 +33,8 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
         // set data for team selected
         binding.epoxyScoresRecyclerView.setController(epoxyControllerScores)
         epoxyControllerScores.setData(emptyList())
-        viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-            Log.d("TeamScoresFragment()", "eventList = ${eventList.size}")
-            val events: List<EventEntity> = eventList.map { event ->
-                viewModel.uiEventMapper.buildFrom(event)
-            }
+        viewModel.eventListLiveData.observe(viewLifecycleOwner) { events ->
+            Log.d("TeamScoresFragment()", "eventList = ${events.size}")
             val epoxyItemsList = epoxyDataManager.giveMeScoresBySeasonTypeEpoxyItems(events)
             epoxyControllerScores.setData(epoxyItemsList)
         }
