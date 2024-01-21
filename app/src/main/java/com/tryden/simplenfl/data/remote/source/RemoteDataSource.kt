@@ -5,6 +5,7 @@ import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.service.ArticleService
 import com.tryden.simplenfl.data.remote.service.NFLService
@@ -138,6 +139,54 @@ class RemoteDataSource @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e("RemoteDataSource", "getArticleById(): Exception hash code: ${e.hashCode()}")
+            return Resource.DataError(errorCode = e.hashCode())
+        }
+    }
+
+    /**
+     * Scores
+     */
+    override suspend fun getScoresRange(dates: String, limit: String): Resource<ScoreboardDto> {
+        try {
+            val res = nflService.getScoresRange(dates, limit)
+
+            when (res.isSuccessful) {
+                true -> {
+                    res.body()?.let { scoresDto ->
+                        Log.d("RemoteDataSource", "getScoresRange(): events list size: ${scoresDto.events.size}" )
+                        return Resource.Success(data = scoresDto)
+                    } ?: return Resource.DataError(errorCode = res.code())
+                }
+                false -> {
+                    Log.d("RemoteDataSource", "getScoresRange(): NOT SUCCESSFUL, res code: ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("RemoteDataSource", "getScoresRange(): Exception hash code: ${e.hashCode()}")
+            return Resource.DataError(errorCode = e.hashCode())
+        }
+    }
+
+    override suspend fun getScoresCalendar(limit: String) : Resource<List<ScoreboardDto.Calendar>> {
+        try {
+            val res = nflService.getScoresCalendar(limit)
+
+            when (res.isSuccessful) {
+                true -> {
+                    res.body()?.leagues?.get(0)?.calendar?.let { calendarListDto ->
+                        Log.d("RemoteDataSource",
+                            "getScoresCalendar(): calendar list size: ${calendarListDto.size}" )
+                        return Resource.Success(data = calendarListDto)
+                    } ?: return Resource.DataError(errorCode = res.code())
+                }
+                false -> {
+                    Log.d("RemoteDataSource", "getScoresCalendar(): NOT SUCCESSFUL, res code: ${res.code()}" )
+                    return Resource.DataError(errorCode = res.code())
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("RemoteDataSource", "getScoresCalendar(): Exception hash code: ${e.hashCode()}")
             return Resource.DataError(errorCode = e.hashCode())
         }
     }

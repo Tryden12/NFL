@@ -7,6 +7,7 @@ import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.source.RemoteSource
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,7 @@ class DataRepositoryImpl @Inject constructor(
     /**
      * Remote source
      */
-    // region teams(s)
+    // region Teams(s)
     override fun getAllTeams(): Flow<List<AllTeamsDto.Teams>> {
         return flow {
             remoteDataSource.getAllTeams().data?.let { list ->
@@ -42,9 +43,9 @@ class DataRepositoryImpl @Inject constructor(
         return remoteDataSource.getTeamById(teamId).data
     }
 
-    // endregion team(s)
+    // endregion Team(s)
 
-    // region news
+    // region News
     override suspend fun getNews(type: String, limit: String): List<NewsDto.Article>? {
         return remoteDataSource.getNews(type, limit).data
     }
@@ -56,7 +57,17 @@ class DataRepositoryImpl @Inject constructor(
     override suspend fun getArticleById(id: String): ArticleDto.Headline {
         return remoteDataSource.getArticleById(id).data!!
     }
-    // endregion news
+    // endregion News
+
+    // region Scores
+    override suspend fun getScoresRange(dates: String, limit: String): ScoreboardDto {
+        return remoteDataSource.getScoresRange(dates, limit).data!!
+    }
+
+    override suspend fun getScoresCalendar(limit: String): List<ScoreboardDto.Calendar> {
+        return remoteDataSource.getScoresCalendar(limit).data!!
+    }
+    // endregion Scores
 
     /**
      * Local source

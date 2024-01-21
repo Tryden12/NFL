@@ -5,6 +5,7 @@ import com.tryden.simplenfl.data.remote.Resource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.ArticleDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import kotlinx.coroutines.flow.Flow
 
@@ -27,7 +28,9 @@ interface DataRepository {
 
     suspend fun getArticleById(id: String) : ArticleDto.Headline
 
+    suspend fun getScoresRange(dates: String, limit: String) : ScoreboardDto
 
+    suspend fun getScoresCalendar(limit: String) : List<ScoreboardDto.Calendar>
 
     /**
      * Local data
