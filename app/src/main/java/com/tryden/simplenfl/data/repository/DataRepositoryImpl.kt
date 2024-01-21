@@ -53,8 +53,8 @@ class DataRepositoryImpl @Inject constructor(
         return remoteDataSource.getNewsByTeamId(teamId, limit).data
     }
 
-    override suspend fun getArticleById(id: String): Resource<ArticleDto.Headline> {
-        return remoteDataSource.getArticleById(id)
+    override suspend fun getArticleById(id: String): ArticleDto.Headline? {
+        return remoteDataSource.getArticleById(id).data
     }
     // endregion news
 

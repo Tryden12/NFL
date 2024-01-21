@@ -25,7 +25,7 @@ interface DataRepository {
 
     suspend fun getNewsByTeamId(teamId: String, limit: String) : List<NewsDto.Article>?
 
-    suspend fun getArticleById(id: String) : Resource<ArticleDto.Headline>
+    suspend fun getArticleById(id: String) : ArticleDto.Headline?
 
 
 
