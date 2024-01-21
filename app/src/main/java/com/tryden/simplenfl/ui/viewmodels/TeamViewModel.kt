@@ -6,15 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
 import com.tryden.simplenfl.domain.models.roster.Player
-import com.tryden.simplenfl.domain.models.team.Logo
 import com.tryden.simplenfl.domain.models.team.Team
-import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.models.TeamHeader
-import com.tryden.simplenfl.data.repository.TeamRepository
 import com.tryden.simplenfl.domain.models.news.Headline
 import com.tryden.simplenfl.domain.usecase.news.byTeamID.NewsByTeamIdUseCase
+import com.tryden.simplenfl.domain.usecase.roster.RosterByTeamIdUseCase
 import com.tryden.simplenfl.domain.usecase.team.TeamByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -27,10 +25,10 @@ import javax.inject.Inject
 class TeamViewModel @Inject constructor(
     private val favoriteTeamDao: FavoriteTeamDao,
     private val teamByIdUseCase: TeamByIdUseCase,
-    private val newsByTeamIdUseCase: NewsByTeamIdUseCase
+    private val newsByTeamIdUseCase: NewsByTeamIdUseCase,
+    private val rosterByTeamIdUseCase: RosterByTeamIdUseCase
 ) : ViewModel() {
 
-    private val repository = TeamRepository()
 
 
     // region Team Header
@@ -97,8 +95,7 @@ class TeamViewModel @Inject constructor(
     // Refresh roster response, and post domain model
     fun refreshRoster(teamId: String) {
         viewModelScope.launch {
-            val rosterMap = repository.getRosterByTeamId(teamId)
-
+            val rosterMap = rosterByTeamIdUseCase.getRosterByTeamId(teamId)
             _rosterMapByTeamId.postValue(rosterMap!!)
         }
     }
