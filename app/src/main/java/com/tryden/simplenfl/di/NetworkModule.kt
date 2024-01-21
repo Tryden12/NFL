@@ -5,6 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tryden.simplenfl.data.local.dao.FavoriteTeamDao
 import com.tryden.simplenfl.data.local.source.LocalDataSource
 import com.tryden.simplenfl.data.local.source.LocalSource
+import com.tryden.simplenfl.data.remote.service.ArticleService
 import com.tryden.simplenfl.data.remote.service.NFLService
 import com.tryden.simplenfl.data.remote.source.RemoteDataSource
 import com.tryden.simplenfl.data.remote.source.RemoteSource
@@ -13,7 +14,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 /**
@@ -36,8 +36,16 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(api: NFLService): RemoteSource {
-        return RemoteDataSource(api)
+    fun provideArticleService(retrofitFactory: RetrofitFactory, moshi: Moshi): ArticleService =
+        retrofitFactory.create(Constants.ARTICLE_BY_ID_URL,moshi).build()
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        nflService: NFLService,
+        articleService: ArticleService
+    ): RemoteSource {
+        return RemoteDataSource(nflService, articleService)
     }
 
     @Provides

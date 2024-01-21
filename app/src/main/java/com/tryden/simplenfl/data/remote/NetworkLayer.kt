@@ -5,7 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tryden.simplenfl.application.SimpleNFLApplication
-import com.tryden.simplenfl.data.remote.service.ArticleByIDService
+import com.tryden.simplenfl.data.remote.service.ArticleService
 import com.tryden.simplenfl.data.remote.service.NFLService
 import com.tryden.simplenfl.data.remote.service.PlayerByIdService
 import com.tryden.simplenfl.util.Constants.ARTICLE_BY_ID_URL
@@ -51,7 +51,7 @@ object NetworkLayer {
     // Common NFL endpoints
     val nflService: NFLService = retrofit.create(NFLService::class.java)
     // Article by id only
-    val articleByIDService: ArticleByIDService = retrofitArticle.create(ArticleByIDService::class.java)
+    val articleService: ArticleService = retrofitArticle.create(ArticleService::class.java)
     // Player by id only
     val playerByIdService: PlayerByIdService = retrofitPlayer.create(PlayerByIdService::class.java)
 
@@ -59,7 +59,7 @@ object NetworkLayer {
     /**
      * Api Client
      */
-    val apiClient = ApiClient(nflService, articleByIDService, playerByIdService)
+    val apiClient = ApiClient(nflService, articleService, playerByIdService)
 
 
     /**

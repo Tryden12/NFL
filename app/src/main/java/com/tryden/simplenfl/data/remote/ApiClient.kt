@@ -6,7 +6,7 @@ import com.tryden.simplenfl.data.remote.dto.RosterDto
 import com.tryden.simplenfl.data.remote.dto.ScoreboardDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
-import com.tryden.simplenfl.data.remote.service.ArticleByIDService
+import com.tryden.simplenfl.data.remote.service.ArticleService
 import com.tryden.simplenfl.data.remote.service.NFLService
 import com.tryden.simplenfl.data.remote.service.PlayerByIdService
 import retrofit2.Response
@@ -14,7 +14,7 @@ import java.lang.Exception
 
 class ApiClient(
     private val nflService: NFLService,
-    private val articleByIDService: ArticleByIDService,
+    private val articleService: ArticleService,
     private val playerByIdService: PlayerByIdService
 ) {
 
@@ -51,7 +51,7 @@ class ApiClient(
     }
 
     suspend fun getArticleById(articleId: String) : ResponseResource<ArticleDto> {
-        return safeApiCall { articleByIDService.getArticleById(articleId) }
+        return safeApiCall { articleService.getArticleById(articleId) }
     }
 
 

@@ -1,14 +1,12 @@
 package com.tryden.simplenfl.data.remote.source
 
 import android.util.Log
-import com.tryden.simplenfl.R
 import com.tryden.simplenfl.data.remote.Resource
-import com.tryden.simplenfl.data.remote.ResponseResource
 import com.tryden.simplenfl.data.remote.dto.AllTeamsDto
 import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.data.remote.dto.TeamDto
+import com.tryden.simplenfl.data.remote.service.ArticleService
 import com.tryden.simplenfl.data.remote.service.NFLService
-import com.tryden.simplenfl.util.Constants.HEADLINE_NEWS
 import javax.inject.Inject
 
 /**
@@ -16,7 +14,8 @@ import javax.inject.Inject
  * We utilize the ResponseResource class for Success, Loading, and DataError cases.
  */
 class RemoteDataSource @Inject constructor(
-    private val nflService: NFLService
+    private val nflService: NFLService,
+    private val articleService: ArticleService
 ) : RemoteSource {
 
     /**
