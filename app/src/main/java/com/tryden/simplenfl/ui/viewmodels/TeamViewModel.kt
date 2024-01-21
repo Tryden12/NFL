@@ -13,6 +13,7 @@ import com.tryden.simplenfl.ui.epoxy.interfaces.team.RosterEpoxyItem
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.models.TeamHeader
 import com.tryden.simplenfl.data.repository.TeamRepository
+import com.tryden.simplenfl.domain.usecase.team.TeamByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamViewModel @Inject constructor(
-    private val favoriteTeamDao: FavoriteTeamDao
+    private val favoriteTeamDao: FavoriteTeamDao,
+    private val teamByIdUseCase: TeamByIdUseCase
 ) : ViewModel() {
 
     private val repository = TeamRepository()
@@ -40,8 +42,8 @@ class TeamViewModel @Inject constructor(
     }
 
     // Team logo
-    private val _teamLogo = MutableLiveData<Logo?>()
-    val teamLogoLiveData: LiveData<Logo?> = _teamLogo
+    private val _teamLogo = MutableLiveData<String>()
+    val teamLogoLiveData: LiveData<String> = _teamLogo
 
     // endregion Team Header
 
@@ -67,7 +69,7 @@ class TeamViewModel @Inject constructor(
 
     fun refreshTeamHeader(teamId: String) {
         viewModelScope.launch {
-            val team = repository.getTeamHeader(teamId)
+            val team = teamByIdUseCase.getTeamById(teamId)
 
             teamFlow.emit(team)
         }
@@ -75,8 +77,8 @@ class TeamViewModel @Inject constructor(
 
     fun refreshTeamLogo(teamId: String) {
         viewModelScope.launch {
-            val logo = repository.getTeamLogo(teamId)
-
+            val team = teamByIdUseCase.getTeamById(teamId)
+            val logo = if (team?.logo.isNullOrEmpty()) { "" } else { team!!.logo }
             _teamLogo.postValue(logo)
         }
     }

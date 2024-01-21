@@ -41,8 +41,8 @@ class TeamNewsFragment : Fragment() {
 
         // Get team logo
         viewModel.refreshTeamLogo(teamId = teamId)
-        viewModel.teamLogoLiveData.observe(viewLifecycleOwner) { logo ->
-            epoxyController.logoUrl = logo!!.logoUrl
+        viewModel.teamLogoLiveData.observe(viewLifecycleOwner) { logoUrl ->
+            epoxyController.logoUrl = logoUrl
         }
 
 
