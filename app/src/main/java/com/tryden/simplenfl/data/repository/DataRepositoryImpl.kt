@@ -23,10 +23,10 @@ class DataRepositoryImpl @Inject constructor(
 ) : DataRepository {
 
 
-    // region Remote data source
     /**
-     * We use flow on Dispatchers.IO thread to fetch the teams list data.
+     * Remote source
      */
+    // region teams(s)
     override fun getAllTeams(): Flow<List<AllTeamsDto.Teams>> {
         return flow {
             remoteDataSource.getAllTeams().data?.let { list ->
@@ -39,12 +39,22 @@ class DataRepositoryImpl @Inject constructor(
     override suspend fun getTeamById(teamId: String): TeamDto.Team? {
         return remoteDataSource.getTeamById(teamId).data
     }
+    // endregion team(s)
+
+
+    // region news
+    override suspend fun getNews(type: String, limit: String): List<NewsDto.Article>? {
+        return remoteDataSource.getNews(type, limit).data
+    }
 
     override suspend fun getNewsByTeamId(teamId: String, limit: String): List<NewsDto.Article>? {
         return remoteDataSource.getNewsByTeamId(teamId, limit).data
     }
-    // endregion Remote data source
+    // endregion news
 
+    /**
+     * Local source
+     */
     // region Local data source: Favorite Team Dao
     override fun getAllFavoriteTeams(): Flow<List<FavoriteTeamEntity>> {
         return localDataSource.getAllFavoriteTeams()

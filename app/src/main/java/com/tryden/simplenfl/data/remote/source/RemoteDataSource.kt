@@ -18,6 +18,10 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(
     private val nflService: NFLService
 ) : RemoteSource {
+
+    /**
+     * Teams
+     */
     override suspend fun getAllTeams(): Resource<List<AllTeamsDto.Teams>> {
         try {
             val res = nflService.getAllTeams()
@@ -66,6 +70,9 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
+    /**
+     * News
+     */
     override suspend fun getNews(type: String, limit: String): Resource<List<NewsDto.Article>> {
         try {
             val res = nflService.getNews(type, limit)
