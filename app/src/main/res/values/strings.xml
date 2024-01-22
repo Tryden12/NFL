@@ -7,6 +7,13 @@
     <string name="news">News</string>
     <string name="teams">Teams</string>
 
+    <!-- Custom Unfavorite Dialog -->
+    <string name="cancel">Cancel</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="description">This will disable all alerts for this team and remove their scores from your homescreen.</string>
+    <string name="are_you_sure">Are you sure you want to remove </string>
+    <string name="as_a_favorite"> as a favorite?</string>
+
     <!-- Team -->
     <string name="team_id_key">team_id_key</string>
     <string name="roster">Roster</string>

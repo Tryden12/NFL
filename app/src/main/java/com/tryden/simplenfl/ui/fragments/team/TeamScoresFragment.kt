@@ -1,15 +1,19 @@
 package com.tryden.simplenfl.ui.fragments.team
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.FragmentTeamScoresBinding
+import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.scores.TeamScoresEpoxyController
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
 
     private var _binding: FragmentTeamScoresBinding? = null
@@ -17,7 +21,7 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
 
     private val viewModel by viewModels<ScoresViewModel>()
     private val epoxyControllerScores = TeamScoresEpoxyController()
-    private val epoxyDataManager = com.tryden.simplenfl.ui.epoxy.EpoxyDataManager()
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,14 +34,12 @@ class TeamScoresFragment: Fragment(R.layout.fragment_team_scores) {
         // set data for team selected
         binding.epoxyScoresRecyclerView.setController(epoxyControllerScores)
         epoxyControllerScores.setData(emptyList())
-        viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-            val events: List<EventEntity> = eventList.map { event ->
-                viewModel.uiEventMapper.buildFrom(event)
-            }
+        viewModel.eventListLiveData.observe(viewLifecycleOwner) { events ->
+            Log.d("TeamScoresFragment()", "eventList = ${events.size}")
             val epoxyItemsList = epoxyDataManager.giveMeScoresBySeasonTypeEpoxyItems(events)
             epoxyControllerScores.setData(epoxyItemsList)
         }
-        viewModel.refreshScores("20220801-20230212", "1000")
+        viewModel.refreshScores("20230801-20240212", "1000")
     }
 
 }

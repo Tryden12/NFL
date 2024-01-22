@@ -5,20 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tryden.simplenfl.domain.models.article.Article
-import com.tryden.simplenfl.ui.repositories.ArticleRepository
+import com.tryden.simplenfl.domain.usecase.news.articleById.ArticleByIdUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ArticleViewModel : ViewModel() {
+@HiltViewModel
+class ArticleViewModel @Inject constructor(
+    private val articleByIdUseCase: ArticleByIdUseCase
+) : ViewModel() {
 
-    private val repository = ArticleRepository()
 
-    private val _articleById = MutableLiveData<Article?>()
-    val articleByIdLiveData: LiveData<Article?> = _articleById
+    private val _articleById = MutableLiveData<Article>()
+    val articleByIdLiveData: LiveData<Article> = _articleById
 
-    fun refreshArticle(articleId: String) {
+    fun refreshArticle(id: String) {
         viewModelScope.launch {
-            val article = repository.getArticleById(articleId)
-
+            val article = articleByIdUseCase.getArticleById(id)
             _articleById.postValue(article)
         }
     }

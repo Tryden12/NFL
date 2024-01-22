@@ -17,8 +17,9 @@ import com.tryden.simplenfl.databinding.FragmentArticleBinding
 import com.tryden.simplenfl.domain.models.article.Article
 import com.tryden.simplenfl.ui.epoxy.controllers.article.ArticleEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.ArticleViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ArticleFragment : Fragment() {
 
     private lateinit var binding: FragmentArticleBinding
@@ -47,13 +48,13 @@ class ArticleFragment : Fragment() {
         // Set articleId
         val articleId = safeArgs.articleId
         viewModel.refreshArticle(articleId)
-        Log.e("ArticleFragment", "onArticleSelected: $articleId" )
+        Log.d("ArticleFragment", "onArticleSelected: $articleId" )
 
         val epoxyArticleRecyclerView = binding.epoxyArticleRecyclerView
         epoxyArticleRecyclerView.setController(epoxyController)
         epoxyController.setData(Article())
         viewModel.articleByIdLiveData.observe(viewLifecycleOwner) { article ->
-            Log.e("ArticleFragment", "onViewCreated: ${article!!.headline}")
+            Log.d("ArticleFragment", "onViewCreated: ${article.headline}")
             epoxyController.setData(article)
         }
     }

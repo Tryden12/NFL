@@ -9,15 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tryden.simplenfl.databinding.FragmentNewsBinding
+import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.news.NewsEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
 
     private val viewModel: NewsViewModel by viewModels()
     private val epoxyController = NewsEpoxyController(::onArticleSelected)
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +38,10 @@ class NewsFragment : Fragment() {
         epoxyController.setData(emptyList())
 
         viewModel.refreshHeadlines("", "30")
-        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
-            epoxyController.setData(epoxyItems)
+        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { headlines ->
+            epoxyController.setData(
+                epoxyDataManager.giveMeNewsHeadlines(headlines)
+            )
         }
 
     }

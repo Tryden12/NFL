@@ -1,15 +1,19 @@
 package com.tryden.simplenfl.domain.mappers.news
 
+import com.tryden.simplenfl.data.remote.dto.NewsDto
 import com.tryden.simplenfl.domain.getArticleIdFromUrl
 import com.tryden.simplenfl.domain.models.news.Headline
-import com.tryden.simplenfl.network.response.models.news.Article
 
 object HeadlinesMapper {
 
-    fun buildFrom(article: Article) : Headline {
+    fun buildFrom(articleDto: NewsDto.Article) : Headline {
         return Headline(
-            title = article.headline,
-            articleId = getArticleIdFromUrl(article.links.api.news.href)
+            title = articleDto.headline,
+            articleId = getArticleIdFromUrl(articleDto.links.api.news.href),
+            shortDescription = articleDto.description,
+            articleImage = articleDto.images[0].url,
+            published = articleDto.published,
+            author = articleDto.byline
         )
     }
 }

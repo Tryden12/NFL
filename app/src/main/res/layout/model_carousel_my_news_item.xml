@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/dark_grey">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/darkish_grey"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic[2]" />
+
+                <View
+                    android:id="@+id/dividerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/teal_700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageImageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/logoImageView"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/placeholder_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dividerView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/teamNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLines="1"
+                    android:textAllCaps="true"
+                    android:textColor="?attr/colorSurface"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/logoImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/logoImageView"
+                    app:layout_constraintTop_toTopOf="@id/logoImageView"
+                    tools:text="Commanders" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/opensans_semi_bold"
+                    android:maxLines="2"
+                    android:textColor="?attr/colorSurface"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@id/teamNameTextView"
+                    app:layout_constraintStart_toStartOf="@id/logoImageView"
+                    app:layout_constraintTop_toBottomOf="@id/logoImageView"
+                    tools:text="Richardson sets QB mark for vertical, broad jump" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/publishedTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLength="8"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@id/logoImageView"
+                    app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                    tools:text="21h" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/circleImageView"
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_circle_24"
+                    app:layout_constraintBottom_toBottomOf="@id/publishedTextView"
+                    app:layout_constraintStart_toEndOf="@id/publishedTextView"
+                    app:layout_constraintTop_toTopOf="@+id/publishedTextView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/authorTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/opensans_regular"
+                    android:maxLines="1"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/publishedTextView"
+                    app:layout_constraintStart_toEndOf="@id/circleImageView"
+                    app:layout_constraintTop_toTopOf="@id/publishedTextView"
+                    tools:text="John Gasaway" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/darkish_grey"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageImageViewShimmer"
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/dividerViewShimmer"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageImageViewShimmer" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/logoImageViewShimmer"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dividerViewShimmer" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/teamNameTextViewShimmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLines="1"
+                        android:textAllCaps="true"
+                        android:textColor="?attr/colorSurface"
+                        android:textSize="12sp"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintBottom_toBottomOf="@id/logoImageViewShimmer"
+                        app:layout_constraintStart_toEndOf="@id/logoImageViewShimmer"
+                        app:layout_constraintTop_toTopOf="@id/logoImageViewShimmer"
+                        tools:text="Commanders" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/titleTextViewShimmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/opensans_semi_bold"
+                        android:maxLines="2"
+                        android:textColor="?attr/colorSurface"
+                        android:textSize="14sp"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintStart_toStartOf="@id/logoImageViewShimmer"
+                        app:layout_constraintTop_toBottomOf="@id/logoImageViewShimmer"
+                        tools:text="Richardson sets QB mark for vertical, broad jump" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/publishedTextViewShimmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLength="8"
+                        android:textColor="@color/grey"
+                        android:textSize="12sp"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintStart_toStartOf="@id/logoImageViewShimmer"
+                        app:layout_constraintTop_toBottomOf="@id/titleTextViewShimmer"
+                        tools:text="21h" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/circleImageViewShimmer"
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintBottom_toBottomOf="@id/publishedTextViewShimmer"
+                        app:layout_constraintStart_toEndOf="@id/publishedTextViewShimmer"
+                        app:layout_constraintTop_toTopOf="@+id/publishedTextViewShimmer" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/authorTextViewShimmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/opensans_regular"
+                        android:maxLines="1"
+                        android:textColor="@color/grey"
+                        android:textSize="12sp"
+                        android:background="@drawable/bg_rounded_12"
+                        app:layout_constraintBottom_toBottomOf="@id/publishedTextViewShimmer"
+                        app:layout_constraintStart_toEndOf="@id/circleImageViewShimmer"
+                        app:layout_constraintTop_toTopOf="@id/publishedTextViewShimmer"
+                        tools:text="John Gasaway" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,9 @@ import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.scores.ScoresByWeekEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.ScoresViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ScoresFragment: Fragment(R.layout.fragment_scores) {
 
     private var _binding: FragmentScoresBinding? = null
@@ -31,15 +33,11 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
         _binding = FragmentScoresBinding.bind(view)
         setupCalendarRecyclerView()
 
-        viewModel.calendarListLiveData.observe(viewLifecycleOwner) { calendarList ->
-            // build calendar and weeks
-            val uiCalendar: List<UiCalendar> = calendarList.map { calendar ->
-                viewModel.uiCalendarMapper.buildFrom(calendar)
-            }
+        viewModel.calendarListLiveData.observe(viewLifecycleOwner) { calendar ->
             // submit weeks to adapter
-            var uiWeeks = mutableListOf<UiCalendar.UiWeek>()
-            for (i in 0 until uiCalendar.size-1) {
-                uiWeeks.addAll(uiCalendar[i].weeks)
+            val uiWeeks = mutableListOf<UiCalendar.UiWeek>()
+            for (i in 0 until calendar.size-1) {
+                uiWeeks.addAll(calendar[i].weeks)
             }
             weeksMenuAdapter.differ.submitList(uiWeeks)
             weeksMenuAdapter.notifyDataSetChanged()
@@ -48,15 +46,12 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
 
         binding.epoxyScoresByWeekRecyclerView.setController(epoxyControllerScoresByWeek)
         epoxyControllerScoresByWeek.setData(emptyList())
-        viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-            val events: List<EventEntity> = eventList.map { event ->
-                viewModel.uiEventMapper.buildFrom(event)
-            }
+        viewModel.eventListLiveData.observe(viewLifecycleOwner) { events ->
             val epoxyItemsList = epoxyDataManager.giveMeScoresByWeekEpoxyItems(events)
             epoxyControllerScoresByWeek.setData(epoxyItemsList)
         }
         // Default loading to HOF Game, todo: load to current week on default
-        viewModel.refreshScores(date= "20220801-20220809", limit = "50")
+        viewModel.refreshScores(date= "20230801-20230809", limit = "50")
     }
 
     private fun setupCalendarRecyclerView() = binding?.weeksListRecyclerView?.apply {
@@ -70,10 +65,7 @@ class ScoresFragment: Fragment(R.layout.fragment_scores) {
             Log.e("ScoresFragment", "onWeekSelected: $range")
 
             epoxyControllerScoresByWeek.setData(emptyList())
-            viewModel.eventListLiveData.observe(viewLifecycleOwner) { eventList ->
-                val events: List<EventEntity> = eventList.map { event ->
-                    viewModel.uiEventMapper.buildFrom(event)
-                }
+            viewModel.eventListLiveData.observe(viewLifecycleOwner) { events ->
                 val epoxyItemsList = epoxyDataManager.giveMeScoresByWeekEpoxyItems(events)
                 epoxyControllerScoresByWeek.setData(epoxyItemsList)
             }

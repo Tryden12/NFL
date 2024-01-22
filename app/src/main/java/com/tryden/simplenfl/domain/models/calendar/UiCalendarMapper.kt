@@ -1,6 +1,6 @@
 package com.tryden.simplenfl.domain.models.calendar
 
-import com.tryden.simplenfl.network.response.models.scores.ScoreboardResponse.Calendar
+import com.tryden.simplenfl.data.remote.dto.ScoreboardDto.Calendar
 
 class UiCalendarMapper {
 

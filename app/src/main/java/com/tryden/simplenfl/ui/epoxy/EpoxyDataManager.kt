@@ -1,9 +1,15 @@
 package com.tryden.simplenfl.ui.epoxy
 
 import android.util.Log
-import com.tryden.simplenfl.network.response.models.team.TeamResponse
+import com.tryden.simplenfl.data.remote.dto.TeamDto
+import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
+import com.tryden.simplenfl.domain.models.news.Headline
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEntity
 import com.tryden.simplenfl.ui.epoxy.interfaces.events.EventEpoxyItem
+import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
+import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
+import com.tryden.simplenfl.util.Constants.MY_NEWS
+import com.tryden.simplenfl.util.Constants.TOP_HEADLINES
 
 class EpoxyDataManager {
 
@@ -23,10 +29,24 @@ class EpoxyDataManager {
      *
      * Updates from Fragment by observing the teamByIdLiveData in the TeamViewModel.
      */
-    var teamDetails: TeamResponse.Team? = null
+    var teamDetails: TeamDto.Team? = null
         set(value) {
             field = value
         }
+
+    /**
+     * Provides news headlines epoxy items.
+     */
+    fun giveMeNewsHeadlines(headlines: List<Headline>) : List<HeadlinesEpoxyItem> {
+        // create epoxy items list
+        return buildList {
+            add(HeadlinesEpoxyItem.HeaderItem(headerTitle = TOP_HEADLINES))
+            headlines.forEach {
+                add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
+            }
+            add(HeadlinesEpoxyItem.FooterItem)
+        }
+    }
 
 
     /**
@@ -52,7 +72,7 @@ class EpoxyDataManager {
     }
 
     /**
-     * This method provides the epoxy items for TeamScoresEpoxyController.
+     * Provides the epoxy items for scores around the league and team.
      *
      * @return the list of epoxy items for grouped by season type with header and footer.
      * season type examples:
@@ -73,6 +93,44 @@ class EpoxyDataManager {
                 }
                 add(EventEpoxyItem.FooterItem)
             }
+        }
+    }
+
+    /**
+     * Provides epoxy items for favorite team(s) news.
+     */
+    fun giveMeFavoriteTeamsNewsEpoxyItems(
+        list: List<FavoriteHeadline>
+    ) : List<FavoritesHeadlinesEpoxyItem> {
+        // build epoxy items
+        return if (list.isNotEmpty()) {
+            buildList {
+                add(FavoritesHeadlinesEpoxyItem.HeaderItem(headerTitle = MY_NEWS))
+                list
+                    .sortedByDescending { it.timeSincePosted }
+                    .forEach {
+                        add(FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem(it))
+                    }
+                add(FavoritesHeadlinesEpoxyItem.FooterItem)
+            }
+        } else {
+            emptyList()
+        }
+    }
+
+    /**
+     * Provides epoxy items for selected team by id.
+     */
+    fun giveMeTeamNewsEpoxyItems(
+        list: List<Headline>?
+    ) : List<HeadlinesEpoxyItem> {
+        // create epoxy items list
+        return buildList {
+            add(HeadlinesEpoxyItem.HeaderItem(headerTitle = "Top Headlines"))
+            list?.forEach {
+                add(HeadlinesEpoxyItem.HeadlineItem(headline = it))
+            }
+            add(HeadlinesEpoxyItem.FooterItem)
         }
     }
 }

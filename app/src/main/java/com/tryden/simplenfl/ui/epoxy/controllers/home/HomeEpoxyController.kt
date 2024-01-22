@@ -1,11 +1,20 @@
 package com.tryden.simplenfl.ui.epoxy.controllers.home
 
+import android.util.Log
+import androidx.core.content.ContextCompat
+import com.airbnb.epoxy.Carousel
+import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
-import com.tryden.simplenfl.addLoadingModel
+import com.airbnb.epoxy.carousel
+import com.tryden.simplenfl.R
+import com.tryden.simplenfl.application.SimpleNFLApplication
+import com.tryden.simplenfl.domain.models.news.FavoriteHeadline
+import com.tryden.simplenfl.ui.epoxy.interfaces.news.FavoritesHeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.interfaces.news.HeadlinesEpoxyItem
 import com.tryden.simplenfl.ui.epoxy.models.SectionFooterEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.SectionHeaderEpoxyModel
 import com.tryden.simplenfl.ui.epoxy.models.news.HeadlineItemEpoxyModel
+import com.tryden.simplenfl.ui.epoxy.models.news.MyNewsCarouselEpoxyItem
 
 class HomeEpoxyController(
     private val onArticleSelected: (String) -> Unit
@@ -26,9 +35,61 @@ class HomeEpoxyController(
             requestModelBuild()
         }
 
+    var favoriteHeadlinesEpoxyItems: List<FavoritesHeadlinesEpoxyItem> = emptyList()
+        set(value) {
+            field = value
+            requestModelBuild()
+        }
+
+    // Todo: implement data class and simplify favoriteHeadlines list
+    data class NewsState(
+        val header: String,
+        val newsItems: List<FavoriteHeadline>
+    )
+
     override fun buildModels() {
         if (isLoading) {
-            addLoadingModel()
+//            addLoadingModel()
+            SectionHeaderEpoxyModel(null, "", true).id("shimmer-header-headlines").addTo(this)
+            repeat(7) {
+                HeadlineItemEpoxyModel(
+                    headline = null,
+                    onArticleSelected = onArticleSelected
+                ).id("shimmer-headline-item-$it").addTo(this)
+            }
+            SectionFooterEpoxyModel().id("shimmmer-footer-headlines").addTo(this)
+
+            SectionHeaderEpoxyModel(null, "", true).id("shimmer-header-my-news").addTo(this)
+
+            val shimmerCarouselModels = buildList {
+                repeat(2) {
+                    add(MyNewsCarouselEpoxyItem(null, onArticleSelected)
+                        .id("carousel-item-$it"))
+                }
+            }
+            carousel {
+                id("shimmer-carousel")
+                models(shimmerCarouselModels)
+                numViewsToShowOnScreen(1.35f)
+                onBind { _, view, _ ->
+                    view.apply {
+                        setBackgroundColor(
+                            ContextCompat.getColor(
+                                SimpleNFLApplication.context, R.color.dark_grey
+                            )
+                        )
+                    }
+                }
+
+                padding(Carousel.Padding.dp(
+                    12, //left
+                    0, //top
+                    0, //right
+                    0, //bottom
+                    0 //itemspacing
+                ))
+            }
+
             return
         }
 
@@ -44,8 +105,7 @@ class HomeEpoxyController(
                 }
                 is HeadlinesEpoxyItem.HeadlineItem -> {
                     HeadlineItemEpoxyModel(
-                        headlineTitle = item.headline.title,
-                        articleId = item.headline.articleId,
+                        headline = item.headline,
                         onArticleSelected = onArticleSelected
                     ).id(item.headline.articleId).addTo(this)
                 }
@@ -57,6 +117,71 @@ class HomeEpoxyController(
                 }
             }
         }
-    }
 
+
+        if (favoriteHeadlinesEpoxyItems.isNotEmpty()) {
+            // Get items
+            val carouselItems = buildList {
+                favoriteHeadlinesEpoxyItems.forEach { item ->
+                    when (item) {
+                        is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
+                            add(MyNewsCarouselEpoxyItem(item.newsItem, onArticleSelected)
+                                .id("carousel-item-${item.newsItem.articleId}"))
+                        }
+
+                    }
+                }
+            }
+
+
+            // Build items
+            favoriteHeadlinesEpoxyItems.forEachIndexed { index, item ->
+                when (item) {
+                    is FavoritesHeadlinesEpoxyItem.HeaderItem -> {
+                        SectionHeaderEpoxyModel(
+                            title = item.headerTitle,
+                            logo = "",
+                            logoVisible = false
+                        ).id("header-my-news-headlines").addTo(this)
+                    }
+                    is FavoritesHeadlinesEpoxyItem.FavoriteHeadlineItem -> {
+                        Log.e("HomeEpoxyController", "favorite carousel: ${item.newsItem.headline}" )
+                        Log.e("HomeEpoxyController", "carousel size: ${carouselItems.size}" )
+
+                        if (index == favoriteHeadlinesEpoxyItems.lastIndex-1) {
+
+                            CarouselModel_()
+                                .id("my-news-carousel")
+                                .onBind { _, view, _ ->
+                                    view.apply {
+                                        setBackgroundColor(
+                                            ContextCompat.getColor(
+                                                SimpleNFLApplication.context, R.color.dark_grey
+                                            )
+                                        )
+                                    }
+                                }
+                                .padding(Carousel.Padding.dp(
+                                    12, //left
+                                    0, //top
+                                    0, //right
+                                    0, //bottom
+                                    0 //itemspacing
+                                ))
+                                .models(carouselItems)
+                                .numViewsToShowOnScreen(1.35f)
+                                .addTo(this)
+                        }
+
+                    }
+                    is FavoritesHeadlinesEpoxyItem.FooterItem -> {
+                        SectionFooterEpoxyModel().id("footer-my-news-headlines").addTo(this)
+                    }
+                    is FavoritesHeadlinesEpoxyItem.Spacer -> {
+                        // do nothing
+                    }
+                }
+            }
+        }
+    }
 }

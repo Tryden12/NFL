@@ -12,14 +12,18 @@ import com.tryden.simplenfl.databinding.FragmentTeamNewsBinding
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.team.news.TeamNewsEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 
+@AndroidEntryPoint
 class TeamNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamNewsBinding
 
     private val viewModel by viewModels<TeamViewModel>()
     private val epoxyController = TeamNewsEpoxyController(::onArticleSelected)
+    private val epoxyDataManager = EpoxyDataManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +42,8 @@ class TeamNewsFragment : Fragment() {
 
         // Get team logo
         viewModel.refreshTeamLogo(teamId = teamId)
-        viewModel.teamLogoLiveData.observe(viewLifecycleOwner) { logo ->
-            epoxyController.logoUrl = logo!!.logoUrl
+        viewModel.teamLogoLiveData.observe(viewLifecycleOwner) { logoUrl ->
+            epoxyController.logoUrl = logoUrl
         }
 
 
@@ -48,7 +52,8 @@ class TeamNewsFragment : Fragment() {
 
         // Get headlines
         viewModel.refreshHeadlinesByTeamId(teamId = teamId, limit = "50")
-        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { epoxyItems ->
+        viewModel.headlinesLiveData.observe(viewLifecycleOwner) { headlines ->
+            val epoxyItems = epoxyDataManager.giveMeTeamNewsEpoxyItems(headlines)
             epoxyController.setData(epoxyItems)
         }
     }

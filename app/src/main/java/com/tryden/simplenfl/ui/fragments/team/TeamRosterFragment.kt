@@ -11,7 +11,10 @@ import com.tryden.simplenfl.databinding.FragmentTeamRosterBinding
 import com.tryden.simplenfl.ui.epoxy.controllers.team.roster.TeamRosterEpoxyController
 import com.tryden.simplenfl.ui.models.RosterViewState
 import com.tryden.simplenfl.ui.viewmodels.TeamViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@AndroidEntryPoint
 class TeamRosterFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamRosterBinding

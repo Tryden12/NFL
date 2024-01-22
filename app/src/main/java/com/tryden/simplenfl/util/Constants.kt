@@ -3,7 +3,7 @@ package com.tryden.simplenfl.util
 object Constants {
 
     // NFL base URL
-    const val BASE_URL_NFL = "http://site.api.espn.com/apis/site/v2/sports/football/nfl/"
+    const val BASE_URL_NFL = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/"
 
     // NFL scoreboard by dates
     // Example /scoreboard?limit=1000&dates=20220908-20230108
@@ -18,5 +18,9 @@ object Constants {
     // Player by id base URL
     const val PLAYER_BY_ID_URL_NEW = "https://site.web.api.espn.com/apis/common/v3/sports/football/nfl/athletes/14876"
 
+    const val DB_NAME = "nfl-db"
+    const val HEADLINE_NEWS = "HeadlineNews"
+    const val TOP_HEADLINES = "Top Headlines"
+    const val MY_NEWS = "My News"
 
 }
