@@ -12,6 +12,7 @@ import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.home.HomeEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.FavoritesViewModel
 import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
+import com.tryden.simplenfl.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +32,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.bind(view)
 
 
-        newsViewModel.refreshHeadlines("", "30")
+        newsViewModel.refreshHeadlines(Constants.HEADLINE_NEWS, "50")
         newsViewModel.headlinesLiveData.observe(viewLifecycleOwner) { headlines ->
             epoxyController.headlineEpoxyItems = epoxyDataManager.giveMeNewsHeadlines(headlines)
         }

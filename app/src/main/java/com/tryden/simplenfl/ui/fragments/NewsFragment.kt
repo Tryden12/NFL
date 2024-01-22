@@ -12,6 +12,7 @@ import com.tryden.simplenfl.databinding.FragmentNewsBinding
 import com.tryden.simplenfl.ui.epoxy.EpoxyDataManager
 import com.tryden.simplenfl.ui.epoxy.controllers.news.NewsEpoxyController
 import com.tryden.simplenfl.ui.viewmodels.NewsViewModel
+import com.tryden.simplenfl.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +38,7 @@ class NewsFragment : Fragment() {
         binding.epoxyNewsRecyclerView.setController(epoxyController)
         epoxyController.setData(emptyList())
 
-        viewModel.refreshHeadlines("", "30")
+        viewModel.refreshHeadlines(Constants.HEADLINE_NEWS, "50")
         viewModel.headlinesLiveData.observe(viewLifecycleOwner) { headlines ->
             epoxyController.setData(
                 epoxyDataManager.giveMeNewsHeadlines(headlines)
