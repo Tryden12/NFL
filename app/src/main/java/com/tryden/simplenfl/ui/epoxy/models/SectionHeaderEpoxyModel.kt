@@ -8,7 +8,9 @@ import com.tryden.simplenfl.ui.epoxy.ViewBindingKotlinModel
 import com.tryden.simplenfl.R
 import com.tryden.simplenfl.databinding.ModelSectionHeaderBinding
 
-// Section header
+/**
+ * Section Header
+ */
 data class SectionHeaderEpoxyModel(
     val title: String?,
     val logo: String,
