@@ -53,7 +53,7 @@ The image below provides context to the architecture pattern used in this app:
 ## Libraries & Dependencies
 
 * [AirBnB Epoxy library](https://github.com/airbnb/epoxy) - Defines UI utilizing the Epoxy RecyclerView library. 
-* [Jetpack Navigation](https://developer.android.com/guide/navigation/navigation-getting-started)
+* [Jetpack Navigation](https://developer.android.com/guide/navigation/navigation-getting-started) - interactions that let users navigate across, into, and back out from the different pieces of content within your app.
 * [View Binding](https://developer.android.com/topic/libraries/view-binding) - View binding is a feature that makes it easier to write code that interacts with views.
 * [Modern App Architecture](https://developer.android.com/topic/architecture) - This guide encompasses best practices and recommended architecture for building robust, high-quality apps.
 * [Retrofit](https://square.github.io/retrofit/) - Interacts with the API and send network requests with OkHttp.
