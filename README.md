@@ -66,7 +66,7 @@ The image below provides context to the architecture pattern used in this app:
 
 ## Screenshots:
 <p align="center" width="100%">
-    <img width="32%" src="https://tylerryden.com/images/simple_nfl_demo_full.gif" alt="Demo Gif"/>
+    <img width="32%" src="https://tylerryden.com/images/simple-nfl-teams_list.png" alt="Teams"/>
     <img width="32%" src="https://tylerryden.com/images/simple-nfl-article.png" alt="Article"/>
     <img width="32%" src="https://tylerryden.com/images/simple-nfl-scores_week_1.png" alt="Scores"/>
 </p>
